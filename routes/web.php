@@ -32,8 +32,8 @@ Route::prefix('admin')
         // ROUTE HOME ADMIN
         Route::get('/', 'HomeController@index')->name('home');
 
-        // ROUTE RESOURCE POSTS
-        // Route::resource('/posts', 'PostController');
+        // ROUTE RESOURCE DISHES
+        Route::resource('/dishes', 'DishController');
     });
 
 //FRONT OFFICE
