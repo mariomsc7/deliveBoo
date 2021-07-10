@@ -20,7 +20,11 @@ class CreateOrdersTable extends Migration
             $table->string('customer_lastname', 20);
             $table->string('customer_address');
             $table->char('phone_number', 10);
+            $table->dateTime('date');
+            $table->unsignedBigInteger('restaurant_id');
             $table->timestamps();
+             // define foreign key
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
         });
     }
 
