@@ -18,9 +18,9 @@ class OrdersTableSeeder extends Seeder
 
             $new_order->customer_name = "Strunz" . $i;
             $new_order->customer_lastname = "ingredient" . $i;
-            $new_order->customer_phonenumber = "description" . $i;
+            $new_order->phone_number = '123456';
             $new_order->customer_address = "price" . $i;
-            $new_order->date = 2021-07-10;
+            $new_order->date = date("Y-m-d H:m:s");
             $new_order->restaurant_id = 1;
             $new_order->tot_paid = 50;
 

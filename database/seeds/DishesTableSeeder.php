@@ -19,7 +19,7 @@ class DishesTableSeeder extends Seeder
             $new_dish->name = "dish" . $i;
             $new_dish->ingredients = "ingredient" . $i;
             $new_dish->description = "description" . $i;
-            $new_dish->price = "price" . $i;
+            $new_dish->price = 10;
             $new_dish->visibility = true;
             $new_dish->restaurant_id = 1;
 
