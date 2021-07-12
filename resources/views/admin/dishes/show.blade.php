@@ -8,9 +8,9 @@
         <h2>Description:</h2>
         <p>{{$dish->description}}</p>
         <h2>Price:</h2>
-        <p>{{$dish->price}}</p>
+        <p>€{{number_format($dish->price, 2)}}</p>
 
-        <a class="btn btn-primary" href="{{route('admin.dishes.index')}}">Back to Menu</a>
+        <a class="btn btn-primary" href="{{route('admin.restaurant.dishes.index', $dish->restaurant_id)}}">Back to Menu</a>
     </div>
     
 @endsection

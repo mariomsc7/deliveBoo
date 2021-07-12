@@ -18,7 +18,7 @@
                     <tr>
                         <td>{{$dish->id}}</td>
                         <td>{{$dish->name}}</td>
-                        <td>{{$dish->price}}</td>
+                        <td>€{{number_format($dish->price, 2)}}</td>
                         <td>{{$dish->visibility ? 'True' : 'False'}}</td>
                         <td>
                             <a class="btn btn-primary" href="{{route('admin.dishes.show', $dish->id)}}">Show Details</a>

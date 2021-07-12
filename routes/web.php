@@ -33,7 +33,7 @@ Route::prefix('admin')
         Route::get('/', 'HomeController@index')->name('home');
 
         // ROUTE RESOURCE DISHES
-        Route::resource('/dishes', 'DishController');
+        Route::resource('restaurant.dishes', 'DishController')->shallow();
     });
 
 //FRONT OFFICE
