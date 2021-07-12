@@ -18,7 +18,7 @@ class DishController extends Controller
     public function index()
     {   
         $user = Auth::user();
-        $restaurant = Restaurant::where('user_id', $user->id)->first();
+        $restaurant = Restaurant::find($user->restaurant)->first();
         $dishes = Dish::where('restaurant_id', $restaurant->id)->get();
 
         return view('admin.dishes.index', compact('dishes', 'restaurant'));
