@@ -15,11 +15,11 @@ class DishController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {   
-        // $user = Auth::user();
-        $restaurant = Restaurant::find($id);
-        $dishes = Dish::where('restaurant_id', $id)->get();
+        $user = Auth::user();
+        $restaurant = Restaurant::find($user->restaurant)->first();
+        $dishes = Dish::where('restaurant_id', $restaurant->id)->get();
 
         return view('admin.dishes.index', compact('dishes', 'restaurant'));
     }
