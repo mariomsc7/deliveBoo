@@ -16,6 +16,11 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+                <div>
+                    @if (!$user->restaurant)
+                        <a class="btn btn-warning" href="{{ route('admin.restaurants.create') }}">Add Restaurant</a>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

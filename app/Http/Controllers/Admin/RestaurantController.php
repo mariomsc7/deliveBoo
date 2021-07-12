@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Restaurant;
 
 class RestaurantController extends Controller
 {
@@ -24,7 +26,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.restaurants.create');
     }
 
     /**
@@ -35,7 +37,27 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:restaurants|max:30',
+            'vat_number' => 'required|unique:restaurants|size:11',
+            'address' => 'required|unique:restaurants|max:50',
+        ], [
+            'required' => 'The :attribute is required!!!',
+            'unique' => 'The :attribute is already used',
+            'max' => 'Max :max characters allowed for the :attribute',
+        ]);
+
+        $user = Auth::id();
+        $data = $request->all();
+        $data['user_id'] = $user;
+       
+
+        $new_restaurant = new Restaurant();
+        $new_restaurant->fill($data);
+
+        $new_restaurant->save();
+
+        return redirect()->route('admin.home');
     }
 
     /**
