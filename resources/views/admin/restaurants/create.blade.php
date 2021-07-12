@@ -23,7 +23,7 @@
                 <label for="vat_number" class="col-md-4 col-form-label text-md-right">{{ __('P.IVA') }}</label>
 
                 <div class="col-md-6">
-                    <input id="vat_number" type="number" class="form-control @error('vat_number') is-invalid @enderror" name="vat_number" value="{{ old('vat_number') }}" required autocomplete="name" autofocus>
+                    <input id="vat_number" type="number" class="form-control @error('vat_number') is-invalid @enderror" name="vat_number" value="{{ old('vat_number') }}" required autocomplete="vat_number" autofocus>
 
                     @error('vat_number')
                         <span class="invalid-feedback" role="alert">
@@ -36,7 +36,7 @@
                 <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo') }}</label>
 
                 <div class="col-md-6">
-                    <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="name" autofocus>
+                    <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
 
                     @error('address')
                         <span class="invalid-feedback" role="alert">
