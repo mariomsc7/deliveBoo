@@ -12,6 +12,7 @@
 
     </head>
     <body>
+        <a href="{{route('admin.home')}}">Admin</a>
         <h1>Welcome</h1>
         <p>Work in progress..............</p>
     </body>
