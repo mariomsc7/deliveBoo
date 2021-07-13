@@ -28,8 +28,13 @@ class RestaurantController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.restaurants.create', compact('types'));
+        if (!Auth::user()->restaurant) {
+            return view('admin.restaurants.create', compact('types'));
+        } else {
+            return redirect()->route('admin.home');
+        }
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -39,6 +44,11 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
+        // CONTROLLO PER UN SOLO RISTORANTI
+        if (Auth::user()->restaurant) {
+            return redirect()->route('admin.home');
+        }
+
         $request->validate([
             'name' => 'required|unique:restaurants|max:30',
             'vat_number' => 'required|unique:restaurants|size:11',
