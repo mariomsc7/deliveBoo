@@ -16,7 +16,7 @@ class DishController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $user = Auth::user();
         $restaurant = Restaurant::find($user->restaurant)->first();
         $dishes = Dish::where('restaurant_id', $restaurant->id)->get();
@@ -31,7 +31,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.dishes.create');
     }
 
     /**
@@ -42,7 +42,36 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required|max:50',
+                'ingredients' => 'required',
+                'description' => 'required',
+                'price' => 'required',
+                'image' => 'nullable',
+            ],
+            [
+                'required' => 'The :attribute is required!!!',
+                'max' => 'Max :max characters allowed for the :attribute',
+            ]
+        );
+
+
+        $data = $request->all();
+        $data['restaurant_id'] = Auth::user()->restaurant->id;
+
+        if (array_key_exists('visibility', $data)) {
+            $data['visibility'] = 1;
+        } else {
+            $data['visibility'] = 0;
+        }
+
+        $new_dish = new Dish();
+
+        $new_dish->fill($data);
+        $new_dish->save();
+
+        return redirect()->route('admin.dishes.show', $new_dish->id);
     }
 
     /**
@@ -52,10 +81,10 @@ class DishController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {
         $dish = Dish::find($id);
 
-        if(! $dish){
+        if (!$dish || Auth::user()->restaurant->id != $dish->restaurant_id) {
             abort(404);
         }
         return view('admin.dishes.show', compact('dish'));
@@ -69,7 +98,8 @@ class DishController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dish = Dish::find($id);
+        return view('admin.dishes.edit', compact('dish'));
     }
 
     /**
@@ -81,7 +111,33 @@ class DishController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required|max:50',
+                'ingredients' => 'required',
+                'description' => 'required',
+                'price' => 'required',
+                'image' => 'nullable',
+            ],
+            [
+                'required' => 'The :attribute is required!!!',
+                'max' => 'Max :max characters allowed for the :attribute',
+            ]
+        );
+
+        $data = $request->all();
+
+        if (array_key_exists('visibility', $data)) {
+            $data['visibility'] = 1;
+        } else {
+            $data['visibility'] = 0;
+        }
+
+        $dish = Dish::find($id);
+
+        $dish->update($data);
+
+        return redirect()->route('admin.dishes.show', $dish->id);
     }
 
     /**
