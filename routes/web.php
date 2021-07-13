@@ -34,6 +34,9 @@ Route::prefix('admin')
 
         // ROUTE RESOURCE DISHES
         Route::resource('/dishes', 'DishController');
+
+        // ROUTE RESTAURANT
+        Route::resource('/restaurants', 'RestaurantController');
     });
 
 //FRONT OFFICE
