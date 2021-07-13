@@ -2,7 +2,13 @@
 
 @section('content')
     <div class="container">
-        <h1>{{$dish->name}}</h1>
+
+        <h1>{{$dish->name}}
+            <span class="mb-3">
+                <a class="btn btn-warning" href="{{route('admin.dishes.edit', $dish->id)}}">Edit</a>
+            </span>
+        </h1>
+
         <h2>Ingredients:</h2>
         <p>{{$dish->ingredients}}</p>
         <h2>Description:</h2>
