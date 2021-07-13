@@ -66,7 +66,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-primary">Registra</button>
+                    <button id="sub-btn" type="submit" class="btn btn-primary">Registra</button>
                 </div>
             </div>    
         </form>

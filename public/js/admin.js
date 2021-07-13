@@ -37350,15 +37350,39 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // CONFIG
 
 
 var btn = document.getElementById("register-button");
-btn.addEventListener('click', function (e) {
-  var password = document.getElementById("password").value;
-  var pswConfirm = document.getElementById("password-confirm").value;
 
-  if (password != pswConfirm) {
-    alert('Password doesn\'t match');
-    e.preventDefault();
-  }
-});
+if (btn) {
+  btn.addEventListener('click', function (e) {
+    var password = document.getElementById("password").value;
+    var pswConfirm = document.getElementById("password-confirm").value;
+
+    if (password != pswConfirm) {
+      alert('Password doesn\'t match');
+      e.preventDefault();
+    }
+  });
+}
+
+; // TYPE CLIENT VALIDATION
+
+var btnType = document.getElementById('sub-btn');
+
+if (btnType) {
+  btnType.addEventListener('click', function (e) {
+    var check = document.querySelectorAll('input[id^=type]');
+    var checked = [];
+    check.forEach(function (input) {
+      if (input.checked) {
+        checked.push(input);
+      }
+    });
+
+    if (checked.length == 0) {
+      alert('Please select almost one type');
+      e.preventDefault();
+    }
+  });
+}
 
 /***/ }),
 
