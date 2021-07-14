@@ -99,6 +99,9 @@ class DishController extends Controller
     public function edit($id)
     {
         $dish = Dish::find($id);
+        if (!$dish || Auth::user()->restaurant->id != $dish->restaurant_id) {
+            abort(404);
+        }
         return view('admin.dishes.edit', compact('dish'));
     }
 
