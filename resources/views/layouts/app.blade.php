@@ -54,7 +54,7 @@
                             @foreach ($restaurants as $restaurant)
                                 @if ($user->id == $restaurant->user_id)
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('admin.dishes.index') }}">Your Restaurant: {{$restaurant->name}}</a>
+                                        <a class="nav-link" href="{{ route('admin.restaurants.show', $restaurant->id) }}">Your Restaurant: {{$restaurant->name}}</a>
                                     </li>                        
                                 @endif
                             @endforeach

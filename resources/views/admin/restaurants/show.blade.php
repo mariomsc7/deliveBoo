@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <h1 class="mb-5">{{$restaurant->name}}</h1>
-        <a class="btn btn-primary text-uppercase" href="{{route('admin.dishes.index')}}">Back to Menu</a>
+        <a class="btn btn-primary text-uppercase" href="{{route('admin.dishes.index')}}">Go to Menu</a>
         <a class="btn btn-success text-uppercase pr-3 pl-3" href="{{route('admin.restaurants.edit', $restaurant->id)}}">Edit</a>
         <a class="btn btn-warning text-uppercase" href="{{route('admin.orders.index')}}">Orders history</a>
         <div>
