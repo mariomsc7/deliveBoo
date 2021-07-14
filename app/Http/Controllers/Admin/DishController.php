@@ -148,6 +148,9 @@ class DishController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dish = Dish::find($id);
+        $dish->orders()->detach();
+        $dish->delete();
+        return redirect()->route('admin.dishes.index')->with('deleted', $dish->name);
     }
 }
