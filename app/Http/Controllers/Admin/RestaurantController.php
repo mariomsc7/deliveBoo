@@ -90,6 +90,10 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::find($id);
 
+        if (!$restaurant || Auth::user()->restaurant->id != $restaurant->id) {
+            abort(404);
+        }
+
         return view('admin.restaurants.show', compact('restaurant'));
 
     }
@@ -105,6 +109,10 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::find($id);
         $types = Type::all();
 
+        if (!$restaurant || Auth::user()->restaurant->id != $restaurant->id) {
+            abort(404);
+        }
+
         return view('admin.restaurants.edit', compact('restaurant', 'types'));
     }
 
@@ -117,18 +125,18 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //  $request->validate(
-        //     [
-        //         'name' => ["required", Rule::unique('restaurants')->ignore($id), 'max:30'],
-        //         'vat_number' => ["required", Rule::unique('restaurants')->ignore($id), 'size:11'],
-        //         'address' => ["required", Rule::unique('restaurants')->ignore($id), 'max:50'],
-        //         'types' => 'required|exists:types,id'
-        //     ],
-        //     [
-        //         'required' => 'The :attribute is required!!!',
-        //         'max' => 'Max :max characters allowed for the :attribute',
-        //     ]
-        // );
+         $request->validate(
+            [
+                'name' => ["required", Rule::unique('restaurants')->ignore($id), 'max:30'],
+                'vat_number' => ["required", Rule::unique('restaurants')->ignore($id), 'size:11'],
+                'address' => ["required", Rule::unique('restaurants')->ignore($id), 'max:50'],
+                'types' => 'required|exists:types,id'
+            ],
+            [
+                'required' => 'The :attribute is required!!!',
+                'max' => 'Max :max characters allowed for the :attribute',
+            ]
+        );
 
         $data = $request->all();
 
@@ -154,6 +162,8 @@ class RestaurantController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $restaurant = Restaurant::find($id);
+        $restaurant->delete();
+        return redirect()->route('admin.home')->with('deleted', $restaurant->name);
     }
 }

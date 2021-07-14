@@ -11,21 +11,21 @@
 
         <div class="mb-3">
             <label for="name" class="control-table">Name</label>
-            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{old('name', $restaurant->name)}}" required maxlength="50">
+            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{old('name', $restaurant->name)}}" required maxlength="30">
             @error('name')
                 <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
         <div class="mb-3">
             <label for="vat_number" class="control-table">P.IVA</label>
-            <textarea class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" rows="10" required>{{old('vat_number.name', $restaurant->vat_number)}}</textarea>
+            <input type="text" class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" required maxlength="11" minlength="11" value="{{old('vat_number.name', $restaurant->vat_number)}}">
             @error('vat_number')
                 <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
         <div class="mb-3">
             <label for="address" class="control-table">Address</label>
-            <textarea class="form-control @error('ingredients') is-invalid @enderror" id="address" name="address" rows="10" required>{{old('adress.name', $restaurant->address)}}</textarea>
+            <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" required maxlength="50" value="{{old('adress.name', $restaurant->address)}}">
             @error('address')
                 <div class="invalid-feedback">{{$message}}</div>
             @enderror
