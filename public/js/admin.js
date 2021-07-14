@@ -37382,7 +37382,19 @@ if (btnType) {
       e.preventDefault();
     }
   });
-}
+} // Delete confirmation message
+
+
+var deleteDish = document.querySelectorAll('.delete-form');
+deleteDish.forEach(function (form) {
+  form.addEventListener("submit", function (e) {
+    var resp = confirm("Are you sure you want to delete this dish?");
+
+    if (!resp) {
+      e.preventDefault();
+    }
+  });
+});
 
 /***/ }),
 
@@ -37438,7 +37450,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/js/admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! C:\Users\giuli\Desktop\Download installazioni\deliveBoo\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })
