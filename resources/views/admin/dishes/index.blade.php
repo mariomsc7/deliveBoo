@@ -8,7 +8,7 @@
                  Deleted Successfully
             </div>
         @endif
-        <h1 class="mb-5">{{$restaurant->name}} Menu</h1>
+        <h1 class="mb-5"><a href="{{ route('admin.restaurants.show', $restaurant->id)}}">{{$restaurant->name}} Menu</a></h1>
         <a class="btn btn-success text-uppercase pr-3 pl-3" href="{{route('admin.dishes.create')}}">Create</a>
         <table class="table mt-5">
             <thead>
