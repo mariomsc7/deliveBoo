@@ -45,7 +45,7 @@
         <div class="mb-3">
             image
         </div>
-        <button type="submit" class="btn btn-success">Save</button>
+        <button type="submit" class="btn btn-success text-uppercase pr-3 pl-3">Save</button>
 
         
     </form>
