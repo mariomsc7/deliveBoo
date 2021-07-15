@@ -43,12 +43,11 @@ if(btnType){
 }
 
 // Delete confirmation message
-
 const deleteDish = document.querySelectorAll('.delete-form');
 deleteDish.forEach(
     form=>{
         form.addEventListener("submit", function(e) {
-            const resp = confirm("Are you sure you want to delete this dish?"); 
+            const resp = confirm("Are you sure you want to delete it?"); 
             if(! resp) {
                 e.preventDefault();
             }
