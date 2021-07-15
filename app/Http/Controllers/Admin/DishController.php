@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class DishController extends Controller
 {
@@ -48,7 +50,7 @@ class DishController extends Controller
                 'ingredients' => 'required',
                 'description' => 'required',
                 'price' => 'required',
-                'image' => 'nullable',
+                'image' => 'nullable|mimes:jpg, jpeg, png',
             ],
             [
                 'required' => 'The :attribute is required!!!',
@@ -65,6 +67,11 @@ class DishController extends Controller
         } else {
             $data['visibility'] = 0;
         }
+
+        // Image
+        if(array_key_exists('image', $data)){
+            $data['image'] = Storage::put('dishes-images', $data['image']);
+        };
 
         $new_dish = new Dish();
 
@@ -84,8 +91,10 @@ class DishController extends Controller
     {
         $dish = Dish::find($id);
 
-        if (!$dish || Auth::user()->restaurant->id != $dish->restaurant_id) {
+        if (!$dish) {
             abort(404);
+        } elseif (Auth::user()->restaurant->id != $dish->restaurant_id){
+            abort(403);
         }
         return view('admin.dishes.show', compact('dish'));
     }
@@ -99,8 +108,10 @@ class DishController extends Controller
     public function edit($id)
     {
         $dish = Dish::find($id);
-        if (!$dish || Auth::user()->restaurant->id != $dish->restaurant_id) {
+        if (!$dish) {
             abort(404);
+        } elseif(Auth::user()->restaurant->id != $dish->restaurant_id){
+            abort(403);
         }
         return view('admin.dishes.edit', compact('dish'));
     }
@@ -120,7 +131,7 @@ class DishController extends Controller
                 'ingredients' => 'required',
                 'description' => 'required',
                 'price' => 'required',
-                'image' => 'nullable',
+                'image' => 'nullable|mimes:jpg, jpeg, png',            
             ],
             [
                 'required' => 'The :attribute is required!!!',
@@ -138,6 +149,16 @@ class DishController extends Controller
 
         $dish = Dish::find($id);
 
+        // Image update
+        if(array_key_exists('image', $data)) {
+            // delete previous one
+            if($dish->image){
+                Storage::delete($dish->image);
+            }
+            // set new one
+            $data['image'] = Storage::put('dishes-images', $data['image']);
+        }
+
         $dish->update($data);
 
         return redirect()->route('admin.dishes.show', $dish->id);
@@ -153,6 +174,12 @@ class DishController extends Controller
     {
         $dish = Dish::find($id);
         $dish->orders()->detach();
+
+        // Remove image if exists
+        if($dish->image) {
+            Storage::delete($dish->image);
+        }
+
         $dish->delete();
         return redirect()->route('admin.dishes.index')->with('deleted', $dish->name);
     }

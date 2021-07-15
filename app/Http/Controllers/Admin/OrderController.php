@@ -55,8 +55,10 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
 
-        if (!$order || Auth::user()->restaurant->id != $order->restaurant_id) {
+        if (!$order) {
             abort(404);
+        } elseif(Auth::user()->restaurant->id != $order->restaurant_id){
+            abort(403);
         }
         return view('admin.orders.show', compact('order'));
     }
@@ -96,7 +98,7 @@ class OrderController extends Controller
             $order = Order::find($id);
             $order->dishes()->detach();
             $order->delete();
-            return redirect()->route('admin.orders.index')->with('deleted', $order->customer_name);
+            return redirect()->route('admin.orders.index')->with('deleted', $order->customer_name . ' ' . $order->customer_lastname);
         }
     }
 }

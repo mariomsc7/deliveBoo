@@ -4,8 +4,9 @@
     <div class="container">
         @if(session('deleted'))
             <div class="alert alert-success">
+                Dish 
                 <strong>{{ session('deleted') }}</strong>
-                 Deleted Successfully
+                 successfully deleted
             </div>
         @endif
         <h1 class="mb-5"><a href="{{ route('admin.restaurants.show', $restaurant->id)}}">{{$restaurant->name}}</a></h1>

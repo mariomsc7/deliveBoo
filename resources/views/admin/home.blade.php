@@ -4,8 +4,9 @@
 <div class="container">
     @if(session('deleted'))
     <div class="alert alert-success">
+        Restaurant 
         <strong>{{ session('deleted') }}</strong>
-         Deleted Successfully
+        successfully deleted
     </div>
     @endif
     <div class="row justify-content-center">

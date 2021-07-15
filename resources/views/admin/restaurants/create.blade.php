@@ -4,7 +4,7 @@
 
     <div class="container">
        
-        <form method="POST" action="{{ route('admin.restaurants.store') }}">
+        <form method="POST" action="{{ route('admin.restaurants.store') }}" enctype="multipart/form-data">
             @csrf
             @method('POST')
             <div class="form-group row">
@@ -50,25 +50,33 @@
                 <h4>Restaurant types</h4>
                 <ul>
                     @foreach ($types as $type)
-                    <li class="list-unstyled">
-                    <input class="@error('types') is-invalid @enderror" type="checkbox" name="types[]" id="type{{ $loop->iteration }}"
-                        value="{{ $type->id}}" 
-                        @if(in_array($type->id, old('types', [])))
-                            checked
-                        @endif>
-                    <label for="type{{ $loop->iteration }}">
-                        {{$type->name}}
-                    </label>
-                </li>
-                @endforeach
+                        <li class="list-unstyled">
+                            <input class="@error('types') is-invalid @enderror" type="checkbox" 
+                                name="types[]" id="type{{ $loop->iteration }}"
+                                value="{{ $type->id}}" 
+                                @if(in_array($type->id, old('types', []))) checked @endif
+                            >
+                            <label for="type{{ $loop->iteration }}">
+                                {{$type->name}}
+                            </label>
+                        </li>
+                    @endforeach
                 </ul>
                 
                 @error('types')
-                    
                         <div class="invalid-feedback">{{ $message }}</div>
-               
                 @enderror
             </div>
+            <div class="mb-3">
+                <div>
+                    <label for="image">Restaurant Image</label>
+                </div>
+                <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png">
+                @error('image')
+                    <div>{{$message}}</div>
+                @enderror
+            </div>
+
             <div class="form-group row">
                 <div class="col-md-6">
                     <button id="sub-btn" type="submit" class="text-uppercase btn btn-primary">Register</button>
