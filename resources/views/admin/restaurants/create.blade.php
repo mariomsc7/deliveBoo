@@ -68,10 +68,12 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                
                 @enderror
+
+                 <button id="sub-btn" type="submit" class="text-uppercase btn btn-primary">Register</button>
             </div>
             <div class="form-group row">
                 <div class="col-md-6">
-                    <button id="sub-btn" type="submit" class="text-uppercase btn btn-primary">Register</button>
+                   
                 </div>
             </div>    
         </form>

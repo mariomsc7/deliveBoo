@@ -4,7 +4,8 @@
 
    <div class="container">
     <h1>EDIT DISH 
-        <a href="{{route('admin.dishes.show', $dish->id)}}">{{$dish->name}}</a> </h1>
+        <a href="{{route('admin.dishes.show', $dish->id)}}">{{$dish->name}}</a> 
+    </h1>
     <form method="POST" action="{{route('admin.dishes.update', $dish->id)}}">
         @csrf
         @method('PATCH')
@@ -39,7 +40,7 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="visibility" class="control-table">Visible</label>
+            <label for="visibility" class="control-table mr-3">VISIBLE: </label>
             <input type="checkbox" name="visibility" id="visibility"  checked>
         </div>
         <div class="mb-3">

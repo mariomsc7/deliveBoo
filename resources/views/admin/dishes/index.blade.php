@@ -9,7 +9,7 @@
             </div>
         @endif
         <h1 class="mb-5"><a href="{{ route('admin.restaurants.show', $restaurant->id)}}">{{$restaurant->name}}</a></h1>
-        <h2>Menu</h2>
+        <h2>MENU</h2>
         <a class="btn btn-success text-uppercase pr-3 pl-3" href="{{route('admin.dishes.create')}}">Add Dish</a>
         <table class="table mt-5">
             <thead>
