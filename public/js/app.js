@@ -1935,8 +1935,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Home'
+  name: "Home",
+  data: function data() {
+    return {
+      restaurants: []
+    };
+  },
+  created: function created() {
+    // console.log(axios);
+    this.getRestaurants();
+  },
+  methods: {
+    getRestaurants: function getRestaurants() {
+      var _this = this;
+
+      // Get posts from API
+      axios.get("http://127.0.0.1:8000/api/restaurants").then(function (res) {
+        // console.log(res.data);
+        _this.restaurants = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -2448,7 +2483,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("Do you want a Milza Burger?")])
+  return _c(
+    "div",
+    [
+      _c("h1", [_vm._v("RESTAURANTS")]),
+      _vm._v(" "),
+      _vm._l(_vm.restaurants, function(restaurant) {
+        return _c("article", { key: restaurant.id }, [
+          _c("h2", [_vm._v(_vm._s(restaurant.name))]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(restaurant.address))]),
+          _vm._v(" "),
+          restaurant.image
+            ? _c("img", {
+                attrs: { src: restaurant.image, alt: restaurant.name }
+              })
+            : _vm._e()
+        ])
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -18004,8 +18059,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\giuli\Desktop\Download installazioni\deliveBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\giuli\Desktop\Download installazioni\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\User\Desktop\deliveBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\User\Desktop\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
