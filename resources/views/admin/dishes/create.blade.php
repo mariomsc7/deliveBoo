@@ -38,7 +38,7 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="visibility" class="control-table mr-3">VISIBLE:</label>
+            <label for="visibility" class="control-table ">VISIBLE:</label>
             <input type="checkbox" name="visibility" id="visibility"  checked>
         </div>
         <div class="mb-3">
