@@ -44,7 +44,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="visibility" class="control-table">Visible</label>
+                <label for="visibility" class="control-table mr-3">VISIBLE:</label>
                 <input type="checkbox" name="visibility" id="visibility"  checked>
             </div>
             <div class="mb-3">

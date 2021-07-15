@@ -72,11 +72,8 @@
                 @error('image')
                     <div>{{$message}}</div>
                 @enderror
+                <button id="sub-btn" type="submit" class="btn btn-success text-uppercase pr-3 pl-3">Save</button>
             </div>
-
-            <button id="sub-btn" type="submit" class="btn btn-success text-uppercase pr-3 pl-3">Save</button>
-
-            
         </form>
     </div>
     

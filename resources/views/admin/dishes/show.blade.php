@@ -7,7 +7,7 @@
             <div class="col-md-6">
                 <h1>{{$dish->name}}
                     <span class="mb-3">
-                        <a class="btn btn-warning" href="{{route('admin.dishes.edit', $dish->id)}}">Edit</a>
+                        <a class="btn btn-warning ml-3" href="{{route('admin.dishes.edit', $dish->id)}}">EDIT</a>
                     </span>
                 </h1>
                 <h2>Ingredients:</h2>

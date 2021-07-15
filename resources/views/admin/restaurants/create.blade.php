@@ -66,22 +66,17 @@
                 @error('types')
                         <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
+                <div class="mb-3">
+                    <div>
+                        <label for="image">Restaurant Image</label>
+                    </div>
+                    <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png">
+                    @error('image')
+                        <div>{{$message}}</div>
+                    @enderror
+                </div> 
+                <button id="sub-btn" type="submit" class="text-uppercase btn btn-primary">Register</button>
             </div>
-            <div class="mb-3">
-                <div>
-                    <label for="image">Restaurant Image</label>
-                </div>
-                <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png">
-                @error('image')
-                    <div>{{$message}}</div>
-                @enderror
-            </div>
-
-            <div class="form-group row">
-                <div class="col-md-6">
-                    <button id="sub-btn" type="submit" class="text-uppercase btn btn-primary">Register</button>
-                </div>
-            </div>    
         </form>
     </div>
 
