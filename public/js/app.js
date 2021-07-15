@@ -1948,25 +1948,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
   data: function data() {
     return {
-      restaurants: []
+      restaurants: [],
+      types: []
     };
   },
   created: function created() {
     // console.log(axios);
     this.getRestaurants();
   },
+  computed: {
+    getMarta: function getMarta() {
+      var _this = this;
+
+      this.restaurants.forEach(function (restaurant) {
+        _this.types.push(restaurant.types);
+
+        console.log(_this.types);
+      });
+    }
+  },
   methods: {
     getRestaurants: function getRestaurants() {
-      var _this = this;
+      var _this2 = this;
 
       // Get posts from API
       axios.get("http://127.0.0.1:8000/api/restaurants").then(function (res) {
-        // console.log(res.data);
-        _this.restaurants = res.data;
+        console.log(res.data);
+        _this2.restaurants = res.data.restaurants;
+        _this2.types = res.data.types;
       })["catch"](function (err) {
         console.log(err);
       });
@@ -2489,16 +2508,33 @@ var render = function() {
       _c("h1", [_vm._v("RESTAURANTS")]),
       _vm._v(" "),
       _vm._l(_vm.restaurants, function(restaurant) {
-        return _c("article", { key: restaurant.id }, [
-          _c("h2", [_vm._v(_vm._s(restaurant.name))]),
-          _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(restaurant.address))]),
-          _vm._v(" "),
-          restaurant.image
-            ? _c("img", {
-                attrs: { src: restaurant.image, alt: restaurant.name }
-              })
-            : _vm._e()
+        return _c(
+          "article",
+          { key: restaurant.id },
+          [
+            _c("h2", [_vm._v(_vm._s(restaurant.name))]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(restaurant.address))]),
+            _vm._v(" "),
+            _vm._l(restaurant.types, function(type) {
+              return _c("p", { key: type.id }, [
+                _vm._v("\n            " + _vm._s(type.name) + "\n        ")
+              ])
+            }),
+            _vm._v(" "),
+            restaurant.image
+              ? _c("img", {
+                  attrs: { src: restaurant.image, alt: restaurant.name }
+                })
+              : _vm._e()
+          ],
+          2
+        )
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.types, function(type) {
+        return _c("article", { key: type.id }, [
+          _c("h2", [_vm._v(_vm._s(type.name))])
         ])
       })
     ],
