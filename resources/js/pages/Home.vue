@@ -1,22 +1,20 @@
 <template>
     <div>
         <h1>RESTAURANTS</h1>
+        <ul>
+            <li v-for="(type, index) in types" :key="`types-${index}`">{{type}}</li>
+        </ul>
 
-        <article v-for="restaurant in restaurants" :key="restaurant.id">
+        <article v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
             <h2>{{ restaurant.name }}</h2>
-            <p>{{ restaurant.address }}</p>
-            <p v-for="type in restaurant.types" :key="type.id">
-                {{ type.name }}
-            </p>
+            <div>{{ restaurant.address }}</div>
+            <div>
+                <span v-for="(type, index) in restaurant.type" :key="`type-${index}`">
+                    {{ type }} 
+                </span>
+            </div>
 
-            <img
-                v-if="restaurant.image"
-                :src="restaurant.image"
-                :alt="restaurant.name"
-            />
-        </article>
-        <article v-for="type in types" :key="type.id">
-            <h2>{{ type.name }}</h2>
+            <img v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name" width="300"/>
         </article>
     </div>
 </template>
@@ -31,16 +29,7 @@ export default {
         };
     },
     created() {
-        // console.log(axios);
         this.getRestaurants();
-    },
-    computed: {
-        getMarta() {
-            this.restaurants.forEach(restaurant => {
-                this.types.push(restaurant.types);
-                console.log(this.types);
-            });
-        }
     },
     methods: {
         getRestaurants() {
@@ -48,9 +37,15 @@ export default {
             axios
                 .get(`http://127.0.0.1:8000/api/restaurants`)
                 .then(res => {
-                    console.log(res.data);
-                    this.restaurants = res.data.restaurants;
-                    this.types = res.data.types;
+                    this.restaurants = res.data;
+
+                    this.restaurants.forEach(restaurant => {
+                        restaurant.types.forEach(type => {
+                            if(!this.types.includes(type.name)){
+                                this.types.push(type.name);
+                            }
+                        });
+                    });
                 })
                 .catch(err => {
                     console.log(err);

@@ -9,20 +9,23 @@ use App\Type;
 
 class RestaurantController extends Controller
 {
-     public function index() {
-        $restaurants = Restaurant::with('types')->get();
-        $types = Type::all();
-        $marta = [
-            'restaurants' => $restaurants, 
-            'types' => $types
-                ];
-
+    public function index() {
+        $restaurants = Restaurant::all();
+        
+        foreach ($restaurants as $res){
+            $temp = [];
+            foreach($res->types as $type){
+                $temp[] = $type->name;
+            }
+            $res['type'] = $temp;
+        }
 
         foreach($restaurants as $restaurant) {
-        if($restaurant->image) {
-            $restaurant->image = url('storage/' . $restaurant->image);
+            if($restaurant->image) {
+                $restaurant->image = url('storage/' . $restaurant->image);
+            }
         }
-    }
-        return response()->json($marta);
+    
+        return response()->json($restaurants);
     }
 }

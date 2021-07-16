@@ -82,7 +82,7 @@ class RestaurantController extends Controller
         }
 
 
-        return redirect()->route('admin.home');
+        return redirect()->route('admin.restaurants.show', $new_restaurant->id);
     }
 
     /**

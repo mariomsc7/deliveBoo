@@ -1952,8 +1952,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
   data: function data() {
@@ -1963,29 +1961,23 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    // console.log(axios);
     this.getRestaurants();
-  },
-  computed: {
-    getMarta: function getMarta() {
-      var _this = this;
-
-      this.restaurants.forEach(function (restaurant) {
-        _this.types.push(restaurant.types);
-
-        console.log(_this.types);
-      });
-    }
   },
   methods: {
     getRestaurants: function getRestaurants() {
-      var _this2 = this;
+      var _this = this;
 
       // Get posts from API
       axios.get("http://127.0.0.1:8000/api/restaurants").then(function (res) {
-        console.log(res.data);
-        _this2.restaurants = res.data.restaurants;
-        _this2.types = res.data.types;
+        _this.restaurants = res.data;
+
+        _this.restaurants.forEach(function (restaurant) {
+          restaurant.types.forEach(function (type) {
+            if (!_this.types.includes(type.name)) {
+              _this.types.push(type.name);
+            }
+          });
+        });
       })["catch"](function (err) {
         console.log(err);
       });
@@ -2507,34 +2499,39 @@ var render = function() {
     [
       _c("h1", [_vm._v("RESTAURANTS")]),
       _vm._v(" "),
+      _c(
+        "ul",
+        _vm._l(_vm.types, function(type, index) {
+          return _c("li", { key: "types-" + index }, [_vm._v(_vm._s(type))])
+        }),
+        0
+      ),
+      _vm._v(" "),
       _vm._l(_vm.restaurants, function(restaurant) {
-        return _c(
-          "article",
-          { key: restaurant.id },
-          [
-            _c("h2", [_vm._v(_vm._s(restaurant.name))]),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(restaurant.address))]),
-            _vm._v(" "),
-            _vm._l(restaurant.types, function(type) {
-              return _c("p", { key: type.id }, [
-                _vm._v("\n            " + _vm._s(type.name) + "\n        ")
+        return _c("article", { key: "res-" + restaurant.id }, [
+          _c("h2", [_vm._v(_vm._s(restaurant.name))]),
+          _vm._v(" "),
+          _c("div", [_vm._v(_vm._s(restaurant.address))]),
+          _vm._v(" "),
+          _c(
+            "div",
+            _vm._l(restaurant.type, function(type, index) {
+              return _c("span", { key: "type-" + index }, [
+                _vm._v("\n                " + _vm._s(type) + " \n            ")
               ])
             }),
-            _vm._v(" "),
-            restaurant.image
-              ? _c("img", {
-                  attrs: { src: restaurant.image, alt: restaurant.name }
-                })
-              : _vm._e()
-          ],
-          2
-        )
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.types, function(type) {
-        return _c("article", { key: type.id }, [
-          _c("h2", [_vm._v(_vm._s(type.name))])
+            0
+          ),
+          _vm._v(" "),
+          restaurant.image
+            ? _c("img", {
+                attrs: {
+                  src: restaurant.image,
+                  alt: restaurant.name,
+                  width: "300"
+                }
+              })
+            : _vm._e()
         ])
       })
     ],
@@ -18057,14 +18054,14 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _pages_Home_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/Home.vue */ "./resources/js/pages/Home.vue");
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]); // Routes definition
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]); // Routes definition
 
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
   mode: 'history',
   linkExactActiveClass: 'active',
   routes: [{
@@ -18095,8 +18092,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\User\Desktop\deliveBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\User\Desktop\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
