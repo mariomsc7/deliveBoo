@@ -49,7 +49,7 @@ class DishController extends Controller
                 'name' => 'required|max:50',
                 'ingredients' => 'required',
                 'description' => 'required',
-                'price' => 'required',
+                'price' => 'required|numeric|max:999',
                 'image' => 'nullable|mimes:jpg, jpeg, png',
             ],
             [
@@ -130,7 +130,7 @@ class DishController extends Controller
                 'name' => 'required|max:50',
                 'ingredients' => 'required',
                 'description' => 'required',
-                'price' => 'required',
+                'price' => 'required|numeric|max:999',
                 'image' => 'nullable|mimes:jpg, jpeg, png',            
             ],
             [

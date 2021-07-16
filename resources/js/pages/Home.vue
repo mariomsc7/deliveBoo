@@ -1,11 +1,13 @@
 <template>
     <div>
+        
         <h1>RESTAURANTS</h1>
         <ul>
             <li v-for="(type, index) in types" :key="`types-${index}`">{{type}}</li>
         </ul>
-
+        
         <article v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
+            <router-link :to="{name: 'restaurant', params: {id:restaurant.id}}">
             <h2>{{ restaurant.name }}</h2>
             <div>{{ restaurant.address }}</div>
             <div>
@@ -15,6 +17,7 @@
             </div>
 
             <img v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name" width="300"/>
+            </router-link>
         </article>
     </div>
 </template>

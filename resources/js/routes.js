@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from './pages/Home.vue';
+import Restaurant from './pages/Restaurant.vue';
 
 Vue.use(VueRouter);
 
@@ -14,6 +15,11 @@ const router = new VueRouter({
             path: '/',
             name: 'home',
             component: Home,
+        },
+        {
+            path: '/restaurant/:id',
+            name: 'restaurant',
+            component: Restaurant,
         },
     ]
 }); 
