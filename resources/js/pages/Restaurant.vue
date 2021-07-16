@@ -1,20 +1,30 @@
 <template>
     <div>
         <h1>DISHES</h1>
+        
         <ul>
-            <li :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
+            <li  @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
+                
                 {{dish.name}}
             </li>
         </ul>
+        <Dish :dishDetails="dishDetail" v-if="visibility" @close="closeDetail"/>
     </div>
+        
 </template>
 
 <script>
+import Dish from "../components/Dish.vue";
 export default {
     name: 'Restaurant',
+    components:{
+        Dish,
+    },
     data() {
         return {
-            dishes: []
+            dishes: [],
+            dishDetail: {},
+            visibility: false,
         };
     },
     created() {
@@ -32,6 +42,13 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
+        },
+        showDish(dish){
+            this.dishDetail= dish;
+            this.visibility=true;
+        },
+        closeDetail(){
+            this.visibility=false;
         }
     }
 }
