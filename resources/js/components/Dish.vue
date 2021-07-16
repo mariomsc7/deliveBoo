@@ -13,7 +13,7 @@
         <button @click="more(dishDetails.price)"> + </button>
         
       </div>
-      <button  @click="addDish(dishDetails)">Aggiungi al carrello | TOT: {{price.toFixed(2)}} €</button>
+      <button @click="addDish(dishDetails)">Aggiungi al carrello | TOT: {{price.toFixed(2)}} €</button>
     </div>
     <button v-else disabled>Non disponibile</button>
    

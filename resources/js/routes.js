@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from './pages/Home.vue';
 import Restaurant from './pages/Restaurant.vue';
+import List from './pages/List.vue';
 
 Vue.use(VueRouter);
 
@@ -20,6 +21,11 @@ const router = new VueRouter({
             path: '/restaurant/:id',
             name: 'restaurant',
             component: Restaurant,
+        },
+        {
+            path: '/restaurants/:type',
+            name: 'list',
+            component: List,
         },
     ]
 }); 

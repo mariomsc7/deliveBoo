@@ -3,7 +3,13 @@
         
         <h1>RESTAURANTS</h1>
         <ul>
-            <li v-for="(type, index) in types" :key="`types-${index}`">{{type}}</li>
+            
+                <li v-for="(type, index) in types" :key="`types-${index}`">
+                    <router-link :restaurants="restaurants" :to="{name: 'list', params: {type:type}}">
+                        {{type}}
+                    </router-link>
+                </li>
+            
         </ul>
         
         <article v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
