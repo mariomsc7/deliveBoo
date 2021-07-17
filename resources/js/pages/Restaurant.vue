@@ -1,7 +1,9 @@
 <template>
     <div>
         <h1>DISHES</h1>
-        <router-link :to="{name: 'cart', params: {order:cart}}">Carrello</router-link>
+
+            <Cart />
+
             <div class="dish" @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
                 {{dish.name}}
                 <img v-if="dish.image" :src="dish.image" :alt="dish.name" width="300"/>
@@ -13,10 +15,12 @@
 
 <script>
 import Dish from "../components/Dish.vue";
+import Cart from "../components/Cart.vue";
 export default {
     name: 'Restaurant',
     components:{
         Dish,
+        Cart,
     },
     data() {
         return {
