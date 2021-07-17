@@ -1,6 +1,10 @@
 <template>
   <div>
-      {{}}
+      <div v-for="(item, index) in cart" :key="index">
+          <span>{{item.name}}</span>
+          X<span>{{item.quantità}}</span>
+          €<span>{{item.prezzo}}</span>
+      </div>
   </div>
 </template>
 
@@ -8,20 +12,23 @@
 export default {
 name: 'Cart',
 
-data(){
-    return{
-        cart: {},
-    }
-},
-created(){
-    this.getCart();
-},
-methods:{
-    getCart(){
-        // this.cart = JSON.parse(window.localStorage.);
-        // console.log(this.cart);
-    }
-},
+    data(){
+        return{
+            cart: {},
+        }
+    },
+    // created(){
+    //     this.getCart();
+    // },
+    watch:{
+        // getCart();
+        getCart(){
+            this.cart = JSON.parse(window.localStorage.getItem('cart'));
+            // console.log(this.cart);
+        }
+    },
+    methods:{
+    },
 }
 </script>
 

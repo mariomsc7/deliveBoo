@@ -2,11 +2,14 @@
     <div>
         <h1>DISHES</h1>
 
-            <Cart />
-
-            <div class="dish" @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
-                {{dish.name}}
-                <img v-if="dish.image" :src="dish.image" :alt="dish.name" width="300"/>
+            <div class="cont">
+                <div>
+                    <div class="dish" @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
+                        {{dish.name}}
+                        <img v-if="dish.image" :src="dish.image" :alt="dish.name" width="300"/>
+                    </div>
+                </div>
+                <Cart />
             </div>
         <Dish @addToCart="addCart" :dishDetails="dishDetail" v-if="visibility" @close="closeDetail"/>
     </div>
@@ -27,16 +30,25 @@ export default {
             dishes: [],
             dishDetail: {},
             visibility: false,
-            cart: [],
+            cart: {},
         };
     },
     created() {
         this.getDishes();
+        if(window.localStorage.getItem('cart')){
+            this.cart = JSON.parse(window.localStorage.getItem('cart'));
+        }
     },
     methods: {
-        addCart(order) {
-            this.cart.push(order);
-            console.log(order);
+        addCart(order, name) {
+            if(this.cart[name]){
+                this.cart[name].quantità += order.quantità;
+                this.cart[name].prezzo += order.prezzo;
+            } else {
+                this.cart[name] = order;
+            }
+            // this.cart.push(order);
+            // console.log(order);
         },
         getDishes() {
             // Get posts from API
@@ -56,6 +68,7 @@ export default {
         },
         closeDetail(){
             this.visibility=false;
+            window.localStorage.setItem('cart', JSON.stringify(this.cart));
         }
     }
 }
@@ -72,5 +85,8 @@ export default {
         background-color: rgb(134, 236, 202);
         border-radius: 10px;
         cursor: pointer;
+    }
+    .cont{
+        display: flex;
     }
 </style>

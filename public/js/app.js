@@ -1943,6 +1943,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Cart',
   data: function data() {
@@ -1950,14 +1954,16 @@ __webpack_require__.r(__webpack_exports__);
       cart: {}
     };
   },
-  created: function created() {
-    this.getCart();
-  },
-  methods: {
-    getCart: function getCart() {// this.cart = JSON.parse(window.localStorage.);
-      // console.log(this.cart);
+  // created(){
+  //     this.getCart();
+  // },
+  watch: {
+    // getCart();
+    getCart: function getCart() {
+      this.cart = JSON.parse(window.localStorage.getItem('cart')); // console.log(this.cart);
     }
-  }
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -2001,37 +2007,41 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      carrello: [],
+      carrello: {},
       price: 0,
       quantity: 0
     };
   },
   methods: {
     addDish: function addDish(dishDetails) {
-      var dish = {
+      // let dish = {
+      //   name: dishDetails.name,
+      //   quantità: this.quantity,
+      //   prezzo: this.price,
+      // }
+      // if(window.localStorage.getItem(dishDetails.name)){
+      //   const addQuant = JSON.parse(window.localStorage.getItem(dishDetails.name));
+      //   console.log(addQuant)
+      //   addQuant.quantità += this.quantity;
+      //   addQuant.prezzo += this.price;
+      //   window.localStorage.setItem(dishDetails.name, JSON.stringify(addQuant));
+      // }else{
+      //   window.localStorage.setItem(dishDetails.name, JSON.stringify(dish));
+      // }
+      var order = {
         name: dishDetails.name,
         quantità: this.quantity,
         prezzo: this.price
       };
+      console.log(order); // this.carrello.dishDetails.name = order;
+      // for(let i = 0; i < this.quantity; i++ ){
+      //   this.carrello.push(dishDetails);
+      //   console.log(this.carrello);
+      // }
+      //   this.quantity = 0;
+      //   this.price = 0;
 
-      if (window.localStorage.getItem(dishDetails.name)) {
-        var addQuant = JSON.parse(window.localStorage.getItem(dishDetails.name));
-        console.log(addQuant);
-        addQuant.quantità += this.quantity;
-        addQuant.prezzo += this.price;
-        window.localStorage.setItem(dishDetails.name, JSON.stringify(addQuant));
-      } else {
-        window.localStorage.setItem(dishDetails.name, JSON.stringify(dish));
-      }
-
-      for (var i = 0; i < this.quantity; i++) {
-        this.carrello.push(dishDetails);
-        console.log(this.carrello);
-      }
-
-      this.quantity = 0;
-      this.price = 0;
-      this.$emit('addToCart', this.carrello);
+      this.$emit('addToCart', order, dishDetails.name);
     },
     more: function more(price) {
       this.quantity++;
@@ -2226,6 +2236,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2239,16 +2252,26 @@ __webpack_require__.r(__webpack_exports__);
       dishes: [],
       dishDetail: {},
       visibility: false,
-      cart: []
+      cart: {}
     };
   },
   created: function created() {
     this.getDishes();
+
+    if (window.localStorage.getItem('cart')) {
+      this.cart = JSON.parse(window.localStorage.getItem('cart'));
+    }
   },
   methods: {
-    addCart: function addCart(order) {
-      this.cart.push(order);
-      console.log(order);
+    addCart: function addCart(order, name) {
+      if (this.cart[name]) {
+        this.cart[name].quantità += order.quantità;
+        this.cart[name].prezzo += order.prezzo;
+      } else {
+        this.cart[name] = order;
+      } // this.cart.push(order);
+      // console.log(order);
+
     },
     getDishes: function getDishes() {
       var _this = this;
@@ -2267,6 +2290,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     closeDetail: function closeDetail() {
       this.visibility = false;
+      window.localStorage.setItem('cart', JSON.stringify(this.cart));
     }
   }
 });
@@ -2342,7 +2366,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.unavailable {\n    color: red;\n}\n.dish{\n    width: 300px;\n    margin: 10px;\n    padding: 20px;\n    background-color: rgb(134, 236, 202);\n    border-radius: 10px;\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.unavailable {\n    color: red;\n}\n.dish{\n    width: 300px;\n    margin: 10px;\n    padding: 20px;\n    background-color: rgb(134, 236, 202);\n    border-radius: 10px;\n    cursor: pointer;\n}\n.cont{\n    display: flex;\n}\n", ""]);
 
 // exports
 
@@ -3576,7 +3600,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    {{}}\n")])
+  return _c(
+    "div",
+    _vm._l(_vm.cart, function(item, index) {
+      return _c("div", { key: index }, [
+        _c("span", [_vm._v(_vm._s(item.name))]),
+        _vm._v("\n        X"),
+        _c("span", [_vm._v(_vm._s(item.quantità))]),
+        _vm._v("\n        €"),
+        _c("span", [_vm._v(_vm._s(item.prezzo))])
+      ])
+    }),
+    0
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -3919,31 +3955,46 @@ var render = function() {
     [
       _c("h1", [_vm._v("DISHES")]),
       _vm._v(" "),
-      _c("Cart"),
-      _vm._v(" "),
-      _vm._l(_vm.dishes, function(dish, index) {
-        return _c(
-          "div",
-          {
-            key: "dishes-" + index,
-            staticClass: "dish",
-            class: { unavailable: !dish.visibility },
-            on: {
-              click: function($event) {
-                return _vm.showDish(dish)
-              }
-            }
-          },
-          [
-            _vm._v("\n            " + _vm._s(dish.name) + "\n            "),
-            dish.image
-              ? _c("img", {
-                  attrs: { src: dish.image, alt: dish.name, width: "300" }
-                })
-              : _vm._e()
-          ]
-        )
-      }),
+      _c(
+        "div",
+        { staticClass: "cont" },
+        [
+          _c(
+            "div",
+            _vm._l(_vm.dishes, function(dish, index) {
+              return _c(
+                "div",
+                {
+                  key: "dishes-" + index,
+                  staticClass: "dish",
+                  class: { unavailable: !dish.visibility },
+                  on: {
+                    click: function($event) {
+                      return _vm.showDish(dish)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(dish.name) +
+                      "\n                    "
+                  ),
+                  dish.image
+                    ? _c("img", {
+                        attrs: { src: dish.image, alt: dish.name, width: "300" }
+                      })
+                    : _vm._e()
+                ]
+              )
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c("Cart")
+        ],
+        1
+      ),
       _vm._v(" "),
       _vm.visibility
         ? _c("Dish", {
@@ -3952,7 +4003,7 @@ var render = function() {
           })
         : _vm._e()
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
@@ -19944,8 +19995,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
