@@ -2,17 +2,18 @@
     <div>
         
         <h1>RESTAURANTS</h1>
+
         <ul>
             
                 <li v-for="(type, index) in types" :key="`types-${index}`">
-                    <router-link :restaurants="restaurants" :to="{name: 'list', params: {type:type}}">
+                    <router-link :to="{name: 'list', params: {type:type}}">
                         {{type}}
                     </router-link>
                 </li>
             
         </ul>
         
-        <article v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
+        <article class="card" v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
             <router-link :to="{name: 'restaurant', params: {id:restaurant.id}}">
             <h2>{{ restaurant.name }}</h2>
             <div>{{ restaurant.address }}</div>
@@ -44,7 +45,7 @@ export default {
         getRestaurants() {
             // Get posts from API
             axios
-                .get(`http://127.0.0.1:8000/api/restaurants`)
+                .get(`http://127.0.0.1:8000/api/restaurants/all`)
                 .then(res => {
                     this.restaurants = res.data;
 
@@ -64,4 +65,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+    .card{
+        width: 400px;
+        margin: 10px;
+        padding: 20px;
+        background-color: rgb(134, 236, 202);
+        border-radius: 10px;
+    }
+</style>
