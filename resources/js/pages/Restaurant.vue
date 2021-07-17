@@ -1,8 +1,6 @@
 <template>
     <div>
         <h1>DISHES</h1>
-
-        <router-link :to="{name: 'home'}">Home</router-link>
         
             <div class="dish" @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
                 {{dish.name}}
