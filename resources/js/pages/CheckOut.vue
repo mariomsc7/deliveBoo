@@ -7,20 +7,15 @@
 
 <script>
 export default {
-    name: 'Cart',
+    name: 'CheckOut',
     data() {
         return {
-            cartData: []
+          
         }
-    },
-    created() {
-        console.log(this.$route);
     },
     methods: {
-        getCartData() {
-            
-        }
-    }
+
+    }    
 }
 </script>
 

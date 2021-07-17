@@ -14,7 +14,7 @@
           <button @click="more(dishDetails.price)"> + </button>
     
         </div>
-        <button @click="addDish(dishDetails)">Aggiungi al carrello | TOT: {{price.toFixed(2)}} €</button>
+        <button @click="addDish(dishDetails), $emit('close')" >Aggiungi al carrello | TOT: {{price.toFixed(2)}} €</button>
       </div>
       <button v-else disabled>Non disponibile</button>
     </div>
@@ -37,6 +37,23 @@ export default {
     
     methods:{
       addDish(dishDetails){
+        let dish = {
+          name: dishDetails.name,
+          quantità: this.quantity,
+          prezzo: this.price,
+        }
+
+        if(window.localStorage.getItem(dishDetails.name)){
+          const addQuant = JSON.parse(window.localStorage.getItem(dishDetails.name));
+          console.log(addQuant)
+          addQuant.quantità += this.quantity;
+          addQuant.prezzo += this.price;
+          window.localStorage.setItem(dishDetails.name, JSON.stringify(addQuant));
+        }else{
+          window.localStorage.setItem(dishDetails.name, JSON.stringify(dish));
+        }
+
+
         for(let i = 0; i < this.quantity; i++ ){
           this.carrello.push(dishDetails);
           console.log(this.carrello);
