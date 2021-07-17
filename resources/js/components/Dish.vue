@@ -42,6 +42,8 @@ export default {
           console.log(this.carrello);
         }
           this.quantity = 0;
+          this.price = 0;
+          this.$emit('addToCart', this.carrello);
       },
       more(price){
         this.quantity++;

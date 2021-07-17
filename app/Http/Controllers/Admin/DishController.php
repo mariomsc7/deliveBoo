@@ -50,7 +50,7 @@ class DishController extends Controller
                 'ingredients' => 'required',
                 'description' => 'required',
                 'price' => 'required|numeric|max:999',
-                'image' => 'nullable|mimes:jpg, jpeg, png',
+                'image' => 'nullable|mimes:jpg,jpeg,png|max:2048',
             ],
             [
                 'required' => 'The :attribute is required!!!',
@@ -131,7 +131,7 @@ class DishController extends Controller
                 'ingredients' => 'required',
                 'description' => 'required',
                 'price' => 'required|numeric|max:999',
-                'image' => 'nullable|mimes:jpg, jpeg, png',            
+                'image' => 'nullable|mimes:jpg,jpeg,png|max:2048',            
             ],
             [
                 'required' => 'The :attribute is required!!!',

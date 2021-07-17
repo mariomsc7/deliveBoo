@@ -56,7 +56,7 @@ class RestaurantController extends Controller
             'vat_number' => 'required|unique:restaurants|size:11',
             'address' => 'required|unique:restaurants|max:50',
             'types' => 'required|exists:types,id',
-            'image' => 'nullable|mimes:jpg, jpeg, png',
+            'image' => 'nullable|mimes:jpg,jpeg,png|max:2048',
         ], [
             'required' => 'The :attribute is required!!!',
             'unique' => 'The :attribute is already used',
@@ -140,7 +140,7 @@ class RestaurantController extends Controller
                 'vat_number' => ["required", Rule::unique('restaurants')->ignore($id), 'size:11'],
                 'address' => ["required", Rule::unique('restaurants')->ignore($id), 'max:50'],
                 'types' => 'required|exists:types,id',
-                'image' => 'nullable|mimes:jpg, jpeg, png',
+                'image' => 'nullable|mimes:jpg,jpeg,png|max:2048',
 
             ],
             [
