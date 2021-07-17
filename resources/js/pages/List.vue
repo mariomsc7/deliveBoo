@@ -1,18 +1,7 @@
 <template>
     <div>
-        
-        <h1>RESTAURANTS</h1>
+        <router-link :to="{name: 'home'}">Home</router-link>
 
-        <ul>
-            
-                <li v-for="(type, index) in types" :key="`types-${index}`">
-                    <router-link :to="{name: 'list', params: {type:type}}">
-                        {{type}}
-                    </router-link>
-                </li>
-            
-        </ul>
-        
         <article class="card" v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
             <router-link :to="{name: 'restaurant', params: {id:restaurant.id}}">
             <h2>{{ restaurant.name }}</h2>
@@ -31,11 +20,10 @@
 
 <script>
 export default {
-    name: "Home",
-    data() {
+    name: 'List',
+     data() {
         return {
             restaurants: [],
-            types: []
         };
     },
     created() {
@@ -45,24 +33,17 @@ export default {
         getRestaurants() {
             // Get posts from API
             axios
-                .get(`http://127.0.0.1:8000/api/restaurants/all`)
+                .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.type}`)
                 .then(res => {
                     this.restaurants = res.data;
 
-                    this.restaurants.forEach(restaurant => {
-                        restaurant.types.forEach(type => {
-                            if(!this.types.includes(type.name)){
-                                this.types.push(type.name);
-                            }
-                        });
-                    });
                 })
                 .catch(err => {
                     console.log(err);
                 });
         }
     }
-};
+}
 </script>
 
 <style lang="scss" scoped>

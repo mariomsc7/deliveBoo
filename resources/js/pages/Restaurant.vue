@@ -1,13 +1,13 @@
 <template>
     <div>
         <h1>DISHES</h1>
+
+        <router-link :to="{name: 'home'}">Home</router-link>
         
-        <ul>
-            <li  @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
-                
+            <div class="dish" @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
                 {{dish.name}}
-            </li>
-        </ul>
+                <img v-if="dish.image" :src="dish.image" :alt="dish.name" width="300"/>
+            </div>
         <Dish :dishDetails="dishDetail" v-if="visibility" @close="closeDetail"/>
     </div>
         
@@ -34,7 +34,7 @@ export default {
         getDishes() {
             // Get posts from API
             axios
-                .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`)
+                .get(`http://127.0.0.1:8000/api/restaurant/${this.$route.params.id}`)
                 .then(res => {
                     this.dishes = res.data;
                     console.log(res)
@@ -57,5 +57,13 @@ export default {
 <style language="scss">
     .unavailable {
         color: red;
+    }
+    .dish{
+        width: 300px;
+        margin: 10px;
+        padding: 20px;
+        background-color: rgb(134, 236, 202);
+        border-radius: 10px;
+        cursor: pointer;
     }
 </style>
