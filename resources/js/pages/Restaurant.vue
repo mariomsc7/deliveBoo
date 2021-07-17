@@ -1,12 +1,12 @@
 <template>
     <div>
         <h1>DISHES</h1>
-        
+        <router-link :to="{name: 'cart', params: {order:cart}}">Carrello</router-link>
             <div class="dish" @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
                 {{dish.name}}
                 <img v-if="dish.image" :src="dish.image" :alt="dish.name" width="300"/>
             </div>
-        <Dish :dishDetails="dishDetail" v-if="visibility" @close="closeDetail"/>
+        <Dish @addToCart="addCart" :dishDetails="dishDetail" v-if="visibility" @close="closeDetail"/>
     </div>
         
 </template>
@@ -23,12 +23,17 @@ export default {
             dishes: [],
             dishDetail: {},
             visibility: false,
+            cart: [],
         };
     },
     created() {
         this.getDishes();
     },
     methods: {
+        addCart(order) {
+            this.cart.push(order);
+            console.log(order);
+        },
         getDishes() {
             // Get posts from API
             axios
