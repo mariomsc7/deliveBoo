@@ -1,6 +1,5 @@
 <template>
     <div>
-        <router-link :to="{name: 'home'}">Home</router-link>
 
         <article class="card" v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
             <router-link :to="{name: 'restaurant', params: {id:restaurant.id}}">

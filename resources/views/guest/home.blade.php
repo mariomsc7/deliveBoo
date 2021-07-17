@@ -12,9 +12,7 @@
 
     </head>
     <body>
-        <a href="{{route('admin.home')}}">Admin</a>
         <div id="root"></div>
-
 
         <!-- Script Js -->
         <script src="{{ asset('js/app.js') }}"></script>
