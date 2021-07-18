@@ -82,6 +82,7 @@ export default {
             }
         },
         addCart(order, name, unitPrice) {
+            console.log(this.cart[Object.keys(this.cart)[1]]);
             if(this.checkId()) {
                 if(this.cart[name]){
                     this.cart[name].quantità += order.quantità;

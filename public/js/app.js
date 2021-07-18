@@ -1975,6 +1975,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     addDish: function addDish(dishDetails) {
       var order = {
+        restaurant_id: dishDetails.restaurant_id,
         name: dishDetails.name,
         quantità: this.quantity,
         prezzo: this.price
@@ -2247,6 +2248,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     addCart: function addCart(order, name, unitPrice) {
+      console.log(this.cart[Object.keys(this.cart)[1]]);
+
       if (this.checkId()) {
         if (this.cart[name]) {
           this.cart[name].quantità += order.quantità;
