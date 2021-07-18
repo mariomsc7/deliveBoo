@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>DISHES</h1>
-
+    
             <div class="cont">
                 <div>
                     <div class="dish" @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
@@ -9,7 +9,20 @@
                         <img v-if="dish.image" :src="dish.image" :alt="dish.name" width="300"/>
                     </div>
                 </div>
-                <Cart />
+                <div class="cart">
+                    <h2>Il tuo Carrello</h2>
+                    <div v-if="Object.keys(cart).length" >
+                        <div v-for="(item, index) in cart" :key="index">
+                            <button @click="remove(item.name, item.unitPrice)">-</button>
+                            <span>{{item.quantità}}</span>
+                            <button @click="add(item.name, item.unitPrice)">+</button>
+                            <span class="name">{{item.name}}</span>
+                            €<span>{{item.prezzo.toFixed(2)}}</span>
+                        </div>
+                    </div>
+                    <div v-else>Il carrello è vuoto</div>
+                        <h3>Tot: €{{tot.toFixed(2)}}</h3>
+                </div>
             </div>
         <Dish @addToCart="addCart" :dishDetails="dishDetail" v-if="visibility" @close="closeDetail"/>
     </div>
@@ -31,25 +44,14 @@ export default {
             dishDetail: {},
             visibility: false,
             cart: {},
+            tot: 0,
         };
     },
     created() {
         this.getDishes();
-        if(window.localStorage.getItem('cart')){
-            this.cart = JSON.parse(window.localStorage.getItem('cart'));
-        }
+        this.popCart();
     },
     methods: {
-        addCart(order, name) {
-            if(this.cart[name]){
-                this.cart[name].quantità += order.quantità;
-                this.cart[name].prezzo += order.prezzo;
-            } else {
-                this.cart[name] = order;
-            }
-            // this.cart.push(order);
-            // console.log(order);
-        },
         getDishes() {
             // Get posts from API
             axios
@@ -68,13 +70,51 @@ export default {
         },
         closeDetail(){
             this.visibility=false;
+        },
+        popCart(){
+            if(window.localStorage.getItem('cart')){
+                this.cart = JSON.parse(window.localStorage.getItem('cart'));
+
+                for(let item in this.cart){
+                    this.tot+=this.cart[item].prezzo;
+                };
+            }
+        },
+        amaddCart(order, name, unitPrice) {
+            if(this.cart[ne]){
+                this.cart[name].quantità += order.quantità;
+                this.cart[name].prezzo += order.prezzo;
+            } else {
+                this.cart[name] = {...order, unitPrice};
+            }
+            this.tot += order.prezzo;
+            this.store();
+            this.closeDetail();
+        },
+        add(name, unit){
+            this.cart[name].quantità ++;
+            this.cart[name].prezzo += unit;
+            this.tot += unit;
+            this.store();
+        },
+        remove(name, unit){
+            if(this.cart[name].quantità == 1){
+                delete this.cart[name];
+            } else {
+                this.cart[name].quantità --;
+                this.cart[name].prezzo -= unit;
+            }
+            this.tot -= unit;
+            this.store();
+        },
+        store(){
             window.localStorage.setItem('cart', JSON.stringify(this.cart));
         }
     }
 }
 </script>
 
-<style language="scss">
+<style lang="scss">
     .unavailable {
         color: red;
     }
@@ -88,5 +128,15 @@ export default {
     }
     .cont{
         display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+    .cart{
+        padding: 20px;
+        background-color: #ccc;
+
+        .name{
+            margin: 0 10px;
+        }
     }
 </style>
