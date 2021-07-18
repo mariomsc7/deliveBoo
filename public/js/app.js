@@ -1968,8 +1968,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       carrello: {},
-      price: 0,
-      quantity: 0
+      price: this.dishDetails.price,
+      quantity: 1
     };
   },
   methods: {
@@ -1987,7 +1987,7 @@ __webpack_require__.r(__webpack_exports__);
       this.price += price;
     },
     less: function less(price) {
-      if (this.quantity != 0) {
+      if (this.quantity != 1) {
         this.quantity--;
         this.price -= price;
       }
@@ -2248,8 +2248,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     addCart: function addCart(order, name, unitPrice) {
-      console.log(this.cart[Object.keys(this.cart)[1]]);
-
+      // console.log(this.cart[Object.keys(this.cart)[0]].restaurant_id);
       if (this.checkId()) {
         if (this.cart[name]) {
           this.cart[name].quantità += order.quantità;
@@ -2266,21 +2265,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     checkId: function checkId() {
-      if (!this.cart['restaurant_id']) {
-        this.cart['restaurant_id'] = this.dishDetail.restaurant_id;
-        return true;
-      } else if (this.cart['restaurant_id'] == this.dishDetail.restaurant_id) {
-        return true;
-      } else {
-        var resp = confirm('Puoi ordinare da un solo ristorante. Vuoi cancellare il tuo ordine precedente?');
-
-        if (resp) {
-          this.cart = {};
-          this.cart['restaurant_id'] = this.dishDetail.restaurant_id;
+      if (Object.keys(this.cart).length != 0) {
+        if (this.cart[Object.keys(this.cart)[0]].restaurant_id == this.dishDetail.restaurant_id) {
+          // this.cart['restaurant_id'] = this.dishDetail.restaurant_id;
           return true;
         } else {
-          return false;
+          var resp = confirm('Puoi ordinare da un solo ristorante. Vuoi cancellare il tuo ordine precedente?');
+
+          if (resp) {
+            this.cart = {};
+            this.tot = 0; //  this.cart['restaurant_id'] = this.dishDetail.restaurant_id;
+
+            return true;
+          } else {
+            return false;
+          }
         }
+      } else {
+        return true;
       }
     },
     add: function add(name, unit) {
@@ -3971,49 +3973,37 @@ var render = function() {
                 "div",
                 _vm._l(_vm.cart, function(item, index) {
                   return _c("div", { key: index }, [
-                    item.name
-                      ? _c(
-                          "button",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.remove(item.name, item.unitPrice)
-                              }
-                            }
-                          },
-                          [_vm._v("-")]
-                        )
-                      : _vm._e(),
+                    _c(
+                      "button",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.remove(item.name, item.unitPrice)
+                          }
+                        }
+                      },
+                      [_vm._v("-")]
+                    ),
                     _vm._v(" "),
-                    item.name
-                      ? _c("span", [_vm._v(_vm._s(item.quantità))])
-                      : _vm._e(),
+                    _c("span", [_vm._v(_vm._s(item.quantità))]),
                     _vm._v(" "),
-                    item.name
-                      ? _c(
-                          "button",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.add(item.name, item.unitPrice)
-                              }
-                            }
-                          },
-                          [_vm._v("+")]
-                        )
-                      : _vm._e(),
+                    _c(
+                      "button",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.add(item.name, item.unitPrice)
+                          }
+                        }
+                      },
+                      [_vm._v("+")]
+                    ),
                     _vm._v(" "),
-                    item.name
-                      ? _c("span", { staticClass: "name" }, [
-                          _vm._v(_vm._s(item.name))
-                        ])
-                      : _vm._e(),
+                    _c("span", { staticClass: "name" }, [
+                      _vm._v(_vm._s(item.name))
+                    ]),
                     _vm._v(" "),
-                    item.name
-                      ? _c("span", [
-                          _vm._v("€ " + _vm._s(item.prezzo.toFixed(2)))
-                        ])
-                      : _vm._e()
+                    _c("span", [_vm._v("€ " + _vm._s(item.prezzo.toFixed(2)))])
                   ])
                 }),
                 0
@@ -19954,8 +19944,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\giuli\Desktop\Download installazioni\deliveBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\giuli\Desktop\Download installazioni\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

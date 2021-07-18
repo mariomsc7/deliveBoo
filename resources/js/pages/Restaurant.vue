@@ -13,11 +13,11 @@
                     <h2>Il tuo Carrello</h2>
                     <div v-if="Object.keys(cart).length" >
                         <div v-for="(item, index) in cart" :key="index">
-                            <button v-if="item.name" @click="remove(item.name, item.unitPrice)">-</button>
-                            <span v-if="item.name">{{item.quantità}}</span>
-                            <button v-if="item.name" @click="add(item.name, item.unitPrice)">+</button>
-                            <span v-if="item.name" class="name">{{item.name}}</span>
-                            <span v-if="item.name">€ {{item.prezzo.toFixed(2)}}</span> 
+                            <button  @click="remove(item.name, item.unitPrice)">-</button>
+                            <span >{{item.quantità}}</span>
+                            <button @click="add(item.name, item.unitPrice)">+</button>
+                            <span class="name">{{item.name}}</span>
+                            <span>€ {{item.prezzo.toFixed(2)}}</span> 
                         </div>
                     </div>
                     <div v-else>Il carrello è vuoto</div>
@@ -82,7 +82,7 @@ export default {
             }
         },
         addCart(order, name, unitPrice) {
-            console.log(this.cart[Object.keys(this.cart)[1]]);
+            // console.log(this.cart[Object.keys(this.cart)[0]].restaurant_id);
             if(this.checkId()) {
                 if(this.cart[name]){
                     this.cart[name].quantità += order.quantità;
@@ -96,20 +96,23 @@ export default {
             }  
         },
         checkId(){
-            if(! this.cart['restaurant_id']) {
-                this.cart['restaurant_id'] = this.dishDetail.restaurant_id;
-                return true;
-            } else if(this.cart['restaurant_id'] == this.dishDetail.restaurant_id) {
-                return true;
-            } else {
-                const resp = confirm('Puoi ordinare da un solo ristorante. Vuoi cancellare il tuo ordine precedente?');
-                if(resp) {
-                    this.cart = {};
-                    this.cart['restaurant_id'] = this.dishDetail.restaurant_id;
+            if(Object.keys(this.cart).length != 0){
+                if(this.cart[Object.keys(this.cart)[0]].restaurant_id == this.dishDetail.restaurant_id) {
+                    // this.cart['restaurant_id'] = this.dishDetail.restaurant_id;
                     return true;
-                } else {
-                    return false;
+                }else {
+                    const resp = confirm('Puoi ordinare da un solo ristorante. Vuoi cancellare il tuo ordine precedente?');
+                    if(resp) {
+                        this.cart = {};
+                        this.tot = 0;
+                        //  this.cart['restaurant_id'] = this.dishDetail.restaurant_id;
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
+            }else{
+                return true;
             }
         },
         add(name, unit){

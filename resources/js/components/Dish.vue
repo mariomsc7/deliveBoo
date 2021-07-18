@@ -30,8 +30,8 @@ export default {
     data(){
       return {
         carrello: {},
-        price: 0,
-        quantity: 0,
+        price: this.dishDetails.price,
+        quantity: 1,
       }
     },
     
@@ -52,7 +52,7 @@ export default {
         this.price += price;
       },
       less(price){
-        if(this.quantity != 0){
+        if(this.quantity != 1){
           this.quantity --;
           this.price -= price;
         }
