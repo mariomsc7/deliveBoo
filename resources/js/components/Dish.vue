@@ -39,6 +39,7 @@ export default {
       addDish(dishDetails){
 
       let order={
+        restaurant_id: dishDetails.restaurant_id,
         name: dishDetails.name,
         quantità: this.quantity,
         prezzo: this.price,

@@ -1975,6 +1975,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     addDish: function addDish(dishDetails) {
       var order = {
+        restaurant_id: dishDetails.restaurant_id,
         name: dishDetails.name,
         quantità: this.quantity,
         prezzo: this.price
@@ -2238,25 +2239,49 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.cart = JSON.parse(window.localStorage.getItem('cart'));
 
         for (var item in this.cart) {
-          this.tot += this.cart[item].prezzo;
+          if (item !== 'restaurant_id') {
+            this.tot += this.cart[item].prezzo;
+          }
         }
 
         ;
       }
     },
-    amaddCart: function amaddCart(order, name, unitPrice) {
-      if (this.cart[ne]) {
-        this.cart[name].quantità += order.quantità;
-        this.cart[name].prezzo += order.prezzo;
-      } else {
-        this.cart[name] = _objectSpread(_objectSpread({}, order), {}, {
-          unitPrice: unitPrice
-        });
-      }
+    addCart: function addCart(order, name, unitPrice) {
+      console.log(this.cart[Object.keys(this.cart)[1]]);
 
-      this.tot += order.prezzo;
-      this.store();
-      this.closeDetail();
+      if (this.checkId()) {
+        if (this.cart[name]) {
+          this.cart[name].quantità += order.quantità;
+          this.cart[name].prezzo += order.prezzo;
+        } else {
+          this.cart[name] = _objectSpread(_objectSpread({}, order), {}, {
+            unitPrice: unitPrice
+          });
+        }
+
+        this.tot += order.prezzo;
+        this.store();
+        this.closeDetail();
+      }
+    },
+    checkId: function checkId() {
+      if (!this.cart['restaurant_id']) {
+        this.cart['restaurant_id'] = this.dishDetail.restaurant_id;
+        return true;
+      } else if (this.cart['restaurant_id'] == this.dishDetail.restaurant_id) {
+        return true;
+      } else {
+        var resp = confirm('Puoi ordinare da un solo ristorante. Vuoi cancellare il tuo ordine precedente?');
+
+        if (resp) {
+          this.cart = {};
+          this.cart['restaurant_id'] = this.dishDetail.restaurant_id;
+          return true;
+        } else {
+          return false;
+        }
+      }
     },
     add: function add(name, unit) {
       this.cart[name].quantità++;
@@ -3946,37 +3971,49 @@ var render = function() {
                 "div",
                 _vm._l(_vm.cart, function(item, index) {
                   return _c("div", { key: index }, [
-                    _c(
-                      "button",
-                      {
-                        on: {
-                          click: function($event) {
-                            return _vm.remove(item.name, item.unitPrice)
-                          }
-                        }
-                      },
-                      [_vm._v("-")]
-                    ),
+                    item.name
+                      ? _c(
+                          "button",
+                          {
+                            on: {
+                              click: function($event) {
+                                return _vm.remove(item.name, item.unitPrice)
+                              }
+                            }
+                          },
+                          [_vm._v("-")]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(item.quantità))]),
+                    item.name
+                      ? _c("span", [_vm._v(_vm._s(item.quantità))])
+                      : _vm._e(),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        on: {
-                          click: function($event) {
-                            return _vm.add(item.name, item.unitPrice)
-                          }
-                        }
-                      },
-                      [_vm._v("+")]
-                    ),
+                    item.name
+                      ? _c(
+                          "button",
+                          {
+                            on: {
+                              click: function($event) {
+                                return _vm.add(item.name, item.unitPrice)
+                              }
+                            }
+                          },
+                          [_vm._v("+")]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
-                    _c("span", { staticClass: "name" }, [
-                      _vm._v(_vm._s(item.name))
-                    ]),
-                    _vm._v("\n                        €"),
-                    _c("span", [_vm._v(_vm._s(item.prezzo.toFixed(2)))])
+                    item.name
+                      ? _c("span", { staticClass: "name" }, [
+                          _vm._v(_vm._s(item.name))
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    item.name
+                      ? _c("span", [
+                          _vm._v("€ " + _vm._s(item.prezzo.toFixed(2)))
+                        ])
+                      : _vm._e()
                   ])
                 }),
                 0
@@ -19917,8 +19954,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\giuli\Desktop\Download installazioni\deliveBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\giuli\Desktop\Download installazioni\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
