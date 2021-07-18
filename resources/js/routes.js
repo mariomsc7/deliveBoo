@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Home from './pages/Home.vue';
 import Restaurant from './pages/Restaurant.vue';
 import List from './pages/List.vue';
-// import CheckOut from './pages/CheckOut.vue';
+import CheckOut from './pages/CheckOut.vue';
 
 Vue.use(VueRouter);
 
@@ -28,11 +28,11 @@ const router = new VueRouter({
             name: 'list',
             component: List,
         },
-    //     {
-    //         path: '/carts/:order',
-    //         name: 'checkout',
-    //         component: CheckOut,
-    //     },
+        {
+            path: '/checkout/',
+            name: 'checkout',
+            component: CheckOut,
+        },
      ]
 }); 
 

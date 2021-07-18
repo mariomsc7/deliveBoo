@@ -21,8 +21,12 @@
                         </div>
                     </div>
                     <div v-else>Il carrello è vuoto</div>
-                        <h3>Tot: €{{tot.toFixed(2)}}</h3>
+                    <h3>Tot: €{{tot.toFixed(2)}}</h3>
+                    <router-link :to="{name: 'checkout'}">Cassa</router-link>
+                    <button @click="deleteCart()">Elimina Carrello</button>
+
                 </div>
+                
             </div>
         <Dish @addToCart="addCart" :dishDetails="dishDetail" v-if="visibility" @close="closeDetail"/>
     </div>
@@ -98,14 +102,12 @@ export default {
         checkId(){
             if(Object.keys(this.cart).length != 0){
                 if(this.cart[Object.keys(this.cart)[0]].restaurant_id == this.dishDetail.restaurant_id) {
-                    // this.cart['restaurant_id'] = this.dishDetail.restaurant_id;
                     return true;
                 }else {
                     const resp = confirm('Puoi ordinare da un solo ristorante. Vuoi cancellare il tuo ordine precedente?');
                     if(resp) {
                         this.cart = {};
                         this.tot = 0;
-                        //  this.cart['restaurant_id'] = this.dishDetail.restaurant_id;
                         return true;
                     } else {
                         return false;
@@ -133,7 +135,15 @@ export default {
         },
         store(){
             window.localStorage.setItem('cart', JSON.stringify(this.cart));
-        }
+        },
+        deleteCart(){
+            const resp = confirm('Vuoi cancellare il tuo ordine?');
+            if(resp){
+                this.cart = {};
+                this.tot = 0; 
+                window.localStorage.clear();
+            } 
+        },
     }
 }
 </script>

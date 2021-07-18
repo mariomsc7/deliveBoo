@@ -12,7 +12,7 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
-        $types = ['Pizza', 'Hamburger', 'Cinese', 'Panini', 'Giapponese', 'Americani', 'Messicano', 'Kebab', 'Dolci', 'Vegano'];
+        $types = ['Pizza', 'Hamburger', 'Cinese', 'Sandwich', 'Giapponese', 'Americano', 'Messicano', 'Kebab', 'Dolci', 'Vegano', 'Mediterraneo', 'Gelati', 'Sushi', 'Poke'];
 
         foreach ($types as $type) {
             $new_type = new Type();
@@ -20,7 +20,6 @@ class TypesTableSeeder extends Seeder
             $new_type->name = $type;
 
             $new_type->save();
-
         }
     }
 }
