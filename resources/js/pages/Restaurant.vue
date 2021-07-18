@@ -31,12 +31,10 @@
 
 <script>
 import Dish from "../components/Dish.vue";
-import Cart from "../components/Cart.vue";
 export default {
     name: 'Restaurant',
     components:{
         Dish,
-        Cart,
     },
     data() {
         return {
