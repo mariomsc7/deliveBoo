@@ -2288,6 +2288,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Restaurant',
@@ -2329,14 +2330,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     popCart: function popCart() {
       if (window.localStorage.getItem('cart')) {
         this.cart = JSON.parse(window.localStorage.getItem('cart'));
-
-        for (var item in this.cart) {
-          if (item !== 'restaurant_id') {
-            this.tot += this.cart[item].prezzo;
-          }
-        }
-
-        ;
+        this.setTotal();
       }
     },
     addCart: function addCart(order, name, unitPrice) {
@@ -2391,6 +2385,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.tot -= unit;
       this.store();
+    },
+    removeAll: function removeAll(item, price) {
+      console.log(item);
+      console.log(price);
+      delete this.cart[item];
+      this.tot -= price;
+      this.store();
+    },
+    updateQuantity: function updateQuantity(e, name, unit) {
+      var value = parseFloat(e.target.value);
+
+      if (value > 0) {
+        console.log(value);
+        this.cart[name].quantità = value;
+        this.cart[name].prezzo = value * unit;
+        this.tot = 0;
+        this.setTotal();
+        this.store();
+      } else {
+        this.cart[name].quantità = 1;
+        this.cart[name].prezzo = unit;
+        this.tot = 0;
+        this.setTotal();
+        this.store();
+      }
+    },
+    setTotal: function setTotal() {
+      for (var item in this.cart) {
+        this.tot += this.cart[item].prezzo;
+      }
+
+      ;
     },
     store: function store() {
       window.localStorage.setItem('cart', JSON.stringify(this.cart));
@@ -2478,7 +2504,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".unavailable {\n  color: red;\n}\n.dish {\n  width: 300px;\n  margin: 10px;\n  padding: 20px;\n  background-color: #86ecca;\n  border-radius: 10px;\n  cursor: pointer;\n}\n.cont {\n  display: flex;\n  justify-content: space-around;\n  align-items: flex-start;\n}\n.cart {\n  padding: 20px;\n  background-color: #ccc;\n}\n.cart .name {\n  margin: 0 10px;\n}", ""]);
+exports.push([module.i, ".inputNum {\n  width: 20px;\n}\n.inputNum::-webkit-outer-spin-button, .inputNum::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n}\n.remove {\n  cursor: pointer;\n}\n.remove:hover {\n  color: red;\n}\n.unavailable {\n  color: red;\n}\n.dish {\n  width: 300px;\n  margin: 10px;\n  padding: 20px;\n  background-color: #86ecca;\n  border-radius: 10px;\n  cursor: pointer;\n}\n.cont {\n  display: flex;\n  justify-content: space-around;\n  align-items: flex-start;\n}\n.cart {\n  padding: 20px;\n  background-color: #ccc;\n}\n.cart .name {\n  margin: 0 10px;\n}", ""]);
 
 // exports
 
@@ -4199,7 +4225,34 @@ var render = function() {
                         [_vm._v("-")]
                       ),
                       _vm._v(" "),
-                      _c("span", [_vm._v(_vm._s(item.quantità))]),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: item.quantità,
+                            expression: "item.quantità"
+                          }
+                        ],
+                        staticClass: "inputNum",
+                        attrs: { type: "number", min: "1" },
+                        domProps: { value: item.quantità },
+                        on: {
+                          change: function($event) {
+                            return _vm.updateQuantity(
+                              $event,
+                              item.name,
+                              item.unitPrice
+                            )
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(item, "quantità", $event.target.value)
+                          }
+                        }
+                      }),
                       _vm._v(" "),
                       _c(
                         "button",
@@ -4219,7 +4272,20 @@ var render = function() {
                       _vm._v(" "),
                       _c("span", [
                         _vm._v("€ " + _vm._s(item.prezzo.toFixed(2)))
-                      ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "remove",
+                          on: {
+                            click: function($event) {
+                              return _vm.removeAll(item.name, item.prezzo)
+                            }
+                          }
+                        },
+                        [_vm._v("X")]
+                      )
                     ])
                   }),
                   0

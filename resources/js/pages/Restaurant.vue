@@ -14,10 +14,11 @@
                     <div v-if="Object.keys(cart).length" >
                         <div v-for="(item, index) in cart" :key="index">
                             <button  @click="remove(item.name, item.unitPrice)">-</button>
-                            <span >{{item.quantità}}</span>
+                            <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unitPrice)">
                             <button @click="add(item.name, item.unitPrice)">+</button>
                             <span class="name">{{item.name}}</span>
                             <span>€ {{item.prezzo.toFixed(2)}}</span> 
+                            <span class="remove" @click="removeAll(item.name, item.prezzo)">X</span>
                         </div>
                     </div>
                     <div v-else>Il carrello è vuoto</div>
@@ -76,13 +77,7 @@ export default {
         popCart(){
             if(window.localStorage.getItem('cart')){
                 this.cart = JSON.parse(window.localStorage.getItem('cart'));
-
-                for(let item in this.cart){
-                    if(item !== 'restaurant_id') {
-                        this.tot+=this.cart[item].prezzo;
-                    }
-                    
-                };
+                this.setTotal();
             }
         },
         addCart(order, name, unitPrice) {
@@ -133,6 +128,35 @@ export default {
             this.tot -= unit;
             this.store();
         },
+        removeAll(item, price){
+            console.log(item);
+            console.log(price);
+            delete this.cart[item];
+            this.tot -= price;
+            this.store();
+        },
+        updateQuantity(e,name, unit){
+            const value = parseFloat(e.target.value);
+            if(value>0){
+                console.log(value);
+                this.cart[name].quantità = value;
+                this.cart[name].prezzo = (value * unit);
+                this.tot = 0;
+                this.setTotal();
+                this.store();
+            } else {
+                this.cart[name].quantità = 1;
+                this.cart[name].prezzo = unit;
+                this.tot = 0;
+                this.setTotal();
+                this.store();
+            }
+        },
+        setTotal(){
+            for(let item in this.cart){
+                this.tot+=this.cart[item].prezzo;
+            }; 
+        },
         store(){
             window.localStorage.setItem('cart', JSON.stringify(this.cart));
         },
@@ -149,6 +173,21 @@ export default {
 </script>
 
 <style lang="scss">
+    .inputNum{
+        width: 20px;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button{
+            -webkit-appearance: none;
+            // margin: 0;
+        }
+    }
+    .remove{
+        cursor: pointer;
+        &:hover{
+            color: red;
+        }
+    }
     .unavailable {
         color: red;
     }
