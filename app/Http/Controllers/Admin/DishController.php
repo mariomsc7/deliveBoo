@@ -21,7 +21,7 @@ class DishController extends Controller
     {
         $user = Auth::user();
         $restaurant = Restaurant::find($user->restaurant)->first();
-        $dishes = Dish::where('restaurant_id', $restaurant->id)->get();
+        $dishes = Dish::where('restaurant_id', $restaurant->id)->orderBy('name')->get();
 
         return view('admin.dishes.index', compact('dishes', 'restaurant'));
     }
@@ -69,7 +69,7 @@ class DishController extends Controller
         }
 
         // Image
-        if(array_key_exists('image', $data)){
+        if (array_key_exists('image', $data)) {
             $data['image'] = Storage::put('dishes-images', $data['image']);
         };
 
@@ -93,7 +93,7 @@ class DishController extends Controller
 
         if (!$dish) {
             abort(404);
-        } elseif (Auth::user()->restaurant->id != $dish->restaurant_id){
+        } elseif (Auth::user()->restaurant->id != $dish->restaurant_id) {
             abort(403);
         }
         return view('admin.dishes.show', compact('dish'));
@@ -110,7 +110,7 @@ class DishController extends Controller
         $dish = Dish::find($id);
         if (!$dish) {
             abort(404);
-        } elseif(Auth::user()->restaurant->id != $dish->restaurant_id){
+        } elseif (Auth::user()->restaurant->id != $dish->restaurant_id) {
             abort(403);
         }
         return view('admin.dishes.edit', compact('dish'));
@@ -131,7 +131,7 @@ class DishController extends Controller
                 'ingredients' => 'required',
                 'description' => 'required',
                 'price' => 'required|numeric|max:999',
-                'image' => 'nullable|mimes:jpg,jpeg,png|max:2048',            
+                'image' => 'nullable|mimes:jpg,jpeg,png|max:2048',
             ],
             [
                 'required' => 'The :attribute is required!!!',
@@ -150,9 +150,9 @@ class DishController extends Controller
         $dish = Dish::find($id);
 
         // Image update
-        if(array_key_exists('image', $data)) {
+        if (array_key_exists('image', $data)) {
             // delete previous one
-            if($dish->image){
+            if ($dish->image) {
                 Storage::delete($dish->image);
             }
             // set new one
@@ -176,7 +176,7 @@ class DishController extends Controller
         $dish->orders()->detach();
 
         // Remove image if exists
-        if($dish->image) {
+        if ($dish->image) {
             Storage::delete($dish->image);
         }
 

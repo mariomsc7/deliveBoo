@@ -8,18 +8,19 @@ use App\Dish;
 
 class DishController extends Controller
 {
-        // GET DISHES
+    // GET DISHES
 
-        public function index($restaurant_id) {
-            
-            $dishes = Dish::where('restaurant_id', $restaurant_id)->get();
-            
-            foreach($dishes as $dish) {
-                if($dish->image) {
-                    $dish->image = url('storage/' . $dish->image);
-                }
+    public function index($restaurant_id)
+    {
+
+        $dishes = Dish::where('restaurant_id', $restaurant_id)->with('restaurant')->get();
+
+        foreach ($dishes as $dish) {
+            if ($dish->image) {
+                $dish->image = url('storage/' . $dish->image);
             }
-    
-            return response()->json($dishes);
         }
+
+        return response()->json($dishes);
+    }
 }

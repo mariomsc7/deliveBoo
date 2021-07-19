@@ -4,6 +4,7 @@ import Home from './pages/Home.vue';
 import Restaurant from './pages/Restaurant.vue';
 import List from './pages/List.vue';
 import CheckOut from './pages/CheckOut.vue';
+import NotFound from './pages/NotFound.vue';
 
 Vue.use(VueRouter);
 
@@ -33,7 +34,11 @@ const router = new VueRouter({
             name: 'checkout',
             component: CheckOut,
         },
-     ]
+        {
+            path:'*',
+            component: NotFound
+        },
+    ]
 }); 
 
 export default router;
