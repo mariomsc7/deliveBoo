@@ -11,7 +11,7 @@
 
 
             <div class="mb-3">
-                <label for="name" class="control-table">Name</label>
+                <label for="name" class="control-table">Name*</label>
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{old('name', $restaurant->name)}}" required maxlength="30">
                 @error('name')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -19,7 +19,7 @@
             </div>
             
             <div class="mb-3">
-                <label for="vat_number" class="control-table">P.IVA</label>
+                <label for="vat_number" class="control-table">P.IVA*</label>
                 <input type="text" class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" required maxlength="11" minlength="11" value="{{old('vat_number.name', $restaurant->vat_number)}}">
                 @error('vat_number')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -27,7 +27,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="address" class="control-table">Address</label>
+                <label for="address" class="control-table">Address*</label>
                 <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" required maxlength="50" value="{{old('adress.name', $restaurant->address)}}">
                 @error('address')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -35,7 +35,7 @@
             </div>
 
             <div class="mb-3 d-flex flex-column align-items-center text-uppercase">
-                <h4>Restaurant types</h4>
+                <h4>Restaurant types*</h4>
                 <ul>
                     @foreach ($types as $type)
                         <li class="list-unstyled">
