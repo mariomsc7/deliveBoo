@@ -6,9 +6,11 @@
         <ul>
             
                 <li v-for="(type, index) in types" :key="`types-${index}`">
-                    <router-link :to="{name: 'list', params: {type:type}}">
+                    <!-- <router-link :to="{name: 'list', params: {type:type}}">
                         {{type}}
-                    </router-link>
+                    </router-link> -->
+                    <input @click="getType" type="checkbox" :value="type" :id="type" v-model="checked">
+                    <label for="checkbox">{{type}}</label>
                 </li>
             
         </ul>
@@ -35,7 +37,8 @@ export default {
     data() {
         return {
             restaurants: [],
-            types: []
+            types: [],
+            checked:[]
         };
     },
     created() {
@@ -53,6 +56,7 @@ export default {
                         restaurant.types.forEach(type => {
                             if(!this.types.includes(type.name)){
                                 this.types.push(type.name);
+                                 console.log(this.types)
                             }
                         });
                     });
@@ -60,7 +64,10 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
-        }
+        },
+        getType(){
+            console.log(this.checked)
+        },
     }
 };
 </script>

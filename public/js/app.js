@@ -2119,12 +2119,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
   data: function data() {
     return {
       restaurants: [],
-      types: []
+      types: [],
+      checked: []
     };
   },
   created: function created() {
@@ -2142,12 +2145,17 @@ __webpack_require__.r(__webpack_exports__);
           restaurant.types.forEach(function (type) {
             if (!_this.types.includes(type.name)) {
               _this.types.push(type.name);
+
+              console.log(_this.types);
             }
           });
         });
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    getType: function getType() {
+      console.log(this.checked);
     }
   }
 });
@@ -3909,24 +3917,49 @@ var render = function() {
       _c(
         "ul",
         _vm._l(_vm.types, function(type, index) {
-          return _c(
-            "li",
-            { key: "types-" + index },
-            [
-              _c(
-                "router-link",
-                { attrs: { to: { name: "list", params: { type: type } } } },
-                [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(type) +
-                      "\n                "
-                  )
-                ]
-              )
-            ],
-            1
-          )
+          return _c("li", { key: "types-" + index }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.checked,
+                  expression: "checked"
+                }
+              ],
+              attrs: { type: "checkbox", id: type },
+              domProps: {
+                value: type,
+                checked: Array.isArray(_vm.checked)
+                  ? _vm._i(_vm.checked, type) > -1
+                  : _vm.checked
+              },
+              on: {
+                click: _vm.getType,
+                change: function($event) {
+                  var $$a = _vm.checked,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = type,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.checked = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.checked = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.checked = $$c
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "checkbox" } }, [_vm._v(_vm._s(type))])
+          ])
         }),
         0
       ),
@@ -20288,8 +20321,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
