@@ -9,7 +9,7 @@
                     <!-- <router-link :to="{name: 'list', params: {type:type}}">
                         {{type}}
                     </router-link> -->
-                    <input @click="getType" type="checkbox" :value="type" :id="type" v-model="checked">
+                    <input @change="getRestaurants" type="checkbox" :value="type" :id="type" v-model="checked">
                     <label for="checkbox">{{type}}</label>
                 </li>
             
@@ -47,8 +47,17 @@ export default {
     methods: {
         getRestaurants() {
             // Get posts from API
+            let query=[];                
+            if(this.checked.length == 0){
+                query.push('all');
+            } else {
+                query = this.checked;
+            }
+                
+            const stringQuery = JSON.stringify(query);
+        
             axios
-                .get(`http://127.0.0.1:8000/api/restaurants/all`)
+                .get(`http://127.0.0.1:8000/api/restaurants/${stringQuery}`)
                 .then(res => {
                     this.restaurants = res.data;
 
@@ -56,7 +65,6 @@ export default {
                         restaurant.types.forEach(type => {
                             if(!this.types.includes(type.name)){
                                 this.types.push(type.name);
-                                 console.log(this.types)
                             }
                         });
                     });
@@ -64,9 +72,6 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
-        },
-        getType(){
-            console.log(this.checked)
         },
     }
 };

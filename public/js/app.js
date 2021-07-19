@@ -2138,24 +2138,28 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // Get posts from API
-      axios.get("http://127.0.0.1:8000/api/restaurants/all").then(function (res) {
+      var query = [];
+
+      if (this.checked.length == 0) {
+        query.push('all');
+      } else {
+        query = this.checked;
+      }
+
+      var stringQuery = JSON.stringify(query);
+      axios.get("http://127.0.0.1:8000/api/restaurants/".concat(stringQuery)).then(function (res) {
         _this.restaurants = res.data;
 
         _this.restaurants.forEach(function (restaurant) {
           restaurant.types.forEach(function (type) {
             if (!_this.types.includes(type.name)) {
               _this.types.push(type.name);
-
-              console.log(_this.types);
             }
           });
         });
       })["catch"](function (err) {
         console.log(err);
       });
-    },
-    getType: function getType() {
-      console.log(this.checked);
     }
   }
 });
@@ -2504,7 +2508,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".inputNum {\n  width: 20px;\n}\n.inputNum::-webkit-outer-spin-button, .inputNum::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n}\n.remove {\n  cursor: pointer;\n}\n.remove:hover {\n  color: red;\n}\n.unavailable {\n  color: red;\n}\n.dish {\n  width: 300px;\n  margin: 10px;\n  padding: 20px;\n  background-color: #86ecca;\n  border-radius: 10px;\n  cursor: pointer;\n}\n.cont {\n  display: flex;\n  justify-content: space-around;\n  align-items: flex-start;\n}\n.cart {\n  padding: 20px;\n  background-color: #ccc;\n}\n.cart .name {\n  margin: 0 10px;\n}", ""]);
+exports.push([module.i, ".inputNum {\n  width: 20px;\n  -moz-appearance: textfield;\n}\n.inputNum::-webkit-outer-spin-button, .inputNum::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n}\n.remove {\n  cursor: pointer;\n}\n.remove:hover {\n  color: red;\n}\n.unavailable {\n  color: red;\n}\n.dish {\n  width: 300px;\n  margin: 10px;\n  padding: 20px;\n  background-color: #86ecca;\n  border-radius: 10px;\n  cursor: pointer;\n}\n.cont {\n  display: flex;\n  justify-content: space-around;\n  align-items: flex-start;\n}\n.cart {\n  padding: 20px;\n  background-color: #ccc;\n}\n.cart .name {\n  margin: 0 10px;\n}", ""]);
 
 // exports
 
@@ -3961,26 +3965,28 @@ var render = function() {
                   : _vm.checked
               },
               on: {
-                click: _vm.getType,
-                change: function($event) {
-                  var $$a = _vm.checked,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = type,
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 && (_vm.checked = $$a.concat([$$v]))
+                change: [
+                  function($event) {
+                    var $$a = _vm.checked,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = type,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.checked = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.checked = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
                     } else {
-                      $$i > -1 &&
-                        (_vm.checked = $$a
-                          .slice(0, $$i)
-                          .concat($$a.slice($$i + 1)))
+                      _vm.checked = $$c
                     }
-                  } else {
-                    _vm.checked = $$c
-                  }
-                }
+                  },
+                  _vm.getRestaurants
+                ]
               }
             }),
             _vm._v(" "),
@@ -20387,8 +20393,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

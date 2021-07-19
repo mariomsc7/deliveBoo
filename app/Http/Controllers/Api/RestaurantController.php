@@ -32,6 +32,7 @@ class RestaurantController extends Controller
     public function list($typology) {
         // Get all Restaurants
         $restaurants = Restaurant::all();
+        $setType = json_decode($typology, true);
 
         // Set type attribute
         foreach ($restaurants as $res){
@@ -42,12 +43,14 @@ class RestaurantController extends Controller
             $res['type'] = $temp;
         }
         // Filter by type
-        if($typology != 'all'){
+        if(!in_array('all', $setType)){
             $temp = [];
-            foreach($restaurants as $restaurant){
-                foreach($restaurant->type as $type){
-                    if($type == $typology){
-                        $temp[] = $restaurant;
+            foreach($setType as $item){
+                foreach($restaurants as $restaurant){
+                    foreach($restaurant->type as $type){
+                        if($type == $item){
+                            $temp[] = $restaurant;
+                        }
                     }
                 }
             }

@@ -175,13 +175,14 @@ export default {
 <style lang="scss">
     .inputNum{
         width: 20px;
+        -moz-appearance: textfield;
 
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button{
             -webkit-appearance: none;
-            // margin: 0;
         }
     }
+    
     .remove{
         cursor: pointer;
         &:hover{
