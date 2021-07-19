@@ -2280,6 +2280,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Restaurant',
@@ -2382,6 +2383,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       this.tot -= unit;
+      this.store();
+    },
+    removeAll: function removeAll(item, price) {
+      console.log(item);
+      console.log(price);
+      delete this.cart[item];
+      this.tot -= price;
       this.store();
     },
     store: function store() {
@@ -4186,7 +4194,19 @@ var render = function() {
                       _vm._v(" "),
                       _c("span", [
                         _vm._v("€ " + _vm._s(item.prezzo.toFixed(2)))
-                      ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          on: {
+                            click: function($event) {
+                              return _vm.removeAll(item.name, item.prezzo)
+                            }
+                          }
+                        },
+                        [_vm._v("X")]
+                      )
                     ])
                   }),
                   0

@@ -18,6 +18,7 @@
                             <button @click="add(item.name, item.unitPrice)">+</button>
                             <span class="name">{{item.name}}</span>
                             <span>€ {{item.prezzo.toFixed(2)}}</span> 
+                            <span @click="removeAll(item.name, item.prezzo)">X</span>
                         </div>
                     </div>
                     <div v-else>Il carrello è vuoto</div>
@@ -131,6 +132,13 @@ export default {
                 this.cart[name].prezzo -= unit;
             }
             this.tot -= unit;
+            this.store();
+        },
+        removeAll(item, price){
+            console.log(item);
+            console.log(price);
+            delete this.cart[item];
+            this.tot -= price;
             this.store();
         },
         store(){
