@@ -49,7 +49,9 @@ class RestaurantController extends Controller
                 foreach($restaurants as $restaurant){
                     foreach($restaurant->type as $type){
                         if($type == $item){
-                            $temp[] = $restaurant;
+                            if(!in_array($restaurant, $temp)){
+                                $temp[] = $restaurant;
+                            }
                         }
                     }
                 }
