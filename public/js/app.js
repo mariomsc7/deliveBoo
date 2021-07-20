@@ -2297,45 +2297,132 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
   data: function data() {
     return {
       restaurants: [],
       types: [],
-      checked: []
+      checked: [],
+      pagination: {}
     };
   },
   created: function created() {
     this.getRestaurants();
+    this.getTypes();
   },
   methods: {
-    getRestaurants: function getRestaurants() {
+    getTypes: function getTypes() {
       var _this = this;
 
-      // Get posts from API
-      var query = [];
-
-      if (this.checked.length == 0) {
-        query.push('all');
-      } else {
-        query = this.checked;
-      }
-
-      var stringQuery = JSON.stringify(query);
-      axios.get("http://127.0.0.1:8000/api/restaurants/".concat(stringQuery)).then(function (res) {
-        _this.restaurants = res.data;
-
-        _this.restaurants.forEach(function (restaurant) {
-          restaurant.types.forEach(function (type) {
-            if (!_this.types.includes(type.name)) {
-              _this.types.push(type.name);
-            }
-          });
-        });
+      axios.get("http://127.0.0.1:8000/api/types").then(function (res) {
+        // console.log(res.data);
+        _this.types = res.data;
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    getRestaurants: function getRestaurants() {
+      var _this2 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+      if (this.checked.length == 0) {
+        console.log(page); // let query=[];                
+        // if(this.checked.length == 0){
+        //     query.push('all');
+        // } else {
+        //     query = this.checked;
+        // }
+        // const stringQuery = JSON.stringify(query);
+        // if(this.checked.length == 0){
+
+        axios.get("http://127.0.0.1:8000/api/restaurants?page=".concat(page)).then(function (res) {
+          _this2.restaurants = res.data.data;
+          _this2.pagination = {
+            current: res.data.current_page,
+            last: res.data.last_page
+          }; // this.restaurants.forEach(restaurant => {
+          //     restaurant.types.forEach(type => {
+          //         if(!this.types.includes(type.name)){
+          //             this.types.push(type.name);
+          //         }
+          //     });
+          // });
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      } else {
+        this.filter(page);
+      } // } else {
+      //     let query=[];
+      //     query = this.checked;
+      //     const stringQuery = JSON.stringify(query);
+      //     console.log(stringQuery);
+      //      axios
+      //         .get(`http://127.0.0.1:8000/api/restaurants?types=${stringQuery}`)
+      //         .then(res => {
+      //             log(res.data)
+      //             this.restaurants = res.data;
+      //             // this.pagination = {
+      //             //     current: res.data.current_page,
+      //             //     last: res.data.last_page
+      //             // };
+      //             // this.restaurants.forEach(restaurant => {
+      //             //     restaurant.types.forEach(type => {
+      //             //         if(!this.types.includes(type.name)){
+      //             //             this.types.push(type.name);
+      //             //         }
+      //             //     });
+      //             // });
+      //         })
+      //         .catch(err => {
+      //             console.log(err);
+      //         });
+      // }
+
+    },
+    filter: function filter() {
+      var _this3 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      console.log('ciaoooooooooooooo');
+
+      if (this.checked.length != 0) {
+        var query = [];
+        query = this.checked;
+        var stringQuery = JSON.stringify(query);
+        axios.get("http://127.0.0.1:8000/api/filter?types=".concat(stringQuery, "&page=").concat(page)).then(function (res) {
+          console.log(res.data);
+          _this3.restaurants = res.data.data;
+          _this3.pagination = {};
+          _this3.pagination = {
+            current: res.data.current_page,
+            last: res.data.last_page
+          }; // this.pagination = {
+          //     current: res.data.current_page,
+          //     last: res.data.last_page
+          // };
+          // this.restaurants.forEach(restaurant => {
+          //     restaurant.types.forEach(type => {
+          //         if(!this.types.includes(type.name)){
+          //             this.types.push(type.name);
+          //         }
+          //     });
+          // });
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      } else {
+        console.log('nooooooo');
+        this.getRestaurants();
+      }
     }
   }
 });
@@ -25213,7 +25300,7 @@ var render = function() {
                       _vm.checked = $$c
                     }
                   },
-                  _vm.getRestaurants
+                  _vm.filter
                 ]
               }
             }),
@@ -25222,6 +25309,57 @@ var render = function() {
           ])
         }),
         0
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "navigation" },
+        [
+          _c(
+            "button",
+            {
+              attrs: { disabled: !(_vm.pagination.current > 1) },
+              on: {
+                click: function($event) {
+                  return _vm.getRestaurants(_vm.pagination.current - 1)
+                }
+              }
+            },
+            [_vm._v("Prev")]
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.pagination.last, function(i) {
+            return _c(
+              "button",
+              {
+                key: "page-" + i,
+                class: { "active-page": _vm.pagination.current == i },
+                on: {
+                  click: function($event) {
+                    return _vm.getRestaurants(i)
+                  }
+                }
+              },
+              [_vm._v(_vm._s(i))]
+            )
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              attrs: {
+                disabled: !(_vm.pagination.current < _vm.pagination.last)
+              },
+              on: {
+                click: function($event) {
+                  return _vm.getRestaurants(_vm.pagination.current + 1)
+                }
+              }
+            },
+            [_vm._v("Next")]
+          )
+        ],
+        2
       ),
       _vm._v(" "),
       _vm._l(_vm.restaurants, function(restaurant) {
