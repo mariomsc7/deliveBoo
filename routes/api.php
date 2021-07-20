@@ -18,7 +18,7 @@ Route::namespace('Api')->group(function() {
     // Get Types
     Route::get('/types', 'RestaurantController@resType');
 
-    // Get restaurants
+    // Get Restaurants
     // All
     Route::get('/restaurants', 'RestaurantController@list');
     // Filter
