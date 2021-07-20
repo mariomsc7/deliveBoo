@@ -2300,9 +2300,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
   data: function data() {
@@ -2322,7 +2319,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("http://127.0.0.1:8000/api/types").then(function (res) {
-        // console.log(res.data);
         _this.types = res.data;
       })["catch"](function (err) {
         console.log(err);
@@ -2334,59 +2330,18 @@ __webpack_require__.r(__webpack_exports__);
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
       if (this.checked.length == 0) {
-        console.log(page); // let query=[];                
-        // if(this.checked.length == 0){
-        //     query.push('all');
-        // } else {
-        //     query = this.checked;
-        // }
-        // const stringQuery = JSON.stringify(query);
-        // if(this.checked.length == 0){
-
         axios.get("http://127.0.0.1:8000/api/restaurants?page=".concat(page)).then(function (res) {
           _this2.restaurants = res.data.data;
           _this2.pagination = {
             current: res.data.current_page,
             last: res.data.last_page
-          }; // this.restaurants.forEach(restaurant => {
-          //     restaurant.types.forEach(type => {
-          //         if(!this.types.includes(type.name)){
-          //             this.types.push(type.name);
-          //         }
-          //     });
-          // });
+          };
         })["catch"](function (err) {
           console.log(err);
         });
       } else {
         this.filter(page);
-      } // } else {
-      //     let query=[];
-      //     query = this.checked;
-      //     const stringQuery = JSON.stringify(query);
-      //     console.log(stringQuery);
-      //      axios
-      //         .get(`http://127.0.0.1:8000/api/restaurants?types=${stringQuery}`)
-      //         .then(res => {
-      //             log(res.data)
-      //             this.restaurants = res.data;
-      //             // this.pagination = {
-      //             //     current: res.data.current_page,
-      //             //     last: res.data.last_page
-      //             // };
-      //             // this.restaurants.forEach(restaurant => {
-      //             //     restaurant.types.forEach(type => {
-      //             //         if(!this.types.includes(type.name)){
-      //             //             this.types.push(type.name);
-      //             //         }
-      //             //     });
-      //             // });
-      //         })
-      //         .catch(err => {
-      //             console.log(err);
-      //         });
-      // }
-
+      }
     },
     filter: function filter() {
       var _this3 = this;
@@ -2405,22 +2360,11 @@ __webpack_require__.r(__webpack_exports__);
           _this3.pagination = {
             current: res.data.current_page,
             last: res.data.last_page
-          }; // this.pagination = {
-          //     current: res.data.current_page,
-          //     last: res.data.last_page
-          // };
-          // this.restaurants.forEach(restaurant => {
-          //     restaurant.types.forEach(type => {
-          //         if(!this.types.includes(type.name)){
-          //             this.types.push(type.name);
-          //         }
-          //     });
-          // });
+          };
         })["catch"](function (err) {
           console.log(err);
         });
       } else {
-        console.log('nooooooo');
         this.getRestaurants();
       }
     }

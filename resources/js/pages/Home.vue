@@ -6,9 +6,6 @@
         <ul>
             
                 <li v-for="(type, index) in types" :key="`types-${index}`">
-                    <!-- <router-link :to="{name: 'list', params: {type:type}}">
-                        {{type}}
-                    </router-link> -->
                     <input @change="filter" type="checkbox" :value="type" :id="type" v-model="checked">
                     <label for="checkbox">{{type}}</label>
                 </li>
@@ -57,7 +54,6 @@ export default {
              axios
                 .get(`http://127.0.0.1:8000/api/types`)
                 .then(res => {
-                    // console.log(res.data);
                     this.types = res.data;
                 })
                 .catch(err => {
@@ -66,16 +62,7 @@ export default {
         },
         getRestaurants(page = 1) {
             if(this.checked.length == 0){
-                console.log(page);
-                // let query=[];                
-                // if(this.checked.length == 0){
-                //     query.push('all');
-                // } else {
-                //     query = this.checked;
-                // }
-                    
-                // const stringQuery = JSON.stringify(query);
-                // if(this.checked.length == 0){
+                
                 axios
                     .get(`http://127.0.0.1:8000/api/restaurants?page=${page}`)
                     .then(res => {
@@ -84,13 +71,6 @@ export default {
                             current: res.data.current_page,
                             last: res.data.last_page
                         };
-                        // this.restaurants.forEach(restaurant => {
-                        //     restaurant.types.forEach(type => {
-                        //         if(!this.types.includes(type.name)){
-                        //             this.types.push(type.name);
-                        //         }
-                        //     });
-                        // });
                     })
                     .catch(err => {
                         console.log(err);
@@ -99,33 +79,8 @@ export default {
             } else {
                 this.filter(page);
             }
-            // } else {
-            //     let query=[];
-            //     query = this.checked;
-            //     const stringQuery = JSON.stringify(query);
-            //     console.log(stringQuery);
-            //      axios
-            //         .get(`http://127.0.0.1:8000/api/restaurants?types=${stringQuery}`)
-            //         .then(res => {
-            //             log(res.data)
-            //             this.restaurants = res.data;
-            //             // this.pagination = {
-            //             //     current: res.data.current_page,
-            //             //     last: res.data.last_page
-            //             // };
-            //             // this.restaurants.forEach(restaurant => {
-            //             //     restaurant.types.forEach(type => {
-            //             //         if(!this.types.includes(type.name)){
-            //             //             this.types.push(type.name);
-            //             //         }
-            //             //     });
-            //             // });
-            //         })
-            //         .catch(err => {
-            //             console.log(err);
-            //         });
-            // }
         },
+        
         filter(page = 1){
             console.log('ciaoooooooooooooo');
             if(this.checked.length != 0){
@@ -139,29 +94,16 @@ export default {
                         this.restaurants = res.data.data;
                         this.pagination = {};
                         this.pagination = {
-                        current: res.data.current_page,
-                        last: res.data.last_page
-                    };
-                        // this.pagination = {
-                        //     current: res.data.current_page,
-                        //     last: res.data.last_page
-                        // };
-                        // this.restaurants.forEach(restaurant => {
-                        //     restaurant.types.forEach(type => {
-                        //         if(!this.types.includes(type.name)){
-                        //             this.types.push(type.name);
-                        //         }
-                        //     });
-                        // });
+                            current: res.data.current_page,
+                            last: res.data.last_page
+                        };
                     })
                     .catch(err => {
                         console.log(err);
                     });
             } else {
-                console.log('nooooooo');
                 this.getRestaurants();
             }
-
         }
     }
 };

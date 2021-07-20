@@ -15,10 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::namespace('Api')->group(function() {
-    
-    //Get restaurants
-    Route::get('/filter', 'RestaurantController@filter');
-    Route::get('/restaurants', 'RestaurantController@list');
+    // Get Types
     Route::get('/types', 'RestaurantController@resType');
+
+    // Get restaurants
+    // All
+    Route::get('/restaurants', 'RestaurantController@list');
+    // Filter
+    Route::get('/filter', 'RestaurantController@filter');
+
+    // Get Dishes
     Route::get('/restaurant/{id}', 'DishController@index');
 });
