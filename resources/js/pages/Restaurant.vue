@@ -4,9 +4,16 @@
     
             <div class="cont">
                 <div>
-                    <div class="dish" @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
-                        {{dish.name}}
-                        <img class="img-fluid" v-if="dish.image" :src="dish.image" :alt="dish.name"/>
+                    <section class="navigation">
+                        <button @click="getDishes(pagination.current - 1)" :disabled ="!(pagination.current > 1)">Prev</button>
+                        <button :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getDishes(i)">{{i}}</button>
+                        <button @click="getDishes(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)">Next</button>
+                    </section>
+                    <div>
+                        <div class="dish" @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
+                            {{dish.name}}
+                            <img class="img-fluid" v-if="dish.image" :src="dish.image" :alt="dish.name"/>
+                        </div>
                     </div>
                 </div>
                 <div class="cart">
@@ -25,7 +32,6 @@
                     <h3>Tot: €{{tot.toFixed(2)}}</h3>
                     <router-link :to="{name: 'checkout'}">Cassa</router-link>
                     <button @click="deleteCart()">Elimina Carrello</button>
-
                 </div>
                 
             </div>
@@ -48,6 +54,7 @@ export default {
             visibility: false,
             cart: {},
             tot: 0,
+            pagination: {},
         };
     },
     created() {
@@ -55,13 +62,16 @@ export default {
         this.popCart();
     },
     methods: {
-        getDishes() {
+        getDishes(page = 1) {
             // Get posts from API
             axios
-                .get(`http://127.0.0.1:8000/api/restaurant/${this.$route.params.id}`)
+                .get(`http://127.0.0.1:8000/api/restaurant/${this.$route.params.id}?page=${page}`)
                 .then(res => {
-                    this.dishes = res.data;
-                    console.log(res)
+                    this.dishes = res.data.data;
+                    this.pagination = {
+                        current: res.data.current_page,
+                        last: res.data.last_page
+                    };
                 })
                 .catch(err => {
                     console.log(err);
@@ -207,7 +217,7 @@ export default {
     }
     .cart{
         padding: 20px;
-        background-color: #ccc;
+        background-color: #888;
 
         .name{
             margin: 0 10px;

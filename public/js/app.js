@@ -2297,45 +2297,76 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
   data: function data() {
     return {
       restaurants: [],
       types: [],
-      checked: []
+      checked: [],
+      pagination: {}
     };
   },
   created: function created() {
     this.getRestaurants();
+    this.getTypes();
   },
   methods: {
-    getRestaurants: function getRestaurants() {
+    getTypes: function getTypes() {
       var _this = this;
 
-      // Get posts from API
-      var query = [];
-
-      if (this.checked.length == 0) {
-        query.push('all');
-      } else {
-        query = this.checked;
-      }
-
-      var stringQuery = JSON.stringify(query);
-      axios.get("http://127.0.0.1:8000/api/restaurants/".concat(stringQuery)).then(function (res) {
-        _this.restaurants = res.data;
-
-        _this.restaurants.forEach(function (restaurant) {
-          restaurant.types.forEach(function (type) {
-            if (!_this.types.includes(type.name)) {
-              _this.types.push(type.name);
-            }
-          });
-        });
+      axios.get("http://127.0.0.1:8000/api/types").then(function (res) {
+        _this.types = res.data;
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    getRestaurants: function getRestaurants() {
+      var _this2 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+      if (this.checked.length == 0) {
+        axios.get("http://127.0.0.1:8000/api/restaurants?page=".concat(page)).then(function (res) {
+          _this2.restaurants = res.data.data;
+          _this2.pagination = {
+            current: res.data.current_page,
+            last: res.data.last_page
+          };
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      } else {
+        this.filter(page);
+      }
+    },
+    filter: function filter() {
+      var _this3 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      console.log('ciaoooooooooooooo');
+
+      if (this.checked.length != 0) {
+        var query = [];
+        query = this.checked;
+        var stringQuery = JSON.stringify(query);
+        axios.get("http://127.0.0.1:8000/api/filter?types=".concat(stringQuery, "&page=").concat(page)).then(function (res) {
+          console.log(res.data);
+          _this3.restaurants = res.data.data;
+          _this3.pagination = {};
+          _this3.pagination = {
+            current: res.data.current_page,
+            last: res.data.last_page
+          };
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      } else {
+        this.getRestaurants();
+      }
     }
   }
 });
@@ -2618,6 +2649,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Restaurant',
@@ -2630,7 +2667,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dishDetail: {},
       visibility: false,
       cart: {},
-      tot: 0
+      tot: 0,
+      pagination: {}
     };
   },
   created: function created() {
@@ -2641,10 +2679,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     getDishes: function getDishes() {
       var _this = this;
 
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       // Get posts from API
-      axios.get("http://127.0.0.1:8000/api/restaurant/".concat(this.$route.params.id)).then(function (res) {
-        _this.dishes = res.data;
-        console.log(res);
+      axios.get("http://127.0.0.1:8000/api/restaurant/".concat(this.$route.params.id, "?page=").concat(page)).then(function (res) {
+        _this.dishes = res.data.data;
+        _this.pagination = {
+          current: res.data.current_page,
+          last: res.data.last_page
+        };
       })["catch"](function (err) {
         console.log(err);
       });
@@ -23450,7 +23492,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".inputNum {\n  width: 35px;\n  -moz-appearance: textfield;\n}\n.inputNum::-webkit-outer-spin-button, .inputNum::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n}\n.remove {\n  cursor: pointer;\n}\n.remove:hover {\n  color: red;\n}\n.unavailable {\n  color: red;\n}\n.dish {\n  width: 300px;\n  margin: 10px;\n  padding: 20px;\n  background-color: #86ecca;\n  border-radius: 10px;\n  cursor: pointer;\n}\n.cont {\n  display: flex;\n  justify-content: space-around;\n  align-items: flex-start;\n}\n.cart {\n  padding: 20px;\n  background-color: #ccc;\n}\n.cart .name {\n  margin: 0 10px;\n}", ""]);
+exports.push([module.i, ".inputNum {\n  width: 35px;\n  -moz-appearance: textfield;\n}\n.inputNum::-webkit-outer-spin-button, .inputNum::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n}\n.remove {\n  cursor: pointer;\n}\n.remove:hover {\n  color: red;\n}\n.unavailable {\n  color: red;\n}\n.dish {\n  width: 300px;\n  margin: 10px;\n  padding: 20px;\n  background-color: #86ecca;\n  border-radius: 10px;\n  cursor: pointer;\n}\n.cont {\n  display: flex;\n  justify-content: space-around;\n  align-items: flex-start;\n}\n.cart {\n  padding: 20px;\n  background-color: #888;\n}\n.cart .name {\n  margin: 0 10px;\n}", ""]);
 
 // exports
 
@@ -25213,7 +25255,7 @@ var render = function() {
                       _vm.checked = $$c
                     }
                   },
-                  _vm.getRestaurants
+                  _vm.filter
                 ]
               }
             }),
@@ -25222,6 +25264,57 @@ var render = function() {
           ])
         }),
         0
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "navigation" },
+        [
+          _c(
+            "button",
+            {
+              attrs: { disabled: !(_vm.pagination.current > 1) },
+              on: {
+                click: function($event) {
+                  return _vm.getRestaurants(_vm.pagination.current - 1)
+                }
+              }
+            },
+            [_vm._v("Prev")]
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.pagination.last, function(i) {
+            return _c(
+              "button",
+              {
+                key: "page-" + i,
+                class: { "active-page": _vm.pagination.current == i },
+                on: {
+                  click: function($event) {
+                    return _vm.getRestaurants(i)
+                  }
+                }
+              },
+              [_vm._v(_vm._s(i))]
+            )
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              attrs: {
+                disabled: !(_vm.pagination.current < _vm.pagination.last)
+              },
+              on: {
+                click: function($event) {
+                  return _vm.getRestaurants(_vm.pagination.current + 1)
+                }
+              }
+            },
+            [_vm._v("Next")]
+          )
+        ],
+        2
       ),
       _vm._v(" "),
       _vm._l(_vm.restaurants, function(restaurant) {
@@ -25528,38 +25621,91 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "cont" }, [
-        _c(
-          "div",
-          _vm._l(_vm.dishes, function(dish, index) {
-            return _c(
-              "div",
-              {
-                key: "dishes-" + index,
-                staticClass: "dish",
-                class: { unavailable: !dish.visibility },
-                on: {
-                  click: function($event) {
-                    return _vm.showDish(dish)
+        _c("div", [
+          _c(
+            "section",
+            { staticClass: "navigation" },
+            [
+              _c(
+                "button",
+                {
+                  attrs: { disabled: !(_vm.pagination.current > 1) },
+                  on: {
+                    click: function($event) {
+                      return _vm.getDishes(_vm.pagination.current - 1)
+                    }
                   }
-                }
-              },
-              [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(dish.name) +
-                    "\n                    "
-                ),
-                dish.image
-                  ? _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: { src: dish.image, alt: dish.name }
-                    })
-                  : _vm._e()
-              ]
-            )
-          }),
-          0
-        ),
+                },
+                [_vm._v("Prev")]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.pagination.last, function(i) {
+                return _c(
+                  "button",
+                  {
+                    key: "page-" + i,
+                    class: { "active-page": _vm.pagination.current == i },
+                    on: {
+                      click: function($event) {
+                        return _vm.getDishes(i)
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(i))]
+                )
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: {
+                    disabled: !(_vm.pagination.current < _vm.pagination.last)
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.getDishes(_vm.pagination.current + 1)
+                    }
+                  }
+                },
+                [_vm._v("Next")]
+              )
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            _vm._l(_vm.dishes, function(dish, index) {
+              return _c(
+                "div",
+                {
+                  key: "dishes-" + index,
+                  staticClass: "dish",
+                  class: { unavailable: !dish.visibility },
+                  on: {
+                    click: function($event) {
+                      return _vm.showDish(dish)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(dish.name) +
+                      "\n                        "
+                  ),
+                  dish.image
+                    ? _c("img", {
+                        staticClass: "img-fluid",
+                        attrs: { src: dish.image, alt: dish.name }
+                      })
+                    : _vm._e()
+                ]
+              )
+            }),
+            0
+          )
+        ]),
         _vm._v(" "),
         _c(
           "div",

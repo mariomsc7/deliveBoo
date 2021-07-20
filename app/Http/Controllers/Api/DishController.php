@@ -13,7 +13,7 @@ class DishController extends Controller
     public function index($restaurant_id)
     {
 
-        $dishes = Dish::where('restaurant_id', $restaurant_id)->with('restaurant')->get();
+        $dishes = Dish::where('restaurant_id', $restaurant_id)->with('restaurant')->paginate(3);
 
         foreach ($dishes as $dish) {
             if ($dish->image) {
