@@ -217,7 +217,7 @@ export default {
     }
     .cart{
         padding: 20px;
-        background-color: #888;
+        background-color: #ccc;
 
         .name{
             margin: 0 10px;

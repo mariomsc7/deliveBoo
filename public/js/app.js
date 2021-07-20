@@ -2300,6 +2300,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
   data: function data() {
@@ -2347,7 +2349,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      console.log('ciaoooooooooooooo');
 
       if (this.checked.length != 0) {
         var query = [];
@@ -23416,7 +23417,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".details[data-v-97bbb0f6] {\n  position: fixed;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.2);\n}\n.details .details-box[data-v-97bbb0f6] {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.details .details-box .close[data-v-97bbb0f6] {\n  cursor: pointer;\n}", ""]);
+exports.push([module.i, ".details[data-v-97bbb0f6] {\n  position: fixed;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.4);\n}\n.details .details-box[data-v-97bbb0f6] {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.details .details-box .close[data-v-97bbb0f6] {\n  cursor: pointer;\n}", ""]);
 
 // exports
 
@@ -23492,7 +23493,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".inputNum {\n  width: 35px;\n  -moz-appearance: textfield;\n}\n.inputNum::-webkit-outer-spin-button, .inputNum::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n}\n.remove {\n  cursor: pointer;\n}\n.remove:hover {\n  color: red;\n}\n.unavailable {\n  color: red;\n}\n.dish {\n  width: 300px;\n  margin: 10px;\n  padding: 20px;\n  background-color: #86ecca;\n  border-radius: 10px;\n  cursor: pointer;\n}\n.cont {\n  display: flex;\n  justify-content: space-around;\n  align-items: flex-start;\n}\n.cart {\n  padding: 20px;\n  background-color: #888;\n}\n.cart .name {\n  margin: 0 10px;\n}", ""]);
+exports.push([module.i, ".inputNum {\n  width: 35px;\n  -moz-appearance: textfield;\n}\n.inputNum::-webkit-outer-spin-button, .inputNum::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n}\n.remove {\n  cursor: pointer;\n}\n.remove:hover {\n  color: red;\n}\n.unavailable {\n  color: red;\n}\n.dish {\n  width: 300px;\n  margin: 10px;\n  padding: 20px;\n  background-color: #86ecca;\n  border-radius: 10px;\n  cursor: pointer;\n}\n.cont {\n  display: flex;\n  justify-content: space-around;\n  align-items: flex-start;\n}\n.cart {\n  padding: 20px;\n  background-color: #ccc;\n}\n.cart .name {\n  margin: 0 10px;\n}", ""]);
 
 // exports
 
@@ -25209,158 +25210,175 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h1", [_vm._v("RESTAURANTS")]),
-      _vm._v(" "),
-      _c(
-        "ul",
-        _vm._l(_vm.types, function(type, index) {
-          return _c("li", { key: "types-" + index }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.checked,
-                  expression: "checked"
-                }
-              ],
-              attrs: { type: "checkbox", id: type },
-              domProps: {
-                value: type,
-                checked: Array.isArray(_vm.checked)
-                  ? _vm._i(_vm.checked, type) > -1
-                  : _vm.checked
-              },
-              on: {
-                change: [
-                  function($event) {
-                    var $$a = _vm.checked,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = type,
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 && (_vm.checked = $$a.concat([$$v]))
+  return _c("div", [
+    _c("h1", [_vm._v("RESTAURANTS")]),
+    _vm._v(" "),
+    _vm.types.length
+      ? _c(
+          "ul",
+          _vm._l(_vm.types, function(type, index) {
+            return _c("li", { key: "types-" + index }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checked,
+                    expression: "checked"
+                  }
+                ],
+                attrs: { type: "checkbox", id: type },
+                domProps: {
+                  value: type,
+                  checked: Array.isArray(_vm.checked)
+                    ? _vm._i(_vm.checked, type) > -1
+                    : _vm.checked
+                },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checked,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = type,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.checked = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.checked = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
                       } else {
-                        $$i > -1 &&
-                          (_vm.checked = $$a
-                            .slice(0, $$i)
-                            .concat($$a.slice($$i + 1)))
+                        _vm.checked = $$c
                       }
-                    } else {
-                      _vm.checked = $$c
+                    },
+                    _vm.filter
+                  ]
+                }
+              }),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "checkbox" } }, [
+                _vm._v(_vm._s(type))
+              ])
+            ])
+          }),
+          0
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.types.length
+      ? _c("div", [
+          _c(
+            "section",
+            { staticClass: "navigation" },
+            [
+              _c(
+                "button",
+                {
+                  attrs: { disabled: !(_vm.pagination.current > 1) },
+                  on: {
+                    click: function($event) {
+                      return _vm.getRestaurants(_vm.pagination.current - 1)
+                    }
+                  }
+                },
+                [_vm._v("Prev")]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.pagination.last, function(i) {
+                return _c(
+                  "button",
+                  {
+                    key: "page-" + i,
+                    class: { "active-page": _vm.pagination.current == i },
+                    on: {
+                      click: function($event) {
+                        return _vm.getRestaurants(i)
+                      }
                     }
                   },
-                  _vm.filter
-                ]
-              }
-            }),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "checkbox" } }, [_vm._v(_vm._s(type))])
-          ])
-        }),
-        0
-      ),
-      _vm._v(" "),
-      _c(
-        "section",
-        { staticClass: "navigation" },
-        [
-          _c(
-            "button",
-            {
-              attrs: { disabled: !(_vm.pagination.current > 1) },
-              on: {
-                click: function($event) {
-                  return _vm.getRestaurants(_vm.pagination.current - 1)
-                }
-              }
-            },
-            [_vm._v("Prev")]
+                  [_vm._v(_vm._s(i))]
+                )
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: {
+                    disabled: !(_vm.pagination.current < _vm.pagination.last)
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.getRestaurants(_vm.pagination.current + 1)
+                    }
+                  }
+                },
+                [_vm._v("Next")]
+              )
+            ],
+            2
           ),
           _vm._v(" "),
-          _vm._l(_vm.pagination.last, function(i) {
-            return _c(
-              "button",
-              {
-                key: "page-" + i,
-                class: { "active-page": _vm.pagination.current == i },
-                on: {
-                  click: function($event) {
-                    return _vm.getRestaurants(i)
-                  }
-                }
-              },
-              [_vm._v(_vm._s(i))]
-            )
-          }),
-          _vm._v(" "),
           _c(
-            "button",
-            {
-              attrs: {
-                disabled: !(_vm.pagination.current < _vm.pagination.last)
-              },
-              on: {
-                click: function($event) {
-                  return _vm.getRestaurants(_vm.pagination.current + 1)
-                }
-              }
-            },
-            [_vm._v("Next")]
+            "div",
+            { staticClass: "d-flex" },
+            _vm._l(_vm.restaurants, function(restaurant) {
+              return _c(
+                "article",
+                { key: "res-" + restaurant.id, staticClass: "card" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      attrs: {
+                        to: {
+                          name: "restaurant",
+                          params: { id: restaurant.id }
+                        }
+                      }
+                    },
+                    [
+                      _c("h2", [_vm._v(_vm._s(restaurant.name))]),
+                      _vm._v(" "),
+                      _c("div", [_vm._v(_vm._s(restaurant.address))]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        _vm._l(restaurant.type, function(type, index) {
+                          return _c("span", { key: "type-" + index }, [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(type) +
+                                "\n                    "
+                            )
+                          ])
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      restaurant.image
+                        ? _c("img", {
+                            staticClass: "img-fluid",
+                            attrs: {
+                              src: restaurant.image,
+                              alt: restaurant.name
+                            }
+                          })
+                        : _vm._e()
+                    ]
+                  )
+                ],
+                1
+              )
+            }),
+            0
           )
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.restaurants, function(restaurant) {
-        return _c(
-          "article",
-          { key: "res-" + restaurant.id, staticClass: "card" },
-          [
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: { name: "restaurant", params: { id: restaurant.id } }
-                }
-              },
-              [
-                _c("h2", [_vm._v(_vm._s(restaurant.name))]),
-                _vm._v(" "),
-                _c("div", [_vm._v(_vm._s(restaurant.address))]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  _vm._l(restaurant.type, function(type, index) {
-                    return _c("span", { key: "type-" + index }, [
-                      _vm._v(
-                        "\n                " + _vm._s(type) + " \n            "
-                      )
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                restaurant.image
-                  ? _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: { src: restaurant.image, alt: restaurant.name }
-                    })
-                  : _vm._e()
-              ]
-            )
-          ],
-          1
-        )
-      })
-    ],
-    2
-  )
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

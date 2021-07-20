@@ -3,34 +3,36 @@
         
         <h1>RESTAURANTS</h1>
 
-        <ul>
-            
-                <li v-for="(type, index) in types" :key="`types-${index}`">
-                    <input @change="filter" type="checkbox" :value="type" :id="type" v-model="checked">
-                    <label for="checkbox">{{type}}</label>
-                </li>
-            
+        <ul v-if="types.length">
+            <li v-for="(type, index) in types" :key="`types-${index}`">
+                <input @change="filter" type="checkbox" :value="type" :id="type" v-model="checked">
+                <label for="checkbox">{{type}}</label>
+            </li>
         </ul>
+
+        <div v-if="types.length">
             <section class="navigation">
                 <button @click="getRestaurants(pagination.current - 1)" :disabled ="!(pagination.current > 1)">Prev</button>
                 <button :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getRestaurants(i)">{{i}}</button>
             
                 <button @click="getRestaurants(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)">Next</button>
             </section>
-        
-        <article class="card" v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
-            <router-link :to="{name: 'restaurant', params: {id:restaurant.id}}">
-            <h2>{{ restaurant.name }}</h2>
-            <div>{{ restaurant.address }}</div>
-            <div>
-                <span v-for="(type, index) in restaurant.type" :key="`type-${index}`">
-                    {{ type }} 
-                </span>
+            
+            <div class="d-flex">
+                <article class="card" v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
+                    <router-link :to="{name: 'restaurant', params: {id:restaurant.id}}">
+                    <h2>{{ restaurant.name }}</h2>
+                    <div>{{ restaurant.address }}</div>
+                    <div>
+                        <span v-for="(type, index) in restaurant.type" :key="`type-${index}`">
+                            {{ type }}
+                        </span>
+                    </div>
+                    <img class="img-fluid" v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name"/>
+                    </router-link>
+                </article>
             </div>
-
-            <img class="img-fluid" v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name"/>
-            </router-link>
-        </article>
+        </div>
     </div>
 </template>
 
@@ -82,7 +84,6 @@ export default {
         },
         
         filter(page = 1){
-            console.log('ciaoooooooooooooo');
             if(this.checked.length != 0){
                 let query=[];
                 query = this.checked;
