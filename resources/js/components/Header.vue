@@ -13,4 +13,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+    .active{
+        color: red;
+    }
+</style>

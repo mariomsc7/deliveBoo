@@ -1,27 +1,32 @@
 <template>
-  <div>
+    <div>
       <h1>Cassa</h1>
       <div class="cart">
         <h2>Il tuo Carrello</h2>
         <div v-if="Object.keys(cart).length" >
             <div v-for="(item, index) in cart" :key="index">
                 
-                <span >{{item.quantità}}</span>
-                
+                <!-- <span >{{item.quantità}}</span> -->
+                <button  @click="remove(item.name, item.unitPrice)">-</button>
+                <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unitPrice)">
+                <button @click="add(item.name, item.unitPrice)">+</button>
                 <span class="name">{{item.name}}</span>
                 <span>€ {{item.prezzo.toFixed(2)}}</span> 
+                <span class="remove" @click="removeAll(item.name, item.prezzo)">X</span>
+
             </div>
         </div>
         <div v-else>Il carrello è vuoto</div>
-            <h3>Tot: €{{tot.toFixed(2)}}</h3>
+        <h3>Tot: €{{tot.toFixed(2)}}</h3>
+        <button @click="deleteCart()">Elimina Carrello</button>
     </div>
       <div class="container">
-        <link
+        <!-- <link
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
             integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
             crossorigin="anonymous"
-        />
+        /> -->
         <div class="col-6 offset-3">
             <div class="card bg-light">
                 <div class="card-header">Payment Information</div>
@@ -137,6 +142,62 @@ export default {
 
                 };
             }
+        },
+        add(name, unit){
+            this.cart[name].quantità ++;
+            this.cart[name].prezzo += unit;
+            this.tot += unit;
+            this.store();
+        },
+        remove(name, unit){
+            if(this.cart[name].quantità == 1){
+                delete this.cart[name];
+            } else {
+                this.cart[name].quantità --;
+                this.cart[name].prezzo -= unit;
+            }
+            this.tot -= unit;
+            this.store();
+        },
+        removeAll(item, price){
+            console.log(item);
+            console.log(price);
+            delete this.cart[item];
+            this.tot -= price;
+            this.store();
+        },
+        updateQuantity(e,name, unit){
+            const value = parseFloat(e.target.value);
+            if(value>0){
+                console.log(value);
+                this.cart[name].quantità = value;
+                this.cart[name].prezzo = (value * unit);
+                this.tot = 0;
+                this.setTotal();
+                this.store();
+            } else {
+                this.cart[name].quantità = 1;
+                this.cart[name].prezzo = unit;
+                this.tot = 0;
+                this.setTotal();
+                this.store();
+            }
+        },
+        setTotal(){
+            for(let item in this.cart){
+                this.tot+=this.cart[item].prezzo;
+            }; 
+        },
+        store(){
+            window.localStorage.setItem('cart', JSON.stringify(this.cart));
+        },
+        deleteCart(){
+            const resp = confirm('Vuoi cancellare il tuo ordine?');
+            if(resp){
+                this.cart = {};
+                this.tot = 0; 
+                window.localStorage.clear();
+            } 
         },
          payWithCreditCard() {
             if (this.hostedFieldInstance) {
