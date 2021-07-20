@@ -6,7 +6,7 @@
       <h3>{{dishDetails.ingredients}}</h3>
       <h3>{{dishDetails.description}}</h3>
       <h3>€{{dishDetails.price.toFixed(2)}}</h3>
-      <img v-if="dishDetails.image" :src="dishDetails.image" :alt="dishDetails.name" width="300"/>
+      <img class="img-fluid" v-if="dishDetails.image" :src="dishDetails.image" :alt="dishDetails.name" width="300"/>
       <div v-if=(dishDetails.visibility)>
         <div>
           <button @click="less(dishDetails.price)"> - </button>

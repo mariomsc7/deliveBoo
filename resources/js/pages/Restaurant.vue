@@ -6,7 +6,7 @@
                 <div>
                     <div class="dish" @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
                         {{dish.name}}
-                        <img v-if="dish.image" :src="dish.image" :alt="dish.name" width="300"/>
+                        <img class="img-fluid" v-if="dish.image" :src="dish.image" :alt="dish.name"/>
                     </div>
                 </div>
                 <div class="cart">
@@ -174,7 +174,7 @@ export default {
 
 <style lang="scss">
     .inputNum{
-        width: 20px;
+        width: 35px;
         -moz-appearance: textfield;
 
         &::-webkit-outer-spin-button,

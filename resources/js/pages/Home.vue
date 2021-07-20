@@ -25,7 +25,7 @@
                 </span>
             </div>
 
-            <img v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name" width="300"/>
+            <img class="img-fluid" v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name"/>
             </router-link>
         </article>
     </div>
