@@ -2014,7 +2014,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Header"
 });
@@ -24929,10 +24928,6 @@ var render = function() {
         _vm._v("Cassa")
       ]),
       _vm._v(" "),
-      _c("router-link", { attrs: { to: { name: "payment" } } }, [
-        _vm._v("Pagamenti")
-      ]),
-      _vm._v(" "),
       _c(
         "a",
         { attrs: { href: "http://127.0.0.1:8000/admin", target: "_blank" } },
@@ -41875,8 +41870,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\User\Desktop\deliveBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\User\Desktop\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
