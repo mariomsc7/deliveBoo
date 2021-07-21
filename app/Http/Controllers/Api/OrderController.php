@@ -12,23 +12,21 @@ class OrderController extends Controller
     public function store(Request $request){
         // Validation
         $validator = Validator::make($request->all(), [
-            'customer_name' => 'required',
-            'customer_lastname' => 'required',
+            'customer_name' => 'required|max:20',
+            'customer_lastname' => 'required|max:20',
             'customer_address' => 'required',
-            'phone_number' => 'required',
+            'phone_number' => 'required|size:10',
         ]);
         // Validation Errors
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()]);
         }
-
         $data = $request->all();
 
-        // Save on DB
+        // // Save on DB
         $new_order = new Order();
         $new_order->fill($data);
         $new_order->save();
-
 
         return response()->json($data);
     }

@@ -31,7 +31,7 @@ const router = new VueRouter({
             component: List
         },
         {
-            path: "/checkout/",
+            path: "/checkout",
             name: "checkout",
             component: CheckOut
         },
