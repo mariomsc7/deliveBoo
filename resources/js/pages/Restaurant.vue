@@ -1,16 +1,30 @@
 <template>
     <div>
         <h1 v-if="dishes.length">{{dishes[0].restaurant.name}} Menù</h1>
-    
+
             <div class="cont">
                 <div>
-                    <div class="dish" @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
-                        {{dish.name}}
-                        <img class="img-fluid" v-if="dish.image" :src="dish.image" :alt="dish.name"/>
+                    <!-- Page Navigation    -->
+                    <section class="navigation">
+                        <button @click="getDishes(pagination.current - 1)" :disabled ="!(pagination.current > 1)">Prev</button>
+                        <button :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getDishes(i)">{{i}}</button>
+                        <button @click="getDishes(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)">Next</button>
+                    </section>
+
+                    <!-- Dish -->
+                    <div>
+                        <div class="dish" @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
+                            {{dish.name}}
+                            <img class="img-fluid" v-if="dish.image" :src="dish.image" :alt="dish.name"/>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Cart -->
                 <div class="cart">
                     <h2>Il tuo Carrello</h2>
+
+                    <!-- Products -->
                     <div v-if="Object.keys(cart).length" >
                         <div v-for="(item, index) in cart" :key="index">
                             <button  @click="remove(item.name, item.unitPrice)">-</button>
@@ -21,14 +35,22 @@
                             <span class="remove" @click="removeAll(item.name, item.prezzo)">X</span>
                         </div>
                     </div>
-                    <div v-else>Il carrello è vuoto</div>
-                    <h3>Tot: €{{tot.toFixed(2)}}</h3>
-                    <router-link :to="{name: 'checkout'}">Cassa</router-link>
-                    <button @click="deleteCart()">Elimina Carrello</button>
 
+                    <div v-else>Il carrello è vuoto</div>
+
+                    <!-- Tot -->
+                    <h3>Tot: €{{tot.toFixed(2)}}</h3>
+                    
+                    <!-- CheckOut Button -->
+                    <router-link :to="{name: 'checkout'}">Cassa</router-link>
+                    
+                    <!-- Delete Button -->
+                    <button @click="deleteCart()">Elimina Carrello</button>
                 </div>
                 
             </div>
+
+        <!-- Dish Detail -->
         <Dish @addToCart="addCart" :dishDetails="dishDetail" v-if="visibility" @close="closeDetail"/>
     </div>
         
@@ -48,6 +70,7 @@ export default {
             visibility: false,
             cart: {},
             tot: 0,
+            pagination: {},
         };
     },
     created() {
@@ -55,33 +78,53 @@ export default {
         this.popCart();
     },
     methods: {
-        getDishes() {
-            // Get posts from API
+        /**
+         * Call API for Dishes
+         */
+        getDishes(page = 1) {
             axios
-                .get(`http://127.0.0.1:8000/api/restaurant/${this.$route.params.id}`)
+                .get(`http://127.0.0.1:8000/api/restaurant/${this.$route.params.id}?page=${page}`)
                 .then(res => {
-                    this.dishes = res.data;
-                    console.log(res)
+                    this.dishes = res.data.data;
+                    this.pagination = {
+                        current: res.data.current_page,
+                        last: res.data.last_page
+                    };
                 })
                 .catch(err => {
                     console.log(err);
                 });
         },
+
+        /**
+         * Show Dish Details
+         */
         showDish(dish){
             this.dishDetail= dish;
             this.visibility=true;
         },
+
+        /**
+         * Close Dish Details
+         */
         closeDetail(){
             this.visibility=false;
         },
+
+        /**
+         * Populate Cart with localStorage
+         */
         popCart(){
             if(window.localStorage.getItem('cart')){
                 this.cart = JSON.parse(window.localStorage.getItem('cart'));
                 this.setTotal();
             }
         },
+
+        /**
+         * Add Dish to Cart
+         */
         addCart(order, name, unitPrice) {
-            // console.log(this.cart[Object.keys(this.cart)[0]].restaurant_id);
             if(this.checkId()) {
                 if(this.cart[name]){
                     this.cart[name].quantità += order.quantità;
@@ -94,6 +137,10 @@ export default {
                 this.closeDetail();
             }  
         },
+
+        /**
+         * Check for 
+         */
         checkId(){
             if(Object.keys(this.cart).length != 0){
                 if(this.cart[Object.keys(this.cart)[0]].restaurant_id == this.dishDetail.restaurant_id) {
@@ -112,12 +159,20 @@ export default {
                 return true;
             }
         },
+
+        /**
+         * Add Button in Cart
+         */
         add(name, unit){
             this.cart[name].quantità ++;
             this.cart[name].prezzo += unit;
             this.tot += unit;
             this.store();
         },
+
+        /**
+         * Remove Button in Cart
+         */
         remove(name, unit){
             if(this.cart[name].quantità == 1){
                 delete this.cart[name];
@@ -128,6 +183,10 @@ export default {
             this.tot -= unit;
             this.store();
         },
+
+        /**
+         * Remove one record in Cart
+         */
         removeAll(item, price){
             console.log(item);
             console.log(price);
@@ -135,6 +194,10 @@ export default {
             this.tot -= price;
             this.store();
         },
+
+        /**
+         * Set Quantity from Input in Cart
+         */
         updateQuantity(e,name, unit){
             const value = parseFloat(e.target.value);
             if(value>0){
@@ -152,14 +215,26 @@ export default {
                 this.store();
             }
         },
+
+        /**
+         * Set Total Amount
+         */
         setTotal(){
             for(let item in this.cart){
                 this.tot+=this.cart[item].prezzo;
             }; 
         },
+
+        /**
+         * Save Cart in localStorage
+         */
         store(){
             window.localStorage.setItem('cart', JSON.stringify(this.cart));
         },
+
+        /**
+         * Eliminate Entire Cart
+         */
         deleteCart(){
             const resp = confirm('Vuoi cancellare il tuo ordine?');
             if(resp){

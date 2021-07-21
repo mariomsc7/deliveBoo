@@ -23,7 +23,7 @@
             <tbody>
                 @foreach ($orders as $order)
                     <tr>
-                        <td>{{$order->date}}</td>
+                        <td>{{$order->created_at}}</td>
                         <td>{{$order->customer_name}} {{$order->customer_lastname}}</td>
                         <td>€{{number_format($order->tot_paid, 2)}}</td>   
                         <td>

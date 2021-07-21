@@ -2108,11 +2108,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CheckOut',
   data: function data() {
     return {
+      // restaurant_id: this.cart[0].restaurant_id,
+      customer_name: '',
+      customer_lastname: '',
+      customer_address: '',
+      phone_number: null,
+      errors: {},
+      success: false,
+      sending: false,
       tot: 0,
       cart: [],
       hostedFieldInstance: false,
@@ -2162,6 +2193,36 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    sendOrder: function sendOrder() {
+      var _this2 = this;
+
+      this.sendig = true;
+      axios.post("http://127.0.0.1:8000/api/orders", {
+        customer_name: this.customer_name,
+        customer_lastname: this.customer_lastname,
+        customer_address: this.customer_address,
+        phone_number: this.phone_number,
+        tot_paid: this.tot,
+        restaurant_id: this.cart[Object.keys(this.cart)[0]].restaurant_id
+      }).then(function (res) {
+        _this2.sendig = false;
+        console.log(res.data.error);
+
+        if (res.data.error) {
+          _this2.errors = res.data.error;
+          _this2.success = false;
+        } else {
+          _this2.customer_name = '';
+          _this2.customer_lastname = '';
+          _this2.customer_address = '';
+          _this2.phone_number = null;
+          _this2.errors = {};
+          _this2.success = true;
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
     getBill: function getBill() {
       if (window.localStorage.getItem('cart')) {
         this.cart = JSON.parse(window.localStorage.getItem('cart'));
@@ -2235,17 +2296,19 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     payWithCreditCard: function payWithCreditCard() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.hostedFieldInstance) {
         this.error = "";
         this.nonce = "";
         this.hostedFieldInstance.tokenize().then(function (payload) {
           console.log(payload);
-          _this2.nonce = payload.nonce;
+          _this3.nonce = payload.nonce;
+
+          _this3.sendOrder();
         })["catch"](function (err) {
           console.error(err);
-          _this2.error = err.message;
+          _this3.error = err.message;
         });
       }
     }
@@ -2296,45 +2359,91 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
   data: function data() {
     return {
       restaurants: [],
       types: [],
-      checked: []
+      checked: [],
+      pagination: {}
     };
   },
   created: function created() {
     this.getRestaurants();
+    this.getTypes();
   },
   methods: {
-    getRestaurants: function getRestaurants() {
+    /**
+     * Call API for Types
+     */
+    getTypes: function getTypes() {
       var _this = this;
 
-      // Get posts from API
-      var query = [];
-
-      if (this.checked.length == 0) {
-        query.push('all');
-      } else {
-        query = this.checked;
-      }
-
-      var stringQuery = JSON.stringify(query);
-      axios.get("http://127.0.0.1:8000/api/restaurants/".concat(stringQuery)).then(function (res) {
-        _this.restaurants = res.data;
-
-        _this.restaurants.forEach(function (restaurant) {
-          restaurant.types.forEach(function (type) {
-            if (!_this.types.includes(type.name)) {
-              _this.types.push(type.name);
-            }
-          });
-        });
+      axios.get("http://127.0.0.1:8000/api/types").then(function (res) {
+        _this.types = res.data;
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+
+    /**
+     * Call API for All Restaurants
+     */
+    getRestaurants: function getRestaurants() {
+      var _this2 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+      if (this.checked.length == 0) {
+        axios.get("http://127.0.0.1:8000/api/restaurants?page=".concat(page)).then(function (res) {
+          _this2.restaurants = res.data.data;
+          _this2.pagination = {
+            current: res.data.current_page,
+            last: res.data.last_page
+          };
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      } else {
+        // When change page
+        this.filter(page);
+      }
+    },
+
+    /**
+     * Call API for Filtered Restaurants
+     */
+    filter: function filter() {
+      var _this3 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+      if (this.checked.length != 0) {
+        // Create query string from checked array
+        var query = [];
+        query = this.checked;
+        var stringQuery = JSON.stringify(query);
+        axios.get("http://127.0.0.1:8000/api/filter?types=".concat(stringQuery, "&page=").concat(page)).then(function (res) {
+          console.log(res.data);
+          _this3.restaurants = res.data.data;
+          _this3.pagination = {
+            current: res.data.current_page,
+            last: res.data.last_page
+          };
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      } else {
+        // When all checkbox are empty
+        this.getRestaurants();
+      }
     }
   }
 });
@@ -2617,6 +2726,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Restaurant',
@@ -2629,7 +2760,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dishDetail: {},
       visibility: false,
       cart: {},
-      tot: 0
+      tot: 0,
+      pagination: {}
     };
   },
   created: function created() {
@@ -2637,32 +2769,53 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.popCart();
   },
   methods: {
+    /**
+     * Call API for Dishes
+     */
     getDishes: function getDishes() {
       var _this = this;
 
-      // Get posts from API
-      axios.get("http://127.0.0.1:8000/api/restaurant/".concat(this.$route.params.id)).then(function (res) {
-        _this.dishes = res.data;
-        console.log(res);
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get("http://127.0.0.1:8000/api/restaurant/".concat(this.$route.params.id, "?page=").concat(page)).then(function (res) {
+        _this.dishes = res.data.data;
+        _this.pagination = {
+          current: res.data.current_page,
+          last: res.data.last_page
+        };
       })["catch"](function (err) {
         console.log(err);
       });
     },
+
+    /**
+     * Show Dish Details
+     */
     showDish: function showDish(dish) {
       this.dishDetail = dish;
       this.visibility = true;
     },
+
+    /**
+     * Close Dish Details
+     */
     closeDetail: function closeDetail() {
       this.visibility = false;
     },
+
+    /**
+     * Populate Cart with localStorage
+     */
     popCart: function popCart() {
       if (window.localStorage.getItem('cart')) {
         this.cart = JSON.parse(window.localStorage.getItem('cart'));
         this.setTotal();
       }
     },
+
+    /**
+     * Add Dish to Cart
+     */
     addCart: function addCart(order, name, unitPrice) {
-      // console.log(this.cart[Object.keys(this.cart)[0]].restaurant_id);
       if (this.checkId()) {
         if (this.cart[name]) {
           this.cart[name].quantità += order.quantità;
@@ -2678,6 +2831,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.closeDetail();
       }
     },
+
+    /**
+     * Check for 
+     */
     checkId: function checkId() {
       if (Object.keys(this.cart).length != 0) {
         if (this.cart[Object.keys(this.cart)[0]].restaurant_id == this.dishDetail.restaurant_id) {
@@ -2697,12 +2854,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return true;
       }
     },
+
+    /**
+     * Add Button in Cart
+     */
     add: function add(name, unit) {
       this.cart[name].quantità++;
       this.cart[name].prezzo += unit;
       this.tot += unit;
       this.store();
     },
+
+    /**
+     * Remove Button in Cart
+     */
     remove: function remove(name, unit) {
       if (this.cart[name].quantità == 1) {
         delete this.cart[name];
@@ -2714,6 +2879,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.tot -= unit;
       this.store();
     },
+
+    /**
+     * Remove one record in Cart
+     */
     removeAll: function removeAll(item, price) {
       console.log(item);
       console.log(price);
@@ -2721,6 +2890,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.tot -= price;
       this.store();
     },
+
+    /**
+     * Set Quantity from Input in Cart
+     */
     updateQuantity: function updateQuantity(e, name, unit) {
       var value = parseFloat(e.target.value);
 
@@ -2739,6 +2912,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.store();
       }
     },
+
+    /**
+     * Set Total Amount
+     */
     setTotal: function setTotal() {
       for (var item in this.cart) {
         this.tot += this.cart[item].prezzo;
@@ -2746,9 +2923,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       ;
     },
+
+    /**
+     * Save Cart in localStorage
+     */
     store: function store() {
       window.localStorage.setItem('cart', JSON.stringify(this.cart));
     },
+
+    /**
+     * Eliminate Entire Cart
+     */
     deleteCart: function deleteCart() {
       var resp = confirm('Vuoi cancellare il tuo ordine?');
 
@@ -23373,7 +23558,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".details[data-v-97bbb0f6] {\n  position: fixed;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.2);\n}\n.details .details-box[data-v-97bbb0f6] {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.details .details-box .close[data-v-97bbb0f6] {\n  cursor: pointer;\n}", ""]);
+exports.push([module.i, ".details[data-v-97bbb0f6] {\n  position: fixed;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.4);\n}\n.details .details-box[data-v-97bbb0f6] {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.details .details-box .close[data-v-97bbb0f6] {\n  cursor: pointer;\n}", ""]);
 
 // exports
 
@@ -23468,7 +23653,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nbody {\r\n    padding: 5px;\n}\r\n", ""]);
+exports.push([module.i, "\n.error-message {\r\n    color: red;\n}\n.success-message {\r\n    color: green;\n}\r\n", ""]);
 
 // exports
 
@@ -25064,43 +25249,290 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "col-6 offset-3" }, [
-        _c("div", { staticClass: "card bg-light" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v("Payment Information")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm.nonce
-              ? _c("div", { staticClass: "alert alert-success" }, [
-                  _vm._v(
-                    "\n                      Successfully generated nonce.\n                  "
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
-        ]),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.success,
+                expression: "success"
+              }
+            ],
+            staticClass: "success-message"
+          },
+          [_vm._v("Il tuo ordine è stato inviato")]
+        ),
         _vm._v(" "),
         _c(
-          "button",
+          "form",
           {
-            staticClass: "btn btn-primary btn-block",
             on: {
-              click: function($event) {
+              submit: function($event) {
                 $event.preventDefault()
                 return _vm.payWithCreditCard.apply(null, arguments)
               }
             }
           },
-          [_vm._v("\n              Pay with Credit Card\n          ")]
-        ),
-        _vm._v(" "),
-        _vm.error
-          ? _c("div", { staticClass: "alert alert-danger" }, [
-              _vm._v("\n              " + _vm._s(_vm.error) + "\n          ")
-            ])
-          : _vm._e()
+          [
+            _c(
+              "div",
+              { staticClass: "mb-3" },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "control-label",
+                    attrs: { for: "customer_name" }
+                  },
+                  [_vm._v("Nome*")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.customer_name,
+                      expression: "customer_name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "customer_name",
+                    required: "",
+                    maxlength: "50"
+                  },
+                  domProps: { value: _vm.customer_name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.customer_name = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors.customer_name, function(error, index) {
+                  return _c(
+                    "div",
+                    { key: "err-name-" + index, staticClass: "error-message" },
+                    [_vm._v(_vm._s(error))]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "mb-3" },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "control-label",
+                    attrs: { for: "customer_lastname" }
+                  },
+                  [_vm._v("Cognome*")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.customer_lastname,
+                      expression: "customer_lastname"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "customer_lastname",
+                    required: "",
+                    maxlength: "50"
+                  },
+                  domProps: { value: _vm.customer_lastname },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.customer_lastname = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors.customer_lastname, function(error, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: "err-lastname-" + index,
+                      staticClass: "error-message"
+                    },
+                    [_vm._v(_vm._s(error))]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "mb-3" },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "control-label",
+                    attrs: { for: "customer_address" }
+                  },
+                  [_vm._v("Indirizzo*")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.customer_address,
+                      expression: "customer_address"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "customer_address",
+                    type: "text",
+                    required: "",
+                    autocomplete: "address",
+                    maxlength: "50",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.customer_address },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.customer_address = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors.customer_address, function(error, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: "err-address-" + index,
+                      staticClass: "error-message"
+                    },
+                    [_vm._v(_vm._s(error))]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "mb-3" },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "control-label",
+                    attrs: { for: "phone_number" }
+                  },
+                  [_vm._v("Numero di telefono*")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.phone_number,
+                      expression: "phone_number"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "phone_number",
+                    type: "text",
+                    required: "",
+                    autocomplete: "phone_number",
+                    minlength: "10",
+                    maxlength: "10",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.phone_number },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.phone_number = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors.phone_number, function(error, index) {
+                  return _c(
+                    "div",
+                    { key: "err-phone-" + index, staticClass: "error-message" },
+                    [_vm._v(_vm._s(error))]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "card bg-light" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _vm._v("Payment Information")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _vm.nonce
+                  ? _c("div", { staticClass: "alert alert-success" }, [
+                      _vm._v(
+                        "\n                          Successfully generated nonce.\n                      "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-block",
+                attrs: { type: "submit" }
+              },
+              [
+                _vm._v(
+                  "\n                  Pay with Credit Card\n              "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _vm.error
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _vm._v(
+                    "\n                  " +
+                      _vm._s(_vm.error) +
+                      "\n              "
+                  )
+                ])
+              : _vm._e()
+          ]
+        )
       ])
     ])
   ])
@@ -25165,101 +25597,165 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h1", [_vm._v("RESTAURANTS")]),
+      _c("h1", [_vm._v("Home")]),
       _vm._v(" "),
-      _c(
-        "ul",
-        _vm._l(_vm.types, function(type, index) {
-          return _c("li", { key: "types-" + index }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.checked,
-                  expression: "checked"
-                }
-              ],
-              attrs: { type: "checkbox", id: type },
-              domProps: {
-                value: type,
-                checked: Array.isArray(_vm.checked)
-                  ? _vm._i(_vm.checked, type) > -1
-                  : _vm.checked
-              },
-              on: {
-                change: [
-                  function($event) {
-                    var $$a = _vm.checked,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = type,
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 && (_vm.checked = $$a.concat([$$v]))
-                      } else {
-                        $$i > -1 &&
-                          (_vm.checked = $$a
-                            .slice(0, $$i)
-                            .concat($$a.slice($$i + 1)))
-                      }
+      _vm._l(_vm.types, function(type, index) {
+        return _c("li", { key: "types-" + index }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.checked,
+                expression: "checked"
+              }
+            ],
+            attrs: { type: "checkbox", id: type },
+            domProps: {
+              value: type,
+              checked: Array.isArray(_vm.checked)
+                ? _vm._i(_vm.checked, type) > -1
+                : _vm.checked
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a = _vm.checked,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = type,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.checked = $$a.concat([$$v]))
                     } else {
-                      _vm.checked = $$c
+                      $$i > -1 &&
+                        (_vm.checked = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.checked = $$c
+                  }
+                },
+                _vm.filter
+              ]
+            }
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "checkbox" } }, [_vm._v(_vm._s(type))])
+        ])
+      }),
+      _vm._v(" "),
+      _vm.types.length
+        ? _c("div", [
+            _c(
+              "section",
+              { staticClass: "navigation" },
+              [
+                _c(
+                  "button",
+                  {
+                    attrs: { disabled: !(_vm.pagination.current > 1) },
+                    on: {
+                      click: function($event) {
+                        return _vm.getRestaurants(_vm.pagination.current - 1)
+                      }
                     }
                   },
-                  _vm.getRestaurants
-                ]
-              }
-            }),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "checkbox" } }, [_vm._v(_vm._s(type))])
-          ])
-        }),
-        0
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.restaurants, function(restaurant) {
-        return _c(
-          "article",
-          { key: "res-" + restaurant.id, staticClass: "card" },
-          [
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: { name: "restaurant", params: { id: restaurant.id } }
-                }
-              },
-              [
-                _c("h2", [_vm._v(_vm._s(restaurant.name))]),
-                _vm._v(" "),
-                _c("div", [_vm._v(_vm._s(restaurant.address))]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  _vm._l(restaurant.type, function(type, index) {
-                    return _c("span", { key: "type-" + index }, [
-                      _vm._v(
-                        "\n                " + _vm._s(type) + " \n            "
-                      )
-                    ])
-                  }),
-                  0
+                  [_vm._v("Prev")]
                 ),
                 _vm._v(" "),
-                restaurant.image
-                  ? _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: { src: restaurant.image, alt: restaurant.name }
-                    })
-                  : _vm._e()
-              ]
+                _vm._l(_vm.pagination.last, function(i) {
+                  return _c(
+                    "button",
+                    {
+                      key: "page-" + i,
+                      class: { "active-page": _vm.pagination.current == i },
+                      on: {
+                        click: function($event) {
+                          return _vm.getRestaurants(i)
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(i))]
+                  )
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    attrs: {
+                      disabled: !(_vm.pagination.current < _vm.pagination.last)
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.getRestaurants(_vm.pagination.current + 1)
+                      }
+                    }
+                  },
+                  [_vm._v("Next")]
+                )
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "d-flex" },
+              _vm._l(_vm.restaurants, function(restaurant) {
+                return _c(
+                  "article",
+                  { key: "res-" + restaurant.id, staticClass: "card" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to: {
+                            name: "restaurant",
+                            params: { id: restaurant.id }
+                          }
+                        }
+                      },
+                      [
+                        _c("h2", [_vm._v(_vm._s(restaurant.name))]),
+                        _vm._v(" "),
+                        _c("div", [_vm._v(_vm._s(restaurant.address))]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          _vm._l(restaurant.type, function(type, index) {
+                            return _c("span", { key: "type-" + index }, [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(type) +
+                                  "\n                    "
+                              )
+                            ])
+                          }),
+                          0
+                        ),
+                        _vm._v(" "),
+                        restaurant.image
+                          ? _c("img", {
+                              staticClass: "img-fluid",
+                              attrs: {
+                                src: restaurant.image,
+                                alt: restaurant.name
+                              }
+                            })
+                          : _vm._e()
+                      ]
+                    )
+                  ],
+                  1
+                )
+              }),
+              0
             )
-          ],
-          1
-        )
-      })
+          ])
+        : _vm._e()
     ],
     2
   )
@@ -25523,38 +26019,91 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "cont" }, [
-        _c(
-          "div",
-          _vm._l(_vm.dishes, function(dish, index) {
-            return _c(
-              "div",
-              {
-                key: "dishes-" + index,
-                staticClass: "dish",
-                class: { unavailable: !dish.visibility },
-                on: {
-                  click: function($event) {
-                    return _vm.showDish(dish)
+        _c("div", [
+          _c(
+            "section",
+            { staticClass: "navigation" },
+            [
+              _c(
+                "button",
+                {
+                  attrs: { disabled: !(_vm.pagination.current > 1) },
+                  on: {
+                    click: function($event) {
+                      return _vm.getDishes(_vm.pagination.current - 1)
+                    }
                   }
-                }
-              },
-              [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(dish.name) +
-                    "\n                    "
-                ),
-                dish.image
-                  ? _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: { src: dish.image, alt: dish.name }
-                    })
-                  : _vm._e()
-              ]
-            )
-          }),
-          0
-        ),
+                },
+                [_vm._v("Prev")]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.pagination.last, function(i) {
+                return _c(
+                  "button",
+                  {
+                    key: "page-" + i,
+                    class: { "active-page": _vm.pagination.current == i },
+                    on: {
+                      click: function($event) {
+                        return _vm.getDishes(i)
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(i))]
+                )
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: {
+                    disabled: !(_vm.pagination.current < _vm.pagination.last)
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.getDishes(_vm.pagination.current + 1)
+                    }
+                  }
+                },
+                [_vm._v("Next")]
+              )
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            _vm._l(_vm.dishes, function(dish, index) {
+              return _c(
+                "div",
+                {
+                  key: "dishes-" + index,
+                  staticClass: "dish",
+                  class: { unavailable: !dish.visibility },
+                  on: {
+                    click: function($event) {
+                      return _vm.showDish(dish)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(dish.name) +
+                      "\n                        "
+                  ),
+                  dish.image
+                    ? _c("img", {
+                        staticClass: "img-fluid",
+                        attrs: { src: dish.image, alt: dish.name }
+                      })
+                    : _vm._e()
+                ]
+              )
+            }),
+            0
+          )
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -41836,7 +42385,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: "list",
     component: _pages_List_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   }, {
-    path: "/checkout/",
+    path: "/checkout",
     name: "checkout",
     component: _pages_CheckOut_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   }, {
