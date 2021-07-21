@@ -1,101 +1,86 @@
 <template>
     <div>
-      <h1>Cassa</h1>
-      <div class="cart">
-        <h2>Il tuo Carrello</h2>
-        <div v-if="Object.keys(cart).length" >
-            <div v-for="(item, index) in cart" :key="index">
-                
-                <!-- <span >{{item.quantità}}</span> -->
-                <button  @click="remove(item.name, item.unitPrice)">-</button>
-                <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unitPrice)">
-                <button @click="add(item.name, item.unitPrice)">+</button>
-                <span class="name">{{item.name}}</span>
-                <span>€ {{item.prezzo.toFixed(2)}}</span> 
-                <span class="remove" @click="removeAll(item.name, item.prezzo)">X</span>
-
+        <h1>Cassa</h1>
+        <div class="cart">
+            <h2>Il tuo Carrello</h2>
+            <div v-if="Object.keys(cart).length" >
+                <div v-for="(item, index) in cart" :key="index">                
+                    <button  @click="remove(item.name, item.unitPrice)">-</button>
+                    <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unitPrice)">
+                    <button @click="add(item.name, item.unitPrice)">+</button>
+                    <span class="name">{{item.name}}</span>
+                    <span>€ {{item.prezzo.toFixed(2)}}</span> 
+                    <span class="remove" @click="removeAll(item.name, item.prezzo)">X</span>
+                </div>
             </div>
+            <div v-else>Il carrello è vuoto</div>
+            <h3>Tot: €{{tot.toFixed(2)}}</h3>
+            <button v-if="Object.keys(cart).length" @click="deleteCart()">Elimina Carrello</button>
         </div>
-        <div v-else>Il carrello è vuoto</div>
-        <h3>Tot: €{{tot.toFixed(2)}}</h3>
-        <button @click="deleteCart()">Elimina Carrello</button>
-    </div>
-      <div class="container">
-        <!-- <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-            crossorigin="anonymous"
-        /> -->
-        <div class="col-6 offset-3">
-            <div class="success-message" v-show="success">Il tuo ordine è stato inviato</div>
-            <form @submit.prevent="payWithCreditCard">
-                <div class="mb-3">
-                    <label for="customer_name" class="control-label">Nome*</label>
-                    <input type="text" class="form-control" id="customer_name" v-model="customer_name" required maxlength="50">
-                    <div class="error-message" v-for="(error,index) in errors.customer_name" :key="`err-name-${index}`">{{error}}</div>
-                </div>
-                <div class="mb-3">
-                    <label for="customer_lastname" class="control-label">Cognome*</label>
-                    <input type="text" class="form-control" id="customer_lastname" v-model="customer_lastname" required maxlength="50">
-                    <div class="error-message" v-for="(error,index) in errors.customer_lastname" :key="`err-lastname-${index}`">{{error}}</div>
-                </div>
-                <div class="mb-3">
-                    <label for="customer_address" class="control-label">Indirizzo*</label>
-                    <input id="customer_address" type="text" class="form-control" v-model="customer_address" required autocomplete="address" maxlength="50" autofocus>
-                    <div class="error-message" v-for="(error,index) in errors.customer_address" :key="`err-address-${index}`">{{error}}</div>
-                </div>
-                <div class="mb-3">
-                    <label for="phone_number" class="control-label">Numero di telefono*</label>
-                    <input id="phone_number" type="text" class="form-control" v-model="phone_number" required autocomplete="phone_number"  minlength="10" maxlength="10" autofocus>
-                    <div class="error-message" v-for="(error,index) in errors.phone_number" :key="`err-phone-${index}`">{{error}}</div>
-                </div>
+        <div v-if="Object.keys(cart).length" class="container">
 
-                <div class="card bg-light">
-                    <div class="card-header">Payment Information</div>
-                    <div class="card-body">
-                        <div class="alert alert-success" v-if="nonce">
-                            Successfully generated nonce.
-                        </div>
-                        <form>
-                            <div class="form-group">
-                                <label>Credit Card Number</label>
-                                <div
-                                    id="creditCardNumber"
-                                    class="form-control"
-                                ></div>
+            <div class="col-6 offset-3">
+                <div class="success-message" v-show="success">Il tuo ordine è stato inviato</div>
+                <form @submit.prevent="payWithCreditCard">
+                    <div class="mb-3">
+                        <label for="customer_name" class="control-label">Nome*</label>
+                        <input type="text" class="form-control" id="customer_name" v-model="customer_name" required maxlength="50">
+                        <div class="error-message" v-for="(error,index) in errors.customer_name" :key="`err-name-${index}`">{{error}}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="customer_lastname" class="control-label">Cognome*</label>
+                        <input type="text" class="form-control" id="customer_lastname" v-model="customer_lastname" required maxlength="50">
+                        <div class="error-message" v-for="(error,index) in errors.customer_lastname" :key="`err-lastname-${index}`">{{error}}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="customer_address" class="control-label">Indirizzo*</label>
+                        <input id="customer_address" type="text" class="form-control" v-model="customer_address" required autocomplete="address" maxlength="50" autofocus>
+                        <div class="error-message" v-for="(error,index) in errors.customer_address" :key="`err-address-${index}`">{{error}}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone_number" class="control-label">Numero di telefono*</label>
+                        <input id="phone_number" type="text" class="form-control" v-model="phone_number" required autocomplete="phone_number"  minlength="10" maxlength="10" autofocus>
+                        <div class="error-message" v-for="(error,index) in errors.phone_number" :key="`err-phone-${index}`">{{error}}</div>
+                    </div>
+
+                    <div class="card bg-light">
+                        <div class="card-header">Payment Information</div>
+                        <div class="card-body">
+                            <div class="alert alert-success" v-if="nonce">
+                                Successfully generated nonce.
                             </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label>Expire Date</label>
-                                        <div
-                                            id="expireDate"
-                                            class="form-control"
-                                        ></div>
-                                    </div>
-                                    <div class="col-6">
-                                        <label>CVV</label>
-                                        <div id="cvv" class="form-control"></div>
+                            <form>
+                                <div class="form-group">
+                                    <label>Credit Card Number</label>
+                                    <div
+                                        id="creditCardNumber"
+                                        class="form-control"
+                                    ></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label>Expire Date</label>
+                                            <div
+                                                id="expireDate"
+                                                class="form-control"
+                                            ></div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label>CVV</label>
+                                            <div id="cvv" class="form-control"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">
-                    Procedi all-ordine
-                </button>
-                <div class="alert alert-danger" v-if="error">
-                    {{ error }}
-                </div>
-            </form>
-            
-
+                    <button type="submit" class="btn btn-primary btn-block">Procedi all'ordine</button>
+                    <div class="alert alert-danger" v-if="error">{{ error }}</div>
+                </form>
+            </div>
         </div>
     </div>
-
-  </div>
 </template>
 
 <script>
@@ -176,7 +161,6 @@ export default {
             })
             .then(res => {
                 this.sendig = false;
-                console.log(res.data.error);
                 if(res.data.error){
                     this.errors = res.data.error;
                     this.success = false;
@@ -221,8 +205,6 @@ export default {
             this.store();
         },
         removeAll(item, price){
-            console.log(item);
-            console.log(price);
             delete this.cart[item];
             this.tot -= price;
             this.store();

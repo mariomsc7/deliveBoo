@@ -1909,7 +1909,6 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Header_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Header.vue */ "./resources/js/components/Header.vue");
-/* harmony import */ var _components_Hero_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Hero.vue */ "./resources/js/components/Hero.vue");
 //
 //
 //
@@ -1919,14 +1918,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
   components: {
-    Header: _components_Header_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Hero: _components_Hero_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Header: _components_Header_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -2160,21 +2156,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CheckOut',
@@ -2250,7 +2231,6 @@ __webpack_require__.r(__webpack_exports__);
         restaurant_id: this.cart[Object.keys(this.cart)[0]].restaurant_id
       }).then(function (res) {
         _this2.sendig = false;
-        console.log(res.data.error);
 
         if (res.data.error) {
           _this2.errors = res.data.error;
@@ -2296,8 +2276,6 @@ __webpack_require__.r(__webpack_exports__);
       this.store();
     },
     removeAll: function removeAll(item, price) {
-      console.log(item);
-      console.log(price);
       delete this.cart[item];
       this.tot -= price;
       this.store();
@@ -2370,6 +2348,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_Hero_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Hero.vue */ "./resources/js/components/Hero.vue");
 //
 //
 //
@@ -2413,8 +2392,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
+  components: {
+    Hero: _components_Hero_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       restaurants: [],
@@ -24815,13 +24799,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [
-      _c("Header"),
-      _vm._v(" "),
-      _c("Hero"),
-      _vm._v(" "),
-      _c("main", [_c("router-view")], 1)
-    ],
+    [_c("Header"), _vm._v(" "), _c("main", [_c("router-view")], 1)],
     1
   )
 }
@@ -25247,303 +25225,312 @@ var render = function() {
       _vm._v(" "),
       _c("h3", [_vm._v("Tot: €" + _vm._s(_vm.tot.toFixed(2)))]),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          on: {
-            click: function($event) {
-              return _vm.deleteCart()
-            }
-          }
-        },
-        [_vm._v("Elimina Carrello")]
-      )
+      Object.keys(_vm.cart).length
+        ? _c(
+            "button",
+            {
+              on: {
+                click: function($event) {
+                  return _vm.deleteCart()
+                }
+              }
+            },
+            [_vm._v("Elimina Carrello")]
+          )
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "col-6 offset-3" }, [
-        _c(
-          "div",
-          {
-            directives: [
+    Object.keys(_vm.cart).length
+      ? _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "col-6 offset-3" }, [
+            _c(
+              "div",
               {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.success,
-                expression: "success"
-              }
-            ],
-            staticClass: "success-message"
-          },
-          [_vm._v("Il tuo ordine è stato inviato")]
-        ),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.payWithCreditCard.apply(null, arguments)
-              }
-            }
-          },
-          [
-            _c(
-              "div",
-              { staticClass: "mb-3" },
-              [
-                _c(
-                  "label",
+                directives: [
                   {
-                    staticClass: "control-label",
-                    attrs: { for: "customer_name" }
-                  },
-                  [_vm._v("Nome*")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.customer_name,
-                      expression: "customer_name"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "customer_name",
-                    required: "",
-                    maxlength: "50"
-                  },
-                  domProps: { value: _vm.customer_name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.customer_name = $event.target.value
-                    }
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.success,
+                    expression: "success"
                   }
-                }),
-                _vm._v(" "),
-                _vm._l(_vm.errors.customer_name, function(error, index) {
-                  return _c(
-                    "div",
-                    { key: "err-name-" + index, staticClass: "error-message" },
-                    [_vm._v(_vm._s(error))]
-                  )
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "mb-3" },
-              [
-                _c(
-                  "label",
-                  {
-                    staticClass: "control-label",
-                    attrs: { for: "customer_lastname" }
-                  },
-                  [_vm._v("Cognome*")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.customer_lastname,
-                      expression: "customer_lastname"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "customer_lastname",
-                    required: "",
-                    maxlength: "50"
-                  },
-                  domProps: { value: _vm.customer_lastname },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.customer_lastname = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._l(_vm.errors.customer_lastname, function(error, index) {
-                  return _c(
-                    "div",
-                    {
-                      key: "err-lastname-" + index,
-                      staticClass: "error-message"
-                    },
-                    [_vm._v(_vm._s(error))]
-                  )
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "mb-3" },
-              [
-                _c(
-                  "label",
-                  {
-                    staticClass: "control-label",
-                    attrs: { for: "customer_address" }
-                  },
-                  [_vm._v("Indirizzo*")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.customer_address,
-                      expression: "customer_address"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "customer_address",
-                    type: "text",
-                    required: "",
-                    autocomplete: "address",
-                    maxlength: "50",
-                    autofocus: ""
-                  },
-                  domProps: { value: _vm.customer_address },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.customer_address = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._l(_vm.errors.customer_address, function(error, index) {
-                  return _c(
-                    "div",
-                    {
-                      key: "err-address-" + index,
-                      staticClass: "error-message"
-                    },
-                    [_vm._v(_vm._s(error))]
-                  )
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "mb-3" },
-              [
-                _c(
-                  "label",
-                  {
-                    staticClass: "control-label",
-                    attrs: { for: "phone_number" }
-                  },
-                  [_vm._v("Numero di telefono*")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.phone_number,
-                      expression: "phone_number"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "phone_number",
-                    type: "text",
-                    required: "",
-                    autocomplete: "phone_number",
-                    minlength: "10",
-                    maxlength: "10",
-                    autofocus: ""
-                  },
-                  domProps: { value: _vm.phone_number },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.phone_number = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._l(_vm.errors.phone_number, function(error, index) {
-                  return _c(
-                    "div",
-                    { key: "err-phone-" + index, staticClass: "error-message" },
-                    [_vm._v(_vm._s(error))]
-                  )
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card bg-light" }, [
-              _c("div", { staticClass: "card-header" }, [
-                _vm._v("Payment Information")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _vm.nonce
-                  ? _c("div", { staticClass: "alert alert-success" }, [
-                      _vm._v(
-                        "\n                          Successfully generated nonce.\n                      "
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm._m(0)
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-block",
-                attrs: { type: "submit" }
+                ],
+                staticClass: "success-message"
               },
-              [_vm._v("\n                  Procedi all-ordine\n              ")]
+              [_vm._v("Il tuo ordine è stato inviato")]
             ),
             _vm._v(" "),
-            _vm.error
-              ? _c("div", { staticClass: "alert alert-danger" }, [
-                  _vm._v(
-                    "\n                  " +
-                      _vm._s(_vm.error) +
-                      "\n              "
-                  )
-                ])
-              : _vm._e()
-          ]
-        )
-      ])
-    ])
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.payWithCreditCard.apply(null, arguments)
+                  }
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "mb-3" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "control-label",
+                        attrs: { for: "customer_name" }
+                      },
+                      [_vm._v("Nome*")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.customer_name,
+                          expression: "customer_name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "customer_name",
+                        required: "",
+                        maxlength: "50"
+                      },
+                      domProps: { value: _vm.customer_name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.customer_name = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm._l(_vm.errors.customer_name, function(error, index) {
+                      return _c(
+                        "div",
+                        {
+                          key: "err-name-" + index,
+                          staticClass: "error-message"
+                        },
+                        [_vm._v(_vm._s(error))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mb-3" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "control-label",
+                        attrs: { for: "customer_lastname" }
+                      },
+                      [_vm._v("Cognome*")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.customer_lastname,
+                          expression: "customer_lastname"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "customer_lastname",
+                        required: "",
+                        maxlength: "50"
+                      },
+                      domProps: { value: _vm.customer_lastname },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.customer_lastname = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm._l(_vm.errors.customer_lastname, function(
+                      error,
+                      index
+                    ) {
+                      return _c(
+                        "div",
+                        {
+                          key: "err-lastname-" + index,
+                          staticClass: "error-message"
+                        },
+                        [_vm._v(_vm._s(error))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mb-3" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "control-label",
+                        attrs: { for: "customer_address" }
+                      },
+                      [_vm._v("Indirizzo*")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.customer_address,
+                          expression: "customer_address"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "customer_address",
+                        type: "text",
+                        required: "",
+                        autocomplete: "address",
+                        maxlength: "50",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.customer_address },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.customer_address = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm._l(_vm.errors.customer_address, function(error, index) {
+                      return _c(
+                        "div",
+                        {
+                          key: "err-address-" + index,
+                          staticClass: "error-message"
+                        },
+                        [_vm._v(_vm._s(error))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mb-3" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "control-label",
+                        attrs: { for: "phone_number" }
+                      },
+                      [_vm._v("Numero di telefono*")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.phone_number,
+                          expression: "phone_number"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "phone_number",
+                        type: "text",
+                        required: "",
+                        autocomplete: "phone_number",
+                        minlength: "10",
+                        maxlength: "10",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.phone_number },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.phone_number = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm._l(_vm.errors.phone_number, function(error, index) {
+                      return _c(
+                        "div",
+                        {
+                          key: "err-phone-" + index,
+                          staticClass: "error-message"
+                        },
+                        [_vm._v(_vm._s(error))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "card bg-light" }, [
+                  _c("div", { staticClass: "card-header" }, [
+                    _vm._v("Payment Information")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
+                    _vm.nonce
+                      ? _c("div", { staticClass: "alert alert-success" }, [
+                          _vm._v(
+                            "\n                            Successfully generated nonce.\n                        "
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm._m(0)
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-block",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Procedi all'ordine")]
+                ),
+                _vm._v(" "),
+                _vm.error
+                  ? _c("div", { staticClass: "alert alert-danger" }, [
+                      _vm._v(_vm._s(_vm.error))
+                    ])
+                  : _vm._e()
+              ]
+            )
+          ])
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -25603,177 +25590,189 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("h1", { staticClass: "text-center" }, [
-      _vm._v("Scegli il tipo di ristorante!")
-    ]),
-    _vm._v(" "),
-    _c(
-      "ul",
-      { staticClass: "type-list d-flex justify-content-around" },
-      _vm._l(_vm.types, function(type, index) {
-        return _c("li", { key: "types-" + index }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.checked,
-                expression: "checked"
-              }
-            ],
-            attrs: { type: "checkbox", id: type },
-            domProps: {
-              value: type,
-              checked: Array.isArray(_vm.checked)
-                ? _vm._i(_vm.checked, type) > -1
-                : _vm.checked
-            },
-            on: {
-              change: [
-                function($event) {
-                  var $$a = _vm.checked,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = type,
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 && (_vm.checked = $$a.concat([$$v]))
-                    } else {
-                      $$i > -1 &&
-                        (_vm.checked = $$a
-                          .slice(0, $$i)
-                          .concat($$a.slice($$i + 1)))
-                    }
-                  } else {
-                    _vm.checked = $$c
-                  }
-                },
-                _vm.filter
-              ]
-            }
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "checkbox" } }, [_vm._v(_vm._s(type))]),
-          _vm._v(" "),
-          _c("span", { staticClass: "checkmark" })
-        ])
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _vm.types.length
-      ? _c("div", [
-          _c(
-            "section",
-            { staticClass: "navigation text-center mb-5" },
-            [
-              _c(
-                "button",
-                {
-                  attrs: { disabled: !(_vm.pagination.current > 1) },
-                  on: {
-                    click: function($event) {
-                      return _vm.getRestaurants(_vm.pagination.current - 1)
-                    }
-                  }
-                },
-                [_vm._v("Prev")]
-              ),
-              _vm._v(" "),
-              _vm._l(_vm.pagination.last, function(i) {
-                return _c(
-                  "button",
+  return _c(
+    "div",
+    [
+      _c("Hero"),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("h1", { staticClass: "text-center" }, [
+          _vm._v("Scegli il tipo di ristorante!")
+        ]),
+        _vm._v(" "),
+        _c(
+          "ul",
+          { staticClass: "type-list d-flex justify-content-around" },
+          _vm._l(_vm.types, function(type, index) {
+            return _c("li", { key: "types-" + index }, [
+              _c("input", {
+                directives: [
                   {
-                    key: "page-" + i,
-                    staticClass: "btn-custom",
-                    class: { "active-page": _vm.pagination.current == i },
-                    on: {
-                      click: function($event) {
-                        return _vm.getRestaurants(i)
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checked,
+                    expression: "checked"
+                  }
+                ],
+                attrs: { type: "checkbox", id: type },
+                domProps: {
+                  value: type,
+                  checked: Array.isArray(_vm.checked)
+                    ? _vm._i(_vm.checked, type) > -1
+                    : _vm.checked
+                },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checked,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = type,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.checked = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.checked = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.checked = $$c
                       }
-                    }
-                  },
-                  [_vm._v(_vm._s(i))]
-                )
+                    },
+                    _vm.filter
+                  ]
+                }
               }),
               _vm._v(" "),
+              _c("label", { attrs: { for: "checkbox" } }, [
+                _vm._v(_vm._s(type))
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "checkmark" })
+            ])
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _vm.types.length
+          ? _c("div", [
               _c(
-                "button",
-                {
-                  attrs: {
-                    disabled: !(_vm.pagination.current < _vm.pagination.last)
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.getRestaurants(_vm.pagination.current + 1)
-                    }
-                  }
-                },
-                [_vm._v("Next")]
-              )
-            ],
-            2
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "d-flex" },
-            _vm._l(_vm.restaurants, function(restaurant) {
-              return _c(
-                "article",
-                { key: "res-" + restaurant.id, staticClass: "card" },
+                "section",
+                { staticClass: "navigation text-center mb-5" },
                 [
                   _c(
-                    "router-link",
+                    "button",
                     {
-                      attrs: {
-                        to: {
-                          name: "restaurant",
-                          params: { id: restaurant.id }
+                      attrs: { disabled: !(_vm.pagination.current > 1) },
+                      on: {
+                        click: function($event) {
+                          return _vm.getRestaurants(_vm.pagination.current - 1)
                         }
                       }
                     },
-                    [
-                      _c("h2", [_vm._v(_vm._s(restaurant.name))]),
-                      _vm._v(" "),
-                      _c("div", [_vm._v(_vm._s(restaurant.address))]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        _vm._l(restaurant.type, function(type, index) {
-                          return _c("span", { key: "type-" + index }, [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(type) +
-                                "\n                    "
-                            )
-                          ])
-                        }),
-                        0
-                      ),
-                      _vm._v(" "),
-                      restaurant.image
-                        ? _c("img", {
-                            staticClass: "img-fluid",
-                            attrs: {
-                              src: restaurant.image,
-                              alt: restaurant.name
-                            }
-                          })
-                        : _vm._e()
-                    ]
+                    [_vm._v("Prev")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.pagination.last, function(i) {
+                    return _c(
+                      "button",
+                      {
+                        key: "page-" + i,
+                        staticClass: "btn-custom",
+                        class: { "active-page": _vm.pagination.current == i },
+                        on: {
+                          click: function($event) {
+                            return _vm.getRestaurants(i)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(i))]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      attrs: {
+                        disabled: !(
+                          _vm.pagination.current < _vm.pagination.last
+                        )
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.getRestaurants(_vm.pagination.current + 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Next")]
                   )
                 ],
-                1
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "d-flex" },
+                _vm._l(_vm.restaurants, function(restaurant) {
+                  return _c(
+                    "article",
+                    { key: "res-" + restaurant.id, staticClass: "card" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          attrs: {
+                            to: {
+                              name: "restaurant",
+                              params: { id: restaurant.id }
+                            }
+                          }
+                        },
+                        [
+                          _c("h2", [_vm._v(_vm._s(restaurant.name))]),
+                          _vm._v(" "),
+                          _c("div", [_vm._v(_vm._s(restaurant.address))]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            _vm._l(restaurant.type, function(type, index) {
+                              return _c("span", { key: "type-" + index }, [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(type) +
+                                    "\n                        "
+                                )
+                              ])
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          restaurant.image
+                            ? _c("img", {
+                                staticClass: "img-fluid",
+                                attrs: {
+                                  src: restaurant.image,
+                                  alt: restaurant.name
+                                }
+                              })
+                            : _vm._e()
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                }),
+                0
               )
-            }),
-            0
-          )
-        ])
-      : _vm._e()
-  ])
+            ])
+          : _vm._e()
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -26018,17 +26017,19 @@ var render = function() {
               _vm._v("Cassa")
             ]),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                on: {
-                  click: function($event) {
-                    return _vm.deleteCart()
-                  }
-                }
-              },
-              [_vm._v("Elimina Carrello")]
-            )
+            Object.keys(_vm.cart).length
+              ? _c(
+                  "button",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteCart()
+                      }
+                    }
+                  },
+                  [_vm._v("Elimina Carrello")]
+                )
+              : _vm._e()
           ],
           1
         )
