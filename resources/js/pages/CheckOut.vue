@@ -28,24 +28,29 @@
             crossorigin="anonymous"
         /> -->
         <div class="col-6 offset-3">
-            <form>
+            <div class="success-message" v-show="success">Il tuo ordine è stato inviato</div>
+            <form @submit.prevent="sendOrder">
                 <div class="mb-3">
-                    <label for="customer_name" class="control-table">Nome*</label>
-                    <input type="text" name="customer_name" class="form-control" id="customer_name" value="" required maxlength="50">
+                    <label for="customer_name" class="control-label">Nome*</label>
+                    <input type="text" class="form-control" id="customer_name" v-model="customer_name"  maxlength="50">
+                    <div class="error-message" v-for="(error,index) in errors.customer_name" :key="`err-name-${index}`">{{error}}</div>
                 </div>
                 <div class="mb-3">
-                    <label for="customer_lastname" class="control-table">Cognome*</label>
-                    <input type="text" name="customer_name" class="form-control" id="customer_lastname" value="" required maxlength="50">
+                    <label for="customer_lastname" class="control-label">Cognome*</label>
+                    <input type="text" class="form-control" id="customer_lastname" v-model="customer_lastname" required maxlength="50">
+                    <div class="error-message" v-for="(error,index) in errors.customer_lastname" :key="`err-lastname-${index}`">{{error}}</div>
                 </div>
                 <div class="mb-3">
-                    <label for="customer_address" class="control-table">Indirizzo*</label>
-                    <input id="customer_address" type="text" class="form-control" name="customer_address" value="" required autocomplete="address" maxlength="50" autofocus>
+                    <label for="customer_address" class="control-label">Indirizzo*</label>
+                    <input id="customer_address" type="text" class="form-control" v-model="customer_address" required autocomplete="address" maxlength="50" autofocus>
+                    <div class="error-message" v-for="(error,index) in errors.customer_address" :key="`err-address-${index}`">{{error}}</div>
                 </div>
                 <div class="mb-3">
-                    <label for="phone_number" class="control-table">Numero di telefono*</label>
-                    <input id="phone_number" type="number" class="form-control" name="vat_number" value="" required autocomplete="vat_number" minlength="11" maxlength="11" autofocus>
+                    <label for="phone_number" class="control-label">Numero di telefono*</label>
+                    <input id="phone_number" type="text" class="form-control" v-model="phone_number" required autocomplete="phone_number"  maxlength="10" autofocus>
+                    <div class="error-message" v-for="(error,index) in errors.phone_number" :key="`err-phone-${index}`">{{error}}</div>
                 </div>
-                <button type="submit" class="btn btn-primary  btn-block mb-3">Sign in</button>
+                <button type="submit" class="btn btn-primary  btn-block mb-3" :disabled="sending">{{sending ? 'Sendig...' : 'Send'}}</button>
             </form>
             <div class="card bg-light">
                 <div class="card-header">Payment Information</div>
@@ -103,11 +108,19 @@ export default {
     name: 'CheckOut',
     data() {
         return {
-          tot: 0,
-          cart: [],
-            hostedFieldInstance: false,
-            nonce: "",
-            error: ""
+        // restaurant_id: this.cart[0].restaurant_id,
+        customer_name: '',
+        customer_lastname: '',
+        customer_address: '',
+        phone_number: null,
+        errors:{},
+        success: false,
+        sending: false,
+        tot: 0,
+        cart: [],
+        hostedFieldInstance: false,
+        nonce: "",
+        error: "",
         }
     },
     created(){
@@ -154,6 +167,36 @@ export default {
             });
     },
     methods: {
+        sendOrder(){
+            this.sendig = true;
+            axios.post("http://127.0.0.1:8000/api/orders", {
+                customer_name: this.customer_name,
+                customer_lastname: this.customer_lastname,
+                customer_address: this.customer_address,
+                phone_number: this.phone_number,
+                tot_paid: this.tot,
+                restaurant_id: this.cart[Object.keys(this.cart)[0]].restaurant_id,
+            })
+            .then(res => {
+                this.sendig = false;
+                console.log(res.data.error);
+                if(res.data.error){
+                    this.errors = res.data.error;
+                    this.success = false;
+                } else {
+                    this.customer_name = '';
+                    this.customer_lastname = '';
+                    this.customer_address = '';
+                    this.phone_number = null;
+
+                    this.errors = {};
+                    this.success = true;
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        },
         getBill(){
             if(window.localStorage.getItem('cart')){
                 this.cart = JSON.parse(window.localStorage.getItem('cart'));
@@ -241,7 +284,10 @@ export default {
 </script>
 
 <style>
-body {
-    padding: 5px;
+.error-message {
+    color: red;
+}
+.success-message {
+    color: green;
 }
 </style>
