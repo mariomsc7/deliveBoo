@@ -2152,11 +2152,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CheckOut',
   data: function data() {
     return {
+      // restaurant_id: this.cart[0].restaurant_id,
+      customer_name: '',
+      customer_lastname: '',
+      customer_address: '',
+      phone_number: null,
+      errors: {},
+      success: false,
+      sending: false,
       tot: 0,
       cart: [],
       hostedFieldInstance: false,
@@ -2206,6 +2237,36 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    sendOrder: function sendOrder() {
+      var _this2 = this;
+
+      this.sendig = true;
+      axios.post("http://127.0.0.1:8000/api/orders", {
+        customer_name: this.customer_name,
+        customer_lastname: this.customer_lastname,
+        customer_address: this.customer_address,
+        phone_number: this.phone_number,
+        tot_paid: this.tot,
+        restaurant_id: this.cart[Object.keys(this.cart)[0]].restaurant_id
+      }).then(function (res) {
+        _this2.sendig = false;
+        console.log(res.data.error);
+
+        if (res.data.error) {
+          _this2.errors = res.data.error;
+          _this2.success = false;
+        } else {
+          _this2.customer_name = '';
+          _this2.customer_lastname = '';
+          _this2.customer_address = '';
+          _this2.phone_number = null;
+          _this2.errors = {};
+          _this2.success = true;
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
     getBill: function getBill() {
       if (window.localStorage.getItem('cart')) {
         this.cart = JSON.parse(window.localStorage.getItem('cart'));
@@ -2279,17 +2340,19 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     payWithCreditCard: function payWithCreditCard() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.hostedFieldInstance) {
         this.error = "";
         this.nonce = "";
         this.hostedFieldInstance.tokenize().then(function (payload) {
           console.log(payload);
-          _this2.nonce = payload.nonce;
+          _this3.nonce = payload.nonce;
+
+          _this3.sendOrder();
         })["catch"](function (err) {
           console.error(err);
-          _this2.error = err.message;
+          _this3.error = err.message;
         });
       }
     }
@@ -23454,7 +23517,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nbody {\r\n    padding: 5px;\n}\r\n", ""]);
+exports.push([module.i, "\n.error-message {\r\n    color: red;\n}\n.success-message {\r\n    color: green;\n}\r\n", ""]);
 
 // exports
 
@@ -25199,43 +25262,290 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "col-6 offset-3" }, [
-        _c("div", { staticClass: "card bg-light" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v("Payment Information")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm.nonce
-              ? _c("div", { staticClass: "alert alert-success" }, [
-                  _vm._v(
-                    "\n                      Successfully generated nonce.\n                  "
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
-        ]),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.success,
+                expression: "success"
+              }
+            ],
+            staticClass: "success-message"
+          },
+          [_vm._v("Il tuo ordine è stato inviato")]
+        ),
         _vm._v(" "),
         _c(
-          "button",
+          "form",
           {
-            staticClass: "btn btn-primary btn-block",
             on: {
-              click: function($event) {
+              submit: function($event) {
                 $event.preventDefault()
                 return _vm.payWithCreditCard.apply(null, arguments)
               }
             }
           },
-          [_vm._v("\n              Pay with Credit Card\n          ")]
-        ),
-        _vm._v(" "),
-        _vm.error
-          ? _c("div", { staticClass: "alert alert-danger" }, [
-              _vm._v("\n              " + _vm._s(_vm.error) + "\n          ")
-            ])
-          : _vm._e()
+          [
+            _c(
+              "div",
+              { staticClass: "mb-3" },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "control-label",
+                    attrs: { for: "customer_name" }
+                  },
+                  [_vm._v("Nome*")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.customer_name,
+                      expression: "customer_name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "customer_name",
+                    required: "",
+                    maxlength: "50"
+                  },
+                  domProps: { value: _vm.customer_name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.customer_name = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors.customer_name, function(error, index) {
+                  return _c(
+                    "div",
+                    { key: "err-name-" + index, staticClass: "error-message" },
+                    [_vm._v(_vm._s(error))]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "mb-3" },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "control-label",
+                    attrs: { for: "customer_lastname" }
+                  },
+                  [_vm._v("Cognome*")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.customer_lastname,
+                      expression: "customer_lastname"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "customer_lastname",
+                    required: "",
+                    maxlength: "50"
+                  },
+                  domProps: { value: _vm.customer_lastname },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.customer_lastname = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors.customer_lastname, function(error, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: "err-lastname-" + index,
+                      staticClass: "error-message"
+                    },
+                    [_vm._v(_vm._s(error))]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "mb-3" },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "control-label",
+                    attrs: { for: "customer_address" }
+                  },
+                  [_vm._v("Indirizzo*")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.customer_address,
+                      expression: "customer_address"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "customer_address",
+                    type: "text",
+                    required: "",
+                    autocomplete: "address",
+                    maxlength: "50",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.customer_address },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.customer_address = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors.customer_address, function(error, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: "err-address-" + index,
+                      staticClass: "error-message"
+                    },
+                    [_vm._v(_vm._s(error))]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "mb-3" },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "control-label",
+                    attrs: { for: "phone_number" }
+                  },
+                  [_vm._v("Numero di telefono*")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.phone_number,
+                      expression: "phone_number"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "phone_number",
+                    type: "text",
+                    required: "",
+                    autocomplete: "phone_number",
+                    minlength: "10",
+                    maxlength: "10",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.phone_number },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.phone_number = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors.phone_number, function(error, index) {
+                  return _c(
+                    "div",
+                    { key: "err-phone-" + index, staticClass: "error-message" },
+                    [_vm._v(_vm._s(error))]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "card bg-light" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _vm._v("Payment Information")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _vm.nonce
+                  ? _c("div", { staticClass: "alert alert-success" }, [
+                      _vm._v(
+                        "\n                          Successfully generated nonce.\n                      "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-block",
+                attrs: { type: "submit" }
+              },
+              [
+                _vm._v(
+                  "\n                  Pay with Credit Card\n              "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _vm.error
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _vm._v(
+                    "\n                  " +
+                      _vm._s(_vm.error) +
+                      "\n              "
+                  )
+                ])
+              : _vm._e()
+          ]
+        )
       ])
     ])
   ])
