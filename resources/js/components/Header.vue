@@ -1,9 +1,17 @@
 <template>
     <header>
-        <router-link :to="{ name: 'home' }">Home</router-link>
-        <router-link :to="{ name: 'checkout' }">Cassa</router-link>
-        <router-link :to="{ name: 'payment' }">Pagamenti</router-link>
-        <a href="http://127.0.0.1:8000/admin" target="_blank">Admin</a>
+        <div class="container d-flex justify-content-between">
+            <div class="logo">
+                <h1 class="title">Deliveboo <i class="fas fa-ghost"></i></h1>
+            </div>
+
+            <div class="top-menu">
+                <router-link class="color" :to="{ name: 'home' }"><i class="fas fa-home">Home</i></router-link>
+                <router-link class="color" :to="{ name: 'checkout' }"><i class="fas fa-cart-plus">Cassa</i></router-link>
+                <a class="admin" href="http://127.0.0.1:8000/admin" target="_blank"><i class="fas fa-user-shield">Area Ristoratore</i></a>
+            </div>
+        </div>
+
     </header>
 </template>
 
@@ -14,7 +22,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .active{
-        color: red;
+@import '../../sass/app';
+    header {
+        padding: 20px !important;
+        height: 100px;
+        background-color: $brand-col;
     }
+
+    .title{
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 3px black;
+        
+    }
+    .top-menu {
+        font-size: 1rem;
+    }
+    .color {
+        color: $black;
+    }
+    .active{
+        color: $blue;
+    }
+    .admin {
+        color: $black;
+    }
+
 </style>

@@ -2,10 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "./pages/Home.vue";
 import Restaurant from "./pages/Restaurant.vue";
-import List from "./pages/List.vue";
 import CheckOut from "./pages/CheckOut.vue";
 import NotFound from "./pages/NotFound.vue";
-import Payment from "./pages/Payment.vue";
 
 Vue.use(VueRouter);
 
@@ -26,19 +24,9 @@ const router = new VueRouter({
             component: Restaurant
         },
         {
-            path: "/restaurants/:type",
-            name: "list",
-            component: List
-        },
-        {
             path: "/checkout/",
             name: "checkout",
             component: CheckOut
-        },
-        {
-            path: "/payment/",
-            name: "payment",
-            component: Payment
         },
         {
             path: "*",
