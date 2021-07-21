@@ -25528,11 +25528,7 @@ var render = function() {
                 staticClass: "btn btn-primary btn-block",
                 attrs: { type: "submit" }
               },
-              [
-                _vm._v(
-                  "\n                  Pay with Credit Card\n              "
-                )
-              ]
+              [_vm._v("\n                  Procedi all-ordine\n              ")]
             ),
             _vm._v(" "),
             _vm.error

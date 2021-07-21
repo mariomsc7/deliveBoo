@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">
-                    Pay with Credit Card
+                    Procedi all-ordine
                 </button>
                 <div class="alert alert-danger" v-if="error">
                     {{ error }}
