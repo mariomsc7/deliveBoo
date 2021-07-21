@@ -70,8 +70,16 @@ class RestaurantController extends Controller
         // Set type attribute
         foreach ($restaurants as $res){
             $temp = [];
-            foreach($res->types as $type){
-                $temp[] = $type->name;
+            foreach($setType as $item){
+                foreach($restaurants as $restaurant){
+                    foreach($restaurant->type as $type){
+                        if($type == $item){
+                            if(!in_array($restaurant, $temp)){
+                                $temp[] = $restaurant;
+                            }
+                        }
+                    }
+                }
             }
             $res['type'] = $temp;
         }

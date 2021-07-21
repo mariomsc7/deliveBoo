@@ -40,6 +40,9 @@ Route::prefix('admin')
 
         // ROUTE ORDERS
         Route::resource('/orders', 'OrderController');
+
+        //ROUTE CHARTS  
+        Route::resource('/charts', 'ChartController');
     });
 
 //FRONT OFFICE
