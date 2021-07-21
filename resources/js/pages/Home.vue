@@ -1,19 +1,23 @@
 <template>
-    <div>
+    <div class="container">
         
-        <h1>Home</h1>
+        <h1 class="text-center">Scegli il tipo di ristorante!</h1>
 
         <!-- Types Checkbox -->
+        <ul class="type-list d-flex justify-content-around">
             <li v-for="(type, index) in types" :key="`types-${index}`">
                 <input @change="filter" type="checkbox" :value="type" :id="type" v-model="checked">
                 <label for="checkbox">{{type}}</label>
+                <span class="checkmark"></span>
             </li>
+        </ul>
+
         
         <div v-if="types.length">
             <!-- Page Navigation -->
-            <section class="navigation">
+            <section class="navigation text-center mb-5">
                 <button @click="getRestaurants(pagination.current - 1)" :disabled ="!(pagination.current > 1)">Prev</button>
-                <button :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getRestaurants(i)">{{i}}</button>
+                <button class="btn-custom" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getRestaurants(i)">{{i}}</button>
             
                 <button @click="getRestaurants(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)">Next</button>
             </section>
@@ -125,11 +129,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../sass/app';
     .card{
         width: 400px;
         margin: 10px;
         padding: 20px;
-        background-color: rgb(134, 236, 202);
+        background-color: $brand-col;
         border-radius: 10px;
+    }
+
+    .type-list {
+        list-style-type: none;
     }
 </style>
