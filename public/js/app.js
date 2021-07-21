@@ -2109,6 +2109,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CheckOut',
@@ -23591,7 +23612,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nbody {\r\n    padding: 5px;\n}\r\n", ""]);
+exports.push([module.i, "\nbody {\n    padding: 5px;\n}\n", ""]);
 
 // exports
 
@@ -23610,7 +23631,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nbody {\r\n    padding: 5px;\n}\r\n", ""]);
+exports.push([module.i, "\nbody {\n    padding: 5px;\n}\n", ""]);
 
 // exports
 
@@ -25191,6 +25212,8 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "col-6 offset-3" }, [
+        _vm._m(0),
+        _vm._v(" "),
         _c("div", { staticClass: "card bg-light" }, [
           _c("div", { staticClass: "card-header" }, [
             _vm._v("Payment Information")
@@ -25205,7 +25228,7 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _vm._m(0)
+            _vm._m(1)
           ])
         ]),
         _vm._v(" "),
@@ -25233,6 +25256,106 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", [
+      _c("div", { staticClass: "mb-3" }, [
+        _c(
+          "label",
+          { staticClass: "control-table", attrs: { for: "customer_name" } },
+          [_vm._v("Nome*")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            name: "customer_name",
+            id: "customer_name",
+            value: "",
+            required: "",
+            maxlength: "50"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-3" }, [
+        _c(
+          "label",
+          { staticClass: "control-table", attrs: { for: "customer_lastname" } },
+          [_vm._v("Cognome*")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            name: "customer_name",
+            id: "customer_lastname",
+            value: "",
+            required: "",
+            maxlength: "50"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-3" }, [
+        _c(
+          "label",
+          { staticClass: "control-table", attrs: { for: "customer_address" } },
+          [_vm._v("Indirizzo*")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            id: "customer_address",
+            type: "text",
+            name: "customer_address",
+            value: "",
+            required: "",
+            autocomplete: "address",
+            maxlength: "50",
+            autofocus: ""
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-3" }, [
+        _c(
+          "label",
+          { staticClass: "control-table", attrs: { for: "phone_number" } },
+          [_vm._v("Numero di telefono*")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            id: "phone_number",
+            type: "number",
+            name: "vat_number",
+            value: "",
+            required: "",
+            autocomplete: "vat_number",
+            minlength: "11",
+            maxlength: "11",
+            autofocus: ""
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary  btn-block mb-3",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Sign in")]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -42114,8 +42237,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
