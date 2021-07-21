@@ -29,10 +29,10 @@
         /> -->
         <div class="col-6 offset-3">
             <div class="success-message" v-show="success">Il tuo ordine è stato inviato</div>
-            <form @submit.prevent="sendOrder">
+            <form @submit.prevent="payWithCreditCard">
                 <div class="mb-3">
                     <label for="customer_name" class="control-label">Nome*</label>
-                    <input type="text" class="form-control" id="customer_name" v-model="customer_name"  maxlength="50">
+                    <input type="text" class="form-control" id="customer_name" v-model="customer_name" required maxlength="50">
                     <div class="error-message" v-for="(error,index) in errors.customer_name" :key="`err-name-${index}`">{{error}}</div>
                 </div>
                 <div class="mb-3">
@@ -47,52 +47,49 @@
                 </div>
                 <div class="mb-3">
                     <label for="phone_number" class="control-label">Numero di telefono*</label>
-                    <input id="phone_number" type="text" class="form-control" v-model="phone_number" required autocomplete="phone_number"  maxlength="10" autofocus>
+                    <input id="phone_number" type="text" class="form-control" v-model="phone_number" required autocomplete="phone_number"  minlength="10" maxlength="10" autofocus>
                     <div class="error-message" v-for="(error,index) in errors.phone_number" :key="`err-phone-${index}`">{{error}}</div>
                 </div>
-                <button type="submit" class="btn btn-primary  btn-block mb-3" :disabled="sending">{{sending ? 'Sendig...' : 'Send'}}</button>
-            </form>
-            <div class="card bg-light">
-                <div class="card-header">Payment Information</div>
-                <div class="card-body">
-                    <div class="alert alert-success" v-if="nonce">
-                        Successfully generated nonce.
-                    </div>
-                    <form>
-                        <div class="form-group">
-                            <label>Credit Card Number</label>
-                            <div
-                                id="creditCardNumber"
-                                class="form-control"
-                            ></div>
+
+                <div class="card bg-light">
+                    <div class="card-header">Payment Information</div>
+                    <div class="card-body">
+                        <div class="alert alert-success" v-if="nonce">
+                            Successfully generated nonce.
                         </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-6">
-                                    <label>Expire Date</label>
-                                    <div
-                                        id="expireDate"
-                                        class="form-control"
-                                    ></div>
-                                </div>
-                                <div class="col-6">
-                                    <label>CVV</label>
-                                    <div id="cvv" class="form-control"></div>
+                        <form>
+                            <div class="form-group">
+                                <label>Credit Card Number</label>
+                                <div
+                                    id="creditCardNumber"
+                                    class="form-control"
+                                ></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Expire Date</label>
+                                        <div
+                                            id="expireDate"
+                                            class="form-control"
+                                        ></div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label>CVV</label>
+                                        <div id="cvv" class="form-control"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <button
-                class="btn btn-primary btn-block"
-                @click.prevent="payWithCreditCard"
-            >
-                Pay with Credit Card
-            </button>
-            <div class="alert alert-danger" v-if="error">
-                {{ error }}
-            </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    Pay with Credit Card
+                </button>
+                <div class="alert alert-danger" v-if="error">
+                    {{ error }}
+                </div>
+            </form>
             
 
         </div>
@@ -272,6 +269,7 @@ export default {
                     .then(payload => {
                         console.log(payload);
                         this.nonce = payload.nonce;
+                        this.sendOrder();
                     })
                     .catch(err => {
                         console.error(err);

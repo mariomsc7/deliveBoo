@@ -2132,9 +2132,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CheckOut',
@@ -2308,6 +2305,8 @@ __webpack_require__.r(__webpack_exports__);
         this.hostedFieldInstance.tokenize().then(function (payload) {
           console.log(payload);
           _this3.nonce = payload.nonce;
+
+          _this3.sendOrder();
         })["catch"](function (err) {
           console.error(err);
           _this3.error = err.message;
@@ -25277,7 +25276,7 @@ var render = function() {
             on: {
               submit: function($event) {
                 $event.preventDefault()
-                return _vm.sendOrder.apply(null, arguments)
+                return _vm.payWithCreditCard.apply(null, arguments)
               }
             }
           },
@@ -25305,7 +25304,12 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", id: "customer_name", maxlength: "50" },
+                  attrs: {
+                    type: "text",
+                    id: "customer_name",
+                    required: "",
+                    maxlength: "50"
+                  },
                   domProps: { value: _vm.customer_name },
                   on: {
                     input: function($event) {
@@ -25466,6 +25470,7 @@ var render = function() {
                     type: "text",
                     required: "",
                     autocomplete: "phone_number",
+                    minlength: "10",
                     maxlength: "10",
                     autofocus: ""
                   },
@@ -25491,54 +25496,48 @@ var render = function() {
               2
             ),
             _vm._v(" "),
+            _c("div", { staticClass: "card bg-light" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _vm._v("Payment Information")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _vm.nonce
+                  ? _c("div", { staticClass: "alert alert-success" }, [
+                      _vm._v(
+                        "\n                          Successfully generated nonce.\n                      "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ]),
+            _vm._v(" "),
             _c(
               "button",
               {
-                staticClass: "btn btn-primary  btn-block mb-3",
-                attrs: { type: "submit", disabled: _vm.sending }
+                staticClass: "btn btn-primary btn-block",
+                attrs: { type: "submit" }
               },
-              [_vm._v(_vm._s(_vm.sending ? "Sendig..." : "Send"))]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "card bg-light" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v("Payment Information")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm.nonce
-              ? _c("div", { staticClass: "alert alert-success" }, [
+              [
+                _vm._v(
+                  "\n                  Pay with Credit Card\n              "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _vm.error
+              ? _c("div", { staticClass: "alert alert-danger" }, [
                   _vm._v(
-                    "\n                      Successfully generated nonce.\n                  "
+                    "\n                  " +
+                      _vm._s(_vm.error) +
+                      "\n              "
                   )
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-block",
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                return _vm.payWithCreditCard.apply(null, arguments)
-              }
-            }
-          },
-          [_vm._v("\n              Pay with Credit Card\n          ")]
-        ),
-        _vm._v(" "),
-        _vm.error
-          ? _c("div", { staticClass: "alert alert-danger" }, [
-              _vm._v("\n              " + _vm._s(_vm.error) + "\n          ")
-            ])
-          : _vm._e()
+              : _vm._e()
+          ]
+        )
       ])
     ])
   ])
