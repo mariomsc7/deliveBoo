@@ -26,4 +26,7 @@ Route::namespace('Api')->group(function() {
 
     // Get Dishes
     Route::get('/restaurant/{id}', 'DishController@index');
+
+    // Get Orders data
+    Route::post('/orders', 'OrderController@store');
 });
