@@ -6,7 +6,7 @@
            <div class="footer-bottom">
                <div class="container d-flex justify-content-between">
                    <div>
-                       <h2>Scopri Deliveroo</h2>
+                       <h2>Scopri DeliveBoo</h2>
                         <ul>
                            <li> <a href="#">Investitori</a></li>
                            <li> <a href="#">Chi Siamo</a></li>
@@ -29,7 +29,7 @@
                         </ul>
                    </div>
                    <div>
-                        <h2>Porta Deliveroo con te</h2>
+                        <h2>Porta DeliveBoo con te</h2>
                         <ul>
                             <li><a href="#"></a></li>
                             <li><a href="#" > <img class="link-img" src="../../../public/image/apple.png" alt="App Store"> </a></li>
@@ -54,20 +54,20 @@ export default {
 <style lang="scss" scoped>
 @import '../../sass/app';
     footer{
-        .footer-bottom{
+        .footer-bottom {
             width: 100%;
             padding: 20px;
             background-color:#273036;
             color:white;
-            ul{
+            ul {
                 padding:0;
                 list-style:none;
-                a{
+                a {
                     color:white;
                 }
-                .link-img{
-                        margin-bottom: 5px;
-                        display:block;
+                .link-img {
+                        margin-top: 20px;
+                        display: block;
                         width: 150px;
                 }
             }
