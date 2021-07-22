@@ -18,23 +18,6 @@ class ChartController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $restaurant = Restaurant::find($user->restaurant->id)->first();
-        //$charts = Order::where('restaurant_id', $restaurant->id)->get();
-        //dd($charts);
-        // Get users grouped by age
-        $groups = Order::where('restaurant_id', $restaurant->id)
-                  ->select('created_at', Order::raw('count(*) as total'))
-                  ->groupBy('created_at')
-                  ->pluck('total', 'created_at')->all();
-        //dd($groups);
-
-        // Prepare the data for returning with the view
-        $chart = new Chart;
-            $chart->labels = (array_keys($groups));
-            $chart->dataset = (array_values($groups));
-            dd($chart);
-            return view('admin.charts.index', compact('chart',));
         
     }
 
@@ -65,9 +48,26 @@ class ChartController extends Controller
      * @param  \App\Chart  $chart
      * @return \Illuminate\Http\Response
      */
-    public function show(Chart $chart)
+    public function show($id)
     {
-        //
+        $user = Auth::user();
+        $restaurant = Restaurant::find($id);
+        if (!$restaurant) {
+            abort(404);
+        } elseif (Auth::user()->restaurant->id != $restaurant->id) {
+            abort(403);
+        }
+        // Get orders grouped by month
+        $groups = Order::where('restaurant_id', $restaurant->id)
+                  ->selectRaw('MONTH(created_at) as month, count(*) as total')
+                  ->groupBy('month')
+                  ->pluck('total', 'month')->all();
+
+        // Prepare the data for returning with the view
+        $chart = new Chart;
+            $chart->labels = (array_keys($groups));
+            $chart->dataset = (array_values($groups));
+            return view('admin.charts.index', compact('chart'));
     }
 
     /**

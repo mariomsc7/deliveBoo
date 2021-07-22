@@ -22,6 +22,7 @@
             <div class="col-6 offset-3">
                 <div class="success-message" v-show="success">Il tuo ordine è stato inviato</div>
                 <form @submit.prevent="payWithCreditCard">
+
                     <div class="mb-3">
                         <label for="customer_name" class="control-label">Nome*</label>
                         <input type="text" class="form-control" id="customer_name" v-model="customer_name" required maxlength="50">
@@ -42,7 +43,6 @@
                         <input id="phone_number" type="text" class="form-control" v-model="phone_number" required autocomplete="phone_number"  minlength="10" maxlength="10" autofocus>
                         <div class="error-message" v-for="(error,index) in errors.phone_number" :key="`err-phone-${index}`">{{error}}</div>
                     </div>
-
                     <div class="card bg-light">
                         <div class="card-header">Payment Information</div>
                         <div class="card-body">

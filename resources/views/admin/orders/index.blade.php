@@ -11,6 +11,7 @@
         @endif
         <h1>Order History</h1>
         <a class="btn btn-primary text-uppercase" href="{{route('admin.restaurants.show', $restaurant->id)}}">Back to Restaurant Info</a>
+        <a class="btn btn-success text-uppercase" href="{{route('admin.charts.show', $restaurant->id)}}">Show orders chart</a>
         <table class="table mt-5">
             <thead>
                 <tr>
