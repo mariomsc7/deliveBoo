@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 v-if="dishes.length">{{dishes[0].restaurant.name}} Menù</h1>
+        <h1 class="text-center" v-if="dishes.length">{{dishes[0].restaurant.name}} Menù</h1>
 
             <div class="cont">
                 <div>
