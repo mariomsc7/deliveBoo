@@ -1,10 +1,8 @@
 <template>
     <footer>
        
-        
-           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#273036" fill-opacity="1" d="M0,192L80,165.3C160,139,320,85,480,69.3C640,53,800,75,960,122.7C1120,171,1280,245,1360,282.7L1440,320L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
-           </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#273036" fill-opacity="1" d="M0,288L60,288C120,288,240,288,360,266.7C480,245,600,203,720,208C840,213,960,267,1080,266.7C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+      
            <div class="footer-bottom">
                <div class="container d-flex justify-content-between">
                    <div>
@@ -34,8 +32,8 @@
                         <h2>Porta Deliveroo con te</h2>
                         <ul>
                             <li><a href="#"></a></li>
-                            <li><a href="#" > <img class="link-img" src="../../../public/image/app_store.png" alt="App Store"> </a></li>
-                            <li><a href="#" ><img class="link-img" src="../../../public/image/gplay.png" alt="Google Play"></a></li>
+                            <li><a href="#" > <img class="link-img" src="../../../public/image/apple.png" alt="App Store"> </a></li>
+                            <li><a href="#" ><img class="link-img" src="../../../public/image/android.png" alt="Google Play"></a></li>
                         </ul>
                    </div>
                 
@@ -58,7 +56,7 @@ export default {
     footer{
         .footer-bottom{
             width: 100%;
-            height:500px;
+            padding: 20px;
             background-color:#273036;
             color:white;
             ul{
@@ -70,7 +68,7 @@ export default {
                 .link-img{
                         margin-bottom: 5px;
                         display:block;
-                        width:150px;
+                        width: 150px;
                 }
             }
         }
