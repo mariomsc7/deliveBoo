@@ -30,7 +30,7 @@ const router = new VueRouter({
             component: CheckOut
         },
         {
-            path: "/aboutus/",
+            path: "/chisiamo/",
             name: "aboutus",
             component: AboutUs
         },

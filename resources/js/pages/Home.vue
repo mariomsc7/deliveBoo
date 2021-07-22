@@ -5,15 +5,14 @@
             
             <h1 class="text-center">Scegli il tipo di ristorante!</h1>
             <!-- Types Checkbox -->
-            <ul class="type-list d-flex justify-content-around">
-                <li  class="box-card" v-for="(type, index) in types" :key="`types-${index}`">
-                    <label for="checkbox">
+            <div class="type-list d-flex justify-content-around">
+                <div class="chek-wrap" v-for="(type, index) in types" :key="`types-${index}`">
                     <input @change="filter" type="checkbox" :value="type" :id="type" v-model="checked">
+                    <label class="box-card" :for="type">
                     {{type}}</label>
-                    <span class="checkmark"></span>
-                </li>
-            </ul>
-            
+                </div>
+            </div>
+        
             <div v-if="types.length">
                 <!-- Page Navigation -->
                 <section class="navigation text-center mb-5">
@@ -152,7 +151,21 @@ export default {
         list-style-type: none;
         flex-wrap: wrap;
     }
+    .chek-wrap{
+        position: relative;
+
+        input{
+            opacity: 0;
+            position: absolute;
+
+            &:checked + .box-card{
+                background-color:#fd4800;
+            }
+
+        }
+    }
     .box-card{
+        position: relative;
         width:250px;
         height:50px;
         border-radius: 50px;
@@ -161,7 +174,9 @@ export default {
         display:flex;
         justify-content:center;
         align-items: center;
+        font-size: 1.5em;
         box-shadow: 5px 10px #888888;
+        cursor: pointer;
     }
 
     .page-btn{
