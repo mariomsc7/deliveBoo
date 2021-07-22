@@ -28,6 +28,7 @@ export default {
         height: 100px;
         background-color: $brand-col;
     }
+    
 
     .title{
         font-size: 2.5rem;
@@ -36,16 +37,26 @@ export default {
         
     }
     .top-menu {
-        font-size: 1rem;
+        font-size: 1rem;    
     }
+
     .color {
         color: $black;
     }
+
+    .color {
+        &:hover {
+            color: #fff;
+        }
+    }
     .active{
-        color: $blue;
+        color: #fff;
     }
     .admin {
         color: $black;
+        &:hover {
+            color: #fff;
+        }
     }
 
 </style>
