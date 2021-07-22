@@ -23725,7 +23725,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.error-message {\n    color: red;\n}\n.success-message {\n    color: green;\n}\n.page-btn{\n        width: 70px;\n        height:30px;\n        border-radius: 50px;\n        background-color:#92d913;\n        margin:20px ;\n        box-shadow: 5px 5px #888888;\n}\n", ""]);
+exports.push([module.i, "\n.error-message {\r\n    color: red;\n}\n.success-message {\r\n    color: green;\n}\n.page-btn{\r\n        width: 70px;\r\n        height:30px;\r\n        border-radius: 50px;\r\n        background-color:#92d913;\r\n        margin:20px ;\r\n        box-shadow: 5px 5px #888888;\n}\r\n", ""]);
 
 // exports
 
@@ -42987,8 +42987,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
