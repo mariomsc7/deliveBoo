@@ -6,9 +6,10 @@
             <h1 class="text-center">Scegli il tipo di ristorante!</h1>
             <!-- Types Checkbox -->
             <ul class="type-list d-flex justify-content-around">
-                <li v-for="(type, index) in types" :key="`types-${index}`">
+                <li  class="box-card" v-for="(type, index) in types" :key="`types-${index}`">
+                    <label for="checkbox">
                     <input @change="filter" type="checkbox" :value="type" :id="type" v-model="checked">
-                    <label for="checkbox">{{type}}</label>
+                    {{type}}</label>
                     <span class="checkmark"></span>
                 </li>
             </ul>
@@ -16,10 +17,10 @@
             <div v-if="types.length">
                 <!-- Page Navigation -->
                 <section class="navigation text-center mb-5">
-                    <button @click="getRestaurants(pagination.current - 1)" :disabled ="!(pagination.current > 1)">Prev</button>
-                    <button class="btn-custom" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getRestaurants(i)">{{i}}</button>
+                    <button class="page-btn" @click="getRestaurants(pagination.current - 1)" :disabled ="!(pagination.current > 1)"><i class="fas fa-caret-left"></i></button>
+                    <button class="page-btn" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getRestaurants(i)">{{i}}</button>
         
-                    <button @click="getRestaurants(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)">Next</button>
+                    <button class="page-btn" @click="getRestaurants(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)"><i class="fas fa-caret-right"></i></button>
                 </section>
                 <div>
                         <!-- Restaurants List -->
@@ -149,6 +150,31 @@ export default {
 
     .type-list {
         list-style-type: none;
+        flex-wrap: wrap;
+    }
+    .box-card{
+        width:250px;
+        height:50px;
+        border-radius: 50px;
+        background-color:#92d913;
+        margin:20px ;
+        display:flex;
+        justify-content:center;
+        align-items: center;
+        box-shadow: 5px 10px #888888;
+    }
+
+    .page-btn{
+        width: 100px;
+        height:50px;
+        border-radius: 50px;
+        background-color:#92d913;
+        margin:20px ;
+        box-shadow: 5px 5px #888888;
+    }
+
+    .active-page{
+            background-color:#13d9c9;
     }
 
     .test {
