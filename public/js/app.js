@@ -25154,7 +25154,7 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("div", [
-          _c("h2", [_vm._v("Porta DeliveBoo con te")]),
+          _c("h2", [_vm._v("Scarica l'app di DeliveBoo!")]),
           _vm._v(" "),
           _c("ul", [
             _c("li", [_c("a", { attrs: { href: "#" } })]),

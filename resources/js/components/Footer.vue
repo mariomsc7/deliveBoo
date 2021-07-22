@@ -29,7 +29,7 @@
                         </ul>
                    </div>
                    <div>
-                        <h2>Porta DeliveBoo con te</h2>
+                        <h2>Scarica l'app di DeliveBoo!</h2>
                         <ul>
                             <li><a href="#"></a></li>
                             <li><a href="#" > <img class="link-img" src="../../../public/image/apple.png" alt="App Store"> </a></li>
