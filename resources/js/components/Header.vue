@@ -41,21 +41,21 @@ export default {
     }
 
     .color {
-        color: $black;
+        color: #fff;
     }
 
     .color {
         &:hover {
-            color: #fff;
+            color: #273936;
         }
     }
     .active{
-        color: #fff;
+        color: #273936;
     }
     .admin {
-        color: $black;
+        color: #fff;
         &:hover {
-            color: #fff;
+            color: #273936;
         }
     }
 

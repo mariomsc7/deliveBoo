@@ -71,6 +71,7 @@ export default {
         max-width: 500px;
         text-align: center;
         align-self: flex-start;
+        color: #fff;
     }
 
 </style>
