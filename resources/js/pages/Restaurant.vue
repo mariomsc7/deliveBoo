@@ -45,7 +45,7 @@
                     <router-link :to="{name: 'checkout'}">Cassa</router-link>
                     
                     <!-- Delete Button -->
-                    <button @click="deleteCart()">Elimina Carrello</button>
+                    <button v-if="Object.keys(cart).length" @click="deleteCart()">Elimina Carrello</button>
                 </div>
                 
             </div>
