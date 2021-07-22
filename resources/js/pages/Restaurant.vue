@@ -1,14 +1,14 @@
 <template>
     <div>
-        <h1 v-if="dishes.length">{{dishes[0].restaurant.name}} Menù</h1>
+        <h1 class="text-center" v-if="dishes.length">{{dishes[0].restaurant.name}} Menù</h1>
 
             <div class="cont">
                 <div>
                     <!-- Page Navigation    -->
                     <section class="navigation">
-                        <button @click="getDishes(pagination.current - 1)" :disabled ="!(pagination.current > 1)">Prev</button>
-                        <button :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getDishes(i)">{{i}}</button>
-                        <button @click="getDishes(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)">Next</button>
+                        <button class="page-btn" @click="getDishes(pagination.current - 1)" :disabled ="!(pagination.current > 1)">Prev</button>
+                        <button class="page-btn" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getDishes(i)">{{i}}</button>
+                        <button class="page-btn" @click="getDishes(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)">Next</button>
                     </section>
 
                     <!-- Dish -->
@@ -27,12 +27,12 @@
                     <!-- Products -->
                     <div v-if="Object.keys(cart).length" >
                         <div v-for="(item, index) in cart" :key="index">
-                            <button  @click="remove(item.name, item.unitPrice)">-</button>
+                            <button class="page-btn" @click="remove(item.name, item.unitPrice)"><i class="fas fa-minus"></i></button>
                             <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unitPrice)">
-                            <button @click="add(item.name, item.unitPrice)">+</button>
+                            <button class="page-btn" @click="add(item.name, item.unitPrice)"><i class="fas fa-plus"></i></button>
                             <span class="name">{{item.name}}</span>
                             <span>€ {{item.prezzo.toFixed(2)}}</span> 
-                            <span class="remove" @click="removeAll(item.name, item.prezzo)">X</span>
+                            <span class="remove" @click="removeAll(item.name, item.prezzo)"><i class="fas fa-times"></i></span>
                         </div>
                     </div>
 
@@ -45,7 +45,7 @@
                     <router-link :to="{name: 'checkout'}">Cassa</router-link>
                     
                     <!-- Delete Button -->
-                    <button v-if="Object.keys(cart).length" @click="deleteCart()">Elimina Carrello</button>
+                    <button class="page-btn" v-if="Object.keys(cart).length" @click="deleteCart()">Elimina</button>
                 </div>
                 
             </div>
@@ -287,5 +287,16 @@ export default {
         .name{
             margin: 0 10px;
         }
+    }
+    .page-btn{
+        width: 70px;
+        height:30px;
+        border-radius: 50px;
+        background-color:#92d913;
+        margin:20px ;
+        box-shadow: 5px 5px #888888;
+    }
+     .active-page{
+            background-color:#13d9c9;
     }
 </style>
