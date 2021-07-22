@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="cards col-md-4" v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
                             <div class="test">
-                                <router-link class="text-decoration-none" :to="{name: 'restaurant', params: {id:restaurant.id}}">
+                                <router-link class="text-decoration-none" :to="{name: 'restaurant', params: {slug:restaurant.slug}}">
                                     <img class="img-fluid" v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name"/>
                                     <h2>{{ restaurant.name }}</h2>
                                     <div>{{ restaurant.address }}</div>
