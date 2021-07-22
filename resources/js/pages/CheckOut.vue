@@ -1,21 +1,21 @@
 <template>
     <div>
-        <h1>Cassa</h1>
-        <div class="cart">
+        <div class="cart container text-center">
+            <h1>Cassa</h1>
             <h2>Il tuo Carrello</h2>
             <div v-if="Object.keys(cart).length" >
                 <div v-for="(item, index) in cart" :key="index">                
-                    <button  @click="remove(item.name, item.unitPrice)">-</button>
+                    <button class="page-btn" @click="remove(item.name, item.unitPrice)">-</button>
                     <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unitPrice)">
-                    <button @click="add(item.name, item.unitPrice)">+</button>
+                    <button class="page-btn" @click="add(item.name, item.unitPrice)">+</button>
                     <span class="name">{{item.name}}</span>
                     <span>€ {{item.prezzo.toFixed(2)}}</span> 
-                    <span class="remove" @click="removeAll(item.name, item.prezzo)">X</span>
+                    <span class="remove" @click="removeAll(item.name, item.prezzo)"><i class="fas fa-times"></i></span>
                 </div>
             </div>
             <div v-else>Il carrello è vuoto</div>
             <h3>Tot: €{{tot.toFixed(2)}}</h3>
-            <button v-if="Object.keys(cart).length" @click="deleteCart()">Elimina Carrello</button>
+            <button class="page-btn" v-if="Object.keys(cart).length" @click="deleteCart()">Elimina</button>
         </div>
         <div v-if="Object.keys(cart).length" class="container">
 
@@ -274,4 +274,12 @@ export default {
 .success-message {
     color: green;
 }
+.page-btn{
+        width: 70px;
+        height:30px;
+        border-radius: 50px;
+        background-color:#92d913;
+        margin:20px ;
+        box-shadow: 5px 5px #888888;
+    }
 </style>
