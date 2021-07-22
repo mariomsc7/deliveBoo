@@ -26,7 +26,7 @@ export default {
     header {
         padding: 20px !important;
         height: 100px;
-        background-color: #13d977;
+        background-color: $brand-col;
     }
     
 

@@ -33,7 +33,7 @@ export default {
 <style lang="scss">
 @import '../../sass/app';
     .hero {
-        background: #13d977;
+        background: $brand-col;
         height: 300px;
     }
     .container{
