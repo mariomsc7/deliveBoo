@@ -2090,6 +2090,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Header"
 });
@@ -25218,7 +25220,26 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("header", [
     _c("div", { staticClass: "container d-flex justify-content-between" }, [
-      _vm._m(0),
+      _c(
+        "div",
+        { staticClass: "logo" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "text-decoration-none",
+              attrs: { to: { name: "home" } }
+            },
+            [
+              _c("h1", { staticClass: "title" }, [
+                _vm._v("Deliveboo "),
+                _c("i", { staticClass: "fas fa-ghost" })
+              ])
+            ]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "div",
@@ -25236,7 +25257,7 @@ var render = function() {
             [_c("i", { staticClass: "fas fa-cart-plus" }, [_vm._v("Cassa")])]
           ),
           _vm._v(" "),
-          _vm._m(1)
+          _vm._m(0)
         ],
         1
       )
@@ -25244,17 +25265,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "logo" }, [
-      _c("h1", { staticClass: "title" }, [
-        _vm._v("Deliveboo "),
-        _c("i", { staticClass: "fas fa-ghost" })
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
