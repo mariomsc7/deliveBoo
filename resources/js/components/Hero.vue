@@ -2,16 +2,7 @@
   <div>
     <section class="hero">
         <div class="container d-flex justify-content-around align-items-center">
-            <div class="animation" data-v-1eea8358="" data-v-06a4e336="" data-v-342286ac="">
-                <div data-test-id="animation-images" class="animation__images" style="display: none;" data-v-1eea8358="">
-                    <img src="https://res.cloudinary.com/glovoapp/image/fetch//f_auto,q_auto/https://glovoapp.com/images/landing/address-container-image-burger.png" class="animation__images__img" data-v-1eea8358="">
-                </div>
-                <div class="animation__videos" data-v-1eea8358="">
-                    <video data-test-id="animation-video" autoplay="autoplay" loop="loop" muted="muted" class="animation__videos__video" data-v-1eea8358="">
-                        <source src="https://res.cloudinary.com/glovoapp//video/upload//website_assets/images/landing/address-container-animation.webm" preload="auto" type="video/webm" data-v-1eea8358="">
-                    </video>
-                </div>
-            </div>
+            <img class="hamburger-gif" src="../../../public/image/hamburger.gif" alt="">
             <h1 class="title">Consegnamo il tuo cibo preferito a casa tua!</h1>
             <img class="rider" src="../../../public/image/rider_deliveboo.png" alt="">
         </div>
@@ -35,10 +26,14 @@ export default {
     .hero {
         background: $brand-col;
         height: 300px;
+        padding-top: 40px;
     }
     .container{
         position: relative;
     }
+    .hamburger-gif {
+        width: 300px;
+    }    
     .rider{
         position: absolute;
         bottom: -160px;
@@ -52,7 +47,7 @@ export default {
         }
         50%{
             transform: rotateY(0);
-            right: 540px;
+            right: 440px;
         }
         51%{
             transform: rotateY(180deg);
