@@ -1,7 +1,7 @@
 <template>
   <div class="details">
     <div class="details-box">
-      <span class="close" @click="$emit('close')">X</span>
+      <span class="close" @click="$emit('close')"><i class="fas fa-times"></i></span>
       <h1>{{dishDetails.name}}</h1>
       <h3>{{dishDetails.ingredients}}</h3>
       <h3>{{dishDetails.description}}</h3>
