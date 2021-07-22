@@ -8,7 +8,6 @@ use App\Chart;
 use Illuminate\Http\Request;
 use App\Restaurant;
 use App\Order;
-use Illuminate\Support\Facades\DB;
 
 class ChartController extends Controller
 {
@@ -19,24 +18,6 @@ class ChartController extends Controller
      */
     public function index()
     {
-        // $user = Auth::user();
-        // dd($user);
-        // $restaurant = Restaurant::find($user->restaurant->id)->first();
-        // // $charts = Order::selectRaw('MONTH(created_at) as month')->where('restaurant_id', $restaurant->id)->get();
-        // // dd($charts);
-        // // Get users grouped by age
-        // $groups = Order::where('restaurant_id', $restaurant->id)
-        //           ->selectRaw('MONTH(created_at) as month, count(*) as total')
-        //           ->groupBy('month')
-        //           ->pluck('total', 'month')->all();
-        // // dd($groups);
-
-        // // Prepare the data for returning with the view
-        // $chart = new Chart;
-        //     $chart->labels = (array_keys($groups));
-        //     $chart->dataset = (array_values($groups));
-        //     // dd($chart);
-        //     return view('admin.charts.index', compact('chart'));
         
     }
 
@@ -69,7 +50,6 @@ class ChartController extends Controller
      */
     public function show($id)
     {
-        // dd($id);
         $user = Auth::user();
         $restaurant = Restaurant::find($id);
         if (!$restaurant) {
@@ -77,21 +57,16 @@ class ChartController extends Controller
         } elseif (Auth::user()->restaurant->id != $restaurant->id) {
             abort(403);
         }
-        // dd($restaurant);
-        // $charts = Order::selectRaw('MONTH(created_at) as month')->where('restaurant_id', $restaurant->id)->get();
-        // dd($charts);
-        // Get users grouped by age
+        // Get orders grouped by month
         $groups = Order::where('restaurant_id', $restaurant->id)
                   ->selectRaw('MONTH(created_at) as month, count(*) as total')
                   ->groupBy('month')
                   ->pluck('total', 'month')->all();
-        // dd($groups);
 
         // Prepare the data for returning with the view
         $chart = new Chart;
             $chart->labels = (array_keys($groups));
             $chart->dataset = (array_values($groups));
-            // dd($chart);
             return view('admin.charts.index', compact('chart'));
     }
 
