@@ -10,6 +10,7 @@
             <div class="top-menu">
                 <router-link class="color" :to="{ name: 'home' }"><i class="fas fa-home">Home</i></router-link>
                 <router-link class="color" :to="{ name: 'checkout' }"><i class="fas fa-cart-plus">Cassa</i></router-link>
+                <router-link class="color" :to="{ name: 'aboutus' }"><i class="fas fa-cart-plus">Chi Siamo</i></router-link>
                 <a class="admin" href="http://127.0.0.1:8000/admin" target="_blank"><i class="fas fa-user-shield">Area Ristoratore</i></a>
             </div>
         </div>
