@@ -22,6 +22,7 @@
             <div class="col-6 offset-3">
                 <div class="success-message" v-show="success">Il tuo ordine è stato inviato</div>
                 <form @submit.prevent="payWithCreditCard">
+
                     <div class="mb-3">
                         <label for="customer_name" class="control-label">Nome*</label>
                         <input type="text" class="form-control" id="customer_name" v-model="customer_name" required maxlength="50">
@@ -42,16 +43,15 @@
                         <input id="phone_number" type="text" class="form-control" v-model="phone_number" required autocomplete="phone_number"  minlength="10" maxlength="10" autofocus>
                         <div class="error-message" v-for="(error,index) in errors.phone_number" :key="`err-phone-${index}`">{{error}}</div>
                     </div>
-
                     <div class="card bg-light">
-                        <div class="card-header">Payment Information</div>
+                        <div class="card-header">Informazioni di Pagamneto</div>
                         <div class="card-body">
                             <div class="alert alert-success" v-if="nonce">
                                 Successfully generated nonce.
                             </div>
                             <form>
                                 <div class="form-group">
-                                    <label>Credit Card Number</label>
+                                    <label>Numero Carta</label>
                                     <div
                                         id="creditCardNumber"
                                         class="form-control"
@@ -60,7 +60,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-6">
-                                            <label>Expire Date</label>
+                                            <label>Data Scadenza</label>
                                             <div
                                                 id="expireDate"
                                                 class="form-control"
@@ -99,7 +99,7 @@ export default {
         success: false,
         sending: false,
         tot: 0,
-        cart: [],
+        cart: {},
         hostedFieldInstance: false,
         nonce: "",
         error: "",
@@ -172,6 +172,10 @@ export default {
 
                     this.errors = {};
                     this.success = true;
+
+                    this.cart = {};
+                    this.tot = 0; 
+                    window.localStorage.clear();
                 }
             })
             .catch(err => {
