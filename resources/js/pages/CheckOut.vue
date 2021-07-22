@@ -162,9 +162,12 @@ export default {
             .then(res => {
                 this.sendig = false;
                 if(res.data.error){
+                    console.log(res.data.error);
                     this.errors = res.data.error;
                     this.success = false;
                 } else {
+                    console.log(res.data);
+
                     this.customer_name = '';
                     this.customer_lastname = '';
                     this.customer_address = '';

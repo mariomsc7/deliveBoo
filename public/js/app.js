@@ -2412,9 +2412,11 @@ __webpack_require__.r(__webpack_exports__);
         _this2.sendig = false;
 
         if (res.data.error) {
+          console.log(res.data.error);
           _this2.errors = res.data.error;
           _this2.success = false;
         } else {
+          console.log(res.data);
           _this2.customer_name = '';
           _this2.customer_lastname = '';
           _this2.customer_address = '';
@@ -2787,7 +2789,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get("http://127.0.0.1:8000/api/restaurant/".concat(this.$route.params.id, "?page=").concat(page)).then(function (res) {
+      axios.get("http://127.0.0.1:8000/api/restaurant/".concat(this.$route.params.slug, "?page=").concat(page)).then(function (res) {
         _this.dishes = res.data.data;
         _this.pagination = {
           current: res.data.current_page,
@@ -26306,7 +26308,7 @@ var render = function() {
                           attrs: {
                             to: {
                               name: "restaurant",
-                              params: { id: restaurant.id }
+                              params: { slug: restaurant.slug }
                             }
                           }
                         },
@@ -42932,7 +42934,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: "home",
     component: _pages_Home_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
-    path: "/restaurant/:id",
+    path: "/restaurant/:slug",
     name: "restaurant",
     component: _pages_Restaurant_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {

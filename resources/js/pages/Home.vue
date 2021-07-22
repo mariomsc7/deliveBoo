@@ -25,7 +25,7 @@
                 <!-- Restaurants List -->
                 <div class="d-flex">
                     <article class="card" v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
-                        <router-link :to="{name: 'restaurant', params: {id:restaurant.id}}">
+                        <router-link :to="{name: 'restaurant', params: {slug:restaurant.slug}}">
                         <h2>{{ restaurant.name }}</h2>
                         <div>{{ restaurant.address }}</div>
                         <div>

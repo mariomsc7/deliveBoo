@@ -9,6 +9,7 @@ use App\Restaurant;
 use App\Type;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class RestaurantController extends Controller
 {
@@ -71,6 +72,9 @@ class RestaurantController extends Controller
         if(array_key_exists('image', $data)){
             $data['image'] = Storage::put('restaurants-images', $data['image']);
         };
+
+        // Slug
+        $data['slug'] = Str::slug($data['name'], '-');
 
         $new_restaurant = new Restaurant();
         $new_restaurant->fill($data);
@@ -161,6 +165,11 @@ class RestaurantController extends Controller
             }
             // set new one
             $data['image'] = Storage::put('restaurants-images', $data['image']);
+        }
+        
+                //Slug
+        if($data['name'] != $restaurant->name){
+            $data['slug'] = Str::slug($data['name'], '-');
         }
 
         $restaurant->update($data);

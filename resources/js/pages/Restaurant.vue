@@ -83,7 +83,7 @@ export default {
          */
         getDishes(page = 1) {
             axios
-                .get(`http://127.0.0.1:8000/api/restaurant/${this.$route.params.id}?page=${page}`)
+                .get(`http://127.0.0.1:8000/api/restaurant/${this.$route.params.slug}?page=${page}`)
                 .then(res => {
                     this.dishes = res.data.data;
                     this.pagination = {
