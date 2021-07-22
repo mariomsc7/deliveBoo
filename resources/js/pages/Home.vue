@@ -2,7 +2,7 @@
     <div>
         <Hero />
         <div class="container">
-        
+            
             <h1 class="text-center">Scegli il tipo di ristorante!</h1>
             <!-- Types Checkbox -->
             <ul class="type-list d-flex justify-content-around">
@@ -12,7 +12,7 @@
                     <span class="checkmark"></span>
                 </li>
             </ul>
-        
+            
             <div v-if="types.length">
                 <!-- Page Navigation -->
                 <section class="navigation text-center mb-5">
@@ -21,22 +21,27 @@
         
                     <button @click="getRestaurants(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)">Next</button>
                 </section>
-        
-                <!-- Restaurants List -->
-                <div class="d-flex">
-                    <article class="card" v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
-                        <router-link :to="{name: 'restaurant', params: {id:restaurant.id}}">
-                        <h2>{{ restaurant.name }}</h2>
-                        <div>{{ restaurant.address }}</div>
-                        <div>
-                            <span v-for="(type, index) in restaurant.type" :key="`type-${index}`">
-                                {{ type }}
-                            </span>
+                <div>
+                        <!-- Restaurants List -->
+                    <div class="row">
+                        <div class="cards col-md-4" v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
+                            <div class="test">
+                                <router-link class="text-decoration-none" :to="{name: 'restaurant', params: {id:restaurant.id}}">
+                                    <img class="img-fluid" v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name"/>
+                                    <h2>{{ restaurant.name }}</h2>
+                                    <div>{{ restaurant.address }}</div>
+                                    <div>
+                                        <span v-for="(type, index) in restaurant.type" :key="`type-${index}`">
+                                            {{ type }}
+                                        </span>
+                                    </div>
+                                </router-link>
+                            </div>
+
                         </div>
-                        <img class="img-fluid" v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name"/>
-                        </router-link>
-                    </article>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -136,15 +141,90 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../sass/app';
-    .card{
-        width: 400px;
-        margin: 10px;
-        padding: 20px;
-        background-color: $brand-col;
+    .cards {
+
         border-radius: 10px;
+        color: #fff;
     }
 
     .type-list {
         list-style-type: none;
+    }
+
+    .test {
+        //border: 1px solid #000;
+        --card-gradient: rgba(0, 0, 0, 0.65);
+        background-color: #fff;
+        border-radius: 0.5rem;
+        box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem rgba(0, 0, 0, 0.45);
+        padding-bottom: 1rem;
+        background-image: linear-gradient(
+            var(--card-gradient),
+            white max(9.5rem, 27vh)
+        );
+        overflow: hidden;
+        transition: 2s;
+        
+
+        img {
+            border-radius: 0.5rem 0.5rem 0 0;
+            width: 100%;
+            object-fit: cover;
+            // height: max(10rem, 25vh);
+            max-height: max(10rem, 30vh);
+            aspect-ratio: 4/3;
+            mix-blend-mode: overlay;
+            
+            // filter: grayscale(100);
+
+            ~ * {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+ 
+        &:hover {
+            mix-blend-mode: normal;
+        }
+    }
+
+
+    // .card {
+        // --card-gradient: rgba(0, 0, 0, 0.8);
+        // --card-blend-mode: overlay;
+        // background-color: #fff;
+        // border-radius: 0.5rem;
+        // box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem rgba(0, 0, 0, 0.45);
+        // padding-bottom: 1rem;
+        // background-image: linear-gradient(
+        //     var(--card-gradient),
+        //     white max(9.5rem, 27vh)
+        // );
+        // overflow: hidden;
+
+        // img {
+        //         border-radius: 0.5rem 0.5rem 0 0;
+        //         width: 100%;
+        //         object-fit: cover;
+        //         // height: max(10rem, 25vh);
+        //         max-height: max(10rem, 30vh);
+        //         aspect-ratio: 4/3;
+        //         mix-blend-mode: var(--card-blend-mode);
+        //         // filter: grayscale(100);
+
+        //         ~ * {
+        //         margin-left: 1rem;
+        //         margin-right: 1rem;
+        //     }
+    // }
+
+    // > :last-child {
+    //     margin-bottom: 0;
+    // }
+
+    //     &:hover,
+    //     &:focus-within {
+    //         --card-gradient: #e5eef1 max(8.5rem, 20vh);
+    //     }
+    
     }
 </style>
