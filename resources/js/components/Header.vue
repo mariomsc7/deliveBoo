@@ -2,7 +2,9 @@
     <header>
         <div class="container d-flex justify-content-between">
             <div class="logo">
-                <h1 class="title">Deliveboo <i class="fas fa-ghost"></i></h1>
+                <router-link class="text-decoration-none" :to="{ name: 'home' }">
+                    <h1 class="title">Deliveboo <i class="fas fa-ghost"></i></h1>
+                </router-link>
             </div>
 
             <div class="top-menu">
@@ -28,7 +30,6 @@ export default {
         height: 100px;
         background-color: $brand-col;
     }
-    
 
     .title{
         font-size: 2.5rem;
