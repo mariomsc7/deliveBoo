@@ -58,7 +58,8 @@ export default {
     footer{
         .footer-bottom{
             width: 100%;
-            height:500px;
+            // height:500px;
+            padding-bottom: 100px;
             background-color:#273036;
             color:white;
             ul{

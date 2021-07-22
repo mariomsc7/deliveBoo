@@ -70,10 +70,13 @@ export default {
   background-color: rgba(0, 0, 0, .4);
 
   .details-box{
+    padding: 10px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    background-color: rgba(255, 255, 255, .75);
+    border-radius: 10px;
 
     .close{
       cursor: pointer;
