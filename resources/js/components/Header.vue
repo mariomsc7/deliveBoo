@@ -3,7 +3,7 @@
         <div class="container d-flex justify-content-between">
             <div class="logo">
                 <router-link class="text-decoration-none" :to="{ name: 'home' }">
-                    <h1 class="title">Deliveboo <i class="fas fa-ghost"></i></h1>
+                    <h1 class="title">DeliveBoo <i class="fas fa-ghost"></i></h1>
                 </router-link>
             </div>
 
