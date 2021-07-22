@@ -107,7 +107,7 @@ export default {
             }
         },
         
-        /**
+        /***
          * Call API for Filtered Restaurants
          */
         filter(page = 1){
