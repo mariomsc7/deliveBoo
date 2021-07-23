@@ -21,26 +21,28 @@
         
                     <button class="custom-btn btn-9" @click="getRestaurants(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)"><i class="fas fa-caret-right"></i></button>
                 </section>
-                <div>
+                <!-- <div> -->
                         <!-- Restaurants List -->
                     <div class="row">
                         <div class="cards col-md-4" v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
-                            <div class="test">
-                                <router-link class="text-decoration-none" :to="{name: 'restaurant', params: {slug:restaurant.slug}}">
+                            <!-- <div class="test"> -->
+                                <router-link class="test text-decoration-none" :to="{name: 'restaurant', params: {slug:restaurant.slug}}">
                                     <img class="img-fluid" v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name"/>
-                                    <h2>{{ restaurant.name }}</h2>
-                                    <div>{{ restaurant.address }}</div>
-                                    <div>
-                                        <span v-for="(type, index) in restaurant.type" :key="`type-${index}`">
-                                            {{ type }}
-                                        </span>
+                                    <div class="res-data">
+                                        <h2>{{ restaurant.name }}</h2>
+                                        <div>{{ restaurant.address }}</div>
+                                        <div>
+                                            <span v-for="(type, index) in restaurant.type" :key="`type-${index}`">
+                                                {{ type }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </router-link>
-                            </div>
+                            <!-- </div> -->
 
                         </div>
                     </div>
-                </div>
+                <!-- </div> -->
 
             </div>
         </div>
@@ -64,8 +66,9 @@ export default {
         };
     },
     created() {
-        this.getRestaurants();
+        this.popCheck();
         this.getTypes();
+        this.getRestaurants();
     },
     methods: {
         /**
@@ -112,6 +115,7 @@ export default {
          */
         filter(page = 1){
             if(this.checked.length != 0){
+                window.localStorage.setItem('check', JSON.stringify(this.checked));
                 // Create query string from checked array
                 let query=[];
                 query = this.checked;
@@ -131,10 +135,17 @@ export default {
                         console.log(err);
                     });
             } else {
+                window.localStorage.removeItem('check');
                 // When all checkbox are empty
                 this.getRestaurants();
             }
-        }
+        },
+
+        popCheck(){
+            if(window.localStorage.getItem('check')){
+                this.checked = JSON.parse(window.localStorage.getItem('check'));
+            }
+        },
     }
 };
 </script>
@@ -244,19 +255,23 @@ export default {
             background-color:#183ea7;
     }
 
+    .res-data{
+        padding: 10px;
+    }
     .test {
         //border: 1px solid #000;
-        --card-gradient: rgba(0, 0, 0, 0.65);
+        display: inline-block;
+        // --card-gradient: rgba(0, 0, 0, 0.65);
         background-color: #fff;
         border-radius: 0.5rem;
         box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem rgba(0, 0, 0, 0.45);
         padding-bottom: 1rem;
         background-image: linear-gradient(
-            var(--card-gradient),
+            rgba(0, 0, 0, 0.65),
             white max(9.5rem, 27vh)
         );
+        color: #273036;
         overflow: hidden;
-        transition: 2s;
         
 
         img {
@@ -267,16 +282,19 @@ export default {
             max-height: max(10rem, 30vh);
             aspect-ratio: 4/3;
             mix-blend-mode: overlay;
+            transition: opacity .5s;
+            opacity: .5;
             
             // filter: grayscale(100);
 
-            ~ * {
-            margin-left: 1rem;
-            margin-right: 1rem;
+            // ~ * {
+            // margin-left: 1rem;
+            // margin-right: 1rem;
         }
  
-        &:hover {
+        &:hover img{
             mix-blend-mode: normal;
+            opacity: 1;
         }
     }
 
@@ -319,5 +337,5 @@ export default {
     //         --card-gradient: #e5eef1 max(8.5rem, 20vh);
     //     }
     
-    }
+    // }
 </style>
