@@ -270,7 +270,7 @@ export default {
         }
 
     .active-page{
-            background-color:#183ea7;
+            background-color:#f64826;
     }
 
     .res-data{
@@ -278,13 +278,13 @@ export default {
     }
     .test {
         display: inline-block;
-        background-color: #fff;
+        // background-color: #fff;
         border-radius: 0.5rem;
         box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem rgba(0, 0, 0, 0.45);
         padding-bottom: 1rem;
         background-image: linear-gradient(
             rgba(0, 0, 0, 0.65),
-            white max(9.5rem, 27vh)
+            rgba(255,255,255,.7) max(9.5rem, 27vh)
         );
         color: #273036;
         overflow: hidden;
