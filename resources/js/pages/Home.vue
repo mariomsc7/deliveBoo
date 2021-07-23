@@ -207,9 +207,7 @@ export default {
         padding: 10px;
     }
     .test {
-        //border: 1px solid #000;
         display: inline-block;
-        // --card-gradient: rgba(0, 0, 0, 0.65);
         background-color: #fff;
         border-radius: 0.5rem;
         box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem rgba(0, 0, 0, 0.45);
@@ -226,18 +224,11 @@ export default {
             border-radius: 0.5rem 0.5rem 0 0;
             width: 100%;
             object-fit: cover;
-            // height: max(10rem, 25vh);
             max-height: max(10rem, 30vh);
             aspect-ratio: 4/3;
             mix-blend-mode: overlay;
             transition: opacity .5s;
             opacity: .5;
-            
-            // filter: grayscale(100);
-
-            // ~ * {
-            // margin-left: 1rem;
-            // margin-right: 1rem;
         }
  
         &:hover img{
@@ -245,45 +236,4 @@ export default {
             opacity: 1;
         }
     }
-
-
-    // .card {
-        // --card-gradient: rgba(0, 0, 0, 0.8);
-        // --card-blend-mode: overlay;
-        // background-color: #fff;
-        // border-radius: 0.5rem;
-        // box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem rgba(0, 0, 0, 0.45);
-        // padding-bottom: 1rem;
-        // background-image: linear-gradient(
-        //     var(--card-gradient),
-        //     white max(9.5rem, 27vh)
-        // );
-        // overflow: hidden;
-
-        // img {
-        //         border-radius: 0.5rem 0.5rem 0 0;
-        //         width: 100%;
-        //         object-fit: cover;
-        //         // height: max(10rem, 25vh);
-        //         max-height: max(10rem, 30vh);
-        //         aspect-ratio: 4/3;
-        //         mix-blend-mode: var(--card-blend-mode);
-        //         // filter: grayscale(100);
-
-        //         ~ * {
-        //         margin-left: 1rem;
-        //         margin-right: 1rem;
-        //     }
-    // }
-
-    // > :last-child {
-    //     margin-bottom: 0;
-    // }
-
-    //     &:hover,
-    //     &:focus-within {
-    //         --card-gradient: #e5eef1 max(8.5rem, 20vh);
-    //     }
-    
-    // }
 </style>
