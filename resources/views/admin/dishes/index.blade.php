@@ -10,15 +10,15 @@
             </div>
         @endif
         <h1 class="mb-5"><a href="{{ route('admin.restaurants.show', $restaurant->id)}}">{{$restaurant->name}}</a></h1>
-        <h2>MENU</h2>
-        <a class="btn btn-success text-uppercase pr-3 pl-3" href="{{route('admin.dishes.create')}}">Add Dish</a>
+        <h2>MENÙ</h2>
+        <a class="btn btn-success text-uppercase pr-3 pl-3 mt-3" href="{{route('admin.dishes.create')}}">Aggiungi Piatto</a>
         <table class="table mt-5">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Visibility</th>
-                    <th colspan="3">Actions</th>
+                    <th>Nome Piatto</th>
+                    <th>Prezzo</th>
+                    <th>Vsibilità</th>
+                    <th colspan="3">Azioni</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,18 +26,18 @@
                     <tr>
                         <td>{{$dish->name}}</td>
                         <td>€{{number_format($dish->price, 2)}}</td>
-                        <td><button class="btn btn-secondary" disabled> {{$dish->visibility ? 'Yes' : 'No'}} </button></td>
+                        <td><button class="btn btn-secondary ml-2" disabled> {{$dish->visibility ? 'Sì' : 'No'}} </button></td>
                         <td>
-                            <a class="btn btn-primary " href="{{route('admin.dishes.show', $dish->id)}}">Show Details</a>
+                            <a class="btn btn-primary " href="{{route('admin.dishes.show', $dish->id)}}">Mostra Dettagli</a>
                         </td>
                         <td>
-                            <a class="btn btn-warning" href="{{route('admin.dishes.edit', $dish->id)}}">Edit Details</a>
+                            <a class="btn btn-warning" href="{{route('admin.dishes.edit', $dish->id)}}">Modifica Dettagli</a>
                         </td>
                         <td>
                             <form class="delete-form" action="{{route('admin.dishes.destroy', $dish->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <input type="submit" class="btn btn-danger" value="DELETE DISH">
+                                <input type="submit" class="btn btn-danger" value="ELIMINA PIATTO">
                             </form>
                         </td>
                     </tr>

@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <h1>EDIT DISH 
+        <h1>Modifica Piatto: 
             <a href="{{route('admin.dishes.show', $dish->id)}}">{{$dish->name}}</a> 
         </h1>
         <form method="POST" action="{{route('admin.dishes.update', $dish->id)}}" enctype="multipart/form-data">
@@ -12,7 +12,7 @@
 
 
             <div class="mb-3">
-                <label for="name" class="control-table">Name*</label>
+                <label for="name" class="control-table">Nome*</label>
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{old('name', $dish->name)}}" required maxlength="50">
                 @error('name')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -20,7 +20,7 @@
             </div>
             
             <div class="mb-3">
-                <label for="ingredients" class="control-table">Ingredients*</label>
+                <label for="ingredients" class="control-table">Ingredienti*</label>
                 <textarea class="form-control @error('ingredients') is-invalid @enderror" id="ingredients" name="ingredients" rows="10" required>{{old('ingredients.name', $dish->ingredients)}}</textarea>
                 @error('ingredients')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -28,7 +28,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="description" class="control-table">Description*</label>
+                <label for="description" class="control-table">Descrizione*</label>
                 <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="10" required>{{old('description.name', $dish->description)}}</textarea>
                 @error('description')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -36,7 +36,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="price" class="control-table">Price*</label>
+                <label for="price" class="control-table">Prezzo*</label>
                 <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" id="price" max="999" value="{{old('price', $dish->price)}}" required>
                 @error('price')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -44,16 +44,12 @@
             </div>
 
             <div class="mb-3">
-                <label for="visibility" class="control-table mr-3">VISIBLE:</label>
+                <label for="visibility" class="control-table mr-3">VISIBILITÀ:</label>
                 <input type="checkbox" name="visibility" id="visibility"  checked>
             </div>
             <div class="mb-3">
-                image
-            </div>
-
-            <div class="mb-3">
                 <div>
-                    <label for="image">Dish Image</label>
+                    <label for="image">Immagine Piatto</label>
                 </div>
                 @if ($dish->image)
                     <div class="mb-3">
@@ -66,7 +62,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-success text-uppercase pr-3 pl-3">Save</button>
+            <button type="submit" class="btn btn-success text-uppercase pr-3 pl-3">Salva</button>
 
         </form>
     </div>

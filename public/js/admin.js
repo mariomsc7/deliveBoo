@@ -37352,24 +37352,23 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // CONFIG
 var btn = document.getElementById("register-button");
 
 if (btn) {
-  btn.addEventListener('click', function (e) {
+  btn.addEventListener("click", function (e) {
     var password = document.getElementById("password").value;
     var pswConfirm = document.getElementById("password-confirm").value;
 
     if (password != pswConfirm) {
-      alert('Password doesn\'t match');
+      alert("Password doesn't match");
       e.preventDefault();
     }
   });
-}
+} // TYPE CLIENT VALIDATION
 
-; // TYPE CLIENT VALIDATION
 
-var btnType = document.getElementById('sub-btn');
+var btnType = document.getElementById("sub-btn");
 
 if (btnType) {
-  btnType.addEventListener('click', function (e) {
-    var check = document.querySelectorAll('input[id^=type]');
+  btnType.addEventListener("click", function (e) {
+    var check = document.querySelectorAll("input[id^=type]");
     var checked = [];
     check.forEach(function (input) {
       if (input.checked) {
@@ -37378,17 +37377,17 @@ if (btnType) {
     });
 
     if (checked.length == 0) {
-      alert('Please select almost one type');
+      alert("Seleziona almeno una tipologia");
       e.preventDefault();
     }
   });
 } // Delete confirmation message
 
 
-var deleteDish = document.querySelectorAll('.delete-form');
+var deleteDish = document.querySelectorAll(".delete-form");
 deleteDish.forEach(function (form) {
   form.addEventListener("submit", function (e) {
-    var resp = confirm("Are you sure you want to delete it?");
+    var resp = confirm("Sei sicuro di voler cancellare?");
 
     if (!resp) {
       e.preventDefault();
