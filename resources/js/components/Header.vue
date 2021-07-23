@@ -8,10 +8,10 @@
             </div>
 
             <div class="top-menu">
-                <router-link class="color" :to="{ name: 'home' }"><i class="fas fa-home">Home</i></router-link>
-                <router-link class="color" :to="{ name: 'checkout' }"><i class="fas fa-cart-plus">Cassa</i></router-link>
-                <router-link class="color" :to="{ name: 'aboutus' }"><i class="fas fa-cart-plus">Chi Siamo</i></router-link>
-                <a class="admin" href="http://127.0.0.1:8000/admin" target="_blank"><i class="fas fa-user-shield">Area Ristoratore</i></a>
+                <router-link class="color icons" :to="{ name: 'home' }"><i class="fas fa-home"></i></router-link>
+                <router-link class="color icons" :to="{ name: 'checkout' }"><i class="fas fa-cart-plus"></i></router-link>
+                <router-link class="color icons" :to="{ name: 'aboutus' }"><i class="fas fa-users"></i></router-link>
+                <a class="admin icons" href="http://127.0.0.1:8000/admin" target="_blank"><i class="fas fa-user-shield">Area Riservata</i></a>
             </div>
         </div>
 
@@ -59,6 +59,11 @@ export default {
         &:hover {
             color: #273936;
         }
+    }
+
+    .icons{
+        font-size: 30px;
+        margin: 0 20px;
     }
 
 </style>
