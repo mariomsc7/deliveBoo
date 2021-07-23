@@ -13,9 +13,13 @@
 
                     <!-- Dish -->
                     <div>
-                        <div class="dish" @click="showDish(dish)" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
+                        <div class="dish" :class="{unavailable: !dish.visibility}" v-for="(dish, index) in dishes" :key="`dishes-${index}`">
                             {{dish.name}}
-                            <img class="img-fluid" v-if="dish.image" :src="dish.image" :alt="dish.name"/>
+                            <img class="img-fluid" @click="showDish(dish)" v-if="dish.image" :src="dish.image" :alt="dish.name"/>
+                            <div class="d-flex">
+                                <div>€ {{dish.price.toFixed(2)}}</div> 
+                                <div @click="addToCart(dish)">+</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -133,6 +137,19 @@ export default {
                     this.cart[name] = {...order, unitPrice};
                 }
                 this.tot += order.prezzo;
+                this.store();
+                this.closeDetail();
+            }  
+        },
+        addToCart(name, quantità, price) {
+            if(this.checkId()) {
+                if(this.cart[name]){
+                    this.cart[name].quantità += quantità;
+                    this.cart[name].prezzo += price;
+                } else {
+                    this.cart[name] = {...order, price};
+                }
+                this.tot += price;
                 this.store();
                 this.closeDetail();
             }  

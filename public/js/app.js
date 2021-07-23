@@ -2785,6 +2785,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Restaurant',
@@ -2864,6 +2868,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
 
         this.tot += order.prezzo;
+        this.store();
+        this.closeDetail();
+      }
+    },
+    addToCart: function addToCart(name, quantità, price) {
+      if (this.checkId()) {
+        if (this.cart[name]) {
+          this.cart[name].quantità += quantità;
+          this.cart[name].prezzo += price;
+        } else {
+          this.cart[name] = _objectSpread(_objectSpread({}, order), {}, {
+            price: price
+          });
+        }
+
+        this.tot += price;
         this.store();
         this.closeDetail();
       }
@@ -26546,12 +26566,7 @@ var render = function() {
                 {
                   key: "dishes-" + index,
                   staticClass: "dish",
-                  class: { unavailable: !dish.visibility },
-                  on: {
-                    click: function($event) {
-                      return _vm.showDish(dish)
-                    }
-                  }
+                  class: { unavailable: !dish.visibility }
                 },
                 [
                   _vm._v(
@@ -26562,9 +26577,30 @@ var render = function() {
                   dish.image
                     ? _c("img", {
                         staticClass: "img-fluid",
-                        attrs: { src: dish.image, alt: dish.name }
+                        attrs: { src: dish.image, alt: dish.name },
+                        on: {
+                          click: function($event) {
+                            return _vm.showDish(dish)
+                          }
+                        }
                       })
-                    : _vm._e()
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "d-flex" }, [
+                    _c("div", [_vm._v("€ " + _vm._s(dish.price.toFixed(2)))]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.addToCart(dish)
+                          }
+                        }
+                      },
+                      [_vm._v("+")]
+                    )
+                  ])
                 ]
               )
             }),
