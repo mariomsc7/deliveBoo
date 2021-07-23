@@ -220,7 +220,7 @@ export default {
             // height: max(10rem, 25vh);
             max-height: max(10rem, 30vh);
             aspect-ratio: 4/3;
-            // mix-blend-mode: overlay;
+            mix-blend-mode: overlay;
             transition: opacity .5s;
             opacity: .5;
             
