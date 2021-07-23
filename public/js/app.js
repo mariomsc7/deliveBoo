@@ -2606,8 +2606,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.getRestaurants();
+    this.popCheck();
     this.getTypes();
+    this.getRestaurants();
   },
   methods: {
     /**
@@ -2656,7 +2657,8 @@ __webpack_require__.r(__webpack_exports__);
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
       if (this.checked.length != 0) {
-        // Create query string from checked array
+        window.localStorage.setItem('check', JSON.stringify(this.checked)); // Create query string from checked array
+
         var query = [];
         query = this.checked;
         var stringQuery = JSON.stringify(query);
@@ -2671,8 +2673,14 @@ __webpack_require__.r(__webpack_exports__);
           console.log(err);
         });
       } else {
-        // When all checkbox are empty
+        window.localStorage.removeItem('check'); // When all checkbox are empty
+
         this.getRestaurants();
+      }
+    },
+    popCheck: function popCheck() {
+      if (window.localStorage.getItem('check')) {
+        this.checked = JSON.parse(window.localStorage.getItem('check'));
       }
     }
   }
