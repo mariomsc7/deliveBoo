@@ -87,7 +87,13 @@ class RestaurantController extends Controller
     }
 
     public function show($slug) {
-        $restaurant = Restaurant::where('slug', $slug)->first();
+        $restaurant = Restaurant::where('slug', $slug)->with('types')->first();
+
+        $temp = [];
+        foreach($restaurant->types as $type){
+            $temp[] = $type->name;
+        }
+        $restaurant['type'] = $temp;
 
         $restaurant->image = url('storage/' . $restaurant->image);
         return response()->json($restaurant);
