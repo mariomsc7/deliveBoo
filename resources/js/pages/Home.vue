@@ -170,24 +170,34 @@ export default {
             position: absolute;
 
             &:checked + .box-card{
-                background-color:#fd4800;
+                background-color:#183ea7;
             }
 
         }
     }
     .box-card{
+        color: #fff;
         position: relative;
         width:250px;
         height:50px;
         border-radius: 50px;
-        background-color:#92d913;
+        background-color:#13d977;
         margin:20px ;
         display:flex;
         justify-content:center;
         align-items: center;
         font-size: 1.5em;
-        box-shadow: 5px 10px #888888;
         cursor: pointer;
+        box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+                    inset -7px -7px 10px 0px rgba(0,0,0,.1),7px 7px 20px 0px rgba(0,0,0,.1),
+                    4px 4px 5px 0px rgba(0,0,0,.1);
+        text-shadow:  2px 2px 3px rgba(255,255,255,.5),
+                      -4px -4px 6px rgba(116, 125, 136, .2);
+        outline: none;
+        -webkit-user-select: none; /* Safari */        
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard */
     }
 
     // Custom buttons
@@ -210,10 +220,10 @@ export default {
         position: relative;
         display: inline-block;
         box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
-            inset -7px -7px 10px 0px rgba(0,0,0,.1),7px 7px 20px 0px rgba(0,0,0,.1),
-        4px 4px 5px 0px rgba(0,0,0,.1);
-        text-shadow:  2px 2px 3px rgba(255,255,255,.5),
-                    -4px -4px 6px rgba(116, 125, 136, .2);
+                    inset -7px -7px 10px 0px rgba(0,0,0,.1),7px 7px 20px 0px rgba(0,0,0,.1),
+                    4px 4px 5px 0px rgba(0,0,0,.1);
+        text-shadow: 2px 2px 3px rgba(255,255,255,.5),
+                     -4px -4px 6px rgba(116, 125, 136, .2);
         outline: none;
 
         &.arrow{
@@ -222,6 +232,8 @@ export default {
             padding: 0;
         }
     }
+
+
 
     .btn-9 {
         border: none;
