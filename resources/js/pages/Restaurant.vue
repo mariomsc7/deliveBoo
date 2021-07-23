@@ -6,9 +6,9 @@
                 <div>
                     <!-- Page Navigation    -->
                     <section class="navigation">
-                        <button class="page-btn" @click="getDishes(pagination.current - 1)" :disabled ="!(pagination.current > 1)">Prev</button>
-                        <button class="page-btn" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getDishes(i)">{{i}}</button>
-                        <button class="page-btn" @click="getDishes(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)">Next</button>
+                        <button class="custom-btn btn-9" @click="getDishes(pagination.current - 1)" :disabled ="!(pagination.current > 1)">Prev</button>
+                        <button class="custom-btn btn-9" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getDishes(i)">{{i}}</button>
+                        <button class="custom-btn btn-9" @click="getDishes(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)">Next</button>
                     </section>
 
                     <!-- Dish -->
@@ -27,9 +27,9 @@
                     <!-- Products -->
                     <div v-if="Object.keys(cart).length" >
                         <div v-for="(item, index) in cart" :key="index">
-                            <button class="page-btn" @click="remove(item.name, item.unitPrice)"><i class="fas fa-minus"></i></button>
+                            <button class="custom-btn btn-9" @click="remove(item.name, item.unitPrice)"><i class="fas fa-minus"></i></button>
                             <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unitPrice)">
-                            <button class="page-btn" @click="add(item.name, item.unitPrice)"><i class="fas fa-plus"></i></button>
+                            <button class="custom-btn btn-9" @click="add(item.name, item.unitPrice)"><i class="fas fa-plus"></i></button>
                             <span class="name">{{item.name}}</span>
                             <span>€ {{item.prezzo.toFixed(2)}}</span> 
                             <span class="remove" @click="removeAll(item.name, item.prezzo)"><i class="fas fa-times"></i></span>
@@ -45,7 +45,7 @@
                     <router-link :to="{name: 'checkout'}">Cassa</router-link>
                     
                     <!-- Delete Button -->
-                    <button class="page-btn" v-if="Object.keys(cart).length" @click="deleteCart()">Elimina</button>
+                    <button class="custom-btn btn-9" v-if="Object.keys(cart).length" @click="deleteCart()">Elimina</button>
                 </div>
                 
             </div>
@@ -288,13 +288,71 @@ export default {
             margin: 0 10px;
         }
     }
-    .page-btn{
-        width: 70px;
-        height:30px;
+
+    //Buttons
+    button {
+        margin: 20px;
+    }
+
+    .custom-btn {
+        width: 130px;
+        height: 40px;
+        color: #fff;
         border-radius: 50px;
-        background-color:#92d913;
-        margin:20px ;
-        box-shadow: 5px 5px #888888;
+        padding: 10px 25px;
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+        box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+            inset -7px -7px 10px 0px rgba(0,0,0,.1),7px 7px 20px 0px rgba(0,0,0,.1),
+        4px 4px 5px 0px rgba(0,0,0,.1);
+        text-shadow:  2px 2px 3px rgba(255,255,255,.5),
+                    -4px -4px 6px rgba(116, 125, 136, .2);
+        outline: none;
+        }
+
+    .btn-9 {
+        border: none;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        color: #1fd1f9;
+        color: #0cbcff;
+        }
+    .btn-9:after {
+        position: absolute;
+        content: " ";
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #5fe0fd;
+        transition: all 0.3s ease;
+        }
+    .btn-9:hover {
+        background: transparent;
+        box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+                    -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+            inset -4px -4px 6px 0 rgba(255,255,255,.5),
+            inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+        color: #fff;
+        }
+    .btn-9:hover:after {
+        -webkit-transform: scale(2) rotate(180deg);
+        transform: scale(2) rotate(180deg);
+        box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+                    -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+            inset -4px -4px 6px 0 rgba(255,255,255,.5),
+            inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+        }
+
+    .active-page{
+            background-color:#13d9c9;
     }
      .active-page{
             background-color:#13d9c9;
