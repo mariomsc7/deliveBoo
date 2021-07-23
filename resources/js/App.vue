@@ -29,8 +29,4 @@ body {
     margin: 0 !important;
     box-sizing: border-box !important;
 }
-main{
-    padding: 20px 40px;
-}
-
 </style>

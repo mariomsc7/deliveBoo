@@ -264,6 +264,7 @@ export default {
 
     .restaurant{
         color: #273036;
+        padding: 20px;
     }
     .inputNum{
         width: 35px;
