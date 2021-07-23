@@ -74,7 +74,7 @@
                             </form>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Procedi all'ordine</button>
+                    <button type="submit" class="execute btn btn-primary btn-block">Procedi all'ordine</button>
                     <div class="alert alert-danger" v-if="error">{{ error }}</div>
                 </form>
             </div>
@@ -304,11 +304,14 @@ export default {
     }
 }
 .page-btn{
-        width: 70px;
-        height:30px;
-        border-radius: 50px;
-        background-color:#92d913;
-        margin:20px ;
-        box-shadow: 5px 5px #888888;
-    }
+    width: 70px;
+    height:30px;
+    border-radius: 50px;
+    background-color:#92d913;
+    margin:20px ;
+    box-shadow: 5px 5px #888888;
+}
+.execute{
+    margin: 20px 0 0;
+}
 </style>

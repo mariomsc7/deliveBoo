@@ -23676,7 +23676,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".error-message {\n  color: red;\n}\n.success-message {\n  color: green;\n}\n.thanks-container {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.thanks-container .thanks {\n  position: absolute;\n  padding: 20px;\n  border-radius: 10px;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  background-color: white;\n}\n.page-btn {\n  width: 70px;\n  height: 30px;\n  border-radius: 50px;\n  background-color: #92d913;\n  margin: 20px;\n  box-shadow: 5px 5px #888888;\n}", ""]);
+exports.push([module.i, ".error-message {\n  color: red;\n}\n.success-message {\n  color: green;\n}\n.thanks-container {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.thanks-container .thanks {\n  position: absolute;\n  padding: 20px;\n  border-radius: 10px;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  background-color: white;\n}\n.page-btn {\n  width: 70px;\n  height: 30px;\n  border-radius: 50px;\n  background-color: #92d913;\n  margin: 20px;\n  box-shadow: 5px 5px #888888;\n}\n.execute {\n  margin: 20px 0 0;\n}", ""]);
 
 // exports
 
@@ -26045,7 +26045,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-primary btn-block",
+                    staticClass: "execute btn btn-primary btn-block",
                     attrs: { type: "submit" }
                   },
                   [_vm._v("Procedi all'ordine")]
