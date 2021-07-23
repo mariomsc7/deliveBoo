@@ -17,7 +17,7 @@
                 <!-- Page Navigation -->
                 <section class="navigation text-center mb-5">
                     <button class="custom-btn btn-9 arrow" @click="getRestaurants(pagination.current - 1)" :disabled ="!(pagination.current > 1)"><i class="fas fa-caret-left"></i></button>
-                    <button class="custom-btn btn-9" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getRestaurants(i)">{{i}}</button>
+                    <button class="custom-btn btn-9 d-none d-md-inline" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getRestaurants(i)">{{i}}</button>
         
                     <button class="custom-btn btn-9 arrow" @click="getRestaurants(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)"><i class="fas fa-caret-right"></i></button>
                 </section>
@@ -170,7 +170,7 @@ export default {
             position: absolute;
 
             &:checked + .box-card{
-                background-color:#183ea7;
+                background-color:#f64826;
             }
 
         }

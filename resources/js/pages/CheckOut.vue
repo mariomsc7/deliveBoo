@@ -4,28 +4,29 @@
         <!-- ROW -->
         <section class="row mt-5">
             <!-- CART -->
-            <div class="cart col-md-4 text-center">
-                <div class="cart-box">
-                    <h1>Carrello</h1>
-                    <h2>Inserisci quantità</h2>
+            <div class="cart col-md-5 col-ms-12 text-center">
+                    <h1>Il tuo Carrello</h1>
                     <!-- SELECT COUNTER -->
                     <div v-if="Object.keys(cart).length" >
-                        <div v-for="(item, index) in cart" :key="index">                
-                            <button class="page-btn" @click="remove(item.name, item.unit)">-</button>
-                            <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unit)">
-                            <button class="page-btn" @click="add(item.name, item.unit)">+</button>
-                            <span class="name">{{item.name}}</span>
-                            <span>€ {{item.prezzo.toFixed(2)}}</span> 
-                            <span class="remove" @click="removeAll(item.name, item.prezzo)"><i class="fas fa-times"></i></span>
+                        <div class="product" v-for="(item, index) in cart" :key="index">                
+                            <div>
+                                <button class="custom-btn btn-9 quantity minus" @click="remove(item.name, item.unit)"><i class="fas fa-minus"></i></button>
+                                <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unit)">
+                                <button class="custom-btn btn-9 quantity" @click="add(item.name, item.unit)"><i class="fas fa-plus"></i></button>
+                            </div>
+                            <div>
+                                <span class="name">{{item.name}}</span>
+                                <span>€ {{item.prezzo.toFixed(2)}}</span>
+                                <span class="remove" @click="removeAll(item.name, item.prezzo)"><i class="fas fa-times"></i></span>
+                            </div>
                         </div>
                     </div>
                     <div v-else>Il carrello è vuoto</div>
                     <h3>Tot: €{{tot.toFixed(2)}}</h3>
-                    <button class="page-btn" v-if="Object.keys(cart).length" @click="deleteCart()">Elimina</button>
-                </div>
+                    <div class="text-right"><button class="custom-btn btn-9 delete" v-if="Object.keys(cart).length" @click="deleteCart()">Elimina</button></div>
             </div>
             <!-- PAYMENT FORM -->
-            <div class="col-md-6 offset-md-2" v-if="Object.keys(cart).length">
+            <div class="col-md-5 offset-md-2 col-ms-12" v-if="Object.keys(cart).length">
                 <div class="form">
                     <div class="success-message" v-show="success">Il tuo ordine è stato inviato</div>
                     <!-- FORM -->
@@ -83,7 +84,7 @@
                                 </form>
                             </div>
                         </div>
-                        <button type="submit" class="execute btn btn-primary btn-block">Procedi all'ordine</button>
+                        <button type="submit" class="execute btn btn-block">Procedi all'ordine</button>
                         <div class="alert alert-danger" v-if="error">{{ error }}</div>
                     </form>
                 </div>
@@ -294,15 +295,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../sass/app';
 .cart {
-    background-color: $brand-col;
-    border-radius: 10px;
-    padding: 20px;
-    display: flex;
     align-self: flex-start;
-    .cart-box {
-        display: flex;
-        flex-direction: column;
-    }
 }
 
 .form {
@@ -310,7 +303,14 @@ export default {
     padding: 1rem;
     border-radius: 10px;
 }
+.custom-btn{
+    margin: 10px;
+}
 
+.delete{
+    border-radius: 50px;
+    overflow: hidden;
+}
 .error-message {
     color: red;
 }
@@ -346,15 +346,20 @@ export default {
         }
     }
 
-.page-btn {
-    width: 70px;
-    height:30px;
-    border-radius: 50px;
-    background-color:#92d913;
-    margin:20px ;
-    box-shadow: 5px 5px #888888;
-}
+// .page-btn {
+//     width: 70px;
+//     height:30px;
+//     border-radius: 50px;
+//     margin:20px ;
+//     box-shadow: 5px 5px #888888;
+// }
 .execute {
     margin: 20px 0 0;
+    background-color:#273036;
+    color: #fff;
+    outline: none;
+    &:hover{
+        background-color:#fdcf7a;
+    }
 }
 </style>

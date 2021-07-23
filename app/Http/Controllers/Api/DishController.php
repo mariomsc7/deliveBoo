@@ -16,12 +16,14 @@ class DishController extends Controller
         $restaurant = Restaurant::where('slug', $slug)->first();
         // dd($restaurant);
         $dishes = Dish::where('restaurant_id', $restaurant->id)->with('restaurant')->paginate(6);
-
+        dd($dishes[0]->restaurant);
         foreach ($dishes as $dish) {
             if ($dish->image) {
                 $dish->image = url('storage/' . $dish->image);
             }
         }
+
+
 
         return response()->json($dishes);
     }

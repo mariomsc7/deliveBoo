@@ -1,6 +1,7 @@
 <template>
     <div class="restaurant">
-        <h1 class="text-center" v-if="dishes.length">{{dishes[0].restaurant.name}} Menù</h1>
+        <h1 class="text-center" v-if="dishes.length">{{restaurant.name}} Menù</h1>
+        <img :src="restaurant.image" :alt="restaurant.name">
 
             <div class="container-fluid">
                 <div class="cont row">
@@ -28,28 +29,32 @@
                             </div>
                     </div>
                     <!-- Cart -->
-                    <div class="cart col-md-4 offset-md-2 col-sm-12">
-                        <h2>Il tuo Carrello</h2>
-                        <!-- Products -->
-                        <div v-if="Object.keys(cart).length" >
-                            <div v-for="(item, index) in cart" :key="index">
-                                <button class="custom-btn btn-9 arrow" @click="remove(item.name, item.unit)"><i class="fas fa-minus"></i></button>
-                                <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unit)">
-                                <button class="custom-btn btn-9 arrow" @click="add(item.name, item.unit)"><i class="fas fa-plus"></i></button>
-                                <span class="name">{{item.name}}</span>
-                                <span>€ {{item.prezzo.toFixed(2)}}</span>
-                                <span class="remove" @click="removeAll(item.name, item.prezzo)"><i class="fas fa-times"></i></span>
+                    <div class="cart col-md-4 offset-md-2 col-sm-12 text-center">
+                        <!-- <div class="cart-box"> -->
+                            <h2>Il tuo Carrello</h2>
+                            <!-- Products -->
+                            <div v-if="Object.keys(cart).length" >
+                                <div class="product" v-for="(item, index) in cart" :key="index">
+                                    <div>
+                                        <button class="custom-btn btn-9 quantity minus" @click="remove(item.name, item.unit)"><i class="fas fa-minus"></i></button>
+                                        <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unit)">
+                                        <button class="custom-btn btn-9 quantity" @click="add(item.name, item.unit)"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                    <div>
+                                        <span class="name">{{item.name}}</span>
+                                        <span>€ {{item.prezzo.toFixed(2)}}</span>
+                                        <span class="remove" @click="removeAll(item.name, item.prezzo)"><i class="fas fa-times"></i></span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div v-else>Il carrello è vuoto</div>
-                        <!-- Tot -->
-                        <h3>Tot: €{{tot.toFixed(2)}}</h3>
-                
-                        <!-- CheckOut Button -->
-                        <router-link :to="{name: 'checkout'}">Cassa</router-link>
-                
-                        <!-- Delete Button -->
-                        <button class="custom-btn btn-9 delete" v-if="Object.keys(cart).length" @click="deleteCart()">Elimina</button>
+                            <div v-else>Il carrello è vuoto</div>
+                            <!-- Tot -->
+                            <h3>Tot: €{{tot.toFixed(2)}}</h3>
+                            <!-- CheckOut Button -->
+                            <router-link class="color" :to="{name: 'checkout'}"><i class="fas fa-cart-plus icons"></i></router-link>
+                            <!-- Delete Button -->
+                            <div class="text-right"><button class="custom-btn btn-9 delete" v-if="Object.keys(cart).length" @click="deleteCart()">Elimina</button></div>
+                        <!-- </div> -->
                     </div>
                 
                 </div>
@@ -70,6 +75,7 @@ export default {
     },
     data() {
         return {
+            restaurant: {},
             dishes: [],
             dishDetail: {},
             visibility: false,
@@ -92,6 +98,7 @@ export default {
                 .get(`http://127.0.0.1:8000/api/restaurant/${this.$route.params.slug}?page=${page}`)
                 .then(res => {
                     this.dishes = res.data.data;
+                    this.restaurant = res.data.data[0].restaurant;
                     this.pagination = {
                         current: res.data.current_page,
                         last: res.data.last_page
@@ -277,14 +284,15 @@ export default {
     }
     
     .remove{
+        margin-left: 10px;
         cursor: pointer;
         &:hover{
-            color: red;
+            color: #ec4524;
         }
     }
-    .unavailable {
-        color: red;
-    }
+    // .unavailable {
+    //     color: red;
+    // }
     .dish{
         // width: 350px;
         height: 130px;
@@ -315,11 +323,27 @@ export default {
         align-items: flex-start;
     }
     .cart{
-        padding: 20px;
-        background-color: $brand-col;
-
+        display: flex;
+        flex-direction: column;
+        padding: 20px 40px;
+        background-color: #273036;
+        border-radius: 10px;
+        color: #fff;
         .name{
             margin: 0 10px;
+        }
+        .product{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.3em;
+        }
+        input[type="number"]{
+            border-radius: 20px;
+            width: 50px;
+            text-align: center;
+            outline: none;
+            border: 0;
         }
     }
 
@@ -331,6 +355,7 @@ export default {
     .custom-btn {
         width: 90px;
         height: 40px;
+        margin: 10px;
         color: #fff;
         border-radius: 50px;
         padding: 0 25px;
@@ -358,6 +383,18 @@ export default {
         &.delete{
             width: 120px;
         }
+        &.quantity{
+            width: 25px;
+            height: 25px;
+            padding: 0;
+            border-radius: 50%;
+            background-color: #fdcf7a;
+            font-size: 12px;
+
+            &.minus:hover{
+                background-color: #ec4524;
+            }
+        }
     }
 
     .btn-9 {
@@ -378,7 +415,7 @@ export default {
         transition: all 0.3s ease;
     }
     .btn-9:hover {
-        background: transparent;
+        background: $brand-col;
         box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
                     -4px -4px 6px 0 rgba(116, 125, 136, .2), 
             inset -4px -4px 6px 0 rgba(255,255,255,.5),
@@ -386,7 +423,7 @@ export default {
         color: #fff;
     }
     .btn-9.delete:hover {
-        background: red;
+        background: #ec4524;
         box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
                     -4px -4px 6px 0 rgba(116, 125, 136, .2), 
             inset -4px -4px 6px 0 rgba(255,255,255,.5),
@@ -403,6 +440,15 @@ export default {
     }
 
     .active-page{
-            background-color:#183ea7;
+            background-color:#f64826;
+    }
+
+    .color {
+        color: #fff;
+        font-size: 2em;
+
+        &:hover {
+            color: $brand-col;
+        }
     }
 </style>

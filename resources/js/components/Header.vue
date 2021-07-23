@@ -91,13 +91,12 @@ export default {
 
     .color {
         color: #fff;
-    }
 
-    .color {
         &:hover {
             color: #273936;
         }
     }
+
     .active{
         color: #273936;
     }

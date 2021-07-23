@@ -9,59 +9,61 @@
         </svg>
 
         <div class="footer-bottom">
-            <div class="container d-flex justify-content-between">
-                <div>
-                    <h2>Scopri DeliveBoo</h2>
-                    <ul>
-                        <li><a href="#">Investitori</a></li>
-                        <li>
-                            <router-link
-                                class="text-decoration-none"
-                                :to="{ name: 'aboutus' }"
-                            >
-                                Chi Siamo
-                            </router-link>
-                        </li>
-                        <li><a href="#">Ristoranti</a></li>
-                        <li><a href="#">Altro</a></li>
-                        <li><a href="#">Pressroom</a></li>
-                        <li><a href="#">Il nostro blog</a></li>
-                        <li><a href="#">Programmazione</a></li>
-                        <li><a href="#">Design</a></li>
-                        <li><a href="#">Lavora con noi</a></li>
-                        <li><a href="#">Diventa nostro partner</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h2>Aiuto</h2>
-                    <ul>
-                        <li><a href="#">Termini e Condizioni</a></li>
-                        <li><a href="#">Informativa sulla privacy</a></li>
-                        <li><a href="#">Cookies</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h2>Porta DeliveBoo con te</h2>
-                    <ul>
-                        <li><a href="#"></a></li>
-                        <li>
-                            <a href="#">
-                                <img
-                                    class="link-img"
-                                    src="../../../public/image/apple.png"
-                                    alt="App Store"
-                                />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                ><img
-                                    class="link-img"
-                                    src="../../../public/image/android.png"
-                                    alt="Google Play"
-                            /></a>
-                        </li>
-                    </ul>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2>Scopri DeliveBoo</h2>
+                        <ul>
+                            <li><a href="#">Investitori</a></li>
+                            <li>
+                                <router-link
+                                    class="text-decoration-none"
+                                    :to="{ name: 'aboutus' }"
+                                >
+                                    Chi Siamo
+                                </router-link>
+                            </li>
+                            <li><a href="#">Ristoranti</a></li>
+                            <li><a href="#">Altro</a></li>
+                            <li><a href="#">Pressroom</a></li>
+                            <li><a href="#">Il nostro blog</a></li>
+                            <li><a href="#">Programmazione</a></li>
+                            <li><a href="#">Design</a></li>
+                            <li><a href="#">Lavora con noi</a></li>
+                            <li><a href="#">Diventa nostro partner</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>Aiuto</h2>
+                        <ul>
+                            <li><a href="#">Termini e Condizioni</a></li>
+                            <li><a href="#">Informativa sulla privacy</a></li>
+                            <li><a href="#">Cookies</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>Porta DeliveBoo con te</h2>
+                        <ul>
+                            <li><a href="#"></a></li>
+                            <li>
+                                <a href="#">
+                                    <img
+                                        class="link-img"
+                                        src="../../../public/image/apple.png"
+                                        alt="App Store"
+                                    />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    ><img
+                                        class="link-img"
+                                        src="../../../public/image/android.png"
+                                        alt="Google Play"
+                                /></a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
