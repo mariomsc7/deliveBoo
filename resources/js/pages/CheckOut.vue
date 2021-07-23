@@ -18,7 +18,6 @@
             <button class="page-btn" v-if="Object.keys(cart).length" @click="deleteCart()">Elimina</button>
         </div>
         <div v-if="Object.keys(cart).length" class="container">
-
             <div class="col-6 offset-3">
                 <div class="success-message" v-show="success">Il tuo ordine è stato inviato</div>
                 <form @submit.prevent="payWithCreditCard">
@@ -80,6 +79,12 @@
                 </form>
             </div>
         </div>
+        <div class="thanks-container" v-if="send" @click="closeModal">
+            <div class="thanks">
+                <h1>Ordine Effettuato!</h1>
+                <h2>Grazie per aver scelto DeliveBoo</h2>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -90,19 +95,19 @@ export default {
     name: 'CheckOut',
     data() {
         return {
-        // restaurant_id: this.cart[0].restaurant_id,
-        customer_name: '',
-        customer_lastname: '',
-        customer_address: '',
-        phone_number: null,
-        errors:{},
-        success: false,
-        sending: false,
-        tot: 0,
-        cart: {},
-        hostedFieldInstance: false,
-        nonce: "",
-        error: "",
+            customer_name: '',
+            customer_lastname: '',
+            customer_address: '',
+            phone_number: null,
+            errors:{},
+            success: false,
+            sending: false,
+            tot: 0,
+            cart: {},
+            hostedFieldInstance: false,
+            nonce: "",
+            error: "",
+            send: false,
         }
     },
     created(){
@@ -166,7 +171,7 @@ export default {
                     this.errors = res.data.error;
                     this.success = false;
                 } else {
-                    console.log(res.data);
+                    this.send = true;
 
                     this.customer_name = '';
                     this.customer_lastname = '';
@@ -265,17 +270,38 @@ export default {
                         this.error = err.message;
                     });
             }
+        },
+        closeModal(){
+            this.send = false;
         }
     }    
 }
 </script>
 
-<style>
+<style lang="scss">
 .error-message {
     color: red;
 }
 .success-message {
     color: green;
+}
+.thanks-container{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .6);
+
+    .thanks{
+        position: absolute;
+        padding: 20px;
+        border-radius: 10px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+    }
 }
 .page-btn{
         width: 70px;

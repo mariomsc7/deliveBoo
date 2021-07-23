@@ -66,8 +66,9 @@ export default {
         };
     },
     created() {
-        this.getRestaurants();
+        this.popCheck();
         this.getTypes();
+        this.getRestaurants();
     },
     methods: {
         /**
@@ -114,6 +115,7 @@ export default {
          */
         filter(page = 1){
             if(this.checked.length != 0){
+                window.localStorage.setItem('check', JSON.stringify(this.checked));
                 // Create query string from checked array
                 let query=[];
                 query = this.checked;
@@ -133,10 +135,17 @@ export default {
                         console.log(err);
                     });
             } else {
+                window.localStorage.removeItem('check');
                 // When all checkbox are empty
                 this.getRestaurants();
             }
-        }
+        },
+
+        popCheck(){
+            if(window.localStorage.getItem('check')){
+                this.checked = JSON.parse(window.localStorage.getItem('check'));
+            }
+        },
     }
 };
 </script>
