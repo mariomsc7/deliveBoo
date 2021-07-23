@@ -15,7 +15,7 @@ class DishController extends Controller
     {   
         $restaurant = Restaurant::where('slug', $slug)->first();
         // dd($restaurant);
-        $dishes = Dish::where('restaurant_id', $restaurant->id)->with('restaurant')->paginate(3);
+        $dishes = Dish::where('restaurant_id', $restaurant->id)->with('restaurant')->paginate(6);
 
         foreach ($dishes as $dish) {
             if ($dish->image) {

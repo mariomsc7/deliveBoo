@@ -5,7 +5,7 @@
         </div>
         <div class="description col-md-3">
             <img
-                class="link-img img-fluid"
+                class="link-img img-fluid rounded-circle"
                 src="../../../public/image/sfondo.jpg"
                 alt="About"
             />
