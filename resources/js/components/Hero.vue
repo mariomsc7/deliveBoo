@@ -3,7 +3,7 @@
     <section class="hero">
         <div class="container d-flex justify-content-around align-items-center">
             <img class="hamburger-gif" src="../../../public/image/hamburger.gif" alt="">
-            <h1 class="title">Consegnamo il tuo cibo preferito a casa tua!</h1>
+            <h1 class="title">Consegniamo il tuo cibo preferito a casa tua!</h1>
             <img class="rider" src="../../../public/image/rider_deliveboo.png" alt="">
         </div>
     </section>
