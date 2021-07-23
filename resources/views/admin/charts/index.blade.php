@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <canvas id="userChart" class="rounded shadow"></canvas>
             </div>
         </div>
-        <a class="btn btn-primary text-uppercase mt-3" href="{{route('admin.orders.index')}}">Back to order history</a>
+        <a class="btn btn-primary text-uppercase mt-5" href="{{route('admin.orders.index')}}">Torna allo Storico Ordini</a>
     </div>
 
     <!-- ChartJs -->

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Deliveboo | Admin</title>
+    <title>Deliveboo | Pannello Amministrativo</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/admin.js') }}" defer></script>
@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('admin.home') }}">
-                    {{ config('app.name', 'Laravel') }}
+                     Deliveboo
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <ul class="navbar-nav mr-auto">
-                            <a href="{{ url('/') }}" target="_blank">View Site</a>
+                            <a href="{{ url('/') }}" target="_blank">Visualizza Sito</a>
                         </ul>
                     </ul>
 
@@ -54,7 +54,7 @@
                             @foreach ($restaurants as $restaurant)
                                 @if ($user->id == $restaurant->user_id)
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('admin.restaurants.show', $restaurant->id) }}">Your Restaurant: {{$restaurant->name}}</a>
+                                        <a class="nav-link" href="{{ route('admin.restaurants.show', $restaurant->id) }}">Il tuo ristorante: {{$restaurant->name}}</a>
                                     </li>                        
                                 @endif
                             @endforeach

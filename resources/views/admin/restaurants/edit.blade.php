@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="container">
-        <h1>EDIT Restaurant 
+        <h1>Modifica il Ristorante:  
             <a href="{{route('admin.restaurants.show', $restaurant->id)}}">{{$restaurant->name}}</a>
         </h1>
         <form method="POST" action="{{route('admin.restaurants.update', $restaurant->id)}}" enctype="multipart/form-data">
@@ -11,7 +11,7 @@
 
 
             <div class="mb-3">
-                <label for="name" class="control-table">Name*</label>
+                <label for="name" class="control-table">Nome*</label>
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{old('name', $restaurant->name)}}" required maxlength="30">
                 @error('name')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -27,7 +27,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="address" class="control-table">Address*</label>
+                <label for="address" class="control-table">Indirizzo*</label>
                 <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" required maxlength="50" value="{{old('adress.name', $restaurant->address)}}">
                 @error('address')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -35,7 +35,7 @@
             </div>
 
             <div class="mb-3 d-flex flex-column align-items-center text-uppercase">
-                <h4>Restaurant types*</h4>
+                <h4>Tipologie Ristorante*</h4>
                 <ul>
                     @foreach ($types as $type)
                         <li class="list-unstyled">
@@ -61,7 +61,7 @@
 
             <div class="mb-3">
                 <div>
-                    <label for="image">Restaurant Image</label>
+                    <label for="image">Immagine Ristorante</label>
                 </div>
                 @if ($restaurant->image)
                     <div class="mb-3">
@@ -72,7 +72,7 @@
                 @error('image')
                     <div>{{$message}}</div>
                 @enderror
-                <button id="sub-btn" type="submit" class="btn btn-success text-uppercase pr-3 pl-3">Save</button>
+                <button id="sub-btn" type="submit" class="btn btn-success text-uppercase pr-3 pl-3">Salva</button>
             </div>
         </form>
     </div>
