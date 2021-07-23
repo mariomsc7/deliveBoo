@@ -16,10 +16,10 @@
             <div v-if="types.length">
                 <!-- Page Navigation -->
                 <section class="navigation text-center mb-5">
-                    <button class="custom-btn btn-9" @click="getRestaurants(pagination.current - 1)" :disabled ="!(pagination.current > 1)"><i class="fas fa-caret-left"></i></button>
+                    <button class="custom-btn btn-9 arrow" @click="getRestaurants(pagination.current - 1)" :disabled ="!(pagination.current > 1)"><i class="fas fa-caret-left"></i></button>
                     <button class="custom-btn btn-9" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getRestaurants(i)">{{i}}</button>
         
-                    <button class="custom-btn btn-9" @click="getRestaurants(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)"><i class="fas fa-caret-right"></i></button>
+                    <button class="custom-btn btn-9 arrow" @click="getRestaurants(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)"><i class="fas fa-caret-right"></i></button>
                 </section>
                 <!-- <div> -->
                         <!-- Restaurants List -->
@@ -206,14 +206,14 @@ export default {
     }
 
     .custom-btn {
-        width: 130px;
+        width: 90px;
         height: 40px;
         color: #fff;
         border-radius: 50px;
-        padding: 10px 25px;
+        padding: 0 25px;
         font-family: 'Lato', sans-serif;
         font-weight: 500;
-        font-size: 16px;
+        font-size: 20px;
         background: transparent;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -225,7 +225,13 @@ export default {
         text-shadow: 2px 2px 3px rgba(255,255,255,.5),
                      -4px -4px 6px rgba(116, 125, 136, .2);
         outline: none;
+
+        &.arrow{
+            width: 40px;
+            border-radius: 50%;
+            padding: 0;
         }
+    }
 
 
 
@@ -243,7 +249,7 @@ export default {
         left: 0;
         width: 100%;
         height: 100%;
-        background: #13d977;
+        background: $brand-col;
         transition: all 0.3s ease;
         }
     .btn-9:hover {
