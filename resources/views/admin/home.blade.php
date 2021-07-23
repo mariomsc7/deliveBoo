@@ -21,11 +21,11 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Log-in effettuato!') }}
                 </div>
                 <div>
                     @if (!$user->restaurant)
-                        <a class="btn btn-warning ml-3 mb-3" href="{{ route('admin.restaurants.create') }}">Add Restaurant</a>
+                        <a class="btn btn-warning ml-3 mb-3" href="{{ route('admin.restaurants.create') }}">Aggiungi qui il tuo ristorante</a>
                     @endif
                 </div>
             </div>
