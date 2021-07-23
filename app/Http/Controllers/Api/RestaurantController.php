@@ -85,4 +85,11 @@ class RestaurantController extends Controller
         
         return response()->json($restaurants);
     }
+
+    public function show($slug) {
+        $restaurant = Restaurant::where('slug', $slug)->first();
+
+        $restaurant->image = url('storage/' . $restaurant->image);
+        return response()->json($restaurant);
+    }
 }

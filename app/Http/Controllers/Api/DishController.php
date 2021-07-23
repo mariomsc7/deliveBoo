@@ -11,12 +11,13 @@ class DishController extends Controller
 {
     // GET DISHES
 
-    public function index($slug)
+    public function index($id)
     {   
-        $restaurant = Restaurant::where('slug', $slug)->first();
+        // $restaurant = Restaurant::where('slug', $slug)->first();
         // dd($restaurant);
-        $dishes = Dish::where('restaurant_id', $restaurant->id)->with('restaurant')->paginate(6);
-        dd($dishes[0]->restaurant);
+        // $dishes = Dish::where('restaurant_id', $restaurant->id)->with('restaurant')->paginate(6);
+        $dishes = Dish::where('restaurant_id', $id)->paginate(6);
+        
         foreach ($dishes as $dish) {
             if ($dish->image) {
                 $dish->image = url('storage/' . $dish->image);

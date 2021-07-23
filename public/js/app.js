@@ -2810,6 +2810,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Restaurant',
@@ -2829,21 +2830,31 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.getDishes();
+    this.getRestaurant();
     this.popCart();
   },
   methods: {
     /**
      * Call API for Dishes
      */
-    getDishes: function getDishes() {
+    getRestaurant: function getRestaurant() {
       var _this = this;
 
+      axios.get("http://127.0.0.1:8000/api/restaurants/".concat(this.$route.params.slug)).then(function (res) {
+        _this.restaurant = res.data;
+
+        _this.getDishes();
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    getDishes: function getDishes() {
+      var _this2 = this;
+
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get("http://127.0.0.1:8000/api/restaurant/".concat(this.$route.params.slug, "?page=").concat(page)).then(function (res) {
-        _this.dishes = res.data.data;
-        _this.restaurant = res.data.data[0].restaurant;
-        _this.pagination = {
+      axios.get("http://127.0.0.1:8000/api/dishes/".concat(this.restaurant.id, "?page=").concat(page)).then(function (res) {
+        _this2.dishes = res.data.data;
+        _this2.pagination = {
           current: res.data.current_page,
           last: res.data.last_page
         };
@@ -26553,14 +26564,18 @@ var render = function() {
     { staticClass: "restaurant" },
     [
       _vm.dishes.length
-        ? _c("h1", { staticClass: "text-center" }, [
-            _vm._v(_vm._s(_vm.restaurant.name) + " Menù")
+        ? _c("div", [
+            _vm.dishes.length
+              ? _c("h1", { staticClass: "text-center" }, [
+                  _vm._v(_vm._s(_vm.restaurant.name) + " Menù")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("img", {
+              attrs: { src: _vm.restaurant.image, alt: _vm.restaurant.name }
+            })
           ])
         : _vm._e(),
-      _vm._v(" "),
-      _c("img", {
-        attrs: { src: _vm.restaurant.image, alt: _vm.restaurant.name }
-      }),
       _vm._v(" "),
       _c("div", { staticClass: "container-fluid" }, [
         _c("div", { staticClass: "cont row" }, [

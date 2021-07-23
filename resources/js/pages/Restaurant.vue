@@ -1,8 +1,9 @@
 <template>
     <div class="restaurant">
-        <h1 class="text-center" v-if="dishes.length">{{restaurant.name}} Menù</h1>
-        <img :src="restaurant.image" :alt="restaurant.name">
-
+        <div  v-if="dishes.length">
+            <h1 class="text-center" v-if="dishes.length">{{restaurant.name}} Menù</h1>
+            <img :src="restaurant.image" :alt="restaurant.name">
+        </div>
             <div class="container-fluid">
                 <div class="cont row">
                     <div class="col-md-6 col-sm-12">
@@ -86,19 +87,29 @@ export default {
         };
     },
     created() {
-        this.getDishes();
+        this.getRestaurant();
         this.popCart();
     },
     methods: {
         /**
          * Call API for Dishes
          */
+        getRestaurant() {
+            axios
+                .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.slug}`)
+                .then(res => {
+                    this.restaurant = res.data;
+                    this.getDishes();
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
         getDishes(page = 1) {
             axios
-                .get(`http://127.0.0.1:8000/api/restaurant/${this.$route.params.slug}?page=${page}`)
+                .get(`http://127.0.0.1:8000/api/dishes/${this.restaurant.id}?page=${page}`)
                 .then(res => {
                     this.dishes = res.data.data;
-                    this.restaurant = res.data.data[0].restaurant;
                     this.pagination = {
                         current: res.data.current_page,
                         last: res.data.last_page
