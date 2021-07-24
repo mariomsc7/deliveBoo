@@ -2,7 +2,7 @@
   <div>
     <section class="hero">
         <div class="container d-flex justify-content-around align-items-center">
-            <img class="hamburger-gif d-none d-md-block" src="../../../public/image/hamburger.gif" alt="">
+            <img class="hamburger-gif" src="../../../public/image/cute_food.gif" alt="">
             <h1 class="title">Consegniamo il tuo cibo preferito a casa tua!</h1>
             <img class="rider d-none d-lg-block" src="../../../public/image/rider_deliveboo.png" alt="">
         </div>
@@ -32,7 +32,7 @@ export default {
         position: relative;
     }
     .hamburger-gif {
-        width: 300px;
+        width: 500px;
     }    
     .rider{
         position: absolute;
@@ -67,6 +67,11 @@ export default {
         text-align: center;
         align-self: flex-start;
         color: #fff;
+    }
+    @media screen and (max-width:910px){
+        .hamburger-gif{
+            display: none;
+        }
     }
 
 </style>

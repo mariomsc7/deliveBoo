@@ -12,7 +12,7 @@
                     {{type}}</label>
                 </div>
             </div>
-        
+            <hr>
             <div v-if="types.length">
                 <!-- Page Navigation -->
                 <section class="navigation text-center mb-5">
@@ -152,6 +152,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../sass/app';
+    hr{
+        width: 40%;
+        border: 1px solid #273036;
+    }
     .cards {
 
         border-radius: 10px;
@@ -181,7 +185,7 @@ export default {
         width:250px;
         height:50px;
         border-radius: 50px;
-        background-color:#13d977;
+        background-color:#273036;
         margin:20px ;
         display:flex;
         justify-content:center;
@@ -249,7 +253,7 @@ export default {
         left: 0;
         width: 100%;
         height: 100%;
-        background: $brand-col;
+        background: #273036;
         transition: all 0.3s ease;
         }
     .btn-9:hover {
@@ -270,7 +274,8 @@ export default {
         }
 
     .active-page{
-            background-color:#f64826;
+            background-color:#fff;
+            color: #4e5357
     }
 
     .res-data{

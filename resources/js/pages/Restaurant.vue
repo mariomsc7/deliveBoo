@@ -19,10 +19,10 @@
                 <div class="col-md-7 col-sm-12">
                     <!-- Dish -->
                         <div class="row">
-                            <div class="col-md-5 col-sm-12 dish d-flex justify-content-between"  v-for="(dish, index) in dishes" :key="`dishes-${index}`">
-                                <div class="d-flex flex-column justify-content-center">
-                                    <i class="fas fa-info-circle info" @click="showDish(dish)" ></i>
+                            <div class="col-md-5 col-sm-12 dish d-flex justify-content-between" :class="{'unavailable' : !dish.visibility}"  v-for="(dish, index) in dishes" :key="`dishes-${index}`">
+                                <div class="d-flex flex-column justify-content-center align-items-center">
                                     {{dish.name}}
+                                    <i class="fas fa-info-circle info" @click="showDish(dish)" ></i>
                                     <div v-if="dish.visibility">
                                         <div>€ {{dish.price.toFixed(2)}}</div>
                                         <i class="fas fa-plus-circle add" @click="addToCart(dish)"></i>
@@ -345,6 +345,10 @@ export default {
     //     justify-content: space-around;
     //     align-items: flex-start;
     // }
+    .unavailable{
+        opacity: .7;
+        cursor: not-allowed
+    }
     .cart{
         align-self:flex-start;
         display: flex;
@@ -436,11 +440,11 @@ export default {
         left: 0;
         width: 100%;
         height: 100%;
-        background: $brand-col;
+        background: #273036;
         transition: all 0.3s ease;
     }
     .btn-9:hover {
-        background: $brand-col;
+        // background: $brand-col;
         box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
                     -4px -4px 6px 0 rgba(116, 125, 136, .2), 
             inset -4px -4px 6px 0 rgba(255,255,255,.5),
@@ -465,7 +469,8 @@ export default {
     }
 
     .active-page{
-            background-color:#f64826;
+        background-color:#fff;
+        color:#273036;
     }
 
     .color {

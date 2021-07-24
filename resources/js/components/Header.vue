@@ -24,7 +24,7 @@
                         <h1 class="title">DeliveBoo <i class="fas fa-ghost"></i></h1>
                     </router-link>
                 </a>
-                <button @click="showHamburger = !showHamburger" :class="{ 'collapsed' : showHamburger}" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button @click="showHamburger = !showHamburger" :class="{ 'collapsed' : showHamburger}" class="ham-color navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse flex-grow-0" :class="{ 'show' : showHamburger}" id="navbarSupportedContent">
@@ -115,6 +115,8 @@ export default {
             color: #273936;
         }
     }
-
+    .ham-color{
+        background-color: #fff;
+    }
 
 </style>
