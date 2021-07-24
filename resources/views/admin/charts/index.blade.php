@@ -7,7 +7,7 @@
                 <canvas id="userChart" class="rounded shadow"></canvas>
             </div>
         </div>
-        <a class="btn btn-primary text-uppercase mt-5" href="{{route('admin.orders.index')}}">Torna allo Storico Ordini</a>
+        <a class="btn show text-uppercase mt-5" href="{{route('admin.orders.index')}}">Torna allo Storico Ordini</a>
     </div>
 
     <!-- ChartJs -->
@@ -34,7 +34,8 @@
                     label: 'Ordini',
                     data:  order,
                     fill: true,
-                    borderColor: 'rgb(75, 192, 192)',
+                    borderColor: 'rgb(19, 217, 119)',
+                    backgroundColor: 'rgba(19, 217, 119, .2)',
                 }]
             },
             options: {

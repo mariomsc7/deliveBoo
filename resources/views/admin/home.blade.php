@@ -4,9 +4,9 @@
 <div class="container">
     @if(session('deleted'))
     <div class="alert alert-success">
-        Restaurant 
+        Ristorante
         <strong>{{ session('deleted') }}</strong>
-        successfully deleted
+        Cancellato con successo
     </div>
     @endif
     <div class="row justify-content-center">
@@ -25,7 +25,7 @@
                 </div>
                 <div>
                     @if (!$user->restaurant)
-                        <a class="btn btn-warning ml-3 mb-3" href="{{ route('admin.restaurants.create') }}">Aggiungi qui il tuo ristorante</a>
+                        <a class="btn add ml-3 mb-3" href="{{ route('admin.restaurants.create') }}">Aggiungi qui il tuo ristorante</a>
                     @endif
                 </div>
             </div>
