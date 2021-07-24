@@ -4,17 +4,17 @@
 <div class="container">
     @if(session('deleted'))
     <div class="alert alert-success">
-        Restaurant 
+        Ristorante
         <strong>{{ session('deleted') }}</strong>
-        successfully deleted
+        Cancellato con successo
     </div>
     @endif
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+        <div class="col-md-6">
+            {{-- <div class="card-info big-font"> --}}
+                {{-- <div class="card-header">{{ __('Dashboard') }}</div> --}}
 
-                <div class="card-body">
+                {{-- <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -22,13 +22,17 @@
                     @endif
 
                     {{ __('Log-in effettuato!') }}
+                </div> --}}
+                <div class="card-info big-font text-center">
+                    <h1><a class="nav-link" href="{{ route('admin.restaurants.show', $user->restaurant->id) }}">{{$user->restaurant->name}}</a></h1>
+                    <img width="500" src="{{asset('storage/' . $user->restaurant->image)}}" :alt="{{$user->restaurant->name}}">
                 </div>
                 <div>
                     @if (!$user->restaurant)
-                        <a class="btn btn-warning ml-3 mb-3" href="{{ route('admin.restaurants.create') }}">Aggiungi qui il tuo ristorante</a>
+                        <a class="btn add ml-3 mb-3" href="{{ route('admin.restaurants.create') }}">Aggiungi qui il tuo ristorante</a>
                     @endif
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
     </div>
 </div>

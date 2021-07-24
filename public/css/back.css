@@ -1,6 +1,84 @@
-.pippo{
-    color: red;
-}
-.pluto{
+/* Background Color */
+.header{
     background-color: #13d977;
+}
+.body{
+    background-color: rgb(252, 173, 26, .58)
+}
+/* Font */
+.big-font{
+    font-size: 1.3em;
+}
+
+/* Text Color */
+.navbar-light .navbar-brand{
+    color: #fff;
+    font-size: 1.7em;
+}
+.navbar-light .navbar-brand:hover{
+    color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link{
+    color: #fff;
+}
+a,
+a:hover{
+    color: #13d977
+}
+.dark{
+    color: #273036;
+}
+.dark:hover{
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Card */
+.card-info{
+    padding: 20px;
+    background-color: rgba(255,255,255,.4);
+    border-radius: 10px;
+}
+
+/* Button */
+.show-info{
+    background-color: #fff;
+}
+.delete{
+    background-color: #ec4524;
+    color: #fff;
+}
+.modify{
+    background-color: #273036;
+    color: #fff;
+}
+.add{
+    background-color: #13d977;
+    color: #fff;
+}
+.btn:hover{
+    color: #fff;
+}
+.btn.show-info:hover{
+    color: #273036;
+}
+
+/* Alert */
+.success{
+    color: #13d977
+}
+
+/* Table */
+.tt thead{
+    border-bottom: 2px solid rgba(0, 0, 0, 0.301);
+}
+.tt td{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.301);
+    border-top: 1px solid rgba(0, 0, 0, 0.301);
+}
+
+/* Chart */
+canvas{
+    background-color: rgba(255,255,255,.4);
 }

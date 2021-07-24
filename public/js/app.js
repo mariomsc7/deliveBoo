@@ -23742,7 +23742,7 @@ exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Ot
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap);", ""]);
 
 // module
-exports.push([module.i, ".container > .about > h1 {\n  font-family: \"Otomanopee One\", sans-serif;\n}\n.about {\n  margin-top: 25px;\n}\n.description {\n  display: inline-block;\n  margin-right: 90px;\n}\n.description img {\n  margin-top: 40px;\n  border-radius: 20px;\n}\n.description h2 {\n  margin-top: 20px;\n  font-family: \"Dancing Script\", cursive;\n}", ""]);
+exports.push([module.i, ".container > .about > h1 {\n  font-family: \"Otomanopee One\", sans-serif;\n}\n.about {\n  margin-top: 25px;\n}\n.description {\n  display: inline-block;\n  margin-right: 88px;\n}\n.description img {\n  margin-top: 40px;\n  border-radius: 20px;\n}\n.description h2 {\n  margin-top: 20px;\n  font-family: \"Dancing Script\", cursive;\n}", ""]);
 
 // exports
 
@@ -43278,8 +43278,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\User\Desktop\deliveBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\User\Desktop\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
