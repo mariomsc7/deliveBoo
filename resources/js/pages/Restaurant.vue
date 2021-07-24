@@ -346,6 +346,7 @@ export default {
     //     align-items: flex-start;
     // }
     .cart{
+        align-self:flex-start;
         display: flex;
         flex-direction: column;
         padding: 20px;

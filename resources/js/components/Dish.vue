@@ -51,4 +51,12 @@ export default {
     }
   }
 }
+@media screen and (max-width: 550px){
+  .details{
+    .details-box{
+      width: 300px;
+      font-size: 0.8em;
+    }
+  }
+}
 </style>
