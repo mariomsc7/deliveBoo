@@ -25523,7 +25523,7 @@ var render = function() {
               _c("ul", { staticClass: "navbar-nav mr-auto " }, [
                 _c(
                   "li",
-                  { staticClass: "nav-item active" },
+                  { staticClass: "nav-item active text-center" },
                   [
                     _c(
                       "router-link",
@@ -25533,6 +25533,14 @@ var render = function() {
                       },
                       [
                         _c("i", { staticClass: "fas fa-home icons" }, [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "d-inline d-md-inline d-lg-none ml-3"
+                            },
+                            [_vm._v("Home "), _c("hr")]
+                          ),
+                          _vm._v(" "),
                           _c("span", { staticClass: "sr-only" }, [
                             _vm._v("(current)")
                           ])
@@ -25545,7 +25553,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "li",
-                  { staticClass: "nav-item active" },
+                  { staticClass: "nav-item active text-center" },
                   [
                     _c(
                       "router-link",
@@ -25555,6 +25563,13 @@ var render = function() {
                       },
                       [
                         _c("i", { staticClass: "fas fa-cart-plus icons" }, [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "d-inline d-md-inline d-lg-none ml-3"
+                            },
+                            [_vm._v("Cassa "), _c("hr")]
+                          ),
                           _c("span", { staticClass: "sr-only" }, [
                             _vm._v("(current)")
                           ])
@@ -25567,7 +25582,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "li",
-                  { staticClass: "nav-item active" },
+                  { staticClass: "nav-item active  text-center" },
                   [
                     _c(
                       "router-link",
@@ -25577,6 +25592,13 @@ var render = function() {
                       },
                       [
                         _c("i", { staticClass: "fas fa-users icons" }, [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "d-inline d-md-inline d-lg-none ml-3"
+                            },
+                            [_vm._v("About"), _c("hr")]
+                          ),
                           _c("span", { staticClass: "sr-only" }, [
                             _vm._v("(current)")
                           ])
@@ -25601,7 +25623,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item active" }, [
+    return _c("li", { staticClass: "nav-item active  text-center" }, [
       _c(
         "a",
         {
@@ -25610,7 +25632,9 @@ var staticRenderFns = [
         },
         [
           _c("i", { staticClass: "fas fa-user-shield icons" }, [
-            _vm._v("Area Riservata")
+            _c("span", { staticClass: "d-inline d-md-inline d-lg-none ml-3" }, [
+              _vm._v(" Area Riservata")
+            ])
           ])
         ]
       )
@@ -43212,8 +43236,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\User\Desktop\deliveBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\User\Desktop\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
