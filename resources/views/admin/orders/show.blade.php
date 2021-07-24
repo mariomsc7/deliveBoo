@@ -8,7 +8,7 @@
             <h3>Indirizzo: {{$order->customer_address}}</h3>
             <h3>Importo Pagato: {{$order->tot_paid}}€</h3>
             <h3>Data & Ora: <span class="text-primary">{{$order->created_at}}</span></h3>
-            <a class="btn show" href="{{route('admin.orders.index')}}">Torna allo Storico Ordini</a>
+            <a class="btn show-info" href="{{route('admin.orders.index')}}">Torna allo Storico Ordini</a>
         </div>
     </div>
 @endsection

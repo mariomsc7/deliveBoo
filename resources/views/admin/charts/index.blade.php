@@ -7,7 +7,7 @@
                 <canvas id="userChart" class="rounded shadow"></canvas>
             </div>
         </div>
-        <a class="btn show text-uppercase mt-5" href="{{route('admin.orders.index')}}">Torna allo Storico Ordini</a>
+        <a class="btn show-info text-uppercase mt-5" href="{{route('admin.orders.index')}}">Torna allo Storico Ordini</a>
     </div>
 
     <!-- ChartJs -->

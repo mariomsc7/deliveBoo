@@ -5,6 +5,34 @@
 .body{
     background-color: rgb(252, 173, 26, .58)
 }
+/* Font */
+.big-font{
+    font-size: 1.3em;
+}
+
+/* Text Color */
+.navbar-light .navbar-brand{
+    color: #fff;
+    font-size: 1.7em;
+}
+.navbar-light .navbar-brand:hover{
+    color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link{
+    color: #fff;
+}
+a,
+a:hover{
+    color: #13d977
+}
+.dark{
+    color: #273036;
+}
+.dark:hover{
+    color: #fff;
+    text-decoration: none;
+}
 
 /* Card */
 .card-info{
@@ -14,7 +42,7 @@
 }
 
 /* Button */
-.show{
+.show-info{
     background-color: #fff;
 }
 .delete{
@@ -32,7 +60,7 @@
 .btn:hover{
     color: #fff;
 }
-.btn.show:hover{
+.btn.show-info:hover{
     color: #273036;
 }
 

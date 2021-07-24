@@ -29,7 +29,7 @@
                             <td>€{{number_format($dish->price, 2)}}</td>
                             <td><button class="btn btn-secondary ml-2" disabled> {{$dish->visibility ? 'Sì' : 'No'}} </button></td>
                             <td>
-                                <a class="btn show" href="{{route('admin.dishes.show', $dish->id)}}">Mostra Dettagli</a>
+                                <a class="btn show-info" href="{{route('admin.dishes.show', $dish->id)}}">Mostra Dettagli</a>
                             </td>
                             <td>
                                 <a class="btn modify" href="{{route('admin.dishes.edit', $dish->id)}}">Modifica Dettagli</a>

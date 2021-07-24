@@ -11,7 +11,7 @@
             </div>
             @endif
             <h1>Storico Ordini</h1>
-            <a class="btn show text-uppercase mr-3" href="{{route('admin.restaurants.show', $restaurant->id)}}">Ritorna al ristorante</a>
+            <a class="btn show-info text-uppercase mr-3" href="{{route('admin.restaurants.show', $restaurant->id)}}">Ritorna al ristorante</a>
             <a class="btn modify text-uppercase" href="{{route('admin.charts.show', $restaurant->id)}}">Mostra Grafico Ordini</a>
             <table class="table mt-5 tt">
                 <thead>
@@ -29,7 +29,7 @@
                             <td>{{$order->customer_name}} {{$order->customer_lastname}}</td>
                             <td>€{{number_format($order->tot_paid, 2)}}</td>
                             <td>
-                                <a class="btn show" href="{{route('admin.orders.show', $order->id)}}">Mostra Dettagli</a>
+                                <a class="btn show-info" href="{{route('admin.orders.show', $order->id)}}">Mostra Dettagli</a>
                             </td>
                             <td>
                                 <form class="delete-form" action="{{route('admin.orders.destroy', $order->id)}}" method="POST">

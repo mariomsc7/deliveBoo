@@ -17,7 +17,7 @@
                     <p>{{$dish->description}}</p>
                     <h2>Prezzo:</h2>
                     <p>€{{number_format($dish->price, 2)}}</p>
-                    <a class="btn show mt-5" href="{{route('admin.dishes.index')}}">Ritorna al Menù</a>
+                    <a class="btn show-info mt-5" href="{{route('admin.dishes.index')}}">Ritorna al Menù</a>
                 </div>
                 @if ($dish->image)
                     <div class="col-md-6">

@@ -22,7 +22,7 @@
 </head>
 <body class="body">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm header">
+        <nav class="big-font navbar navbar-expand-md navbar-light shadow-sm header">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('admin.home') }}">
                      Deliveboo
@@ -35,7 +35,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <ul class="navbar-nav mr-auto">
-                            <a href="{{ url('/') }}" target="_blank">Visualizza Sito</a>
+                            <a class="dark" href="{{ url('/') }}" target="_blank">Visualizza Sito</a>
                         </ul>
                     </ul>
 

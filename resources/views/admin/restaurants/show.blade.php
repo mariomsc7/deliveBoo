@@ -18,7 +18,7 @@
                         </h3>
                     </div>
                     <div class=mt-5>
-                        <a class="btn show text-uppercase mr-2" href="{{route('admin.orders.index')}}">Storico Ordini</a>
+                        <a class="btn show-info text-uppercase mr-2" href="{{route('admin.orders.index')}}">Storico Ordini</a>
                         <a class="btn modify text-uppercase pr-3 pl-3 mr-2" href="{{route('admin.restaurants.edit', $restaurant->id)}}">Modifica</a>
                         <form class="delete-form d-inline-block" action="{{route('admin.restaurants.destroy', $restaurant->id)}}" method="POST">
                             @csrf
