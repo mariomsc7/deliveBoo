@@ -23,9 +23,11 @@ Route::namespace('Api')->group(function() {
     Route::get('/restaurants', 'RestaurantController@list');
     // Filter
     Route::get('/filter', 'RestaurantController@filter');
+    // Single
+    Route::get('/restaurants/{slug}', 'RestaurantController@show');
 
     // Get Dishes
-    Route::get('/restaurant/{slug}', 'DishController@index');
+    Route::get('/dishes/{id}', 'DishController@index');
 
     // Orders data
     Route::post('/orders', 'OrderController@store');

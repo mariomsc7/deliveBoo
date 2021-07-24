@@ -2,9 +2,9 @@
   <div>
     <section class="hero">
         <div class="container d-flex justify-content-around align-items-center">
-            <img class="hamburger-gif" src="../../../public/image/hamburger.gif" alt="">
+            <img class="hamburger-gif d-none d-md-block" src="../../../public/image/hamburger.gif" alt="">
             <h1 class="title">Consegniamo il tuo cibo preferito a casa tua!</h1>
-            <img class="rider" src="../../../public/image/rider_deliveboo.png" alt="">
+            <img class="rider d-none d-lg-block" src="../../../public/image/rider_deliveboo.png" alt="">
         </div>
     </section>
     <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">

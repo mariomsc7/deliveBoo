@@ -1,63 +1,69 @@
 <template>
-    <div class="restaurant">
-        <h1 class="text-center" v-if="dishes.length">{{dishes[0].restaurant.name}} Menù</h1>
-
-            <div class="container-fluid">
-                <div class="cont row">
-                    <div class="col-md-6 col-sm-12">
-                        <!-- Page Navigation    -->
-                        <section class="navigation">
-                            <button class="custom-btn btn-9 arrow" @click="getDishes(pagination.current - 1)" :disabled ="!(pagination.current > 1)"><i class="fas fa-caret-left "></i></button>
-                            <button class="custom-btn btn-9" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getDishes(i)">{{i}}</button>
-                            <button class="custom-btn btn-9 arrow" @click="getDishes(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)"><i class="fas fa-caret-right"></i></button>
-                        </section>
-                        <!-- Dish -->
-                            <div class="row">
-                                <div class="col-md-5 offset-md-1 col-sm-12 dish d-flex justify-content-between"  v-for="(dish, index) in dishes" :key="`dishes-${index}`">
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <i class="fas fa-info-circle info" @click="showDish(dish)" ></i>
-                                        {{dish.name}}
-                                        <div v-if="dish.visibility" class="d-flex">
-                                            <div>€ {{dish.price.toFixed(2)}}</div>
-                                            <i class="fas fa-plus-circle add" @click="addToCart(dish)"></i>
-                                        </div>
-                                        <div v-else>Non Disponibile</div>
+    <section>
+        <div class="restaurant container">
+            <div class="info row align-items-center text-center" v-if="dishes.length">
+                <div class="col-md-6 col-sm-12 "><img class="img-fluid rounded" :src="restaurant.image" :alt="restaurant.name"></div>
+                <div class="details col-md-6 col-sm-12">
+                    <h1>{{restaurant.name}}</h1>
+                    <h2>{{restaurant.address}}</h2>
+                    <span class="type" v-for="(type, index) in restaurant.type" :key="`type-${index}`">{{ type }}</span>
+                </div>
+            </div>
+            <!-- Page Navigation    -->
+            <div class="navigation text-center">
+                <button class="custom-btn btn-9 arrow" @click="getDishes(pagination.current - 1)" :disabled ="!(pagination.current > 1)"><i class="fas fa-caret-left "></i></button>
+                <button class="custom-btn btn-9" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getDishes(i)">{{i}}</button>
+                <button class="custom-btn btn-9 arrow" @click="getDishes(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)"><i class="fas fa-caret-right"></i></button>
+            </div>
+            <div class="row">
+                <div class="col-md-7 col-sm-12">
+                    <!-- Dish -->
+                        <div class="row">
+                            <div class="col-md-5 col-sm-12 dish d-flex justify-content-between"  v-for="(dish, index) in dishes" :key="`dishes-${index}`">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <i class="fas fa-info-circle info" @click="showDish(dish)" ></i>
+                                    {{dish.name}}
+                                    <div v-if="dish.visibility">
+                                        <div>€ {{dish.price.toFixed(2)}}</div>
+                                        <i class="fas fa-plus-circle add" @click="addToCart(dish)"></i>
                                     </div>
-                                    <div class="img"><img class="img-fluid" v-if="dish.image" :src="dish.image" :alt="dish.name"/></div>
+                                    <div v-else>Non Disponibile</div>
                                 </div>
+                                <div class="img"><img class="img-fluid" v-if="dish.image" :src="dish.image" :alt="dish.name"/></div>
                             </div>
-                    </div>
-                    <!-- Cart -->
-                    <div class="cart col-md-4 offset-md-2 col-sm-12">
-                        <h2>Il tuo Carrello</h2>
-                        <!-- Products -->
-                        <div v-if="Object.keys(cart).length" >
-                            <div v-for="(item, index) in cart" :key="index">
-                                <button class="custom-btn btn-9 arrow" @click="remove(item.name, item.unit)"><i class="fas fa-minus"></i></button>
+                        </div>
+                </div>
+                <!-- Cart -->
+                <div class="cart col-md-5 col-sm-12 text-center">
+                    <h2>Il tuo Carrello</h2>
+                    <!-- Products -->
+                    <div v-if="Object.keys(cart).length" >
+                        <div class="product" v-for="(item, index) in cart" :key="index">
+                            <div>
+                                <button class="custom-btn btn-9 quantity minus" @click="remove(item.name, item.unit)"><i class="fas fa-minus"></i></button>
                                 <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unit)">
-                                <button class="custom-btn btn-9 arrow" @click="add(item.name, item.unit)"><i class="fas fa-plus"></i></button>
+                                <button class="custom-btn btn-9 quantity" @click="add(item.name, item.unit)"><i class="fas fa-plus"></i></button>
+                            </div>
+                            <div>
                                 <span class="name">{{item.name}}</span>
                                 <span>€ {{item.prezzo.toFixed(2)}}</span>
                                 <span class="remove" @click="removeAll(item.name, item.prezzo)"><i class="fas fa-times"></i></span>
                             </div>
                         </div>
-                        <div v-else>Il carrello è vuoto</div>
-                        <!-- Tot -->
-                        <h3>Tot: €{{tot.toFixed(2)}}</h3>
-                
-                        <!-- CheckOut Button -->
-                        <router-link :to="{name: 'checkout'}">Cassa</router-link>
-                
-                        <!-- Delete Button -->
-                        <button class="custom-btn btn-9 delete" v-if="Object.keys(cart).length" @click="deleteCart()">Elimina</button>
                     </div>
-                
+                    <div v-else>Il carrello è vuoto</div>
+                    <!-- Tot -->
+                    <h3>Tot: €{{tot.toFixed(2)}}</h3>
+                    <!-- CheckOut Button -->
+                    <router-link class="color" :to="{name: 'checkout'}"><i class="fas fa-cart-plus icons"></i></router-link>
+                    <!-- Delete Button -->
+                    <div class="text-right"><button class="custom-btn btn-9 delete" v-if="Object.keys(cart).length" @click="deleteCart()">Elimina</button></div>
                 </div>
             </div>
-
+        </div>
         <!-- Dish Detail -->
         <Dish :dishDetails="dishDetail" v-if="visibility" @close="closeDetail"/>
-    </div>
+    </section>
         
 </template>
 
@@ -70,6 +76,7 @@ export default {
     },
     data() {
         return {
+            restaurant: {},
             dishes: [],
             dishDetail: {},
             visibility: false,
@@ -80,16 +87,27 @@ export default {
         };
     },
     created() {
-        this.getDishes();
+        this.getRestaurant();
         this.popCart();
     },
     methods: {
         /**
          * Call API for Dishes
          */
+        getRestaurant() {
+            axios
+                .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.slug}`)
+                .then(res => {
+                    this.restaurant = res.data;
+                    this.getDishes();
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
         getDishes(page = 1) {
             axios
-                .get(`http://127.0.0.1:8000/api/restaurant/${this.$route.params.slug}?page=${page}`)
+                .get(`http://127.0.0.1:8000/api/dishes/${this.restaurant.id}?page=${page}`)
                 .then(res => {
                     this.dishes = res.data.data;
                     this.pagination = {
@@ -261,10 +279,25 @@ export default {
 <style lang="scss">
 
 @import '../../sass/app';
-
     .restaurant{
         color: #273036;
         padding: 20px;
+    }
+    .info{
+        margin: 20px;
+        position: relative;
+        img{
+            height: 200px;
+            object-fit: cover;
+        }
+        .type{
+            margin: 0 5px;
+            font-size: 1.2em;
+            font-weight: 900;
+        }
+    }
+    .navigation{
+        margin: 20px 0;
     }
     .inputNum{
         width: 35px;
@@ -277,21 +310,19 @@ export default {
     }
     
     .remove{
+        margin-left: 10px;
         cursor: pointer;
         &:hover{
-            color: red;
+            color: #ec4524;
         }
     }
-    .unavailable {
-        color: red;
-    }
+
     .dish{
-        // width: 350px;
         height: 130px;
-        margin-bottom: 10px;
-        padding: 20px;
-        font-size: 1.4em;
-        background-color: rgb(134, 236, 202);
+        margin: 5px 10px;
+        padding: 10px;
+        // font-size: 1em;
+        background-color: rgba(255,255,255,.7);
         border-radius: 10px;
 
         i.info{
@@ -306,20 +337,38 @@ export default {
         }
     }
     .img{
-        width: 150px;
+        width: 120px;
         overflow: hidden;
     }
-    .cont{
-        display: flex;
-        justify-content: space-around;
-        align-items: flex-start;
-    }
+    // .cont{
+    //     display: flex;
+    //     justify-content: space-around;
+    //     align-items: flex-start;
+    // }
     .cart{
+        align-self:flex-start;
+        display: flex;
+        flex-direction: column;
         padding: 20px;
-        background-color: $brand-col;
-
+        background-color: #273036;
+        border-radius: 10px;
+        color: #fff;
         .name{
             margin: 0 10px;
+        }
+        .product{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.1em;
+            font-weight: 900;
+        }
+        input[type="number"]{
+            border-radius: 20px;
+            width: 30px;
+            text-align: center;
+            outline: none;
+            border: 0;
         }
     }
 
@@ -331,12 +380,13 @@ export default {
     .custom-btn {
         width: 90px;
         height: 40px;
+        margin: 7px;
         color: #fff;
         border-radius: 50px;
         padding: 0 25px;
         font-family: 'Lato', sans-serif;
         font-weight: 500;
-        font-size: 20px;
+        font-size: 1.1em;
         background: transparent;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -358,6 +408,18 @@ export default {
         &.delete{
             width: 120px;
         }
+        &.quantity{
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            border-radius: 50%;
+            background-color: #fdcf7a;
+            font-size: 10px;
+
+            &.minus:hover{
+                background-color: #ec4524;
+            }
+        }
     }
 
     .btn-9 {
@@ -378,7 +440,7 @@ export default {
         transition: all 0.3s ease;
     }
     .btn-9:hover {
-        background: transparent;
+        background: $brand-col;
         box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
                     -4px -4px 6px 0 rgba(116, 125, 136, .2), 
             inset -4px -4px 6px 0 rgba(255,255,255,.5),
@@ -386,7 +448,7 @@ export default {
         color: #fff;
     }
     .btn-9.delete:hover {
-        background: red;
+        background: #ec4524;
         box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
                     -4px -4px 6px 0 rgba(116, 125, 136, .2), 
             inset -4px -4px 6px 0 rgba(255,255,255,.5),
@@ -403,6 +465,15 @@ export default {
     }
 
     .active-page{
-            background-color:#183ea7;
+            background-color:#f64826;
+    }
+
+    .color {
+        color: #fff;
+        font-size: 2em;
+
+        &:hover {
+            color: $brand-col;
+        }
     }
 </style>
