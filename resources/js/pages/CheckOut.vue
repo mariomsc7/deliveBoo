@@ -352,7 +352,7 @@ export default {
 //     border-radius: 50px;
 //     margin:20px ;
 //     box-shadow: 5px 5px #888888;
-// }
+/// }
 .execute {
     margin: 20px 0 0;
     background-color:#273036;
