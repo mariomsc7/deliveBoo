@@ -16,10 +16,7 @@
                         <ul>
                             <li><a href="#">Investitori</a></li>
                             <li>
-                                <router-link
-                                    class="text-decoration-none"
-                                    :to="{ name: 'aboutus' }"
-                                >
+                                <router-link :to="{ name: 'aboutus' }">
                                     Chi Siamo
                                 </router-link>
                             </li>
