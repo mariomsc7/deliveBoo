@@ -91,7 +91,7 @@ export default {};
 
 .description {
     display: inline-block;
-    margin-right: 90px;
+    margin-right: 88px;
     img {
         margin-top: 40px;
         border-radius: 20px;

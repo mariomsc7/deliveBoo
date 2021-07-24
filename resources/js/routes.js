@@ -13,6 +13,9 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     mode: "history",
     linkExactActiveClass: "active",
+    scrollBehavior (to, from, savedPosition) {
+        return { x: 0, y: 0, behavior: 'smooth' }
+    },
     routes: [
         {
             path: "/",
