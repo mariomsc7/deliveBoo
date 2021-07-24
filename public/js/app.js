@@ -2244,14 +2244,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -23743,7 +23735,7 @@ exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Ot
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap);", ""]);
 
 // module
-exports.push([module.i, ".container > .about > h1 {\n  font-family: \"Otomanopee One\", sans-serif;\n}\n.about {\n  margin-top: 25px;\n}\n.description {\n  display: inline-block;\n  margin-right: 88px;\n}\n.description img {\n  margin-top: 40px;\n  border-radius: 20px;\n}\n.description h2 {\n  margin-top: 20px;\n  font-family: \"Dancing Script\", cursive;\n}", ""]);
+exports.push([module.i, ".container > .about > h1 {\n  font-family: \"Otomanopee One\", sans-serif;\n}\n.about {\n  margin-top: 25px;\n}\n.description img {\n  margin-top: 40px;\n  border-radius: 20px;\n}\n.description h2 {\n  margin-top: 20px;\n  font-family: \"Dancing Script\", cursive;\n}", ""]);
 
 // exports
 
@@ -25822,83 +25814,81 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "description col-md-3" }, [
-        _c("img", {
-          staticClass: "link-img img-fluid rounded-circle",
-          attrs: {
-            src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
-            alt: "About"
-          }
-        }),
+      _c("div", { staticClass: "row justify-content-around" }, [
+        _c("div", { staticClass: "description col-md-3 col-sm-6 col-6" }, [
+          _c("img", {
+            staticClass: "link-img img-fluid rounded-circle",
+            attrs: {
+              src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
+              alt: "About"
+            }
+          }),
+          _vm._v(" "),
+          _c("h2", [_vm._v("\n                Lorem \n            ")])
+        ]),
         _vm._v(" "),
-        _c("h2", [
-          _vm._v(
-            "\n            Lorem ipsum dolor sit amet consectetur adipisicing elit.\n            Laboriosam illo delectus eos iusto cum tempore harum blanditiis\n            porro. Mollitia corporis adipisci esse corrupti odit assumenda\n            numquam laudantium ex voluptates velit.\n        "
-          )
+        _c("div", { staticClass: "w-100 d-sm-block d-md-none " }),
+        _vm._v(" "),
+        _c("div", { staticClass: "description col-md-3 col-sm-6 col-6" }, [
+          _c("img", {
+            staticClass: "link-img img-fluid",
+            attrs: {
+              src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
+              alt: "About"
+            }
+          }),
+          _vm._v(" "),
+          _c("h2", [
+            _vm._v("\n                Lorem, ipsum dolor sit \n            ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "w-100 d-sm-block d-md-none " }),
+        _vm._v(" "),
+        _c("div", { staticClass: "description col-md-3 col-sm-6 col-6" }, [
+          _c("img", {
+            staticClass: "link-img img-fluid",
+            attrs: {
+              src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
+              alt: "About"
+            }
+          }),
+          _vm._v(" "),
+          _c("h2", [
+            _vm._v("\n                Lorem, ipsum dolor sit \n            ")
+          ])
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "description col-md-3" }, [
-        _c("img", {
-          staticClass: "link-img img-fluid",
-          attrs: {
-            src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
-            alt: "About"
-          }
-        }),
+      _c("div", { staticClass: "row justify-content-around" }, [
+        _c("div", { staticClass: "description col-md-3 col-sm-6 col-6" }, [
+          _c("img", {
+            staticClass: "link-img img-fluid",
+            attrs: {
+              src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
+              alt: "About"
+            }
+          }),
+          _vm._v(" "),
+          _c("h2", [
+            _vm._v("\n                Lorem, ipsum dolor sit \n            ")
+          ])
+        ]),
         _vm._v(" "),
-        _c("h2", [
-          _vm._v(
-            "\n            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam\n            perferendis, eaque odit aut totam eveniet! Beatae reprehenderit,\n            distinctio sequi hic sit, ea repellat pariatur cum incidunt\n            impedit voluptatum labore magnam.\n        "
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "description col-md-3" }, [
-        _c("img", {
-          staticClass: "link-img img-fluid",
-          attrs: {
-            src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
-            alt: "About"
-          }
-        }),
+        _c("div", { staticClass: "w-100 d-sm-block d-md-none " }),
         _vm._v(" "),
-        _c("h2", [
-          _vm._v(
-            "\n            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam\n            perferendis, eaque odit aut totam eveniet! Beatae reprehenderit,\n            distinctio sequi hic sit, ea repellat pariatur cum incidunt\n            impedit voluptatum labore magnam.\n        "
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "description col-md-3" }, [
-        _c("img", {
-          staticClass: "link-img img-fluid",
-          attrs: {
-            src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
-            alt: "About"
-          }
-        }),
-        _vm._v(" "),
-        _c("h2", [
-          _vm._v(
-            "\n            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam\n            perferendis, eaque odit aut totam eveniet! Beatae reprehenderit,\n            distinctio sequi hic sit, ea repellat pariatur cum incidunt\n            impedit voluptatum labore magnam.\n        "
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "description col-md-3" }, [
-        _c("img", {
-          staticClass: "link-img img-fluid",
-          attrs: {
-            src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
-            alt: "About"
-          }
-        }),
-        _vm._v(" "),
-        _c("h2", [
-          _vm._v(
-            "\n            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam\n            perferendis, eaque odit aut totam eveniet! Beatae reprehenderit,\n            distinctio sequi hic sit, ea repellat pariatur cum incidunt\n            impedit voluptatum labore magnam.\n        "
-          )
+        _c("div", { staticClass: "description col-md-3 col-sm-6 col-6" }, [
+          _c("img", {
+            staticClass: "link-img img-fluid",
+            attrs: {
+              src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
+              alt: "About"
+            }
+          }),
+          _vm._v(" "),
+          _c("h2", [
+            _vm._v("\n                Lorem, ipsum dolor sit \n            ")
+          ])
         ])
       ])
     ])
