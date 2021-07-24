@@ -138,17 +138,17 @@ export default {
                     styles: {
                         input: {
                             "font-size": "14px",
-                            "font-family": "Open Sans"
+                            "font-family": "sans-serif",
                         }
                     },
                     fields: {
                         number: {
                             selector: "#creditCardNumber",
-                            placeholder: "Enter Credit Card"
+                            placeholder: "Inserisci numero carta"
                         },
                         cvv: {
                             selector: "#cvv",
-                            placeholder: "Enter CVV"
+                            placeholder: "CVV"
                         },
                         expirationDate: {
                             selector: "#expireDate",
@@ -361,5 +361,9 @@ export default {
     &:hover{
         background-color:#fdcf7a;
     }
+}
+
+::placeholder {
+    font-family: sans-serif;
 }
 </style>

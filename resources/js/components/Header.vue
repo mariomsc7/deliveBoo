@@ -42,7 +42,7 @@
             
                         </li>
                         <li class="nav-item active">
-                            <a class="admin icons nav-link" href="http://127.0.0.1:8000/admin" target="_blank"><i class="fas fa-user-shield icons">Area Riservata</i></a>
+                            <a class="admin icons nav-link" href="http://127.0.0.1:8000/admin" target="_blank"><i class="fas fa-user-shield icons"></i></a>
                         </li>
             
                     </ul>
