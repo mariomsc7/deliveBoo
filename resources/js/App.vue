@@ -57,4 +57,8 @@ body {
 a:hover{
   color: #0ea459 !important;
 }
+
+html {
+  scroll-behavior: smooth;
+}
 </style>
