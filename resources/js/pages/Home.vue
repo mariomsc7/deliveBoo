@@ -174,7 +174,11 @@ export default {
             position: absolute;
 
             &:checked + .box-card{
-                background-color:#f64826;
+                background-color:#fff;
+                color: #273036;
+                        box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+                    inset -7px -7px 10px 0px rgba(0,0,0,.1),0px 0px 15px 5px $brand-col,
+                    4px 4px 5px 0px $brand-col;
             }
 
         }
@@ -274,8 +278,12 @@ export default {
         }
 
     .active-page{
-            background-color:#fff;
-            color: #4e5357
+        background-color:#fff;
+        color: #4e5357 ;
+        box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+                    inset -7px -7px 10px 0px rgba(0,0,0,.1),0px 0px 15px 5px $brand-col,
+                    4px 4px 5px 0px $brand-col;
+
     }
 
     .res-data{
