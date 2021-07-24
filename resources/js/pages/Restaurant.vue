@@ -42,7 +42,7 @@
                             <div>
                                 <button class="custom-btn btn-9 quantity minus" @click="remove(item.name, item.unit)"><i class="fas fa-minus"></i></button>
                                 <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unit)">
-                                <button class="custom-btn btn-9 quantity" @click="add(item.name, item.unit)"><i class="fas fa-plus"></i></button>
+                                <button class="custom-btn btn-9 quantity plus" @click="add(item.name, item.unit)"><i class="fas fa-plus"></i></button>
                             </div>
                             <div>
                                 <span class="name">{{item.name}}</span>
@@ -340,11 +340,7 @@ export default {
         width: 120px;
         overflow: hidden;
     }
-    // .cont{
-    //     display: flex;
-    //     justify-content: space-around;
-    //     align-items: flex-start;
-    // }
+
     .unavailable{
         opacity: .7;
         cursor: not-allowed
@@ -422,6 +418,9 @@ export default {
 
             &.minus:hover{
                 background-color: #ec4524;
+            }
+            &.plus:hover{
+                background-color: $brand-col;
             }
         }
     }

@@ -54,4 +54,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #149756d5; 
 }
+a:hover{
+  color: #0ea459 !important;
+}
 </style>
