@@ -12,7 +12,9 @@
             <!-- Page Navigation    -->
             <div class="navigation text-center">
                 <button class="custom-btn btn-9 arrow" @click="getDishes(pagination.current - 1)" :disabled ="!(pagination.current > 1)"><i class="fas fa-caret-left "></i></button>
-                <button class="custom-btn btn-9" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getDishes(i)">{{i}}</button>
+                <span v-if="pagination.last != 1">
+                    <button class="custom-btn btn-9" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getDishes(i)">{{i}}</button>
+                </span>
                 <button class="custom-btn btn-9 arrow" @click="getDishes(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)"><i class="fas fa-caret-right"></i></button>
             </div>
             <div class="row">
@@ -387,7 +389,8 @@ export default {
         font-family: 'Lato', sans-serif;
         font-weight: 500;
         font-size: 1.1em;
-        background: transparent;
+        // background: transparent;
+        background: #273036;
         cursor: pointer;
         transition: all 0.3s ease;
         position: relative;
@@ -403,6 +406,15 @@ export default {
             width: 40px;
             border-radius: 50%;
             padding: 0;
+
+            &:disabled{
+                background-color: #797b7c;
+                &:hover{
+                           box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+                    inset -7px -7px 10px 0px rgba(0,0,0,.1),7px 7px 20px 0px rgba(0,0,0,.1),
+                    4px 4px 5px 0px rgba(0,0,0,.1);
+                }
+            }
         }
 
         &.delete{
@@ -431,17 +443,17 @@ export default {
         overflow: hidden;
         color: #fff;
     }
-    .btn-9:after {
-        position: absolute;
-        content: " ";
-        z-index: -1;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #273036;
-        transition: all 0.3s ease;
-    }
+    // .btn-9:after {
+    //     position: absolute;
+    //     content: " ";
+    //     z-index: -1;
+    //     top: 0;
+    //     left: 0;
+    //     width: 100%;
+    //     height: 100%;
+    //     background: #273036;
+    //     transition: all 0.3s ease;
+    // }
     .btn-9:hover {
         // background: $brand-col;
         box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
@@ -458,15 +470,15 @@ export default {
             inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
         color: #fff;
     }
-    .btn-9:hover:after {
-        -webkit-transform: scale(2) rotate(180deg);
-        transform: scale(2) rotate(180deg);
-        box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
-                    -4px -4px 6px 0 rgba(116, 125, 136, .2), 
-            inset -4px -4px 6px 0 rgba(255,255,255,.5),
-            inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+    // .btn-9:hover:after {
+    //     -webkit-transform: scale(2) rotate(180deg);
+    //     transform: scale(2) rotate(180deg);
+    //     box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+    //                 -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    //         inset -4px -4px 6px 0 rgba(255,255,255,.5),
+    //         inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
 
-    }
+    // }
 
     .active-page{
         background-color:#fff;

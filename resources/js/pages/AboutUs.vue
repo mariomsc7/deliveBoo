@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="about">
-            <h1>Chi Siamo</h1>
+            <h1 class="text-center">Chi ha creato DelveBoo???</h1>
         </div>
         <div class="description col-md-3">
             <img
