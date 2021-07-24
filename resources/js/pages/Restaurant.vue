@@ -380,7 +380,7 @@ export default {
     }
 
     .custom-btn {
-        width: 90px;
+        width: 75px;
         height: 40px;
         margin: 7px;
         color: #fff;
@@ -490,7 +490,7 @@ export default {
 
     .color {
         color: #fff;
-        font-size: 2em;
+        font-size: 3em;
 
         &:hover {
             color: $brand-col;
