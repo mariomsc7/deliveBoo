@@ -4,13 +4,15 @@
     <div class="container">
         <div class="card-info">
             @if(session('deleted'))
-            <div class="alert success">
+            <div class="alert alert-success">
                 Ordine di
-                <strong>{{ session('deleted') }}</strong>
+                <strong>{{ session('deleted') }} </strong>
                 cancellato con successo
             </div>
             @endif
-            <h1>Storico Ordini</h1>
+            <h1 class="mb-5 text-center"><a href="{{ route('admin.restaurants.show', $restaurant->id)}}">{{$restaurant->name}}</a></h1>
+
+            <h2>STORICO ORDINI</h2>
             <a class="btn show-info text-uppercase mr-3" href="{{route('admin.restaurants.show', $restaurant->id)}}">Ritorna al ristorante</a>
             <a class="btn modify text-uppercase" href="{{route('admin.charts.show', $restaurant->id)}}">Mostra Grafico Ordini</a>
             <table class="table mt-5 tt">

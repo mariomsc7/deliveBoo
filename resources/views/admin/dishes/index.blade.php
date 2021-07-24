@@ -4,15 +4,16 @@
     <div class="container">
         <div class="card-info">
             @if(session('deleted'))
-                <div class="alert success">
+                <div class="alert alert-success">
                     Piatto
-                    <strong>{{ session('deleted') }}</strong>
-                     Cancellato con succeeso
+                    <strong>{{ session('deleted') }} </strong>
+                    cancellato con succeeso
                 </div>
             @endif
-            <h1 class="mb-5"><a href="{{ route('admin.restaurants.show', $restaurant->id)}}">{{$restaurant->name}}</a></h1>
+            <h1 class="mb-5 text-center"><a href="{{ route('admin.restaurants.show', $restaurant->id)}}">{{$restaurant->name}}</a></h1>
             <h2>MENÙ</h2>
-            <a class="btn add text-uppercase pr-3 pl-3 mt-3" href="{{route('admin.dishes.create')}}">Aggiungi Piatto</a>
+            <a class="btn show-info text-uppercase mr-3" href="{{route('admin.restaurants.show', $restaurant->id)}}">Ritorna al ristorante</a>
+            <a class="btn add text-uppercase pr-3 pl-3" href="{{route('admin.dishes.create')}}">Aggiungi Piatto</a>
             <table class="table tt mt-5">
                 <thead>
                     <tr>
