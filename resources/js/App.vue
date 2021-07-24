@@ -31,6 +31,7 @@ body {
     padding-top: 85px !important;
     box-sizing: border-box !important;
     background-color: rgb(252, 173, 26, .58) !important;
+    font-family: 'Architects Daughter', cursive !important;
 }
 
 /* width */
