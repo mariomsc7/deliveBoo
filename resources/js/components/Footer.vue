@@ -62,6 +62,14 @@
                                         alt="Google Play"
                                 /></a>
                             </li>
+                            <li class="socials-li mt-3">
+                             
+                                    <a class="socials" href="#"><i class="fab fa-facebook-square"></i></a>
+                                    <a class="socials" href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                                    <a class="socials" href="#"><i class="fab fa-google-plus-g" aria-hidden="true"></i></a>
+                                    <a class="socials" href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                                
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -92,10 +100,40 @@ footer {
             }
             .link-img {
                 margin-top: 20px;
-                display: block;
                 width: 150px;
             }
         }
     }
 }
+
+.socials-li {
+    display: flex;
+}
+
+.socials i {
+    font-size: 30px;
+    padding: 10px;
+    transition: color 0.4s;
+}
+
+.socials:nth-child(1) i:hover {
+  color: #3b5998;
+  text-shadow: 0 0 8px #3b5998;
+}
+
+.socials:nth-child(2) i:hover {
+  color: #00aced;
+  text-shadow: 0 0 8px #00aced;
+}
+
+.socials:nth-child(3) i:hover {
+  color: #dd4b39;
+  text-shadow: 0 0 8px #dd4b39;
+}
+
+.socials:nth-child(4) i:hover {
+  color: #e4405f;
+  text-shadow: 0 0 8px #e4405f;
+}
+
 </style>
