@@ -69,6 +69,7 @@
                         <div>{{$message}}</div>
                     @enderror
                     <button id="sub-btn" type="submit" class="btn add text-uppercase pr-3 pl-3">Salva</button>
+                    <a class="btn btn-danger text-uppercase ml-2 " href="{{route('admin.restaurants.show', $restaurant->id)}}">Indietro</a>
                 </div>
             </form>
         </div>

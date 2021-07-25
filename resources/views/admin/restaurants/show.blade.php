@@ -17,13 +17,13 @@
                             @endforeach
                         </h3>
                     </div>
-                    <div class=mt-5>
-                        <a class="btn show-info text-uppercase mr-2" href="{{route('admin.orders.index')}}">Storico Ordini</a>
-                        <a class="btn modify text-uppercase pr-3 pl-3 mr-2" href="{{route('admin.restaurants.edit', $restaurant->id)}}">Modifica</a>
+                    <div class="mt-5 d-flex justify-content-center flex-wrap">
+                        <a class="btn show-info text-uppercase mr-2 mt-3" href="{{route('admin.orders.index')}}">Storico Ordini</a>
+                        <a class="btn modify text-uppercase pr-3 pl-3 mr-2 mt-3" href="{{route('admin.restaurants.edit', $restaurant->id)}}">Modifica</a>
                         <form class="delete-form d-inline-block" action="{{route('admin.restaurants.destroy', $restaurant->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <input type="submit" class="btn delete" value="CANCELLA RISTORANTE">
+                            <input type="submit" class="btn delete mt-3" value="CANCELLA RISTORANTE">
                         </form>
                     </div>
                 </div>
