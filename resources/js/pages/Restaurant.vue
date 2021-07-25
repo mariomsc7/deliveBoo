@@ -10,26 +10,32 @@
                 </div>
             </div>
             <!-- Page Navigation    -->
-            <div class="navigation text-center">
-                <button class="custom-btn btn-9 arrow" @click="getDishes(pagination.current - 1)" :disabled ="!(pagination.current > 1)"><i class="fas fa-caret-left "></i></button>
-                <button class="custom-btn btn-9" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getDishes(i)">{{i}}</button>
-                <button class="custom-btn btn-9 arrow" @click="getDishes(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)"><i class="fas fa-caret-right"></i></button>
+            <div class="row">
+                <div class="col-md-7 navigation text-center">
+                    <button class="custom-btn btn-9 arrow" @click="getDishes(pagination.current - 1)" :disabled ="!(pagination.current > 1)"><i class="fas fa-caret-left "></i></button>
+                    <span v-if="pagination.last != 1">
+                        <button class="custom-btn btn-9" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getDishes(i)">{{i}}</button>
+                    </span>
+                    <button class="custom-btn btn-9 arrow" @click="getDishes(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)"><i class="fas fa-caret-right"></i></button>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-7 col-sm-12">
                     <!-- Dish -->
                         <div class="row">
-                            <div class="col-md-5 col-sm-12 dish d-flex justify-content-between" :class="{'unavailable' : !dish.visibility}"  v-for="(dish, index) in dishes" :key="`dishes-${index}`">
-                                <div class="d-flex flex-column justify-content-center align-items-center">
-                                    {{dish.name}}
-                                    <i class="fas fa-info-circle info" @click="showDish(dish)" ></i>
-                                    <div v-if="dish.visibility">
-                                        <div>€ {{dish.price.toFixed(2)}}</div>
-                                        <i class="fas fa-plus-circle add" @click="addToCart(dish)"></i>
+                            <div class="col-md-6 col-sm-12 d-flex justify-content-between" :class="{'unavailable' : !dish.visibility}"  v-for="(dish, index) in dishes" :key="`dishes-${index}`">
+                                <div class="dish d-flex justify-content-between align-items-center">
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        {{dish.name}}
+                                        <i class="fas fa-info-circle info" @click="showDish(dish)" ></i>
+                                        <div v-if="dish.visibility">
+                                            <div>€ {{dish.price.toFixed(2)}}</div>
+                                            <i class="fas fa-plus-circle add" @click="addToCart(dish)"></i>
+                                        </div>
+                                        <div v-else>Non Disponibile</div>
                                     </div>
-                                    <div v-else>Non Disponibile</div>
-                                </div>
-                                <div class="img"><img class="img-fluid" v-if="dish.image" :src="dish.image" :alt="dish.name"/></div>
+                                    <div class="img d-flex align-items-center"><img class="img-fluid" v-if="dish.image" :src="dish.image" :alt="dish.name"/>
+                                </div></div>
                             </div>
                         </div>
                 </div>
@@ -318,8 +324,9 @@ export default {
     }
 
     .dish{
+        width: 100%;
         height: 130px;
-        margin: 5px 10px;
+        margin-bottom: 10px;
         padding: 10px;
         // font-size: 1em;
         background-color: rgba(255,255,255,.7);
@@ -337,7 +344,8 @@ export default {
         }
     }
     .img{
-        width: 120px;
+        width: 50%;
+        height: 100px;
         overflow: hidden;
     }
 
@@ -378,7 +386,7 @@ export default {
     }
 
     .custom-btn {
-        width: 90px;
+        width: 75px;
         height: 40px;
         margin: 7px;
         color: #fff;
@@ -387,7 +395,8 @@ export default {
         font-family: 'Lato', sans-serif;
         font-weight: 500;
         font-size: 1.1em;
-        background: transparent;
+        // background: transparent;
+        background: #273036;
         cursor: pointer;
         transition: all 0.3s ease;
         position: relative;
@@ -403,6 +412,15 @@ export default {
             width: 40px;
             border-radius: 50%;
             padding: 0;
+
+            &:disabled{
+                background-color: #797b7c;
+                &:hover{
+                           box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+                    inset -7px -7px 10px 0px rgba(0,0,0,.1),7px 7px 20px 0px rgba(0,0,0,.1),
+                    4px 4px 5px 0px rgba(0,0,0,.1);
+                }
+            }
         }
 
         &.delete{
@@ -431,17 +449,17 @@ export default {
         overflow: hidden;
         color: #fff;
     }
-    .btn-9:after {
-        position: absolute;
-        content: " ";
-        z-index: -1;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #273036;
-        transition: all 0.3s ease;
-    }
+    // .btn-9:after {
+    //     position: absolute;
+    //     content: " ";
+    //     z-index: -1;
+    //     top: 0;
+    //     left: 0;
+    //     width: 100%;
+    //     height: 100%;
+    //     background: #273036;
+    //     transition: all 0.3s ease;
+    // }
     .btn-9:hover {
         // background: $brand-col;
         box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
@@ -458,15 +476,15 @@ export default {
             inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
         color: #fff;
     }
-    .btn-9:hover:after {
-        -webkit-transform: scale(2) rotate(180deg);
-        transform: scale(2) rotate(180deg);
-        box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
-                    -4px -4px 6px 0 rgba(116, 125, 136, .2), 
-            inset -4px -4px 6px 0 rgba(255,255,255,.5),
-            inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+    // .btn-9:hover:after {
+    //     -webkit-transform: scale(2) rotate(180deg);
+    //     transform: scale(2) rotate(180deg);
+    //     box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+    //                 -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    //         inset -4px -4px 6px 0 rgba(255,255,255,.5),
+    //         inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
 
-    }
+    // }
 
     .active-page{
         background-color:#fff;
@@ -478,7 +496,7 @@ export default {
 
     .color {
         color: #fff;
-        font-size: 2em;
+        font-size: 3em;
 
         &:hover {
             color: $brand-col;

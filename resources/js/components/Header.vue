@@ -29,20 +29,20 @@
                 </button>
                 <div class="collapse navbar-collapse flex-grow-0" :class="{ 'show' : showHamburger}" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto ">
-                        <li class="nav-item active text-center">
+                        <li class="nav-item active text-center" @click="showHamburger = false">
                             <router-link class="color icons nav-link" :to="{ name: 'home' }"><i class="fas fa-home icons"> <span class="d-inline d-md-inline d-lg-none ml-3" >Home <hr></span> <span class="sr-only">(current)</span></i></router-link>
             
                         </li>
-                        <li class="nav-item active text-center">
+                        <li class="nav-item active text-center" @click="showHamburger = false">
                             <router-link class="color icons nav-link" :to="{ name: 'checkout' }"><i class="fas fa-cart-plus icons"> <span class="d-inline d-md-inline d-lg-none ml-3" >Cassa <hr></span><span class="sr-only">(current)</span></i></router-link>
             
                         </li>
-                        <li class="nav-item active  text-center">
+                        <li class="nav-item active  text-center" @click="showHamburger = false">
                             <router-link class="color icons nav-link" :to="{ name: 'aboutus' }"><i class="fas fa-users icons"> <span class="d-inline d-md-inline d-lg-none ml-3" >About<hr></span><span class="sr-only">(current)</span></i></router-link>
             
                         </li>
-                        <li class="nav-item active  text-center">
-                            <a class="admin icons nav-link" href="http://127.0.0.1:8000/admin" target="_blank"><i class="fas fa-user-shield icons"> <span class="d-inline d-md-inline d-lg-none ml-3"> Area Riservata</span></i></a>
+                        <li class="nav-item active  text-center" @click="showHamburger = false">
+                            <a class="admin icons nav-link" href="http://127.0.0.1:8000/admin" target="_blank"><i class="fas fa-user-shield icons"> <span class="d-inline d-md-inline d-lg-none ml-3">Area Riservata</span></i></a>
                         </li>
             
                     </ul>
@@ -117,6 +117,9 @@ export default {
     }
     .ham-color{
         background-color: #fff;
+    }
+    a.navbar-brand{
+        margin: 0;
     }
 
 </style>

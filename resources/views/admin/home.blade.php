@@ -5,34 +5,24 @@
     @if(session('deleted'))
     <div class="alert alert-success">
         Ristorante
-        <strong>{{ session('deleted') }}</strong>
-        Cancellato con successo
+        <strong>{{ session('deleted') }} </strong>
+        cancellato con successo
     </div>
     @endif
     <div class="row justify-content-center">
         <div class="col-md-6">
-            {{-- <div class="card-info big-font"> --}}
-                {{-- <div class="card-header">{{ __('Dashboard') }}</div> --}}
-
-                {{-- <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('Log-in effettuato!') }}
-                </div> --}}
+            @if ($user->restaurant)
                 <div class="card-info big-font text-center">
-                    <h1><a class="nav-link" href="{{ route('admin.restaurants.show', $user->restaurant->id) }}">{{$user->restaurant->name}}</a></h1>
+                    <h1><a href="{{ route('admin.restaurants.show', $user->restaurant->id) }}">{{$user->restaurant->name}}</a></h1>
                     <img width="500" src="{{asset('storage/' . $user->restaurant->image)}}" :alt="{{$user->restaurant->name}}">
                 </div>
-                <div>
-                    @if (!$user->restaurant)
-                        <a class="btn add ml-3 mb-3" href="{{ route('admin.restaurants.create') }}">Aggiungi qui il tuo ristorante</a>
-                    @endif
-                </div>
-            {{-- </div> --}}
+            @endif
+
+            <div>
+                @if (!$user->restaurant)
+                    <a class="btn add ml-3 mb-3 mt-5" href="{{ route('admin.restaurants.create') }}"><h1>Aggiungi qui il tuo ristorante</h1></a>
+                @endif
+            </div>
         </div>
     </div>
 </div>

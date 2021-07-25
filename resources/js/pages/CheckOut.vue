@@ -4,7 +4,7 @@
         <!-- ROW -->
         <section class="row mt-5">
             <!-- CART -->
-            <div class="cart col-md-5 col-ms-12 text-center">
+            <div class="cart col-md-6 col-sm-12 text-center mb-3">
                     <h1>Il tuo Carrello</h1>
                     <!-- SELECT COUNTER -->
                     <div v-if="Object.keys(cart).length" >
@@ -26,7 +26,7 @@
                     <div class="text-right"><button class="custom-btn btn-9 delete" v-if="Object.keys(cart).length" @click="deleteCart()">Elimina</button></div>
             </div>
             <!-- PAYMENT FORM -->
-            <div class="col-md-5 offset-md-2 col-ms-12" v-if="Object.keys(cart).length">
+            <div class="col-md-5 offset-md-1 col-sm-12" v-if="Object.keys(cart).length">
                 <div class="form">
                     <div class="success-message" v-show="success">Il tuo ordine è stato inviato</div>
                     <!-- FORM -->

@@ -73,5 +73,10 @@ export default {
             display: none;
         }
     }
+    @media screen and (max-width:400px){
+        .title{
+            font-size: 3.5rem;
+        }
+    }
 
 </style>

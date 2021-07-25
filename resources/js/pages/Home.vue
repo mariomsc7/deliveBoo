@@ -3,7 +3,7 @@
         <Hero />
         <div class="container">
             
-            <h1 class="text-center">Scegli il tipo di ristorante!</h1>
+            <h1 class="text-center">Cosa vorresti mangiare oggi?</h1>
             <!-- Types Checkbox -->
             <div class="type-list d-flex justify-content-around">
                 <div class="chek-wrap" v-for="(type, index) in types" :key="`types-${index}`">
@@ -12,38 +12,37 @@
                     {{type}}</label>
                 </div>
             </div>
+
             <hr>
+
             <div v-if="types.length">
                 <!-- Page Navigation -->
-                <section class="navigation text-center mb-5">
+                <div class="navigation text-center mb-5">
                     <button class="custom-btn btn-9 arrow" @click="getRestaurants(pagination.current - 1)" :disabled ="!(pagination.current > 1)"><i class="fas fa-caret-left"></i></button>
-                    <button class="custom-btn btn-9 d-none d-md-inline" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getRestaurants(i)">{{i}}</button>
+                    <span v-if="pagination.last != 1">
+                        <button class="custom-btn btn-9 d-none d-md-inline" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getRestaurants(i)">{{i}}</button>
+                    </span>
         
                     <button class="custom-btn btn-9 arrow" @click="getRestaurants(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)"><i class="fas fa-caret-right"></i></button>
-                </section>
-                <!-- <div> -->
-                        <!-- Restaurants List -->
-                    <div class="row">
-                        <div class="cards col-md-4" v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
-                            <!-- <div class="test"> -->
-                                <router-link class="test text-decoration-none" :to="{name: 'restaurant', params: {slug:restaurant.slug}}">
-                                    <img class="img-fluid" v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name"/>
-                                    <div class="res-data">
-                                        <h2>{{ restaurant.name }}</h2>
-                                        <div>{{ restaurant.address }}</div>
-                                        <div>
-                                            <span v-for="(type, index) in restaurant.type" :key="`type-${index}`">
-                                                {{ type }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </router-link>
-                            <!-- </div> -->
+                </div>
 
-                        </div>
+                <!-- Restaurants List -->
+                <div class="row">
+                    <div class="cards col-md-4" v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
+                        <router-link class="test text-decoration-none" :to="{name: 'restaurant', params: {slug:restaurant.slug}}">
+                            <img class="img-fluid" v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name"/>
+                            <div class="res-data">
+                                <h2>{{ restaurant.name }}</h2>
+                                <div>{{ restaurant.address }}</div>
+                                <div>
+                                    <span v-for="(type, index) in restaurant.type" :key="`type-${index}`">
+                                        {{ type }}
+                                    </span>
+                                </div>
+                            </div>
+                        </router-link>
                     </div>
-                <!-- </div> -->
-
+                </div>
             </div>
         </div>
     </div>
@@ -186,7 +185,7 @@ export default {
     .box-card{
         color: #fff;
         position: relative;
-        width:250px;
+        width:170px;
         height:50px;
         border-radius: 50px;
         background-color:#273036;
@@ -214,7 +213,7 @@ export default {
     }
 
     .custom-btn {
-        width: 90px;
+        width: 75px;
         height: 40px;
         color: #fff;
         border-radius: 50px;
@@ -222,7 +221,8 @@ export default {
         font-family: 'Lato', sans-serif;
         font-weight: 500;
         font-size: 20px;
-        background: transparent;
+        background: #273036;
+        // background: transparent;
         cursor: pointer;
         transition: all 0.3s ease;
         position: relative;
@@ -238,6 +238,15 @@ export default {
             width: 40px;
             border-radius: 50%;
             padding: 0;
+
+            &:disabled{
+                background-color: #797b7c;
+                &:hover{
+                           box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+                    inset -7px -7px 10px 0px rgba(0,0,0,.1),7px 7px 20px 0px rgba(0,0,0,.1),
+                    4px 4px 5px 0px rgba(0,0,0,.1);
+                }
+            }
         }
     }
 
@@ -249,33 +258,35 @@ export default {
         overflow: hidden;
         color: white;
         }
-    .btn-9:after {
-        position: absolute;
-        content: " ";
-        z-index: -1;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #273036;
-        transition: all 0.3s ease;
-        }
+    // .btn-9:after {
+    //     position: absolute;
+    //     content: " ";
+    //     z-index: -1;
+    //     top: 0;
+    //     left: 0;
+    //     width: 100%;
+    //     height: 100%;
+    //     background: #273036;
+    //     transition: all 0.3s ease;
+    //     }
     .btn-9:hover {
-        background: transparent;
+        background: #273036;
+        // background: transparent;
+        // background: #13d97742;
         box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
                     -4px -4px 6px 0 rgba(116, 125, 136, .2), 
             inset -4px -4px 6px 0 rgba(255,255,255,.5),
             inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
         color: #fff;
         }
-    .btn-9:hover:after {
-        -webkit-transform: scale(2) rotate(180deg);
-        transform: scale(2) rotate(180deg);
-        box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
-                    -4px -4px 6px 0 rgba(116, 125, 136, .2), 
-            inset -4px -4px 6px 0 rgba(255,255,255,.5),
-            inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
-        }
+    // .btn-9:hover:after {
+    //     -webkit-transform: scale(2) rotate(180deg);
+    //     transform: scale(2) rotate(180deg);
+    //     box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+    //                 -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    //         inset -4px -4px 6px 0 rgba(255,255,255,.5),
+    //         inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+    //     }
 
     .active-page{
         background-color:#fff;
@@ -317,6 +328,18 @@ export default {
         &:hover img{
             mix-blend-mode: normal;
             opacity: 1;
+        }
+    }
+    @media screen and (max-width:765px) {
+        .box-card{
+            width: 120px;
+            font-size: 1.3em;
+        }
+    }
+    @media screen and (max-width:380px) {
+        .box-card{
+            width: 90px;
+            font-size: 1.1em;
         }
     }
 </style>

@@ -59,15 +59,26 @@ class ChartController extends Controller
         }
         // Get orders grouped by month
         $groups = Order::where('restaurant_id', $restaurant->id)
-                  ->selectRaw('MONTH(created_at) as month, count(*) as total')
+                  ->selectRaw('EXTRACT(YEAR_MONTH FROM created_at) as month, count(*) as total')
                   ->groupBy('month')
                   ->pluck('total', 'month')->all();
-
         // Prepare the data for returning with the view
+        $keys = array_keys($groups);
+        // dd($keys);
+        $months = [];
+         foreach ($keys as $item){
+            // dump($item);
+            $months[] = $item % 100;
+        }
+        // dd($months);
+
+        // dd($groups);
         $chart = new Chart;
-            $chart->labels = (array_keys($groups));
+            $chart->labels = $months;
             $chart->dataset = (array_values($groups));
+            // dd($chart);
             return view('admin.charts.index', compact('chart'));
+
     }
 
     /**
