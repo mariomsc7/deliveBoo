@@ -40,8 +40,9 @@
                         </div>
                 </div>
                 <!-- Cart -->
-                <div class="cart col-md-5 col-sm-12 text-center">
+                <div class="cart col-md-5 col-sm-12">
                     <h2>Il tuo Carrello</h2>
+                    <h2>Ristorante: {{restaurant.name}}</h2>
                     <!-- Products -->
                     <div v-if="Object.keys(cart).length" >
                         <div class="product" v-for="(item, index) in cart" :key="index">
@@ -50,18 +51,20 @@
                                 <input class="inputNum" type="number" min="1" v-model="item.quantità" @change="updateQuantity($event, item.name, item.unit)">
                                 <button class="custom-btn btn-9 quantity plus" @click="add(item.name, item.unit)"><i class="fas fa-plus"></i></button>
                             </div>
-                            <div>
-                                <span class="name">{{item.name}}</span>
-                                <span>€ {{item.prezzo.toFixed(2)}}</span>
-                                <span class="remove" @click="removeAll(item.name, item.prezzo)"><i class="fas fa-times"></i></span>
+                            <div class="d-flex flex-column">
+                                <span class="name text-center">{{item.name}}</span>
+                                <div class="price-x text-center">
+                                    <span>€ {{item.prezzo.toFixed(2)}}</span>
+                                    <span class="remove" @click="removeAll(item.name, item.prezzo)"><i class="fas fa-times"></i></span>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div v-else>Il carrello è vuoto</div>
                     <!-- Tot -->
-                    <h3>Tot: €{{tot.toFixed(2)}}</h3>
+                    <h3 class="text-center">Tot: €{{tot.toFixed(2)}}</h3>
                     <!-- CheckOut Button -->
-                    <router-link class="color" :to="{name: 'checkout'}"><i class="fas fa-cart-plus icons"></i></router-link>
+                    <router-link class="color text-center" :to="{name: 'checkout'}"><i class="fas fa-cart-plus icons"></i></router-link>
                     <!-- Delete Button -->
                     <div class="text-right"><button class="custom-btn btn-9 delete" v-if="Object.keys(cart).length" @click="deleteCart()">Elimina</button></div>
                 </div>
@@ -300,6 +303,7 @@ export default {
             margin: 0 5px;
             font-size: 1.2em;
             font-weight: 900;
+            word-break: break-all;
         }
     }
     .navigation{
@@ -361,13 +365,19 @@ export default {
         background-color: #273036;
         border-radius: 10px;
         color: #fff;
-        .name{
-            margin: 0 10px;
+        
+        .price-x {
+            min-width: 20px;
         }
+
         .product{
             display: flex;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #fff;
+            padding: 20px;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            // justify-content: space-between;
             font-size: 1.1em;
             font-weight: 900;
         }
