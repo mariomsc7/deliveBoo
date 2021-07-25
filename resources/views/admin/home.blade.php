@@ -14,7 +14,7 @@
             @if ($user->restaurant)
                 <div class="card-info big-font text-center">
                     <h1><a href="{{ route('admin.restaurants.show', $user->restaurant->id) }}">{{$user->restaurant->name}}</a></h1>
-                    <img width="500" src="{{asset('storage/' . $user->restaurant->image)}}" :alt="{{$user->restaurant->name}}">
+                    <img class="img-fluid" src="{{asset('storage/' . $user->restaurant->image)}}" :alt="{{$user->restaurant->name}}">
                 </div>
             @endif
 
