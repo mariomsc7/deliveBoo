@@ -185,7 +185,7 @@ export default {
     .box-card{
         color: #fff;
         position: relative;
-        width:250px;
+        width:170px;
         height:50px;
         border-radius: 50px;
         background-color:#273036;
@@ -213,7 +213,7 @@ export default {
     }
 
     .custom-btn {
-        width: 90px;
+        width: 75px;
         height: 40px;
         color: #fff;
         border-radius: 50px;
@@ -328,6 +328,18 @@ export default {
         &:hover img{
             mix-blend-mode: normal;
             opacity: 1;
+        }
+    }
+    @media screen and (max-width:765px) {
+        .box-card{
+            width: 120px;
+            font-size: 1.3em;
+        }
+    }
+    @media screen and (max-width:380px) {
+        .box-card{
+            width: 90px;
+            font-size: 1.1em;
         }
     }
 </style>

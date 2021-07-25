@@ -3,70 +3,62 @@
         <div class="about">
             <h1 class="text-center">Chi ha creato DeliveBoo???</h1>
         </div>
-        <div class="description col-md-3">
-            <img
-                class="link-img img-fluid rounded-circle"
-                src="../../../public/image/sfondo.jpg"
-                alt="About"
-            />
-            <h2>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laboriosam illo delectus eos iusto cum tempore harum blanditiis
-                porro. Mollitia corporis adipisci esse corrupti odit assumenda
-                numquam laudantium ex voluptates velit.
-            </h2>
+        <div class="row justify-content-around">
+            <div class="description col-md-3 col-sm-6 col-6">
+                <img
+                    class="link-img img-fluid rounded-circle"
+                    src="../../../public/image/sfondo.jpg"
+                    alt="About"
+                />
+                <h2>
+                    Lorem 
+                </h2>
+            </div>
+            <div class="w-100 d-sm-block d-md-none "></div>
+            <div class="description col-md-3 col-sm-6 col-6">
+                <img
+                    class="link-img img-fluid"
+                    src="../../../public/image/sfondo.jpg"
+                    alt="About"
+                />
+                <h2>
+                    Lorem, ipsum dolor sit 
+                </h2>
+            </div>
+            <div class="w-100 d-sm-block d-md-none "></div>
+            <div class="description col-md-3 col-sm-6 col-6">
+                <img
+                    class="link-img img-fluid"
+                    src="../../../public/image/sfondo.jpg"
+                    alt="About"
+                />
+                <h2>
+                    Lorem, ipsum dolor sit 
+                </h2>
+            </div>
         </div>
-        <div class="description col-md-3">
-            <img
-                class="link-img img-fluid"
-                src="../../../public/image/sfondo.jpg"
-                alt="About"
-            />
-            <h2>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
-                perferendis, eaque odit aut totam eveniet! Beatae reprehenderit,
-                distinctio sequi hic sit, ea repellat pariatur cum incidunt
-                impedit voluptatum labore magnam.
-            </h2>
-        </div>
-        <div class="description col-md-3">
-            <img
-                class="link-img img-fluid"
-                src="../../../public/image/sfondo.jpg"
-                alt="About"
-            />
-            <h2>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
-                perferendis, eaque odit aut totam eveniet! Beatae reprehenderit,
-                distinctio sequi hic sit, ea repellat pariatur cum incidunt
-                impedit voluptatum labore magnam.
-            </h2>
-        </div>
-        <div class="description col-md-3">
-            <img
-                class="link-img img-fluid"
-                src="../../../public/image/sfondo.jpg"
-                alt="About"
-            />
-            <h2>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
-                perferendis, eaque odit aut totam eveniet! Beatae reprehenderit,
-                distinctio sequi hic sit, ea repellat pariatur cum incidunt
-                impedit voluptatum labore magnam.
-            </h2>
-        </div>
-        <div class="description col-md-3">
-            <img
-                class="link-img img-fluid"
-                src="../../../public/image/sfondo.jpg"
-                alt="About"
-            />
-            <h2>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
-                perferendis, eaque odit aut totam eveniet! Beatae reprehenderit,
-                distinctio sequi hic sit, ea repellat pariatur cum incidunt
-                impedit voluptatum labore magnam.
-            </h2>
+        <div class="row justify-content-around">
+            <div class="description col-md-3 col-sm-6 col-6">
+                <img
+                    class="link-img img-fluid"
+                    src="../../../public/image/sfondo.jpg"
+                    alt="About"
+                />
+                <h2>
+                    Lorem, ipsum dolor sit 
+                </h2>
+            </div>
+            <div class="w-100 d-sm-block d-md-none "></div>
+            <div class="description col-md-3 col-sm-6 col-6">
+                <img
+                    class="link-img img-fluid"
+                    src="../../../public/image/sfondo.jpg"
+                    alt="About"
+                />
+                <h2>
+                    Lorem, ipsum dolor sit 
+                </h2>
+            </div>
         </div>
     </div>
 </template>
@@ -90,8 +82,8 @@ export default {};
 }
 
 .description {
-    display: inline-block;
-    margin-right: 88px;
+    // display: inline-block;
+    // margin-right: 88px;
     img {
         margin-top: 40px;
         border-radius: 20px;
