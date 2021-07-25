@@ -25,12 +25,18 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-12 d-flex justify-content-between" :class="{'unavailable' : !dish.visibility}"  v-for="(dish, index) in dishes" :key="`dishes-${index}`">
                                 <div class="dish d-flex justify-content-between align-items-center">
-                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                        {{dish.name}}
-                                        <i class="fas fa-info-circle info" @click="showDish(dish)" ></i>
+                                    <div class="d-flex flex-grow-1 flex-column justify-content-center align-items-center">
+                                        <div class="text-center">{{dish.name}}</div>
+                                        <div class="d-flex">
+                                            € {{dish.price.toFixed(2)}}
+                                        </div>
                                         <div v-if="dish.visibility">
-                                            <div>€ {{dish.price.toFixed(2)}}</div>
-                                            <i class="fas fa-plus-circle add" @click="addToCart(dish)"></i>
+                                            <div>
+                                                <span class="add" @click="addToCart(dish)"><i class="fas fa-plus-circle"></i> Aggiungi</span>
+                                            </div>
+                                                <div>
+                                                    <i class="fas fa-info-circle information" @click="showDish(dish)" ></i> Info
+                                                </div>
                                         </div>
                                         <div v-else>Non Disponibile</div>
                                     </div>
@@ -336,15 +342,21 @@ export default {
         background-color: rgba(255,255,255,.7);
         border-radius: 10px;
 
-        i.info{
+        i.information{
+            margin-left: 10px;
             cursor: pointer;
         }
 
-        i.add{
-            margin-left: 15px;
+        .add{
+            // margin-left: 15px;
             color: $brand-col;
             font-size: 1.1em;
+            font-weight: 900;
             cursor: pointer;
+
+            &:hover{
+                color: #1b9759;
+            }
         }
     }
     .img{

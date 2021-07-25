@@ -175,7 +175,7 @@ export default {
             &:checked + .box-card{
                 background-color:#fff;
                 color: #273036;
-                        box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+                box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
                     inset -7px -7px 10px 0px rgba(0,0,0,.1),0px 0px 15px 5px $brand-col,
                     4px 4px 5px 0px $brand-col;
             }
@@ -183,16 +183,18 @@ export default {
         }
     }
     .box-card{
+        text-align: center;
+        padding: 8px 0;
         color: #fff;
-        position: relative;
+        // position: relative;
         width:170px;
-        height:50px;
+        // height:50px;
         border-radius: 50px;
         background-color:#273036;
-        margin:20px ;
-        display:flex;
-        justify-content:center;
-        align-items: center;
+        margin: 15px ;
+        // display:flex;
+        // justify-content:center;
+        // align-items: center;
         font-size: 1.5em;
         cursor: pointer;
         box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
