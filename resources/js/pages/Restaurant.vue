@@ -6,7 +6,9 @@
                 <div class="details col-md-6 col-sm-12">
                     <h1>{{restaurant.name}}</h1>
                     <h2>{{restaurant.address}}</h2>
-                    <span class="type" v-for="(type, index) in restaurant.type" :key="`type-${index}`">{{ type }}</span>
+                    <div class="d-flex flex-column">
+                        <span class="type" v-for="(type, index) in restaurant.type" :key="`type-${index}`">{{ type }}</span>
+                    </div>
                 </div>
             </div>
             <!-- Page Navigation    -->

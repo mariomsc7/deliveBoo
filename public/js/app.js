@@ -2810,6 +2810,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Restaurant',
@@ -26686,24 +26688,24 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "details col-md-6 col-sm-12" },
-                  [
-                    _c("h1", [_vm._v(_vm._s(_vm.restaurant.name))]),
-                    _vm._v(" "),
-                    _c("h2", [_vm._v(_vm._s(_vm.restaurant.address))]),
-                    _vm._v(" "),
+                _c("div", { staticClass: "details col-md-6 col-sm-12" }, [
+                  _c("h1", [_vm._v(_vm._s(_vm.restaurant.name))]),
+                  _vm._v(" "),
+                  _c("h2", [_vm._v(_vm._s(_vm.restaurant.address))]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "d-flex flex-column" },
                     _vm._l(_vm.restaurant.type, function(type, index) {
                       return _c(
                         "span",
                         { key: "type-" + index, staticClass: "type" },
                         [_vm._v(_vm._s(type))]
                       )
-                    })
-                  ],
-                  2
-                )
+                    }),
+                    0
+                  )
+                ])
               ]
             )
           : _vm._e(),
