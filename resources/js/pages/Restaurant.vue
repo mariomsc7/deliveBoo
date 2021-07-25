@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-7 col-sm-12">
+                <div class="col-md-7 col-sm-12 mb-5">
                     <!-- Dish -->
                         <div class="row">
                             <div class="col-md-6 col-sm-12 d-flex justify-content-between" :class="{'unavailable' : !dish.visibility}"  v-for="(dish, index) in dishes" :key="`dishes-${index}`">
