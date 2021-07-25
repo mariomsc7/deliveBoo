@@ -1,22 +1,5 @@
 <template>
     <header>
-        <!-- <div class="container d-flex justify-content-between">
-            <div class="logo">
-                <router-link class="text-decoration-none" :to="{ name: 'home' }">
-                    <h1 class="title">DeliveBoo <i class="fas fa-ghost"></i></h1>
-                </router-link>
-            </div>
-
-            <div class="top-menu">
-                <router-link class="color icons nav-link" :to="{ name: 'home' }"><i class="fas fa-home"></i></router-link>
-                <router-link class="color icons" :to="{ name: 'checkout' }"><i class="fas fa-cart-plus"></i></router-link>
-                <router-link class="color icons" :to="{ name: 'aboutus' }"><i class="fas fa-users"></i></router-link>
-                <a class="admin icons" href="http://127.0.0.1:8000/admin" target="_blank"><i class="fas fa-user-shield">Area Riservata</i></a>
-            </div>
-        </div> -->
-
-
-
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light back justify-content-between">
                 <a class="navbar-brand" href="#">
@@ -30,19 +13,19 @@
                 <div class="collapse navbar-collapse flex-grow-0" :class="{ 'show' : showHamburger}" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto ">
                         <li class="nav-item active text-center" @click="showHamburger = false">
-                            <router-link class="color icons nav-link" :to="{ name: 'home' }"><i class="fas fa-home icons"> <span class="d-inline d-md-inline d-lg-none ml-3" >Home <hr></span> <span class="sr-only">(current)</span></i></router-link>
+                            <router-link class="color icons nav-link" :to="{ name: 'home' }"><i class="fas fa-home icons"></i> <span class="color-span d-inline d-md-inline d-lg-none ml-3" >Home <hr></span> <span class="sr-only">(current)</span></router-link>
             
                         </li>
                         <li class="nav-item active text-center" @click="showHamburger = false">
-                            <router-link class="color icons nav-link" :to="{ name: 'checkout' }"><i class="fas fa-cart-plus icons"> <span class="d-inline d-md-inline d-lg-none ml-3" >Cassa <hr></span><span class="sr-only">(current)</span></i></router-link>
+                            <router-link class="color icons nav-link" :to="{ name: 'checkout' }"><i class="fas fa-cart-plus icons"></i> <span class="color-span d-inline d-md-inline d-lg-none ml-3" >Cassa <hr></span><span class="sr-only">(current)</span></router-link>
             
                         </li>
                         <li class="nav-item active  text-center" @click="showHamburger = false">
-                            <router-link class="color icons nav-link" :to="{ name: 'aboutus' }"><i class="fas fa-users icons"> <span class="d-inline d-md-inline d-lg-none ml-3" >About<hr></span><span class="sr-only">(current)</span></i></router-link>
+                            <router-link class="color icons nav-link" :to="{ name: 'aboutus' }"><i class="fas fa-users icons"></i><span class="color-span d-inline d-md-inline d-lg-none ml-3" >About<hr></span><span class="sr-only">(current)</span></router-link>
             
                         </li>
                         <li class="nav-item active  text-center" @click="showHamburger = false">
-                            <a class="admin icons nav-link" href="http://127.0.0.1:8000/admin" target="_blank"><i class="fas fa-user-shield icons"> <span class="d-inline d-md-inline d-lg-none ml-3">Area Riservata</span></i></a>
+                            <a class="admin icons nav-link" href="http://127.0.0.1:8000/admin" target="_blank"><i class="fas fa-user-shield icons"></i> <span class="color-span d-inline d-md-inline d-lg-none ml-3">Area Riservata</span></a>
                         </li>
             
                     </ul>
@@ -121,5 +104,7 @@ export default {
     a.navbar-brand{
         margin: 0;
     }
-
+    .color-span{
+        color: #fff;
+    }
 </style>

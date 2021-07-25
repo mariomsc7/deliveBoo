@@ -5,7 +5,7 @@
             
             <h1 class="text-center">Cosa vorresti mangiare oggi?</h1>
             <!-- Types Checkbox -->
-            <div class="type-list d-flex justify-content-around">
+            <div class="type-list d-flex justify-content-center">
                 <div class="chek-wrap" v-for="(type, index) in types" :key="`types-${index}`">
                     <input @change="filter" type="checkbox" :value="type" :id="type" v-model="checked">
                     <label class="box-card" :for="type">
@@ -33,9 +33,9 @@
                             <img class="img-fluid" v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name"/>
                             <div class="res-data">
                                 <h2>{{ restaurant.name }}</h2>
-                                <div>{{ restaurant.address }}</div>
+                                <h4>{{ restaurant.address }}</h4>
                                 <div>
-                                    <span v-for="(type, index) in restaurant.type" :key="`type-${index}`">
+                                    <span class="type" v-for="(type, index) in restaurant.type" :key="`type-${index}`">
                                         {{ type }}
                                     </span>
                                 </div>
@@ -159,6 +159,10 @@ export default {
 
         border-radius: 10px;
         color: #fff;
+    }
+
+    .type:not(:last-child):after {
+        content: '-';
     }
 
     .type-list {
