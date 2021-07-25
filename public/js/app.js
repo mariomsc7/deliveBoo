@@ -2898,6 +2898,7 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           this.cart[dish.name] = {
             restaurant_id: dish.restaurant_id,
+            restaurant_name: this.restaurant.name,
             name: dish.name,
             quantità: 1,
             prezzo: dish.price,
@@ -26873,7 +26874,16 @@ var render = function() {
             [
               _c("h2", [_vm._v("Il tuo Carrello")]),
               _vm._v(" "),
-              _c("h2", [_vm._v("Ristorante: " + _vm._s(_vm.restaurant.name))]),
+              Object.keys(_vm.cart).length
+                ? _c("h2", [
+                    _vm._v(
+                      "Ristorante: " +
+                        _vm._s(
+                          _vm.cart[Object.keys(this.cart)[0]].restaurant_name
+                        )
+                    )
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               Object.keys(_vm.cart).length
                 ? _c(

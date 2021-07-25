@@ -48,7 +48,7 @@
                 <!-- Cart -->
                 <div class="cart col-md-5 col-sm-12">
                     <h2>Il tuo Carrello</h2>
-                    <h2>Ristorante: {{restaurant.name}}</h2>
+                    <h2 v-if="Object.keys(cart).length">Ristorante: {{cart[Object.keys(this.cart)[0]].restaurant_name}}</h2>
                     <!-- Products -->
                     <div v-if="Object.keys(cart).length" >
                         <div class="product" v-for="(item, index) in cart" :key="index">
@@ -171,6 +171,7 @@ export default {
                 } else {
                     this.cart[dish.name] = {
                         restaurant_id: dish.restaurant_id,
+                        restaurant_name: this.restaurant.name,
                         name: dish.name,
                         quantità: 1,
                         prezzo: dish.price,
@@ -338,7 +339,6 @@ export default {
         height: 130px;
         margin-bottom: 10px;
         padding: 10px;
-        // font-size: 1em;
         background-color: rgba(255,255,255,.7);
         border-radius: 10px;
 
@@ -348,7 +348,6 @@ export default {
         }
 
         .add{
-            // margin-left: 15px;
             color: $brand-col;
             font-size: 1.1em;
             font-weight: 900;
@@ -389,7 +388,6 @@ export default {
             padding: 20px;
             flex-direction: column;
             align-items: center;
-            // justify-content: space-between;
             font-size: 1.1em;
             font-weight: 900;
         }
@@ -417,7 +415,6 @@ export default {
         font-family: 'Lato', sans-serif;
         font-weight: 500;
         font-size: 1.1em;
-        // background: transparent;
         background: #273036;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -471,19 +468,7 @@ export default {
         overflow: hidden;
         color: #fff;
     }
-    // .btn-9:after {
-    //     position: absolute;
-    //     content: " ";
-    //     z-index: -1;
-    //     top: 0;
-    //     left: 0;
-    //     width: 100%;
-    //     height: 100%;
-    //     background: #273036;
-    //     transition: all 0.3s ease;
-    // }
     .btn-9:hover {
-        // background: $brand-col;
         box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
                     -4px -4px 6px 0 rgba(116, 125, 136, .2), 
             inset -4px -4px 6px 0 rgba(255,255,255,.5),
@@ -498,15 +483,6 @@ export default {
             inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
         color: #fff;
     }
-    // .btn-9:hover:after {
-    //     -webkit-transform: scale(2) rotate(180deg);
-    //     transform: scale(2) rotate(180deg);
-    //     box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
-    //                 -4px -4px 6px 0 rgba(116, 125, 136, .2), 
-    //         inset -4px -4px 6px 0 rgba(255,255,255,.5),
-    //         inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
-
-    // }
 
     .active-page{
         background-color:#fff;
