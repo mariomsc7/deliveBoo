@@ -21,17 +21,19 @@
                 <div class="col-md-7 col-sm-12">
                     <!-- Dish -->
                         <div class="row">
-                            <div class="col-md-5 col-sm-12 dish d-flex justify-content-between" :class="{'unavailable' : !dish.visibility}"  v-for="(dish, index) in dishes" :key="`dishes-${index}`">
-                                <div class="d-flex flex-column justify-content-center align-items-center">
-                                    {{dish.name}}
-                                    <i class="fas fa-info-circle info" @click="showDish(dish)" ></i>
-                                    <div v-if="dish.visibility">
-                                        <div>€ {{dish.price.toFixed(2)}}</div>
-                                        <i class="fas fa-plus-circle add" @click="addToCart(dish)"></i>
+                            <div class="col-md-6 col-sm-12 d-flex justify-content-between" :class="{'unavailable' : !dish.visibility}"  v-for="(dish, index) in dishes" :key="`dishes-${index}`">
+                                <div class="dish d-flex justify-content-between align-items-center">
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        {{dish.name}}
+                                        <i class="fas fa-info-circle info" @click="showDish(dish)" ></i>
+                                        <div v-if="dish.visibility">
+                                            <div>€ {{dish.price.toFixed(2)}}</div>
+                                            <i class="fas fa-plus-circle add" @click="addToCart(dish)"></i>
+                                        </div>
+                                        <div v-else>Non Disponibile</div>
                                     </div>
-                                    <div v-else>Non Disponibile</div>
-                                </div>
-                                <div class="img"><img class="img-fluid" v-if="dish.image" :src="dish.image" :alt="dish.name"/></div>
+                                    <div class="img d-flex align-items-center"><img class="img-fluid" v-if="dish.image" :src="dish.image" :alt="dish.name"/>
+                                </div></div>
                             </div>
                         </div>
                 </div>
@@ -320,8 +322,9 @@ export default {
     }
 
     .dish{
+        width: 100%;
         height: 130px;
-        margin: 5px 10px;
+        margin-bottom: 10px;
         padding: 10px;
         // font-size: 1em;
         background-color: rgba(255,255,255,.7);
@@ -339,7 +342,8 @@ export default {
         }
     }
     .img{
-        width: 120px;
+        width: 50%;
+        height: 100px;
         overflow: hidden;
     }
 
