@@ -304,6 +304,9 @@ export default {
     .info{
         margin: 20px;
         position: relative;
+        padding: 40px 0px;
+        border-radius: 10px;
+        background: #fee3af;
         img{
             height: 200px;
             object-fit: cover;
