@@ -6,6 +6,11 @@
             <!-- CART -->
             <div class="cart col-md-6 col-sm-12 text-center mb-3">
                     <h1>Il tuo Carrello</h1>
+                    <h2 v-if="Object.keys(cart).length">
+                        <router-link :to="{path: `/restaurant/${cart[Object.keys(this.cart)[0]].restaurant_slug}`}">
+                            Ristorante: {{cart[Object.keys(this.cart)[0]].restaurant_name}}
+                        </router-link>    
+                    </h2>
                     <!-- SELECT COUNTER -->
                     <div v-if="Object.keys(cart).length" >
                         <div class="product" v-for="(item, index) in cart" :key="index">                
@@ -94,7 +99,9 @@
         <!-- FINAL MESSAGE -->
         <div class="thanks-container" v-if="send" @click="closeModal">
                 <div class="thanks">
-                    <h1>Ordine Effettuato!</h1>
+                    <h1>Ordine Effettuato!
+                         <img class="hamburger-gif" src="../../../public/images/hamburger.gif" alt="">
+                    </h1>
                     <h2>Grazie per aver scelto DeliveBoo</h2>
                 </div>
         </div>
@@ -346,13 +353,6 @@ export default {
         }
     }
 
-// .page-btn {
-//     width: 70px;
-//     height:30px;
-//     border-radius: 50px;
-//     margin:20px ;
-//     box-shadow: 5px 5px #888888;
-/// }
 .execute {
     margin: 20px 0 0;
     background-color:#273036;
@@ -365,5 +365,16 @@ export default {
 
 ::placeholder {
     font-family: sans-serif;
+}
+.hamburger-gif{
+    width: 80px;
+    margin-left: 30px;
+}
+a{
+    color: $brand-col;
+    
+    &:hover{
+        text-decoration: none;
+    }
 }
 </style>

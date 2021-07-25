@@ -32,7 +32,7 @@
                         <router-link class="test text-decoration-none" :to="{name: 'restaurant', params: {slug:restaurant.slug}}">
                             <img class="img-fluid" v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name"/>
                             <div class="res-data">
-                                <h2>{{ restaurant.name }}</h2>
+                                <h2 class="font-weight-bold">{{ restaurant.name }}</h2>
                                 <h4>{{ restaurant.address }}</h4>
                                 <div>
                                     <span class="type" v-for="(type, index) in restaurant.type" :key="`type-${index}`">
@@ -67,7 +67,12 @@ export default {
     created() {
         this.popCheck();
         this.getTypes();
-        this.getRestaurants();
+        if(window.localStorage.getItem('page')){
+            this.getRestaurants(window.localStorage.getItem('page'));
+        } else {
+            this.getRestaurants();
+        }
+        
     },
     methods: {
         /**
@@ -98,6 +103,7 @@ export default {
                             current: res.data.current_page,
                             last: res.data.last_page
                         };
+                        window.localStorage.setItem('page', res.data.current_page);
                     })
                     .catch(err => {
                         console.log(err);
@@ -129,6 +135,7 @@ export default {
                             current: res.data.current_page,
                             last: res.data.last_page
                         };
+                        window.localStorage.setItem('page', res.data.current_page);
                     })
                     .catch(err => {
                         console.log(err);
@@ -145,6 +152,11 @@ export default {
                 this.checked = JSON.parse(window.localStorage.getItem('check'));
             }
         },
+        // currentPage(){
+        //     if(window.localStorage.getItem('page')){
+        //         return JSON.parse(window.localStorage.getItem('page'));
+        //     }
+        // }
     }
 };
 </script>
@@ -190,22 +202,15 @@ export default {
         text-align: center;
         padding: 8px 0;
         color: #fff;
-        // position: relative;
         width:170px;
-        // height:50px;
         border-radius: 50px;
         background-color:#273036;
         margin: 15px ;
-        // display:flex;
-        // justify-content:center;
-        // align-items: center;
         font-size: 1.5em;
         cursor: pointer;
         box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
                     inset -7px -7px 10px 0px rgba(0,0,0,.1),7px 7px 20px 0px rgba(0,0,0,.1),
                     4px 4px 5px 0px rgba(0,0,0,.1);
-        text-shadow:  2px 2px 3px rgba(255,255,255,.5),
-                      -4px -4px 6px rgba(116, 125, 136, .2);
         outline: none;
         -webkit-user-select: none; /* Safari */        
         -moz-user-select: none; /* Firefox */
@@ -228,7 +233,6 @@ export default {
         font-weight: 500;
         font-size: 20px;
         background: #273036;
-        // background: transparent;
         cursor: pointer;
         transition: all 0.3s ease;
         position: relative;
@@ -236,8 +240,6 @@ export default {
         box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
                     inset -7px -7px 10px 0px rgba(0,0,0,.1),7px 7px 20px 0px rgba(0,0,0,.1),
                     4px 4px 5px 0px rgba(0,0,0,.1);
-        text-shadow: 2px 2px 3px rgba(255,255,255,.5),
-                     -4px -4px 6px rgba(116, 125, 136, .2);
         outline: none;
 
         &.arrow{
@@ -263,36 +265,16 @@ export default {
         transition: all 0.3s ease;
         overflow: hidden;
         color: white;
-        }
-    // .btn-9:after {
-    //     position: absolute;
-    //     content: " ";
-    //     z-index: -1;
-    //     top: 0;
-    //     left: 0;
-    //     width: 100%;
-    //     height: 100%;
-    //     background: #273036;
-    //     transition: all 0.3s ease;
-    //     }
+    }
+
     .btn-9:hover {
         background: #273036;
-        // background: transparent;
-        // background: #13d97742;
         box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
                     -4px -4px 6px 0 rgba(116, 125, 136, .2), 
             inset -4px -4px 6px 0 rgba(255,255,255,.5),
             inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
         color: #fff;
-        }
-    // .btn-9:hover:after {
-    //     -webkit-transform: scale(2) rotate(180deg);
-    //     transform: scale(2) rotate(180deg);
-    //     box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
-    //                 -4px -4px 6px 0 rgba(116, 125, 136, .2), 
-    //         inset -4px -4px 6px 0 rgba(255,255,255,.5),
-    //         inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
-    //     }
+    }
 
     .active-page{
         background-color:#fff;
@@ -300,7 +282,13 @@ export default {
         box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
                     inset -7px -7px 10px 0px rgba(0,0,0,.1),0px 0px 15px 5px $brand-col,
                     4px 4px 5px 0px $brand-col;
-
+        &:hover{
+            background-color:#fff;
+            color: #4e5357 ;
+                    box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+                    inset -7px -7px 10px 0px rgba(0,0,0,.1),0px 0px 15px 5px $brand-col,
+                    4px 4px 5px 0px $brand-col;
+        }
     }
 
     .res-data{
@@ -308,7 +296,6 @@ export default {
     }
     .test {
         display: inline-block;
-        // background-color: #fff;
         border-radius: 0.5rem;
         box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem rgba(0, 0, 0, 0.45);
         padding-bottom: 1rem;
@@ -336,6 +323,7 @@ export default {
             opacity: 1;
         }
     }
+
     @media screen and (max-width:765px) {
         .box-card{
             width: 120px;

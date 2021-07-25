@@ -2,7 +2,9 @@
     <section>
         <div class="restaurant container">
             <div class="info row align-items-center text-center" v-if="dishes.length">
-                <div class="col-md-6 col-sm-12 "><img class="img-fluid rounded" :src="restaurant.image" :alt="restaurant.name"></div>
+                <div class="col-md-6 col-sm-12 ">
+                    <img class="img-fluid rounded" :src="restaurant.image" :alt="restaurant.name">
+                </div>
                 <div class="details col-md-6 col-sm-12">
                     <h1>{{restaurant.name}}</h1>
                     <h2>{{restaurant.address}}</h2>
@@ -28,16 +30,16 @@
                             <div class="col-md-6 col-sm-12 d-flex justify-content-between" :class="{'unavailable' : !dish.visibility}"  v-for="(dish, index) in dishes" :key="`dishes-${index}`">
                                 <div class="dish d-flex justify-content-between align-items-center">
                                     <div class="d-flex flex-grow-1 flex-column justify-content-center align-items-center">
-                                        <div class="text-center">{{dish.name}}</div>
-                                        <div class="d-flex">
+                                        <div class="text-center font-weight-bold">{{dish.name}}</div>
+                                        <h4 class="d-flex">
                                             € {{dish.price.toFixed(2)}}
-                                        </div>
+                                        </h4>
                                         <div v-if="dish.visibility">
                                             <div>
                                                 <span class="add" @click="addToCart(dish)"><i class="fas fa-plus-circle"></i> Aggiungi</span>
                                             </div>
                                                 <div>
-                                                    <i class="fas fa-info-circle information" @click="showDish(dish)" ></i> Info
+                                                    <span @click="showDish(dish)" class="information font-weight-bold"><i class="fas fa-info-circle" ></i> Info</span>
                                                 </div>
                                         </div>
                                         <div v-else>Non Disponibile</div>
@@ -50,7 +52,12 @@
                 <!-- Cart -->
                 <div class="cart col-md-5 col-sm-12">
                     <h2>Il tuo Carrello</h2>
-                    <h2 v-if="Object.keys(cart).length">Ristorante: {{cart[Object.keys(this.cart)[0]].restaurant_name}}</h2>
+                    
+                    <h2 v-if="Object.keys(cart).length">
+                        <router-link :to="{path: `/restaurant/${cart[Object.keys(this.cart)[0]].restaurant_slug}`}">
+                            Ristorante: {{cart[Object.keys(this.cart)[0]].restaurant_name}}
+                        </router-link>    
+                    </h2>
                     <!-- Products -->
                     <div v-if="Object.keys(cart).length" >
                         <div class="product" v-for="(item, index) in cart" :key="index">
@@ -174,6 +181,7 @@ export default {
                     this.cart[dish.name] = {
                         restaurant_id: dish.restaurant_id,
                         restaurant_name: this.restaurant.name,
+                        restaurant_slug: this.restaurant.slug,
                         name: dish.name,
                         quantità: 1,
                         prezzo: dish.price,
@@ -302,12 +310,13 @@ export default {
         padding: 20px;
     }
     .info{
-        margin: 20px;
+        margin: 20px 0;
         position: relative;
-        padding: 40px 0px;
+        padding: 40px 15px;
         border-radius: 10px;
         background: #fee3af;
         img{
+            width: 100%;
             height: 200px;
             object-fit: cover;
         }
@@ -347,8 +356,8 @@ export default {
         background-color: rgba(255,255,255,.7);
         border-radius: 10px;
 
-        i.information{
-            margin-left: 10px;
+        .information{
+            margin: 0 10px;
             cursor: pointer;
         }
 
@@ -495,6 +504,13 @@ export default {
         box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
                     inset -7px -7px 10px 0px rgba(0,0,0,.1),0px 0px 15px 5px $brand-col,
                     4px 4px 5px 0px $brand-col;
+        &:hover{
+            background-color:#fff;
+            color: #4e5357 ;
+                    box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+                    inset -7px -7px 10px 0px rgba(0,0,0,.1),0px 0px 15px 5px $brand-col,
+                    4px 4px 5px 0px $brand-col;
+        }
     }
 
     .color {
