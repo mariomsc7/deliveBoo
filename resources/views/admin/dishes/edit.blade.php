@@ -58,6 +58,8 @@
                     @enderror
                 </div>
                 <button type="submit" class="btn add text-uppercase pr-3 pl-3">Salva</button>
+                <a class="btn show-info text-uppercase ml-2 " href="{{route('admin.dishes.index')}}">Menù</a>
+
             </form>
         </div>
     </div>

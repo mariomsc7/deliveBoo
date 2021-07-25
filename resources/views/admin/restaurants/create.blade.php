@@ -70,7 +70,11 @@
                             <div>{{$message}}</div>
                         @enderror
                     </div>
-                    <button id="sub-btn" type="submit" class="text-uppercase btn add">Registra</button>
+                    <div class="d-flex">
+                        <button id="sub-btn" type="submit" class="text-uppercase btn add">Registra</button>
+                        <a class="btn btn-danger text-uppercase ml-2 " href="{{route('admin.home')}}">Indietro</a>
+                    </div>
+
                 </div>
             </form>
         </div>
