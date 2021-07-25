@@ -2815,6 +2815,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Restaurant',
@@ -26693,59 +26695,61 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "navigation text-center" }, [
-          _c(
-            "button",
-            {
-              staticClass: "custom-btn btn-9 arrow",
-              attrs: { disabled: !(_vm.pagination.current > 1) },
-              on: {
-                click: function($event) {
-                  return _vm.getDishes(_vm.pagination.current - 1)
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-7 navigation text-center" }, [
+            _c(
+              "button",
+              {
+                staticClass: "custom-btn btn-9 arrow",
+                attrs: { disabled: !(_vm.pagination.current > 1) },
+                on: {
+                  click: function($event) {
+                    return _vm.getDishes(_vm.pagination.current - 1)
+                  }
                 }
-              }
-            },
-            [_c("i", { staticClass: "fas fa-caret-left " })]
-          ),
-          _vm._v(" "),
-          _vm.pagination.last != 1
-            ? _c(
-                "span",
-                _vm._l(_vm.pagination.last, function(i) {
-                  return _c(
-                    "button",
-                    {
-                      key: "page-" + i,
-                      staticClass: "custom-btn btn-9",
-                      class: { "active-page": _vm.pagination.current == i },
-                      on: {
-                        click: function($event) {
-                          return _vm.getDishes(i)
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(i))]
-                  )
-                }),
-                0
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "custom-btn btn-9 arrow",
-              attrs: {
-                disabled: !(_vm.pagination.current < _vm.pagination.last)
               },
-              on: {
-                click: function($event) {
-                  return _vm.getDishes(_vm.pagination.current + 1)
+              [_c("i", { staticClass: "fas fa-caret-left " })]
+            ),
+            _vm._v(" "),
+            _vm.pagination.last != 1
+              ? _c(
+                  "span",
+                  _vm._l(_vm.pagination.last, function(i) {
+                    return _c(
+                      "button",
+                      {
+                        key: "page-" + i,
+                        staticClass: "custom-btn btn-9",
+                        class: { "active-page": _vm.pagination.current == i },
+                        on: {
+                          click: function($event) {
+                            return _vm.getDishes(i)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(i))]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "custom-btn btn-9 arrow",
+                attrs: {
+                  disabled: !(_vm.pagination.current < _vm.pagination.last)
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.getDishes(_vm.pagination.current + 1)
+                  }
                 }
-              }
-            },
-            [_c("i", { staticClass: "fas fa-caret-right" })]
-          )
+              },
+              [_c("i", { staticClass: "fas fa-caret-right" })]
+            )
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
