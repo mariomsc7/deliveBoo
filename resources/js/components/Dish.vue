@@ -26,6 +26,7 @@ export default {
 
 <style lang="scss" scoped>
 .details{
+  z-index: 10;
   position: fixed;
   top: 0;
   width: 100%;
@@ -36,13 +37,12 @@ export default {
     width: 500px;
     height: 65%;
     padding: 10px;
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     background-color: rgba(255, 255, 255, .90);
     border-radius: 10px;
-    z-index: 10;
 
     .dish-info{
       height: 170px;

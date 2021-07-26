@@ -17,17 +17,23 @@
 
             <div v-if="types.length">
                 <!-- Page Navigation -->
-                <div class="navigation text-center mb-5">
+
+                <div class="navigation text-center">
                     <button class="custom-btn btn-9 arrow" @click="getRestaurants(pagination.current - 1)" :disabled ="!(pagination.current > 1)"><i class="fas fa-caret-left"></i></button>
                     <span v-if="pagination.last != 1">
                         <button class="custom-btn btn-9 d-none d-md-inline" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getRestaurants(i)">{{i}}</button>
                     </span>
         
                     <button class="custom-btn btn-9 arrow" @click="getRestaurants(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)"><i class="fas fa-caret-right"></i></button>
+                    <div class="text-center">
+                        <span v-if="pagination.last != 1">
+                            <button class="custom-btn btn-9 d-inline d-md-none" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getRestaurants(i)">{{i}}</button>
+                        </span>
+                    </div>
                 </div>
 
                 <!-- Restaurants List -->
-                <div class="row">
+                <div class="row mt-4 mb-4">
                     <div class="cards col-md-4" v-for="restaurant in restaurants" :key="`res-${restaurant.id}`">
                         <router-link class="test text-decoration-none" :to="{name: 'restaurant', params: {slug:restaurant.slug}}">
                             <img class="img-fluid" v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.name"/>
@@ -41,6 +47,19 @@
                                 </div>
                             </div>
                         </router-link>
+                    </div>
+                </div>
+
+
+                <div class="navigation text-center d-inline d-md-none">
+                    <div class="text-center">
+                        <span v-if="pagination.last != 1">
+                            <button class="custom-btn btn-9" :class="{'active-page' : pagination.current == i}" v-for="i in pagination.last" :key="`page-${i}`" @click="getRestaurants(i)">{{i}}</button>
+                        </span>
+                    </div>
+                    <div class="text-center">
+                        <button class="custom-btn btn-9 arrow" @click="getRestaurants(pagination.current - 1)" :disabled ="!(pagination.current > 1)"><i class="fas fa-caret-left"></i></button>
+                        <button class="custom-btn btn-9 arrow" @click="getRestaurants(pagination.current + 1)" :disabled="!(pagination.current < pagination.last)"><i class="fas fa-caret-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -224,6 +243,7 @@ export default {
     }
 
     .custom-btn {
+        margin: 15px;
         width: 75px;
         height: 40px;
         color: #fff;
@@ -324,12 +344,17 @@ export default {
         }
     }
 
-    @media screen and (max-width:765px) {
+    @media screen and (max-width:845px) {
+        .custom-btn {
+            width: 60px;
+        }
         .box-card{
             width: 120px;
             font-size: 1.3em;
         }
     }
+    // @media screen and (max-width:765px) {
+    // }
     @media screen and (max-width:380px) {
         .box-card{
             width: 90px;

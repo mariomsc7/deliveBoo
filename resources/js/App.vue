@@ -1,11 +1,12 @@
 <template>
   <div class="app">
-      <Header />
-      
-      <main>
-          <router-view></router-view>
-      </main>
-      <Footer />
+    <Header />
+
+    <main>
+      <router-view></router-view> 
+    </main>
+
+    <Footer />
   </div>
 </template>
 
