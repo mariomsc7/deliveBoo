@@ -100,9 +100,9 @@
         <div class="thanks-container" v-if="send" @click="closeModal">
                 <div class="thanks">
                     <h1>Ordine Effettuato!
-                         <img class="hamburger-gif" src="../../../public/images/hamburger.gif" alt="">
+                         <img class="hamburger-gif" src="../../../public/image/hamburger.gif" alt="">
                     </h1>
-                    <h2>Grazie per aver scelto DeliveBoo</h2>
+                    <h2>Grazie per aver scelto DeliveBoo!!!</h2>
                 </div>
         </div>
 

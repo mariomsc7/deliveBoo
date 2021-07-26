@@ -2224,10 +2224,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -25882,9 +25878,7 @@ var staticRenderFns = [
               src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
               alt: "About"
             }
-          }),
-          _vm._v(" "),
-          _c("h2", [_vm._v("\n                Lorem \n            ")])
+          })
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "w-100 d-sm-block d-md-none " }),
@@ -25896,11 +25890,7 @@ var staticRenderFns = [
               src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
               alt: "About"
             }
-          }),
-          _vm._v(" "),
-          _c("h2", [
-            _vm._v("\n                Lorem, ipsum dolor sit \n            ")
-          ])
+          })
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "w-100 d-sm-block d-md-none " }),
@@ -25912,11 +25902,7 @@ var staticRenderFns = [
               src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
               alt: "About"
             }
-          }),
-          _vm._v(" "),
-          _c("h2", [
-            _vm._v("\n                Lorem, ipsum dolor sit \n            ")
-          ])
+          })
         ])
       ]),
       _vm._v(" "),
@@ -25928,11 +25914,7 @@ var staticRenderFns = [
               src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
               alt: "About"
             }
-          }),
-          _vm._v(" "),
-          _c("h2", [
-            _vm._v("\n                Lorem, ipsum dolor sit \n            ")
-          ])
+          })
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "w-100 d-sm-block d-md-none " }),
@@ -25944,10 +25926,23 @@ var staticRenderFns = [
               src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
               alt: "About"
             }
-          }),
-          _vm._v(" "),
-          _c("h2", [
-            _vm._v("\n                Lorem, ipsum dolor sit \n            ")
+          })
+        ]),
+        _vm._v(" "),
+        _c("h2", { staticClass: "text-center mt-3" }, [
+          _vm._v(
+            "\n            Siamo un gruppo di ragazzi che è voluto andare oltre le proprie conoscenze ed intraprendere un corso come Boolean per approfondire la nostra passione nell'informatica .\n             "
+          ),
+          _c("h2", { staticClass: "text-center mt-3" }, [
+            _vm._v(
+              "Con semplicità abbiamo creato questo sito, frutto di dedizione, organizzazione e caparbietà."
+            )
+          ]),
+          _vm._v(
+            "\n            Con la speranza che sia il primo di tanti, ci presentiamo così.\n             "
+          ),
+          _c("h2", { staticClass: "text-center mt-3" }, [
+            _vm._v("Marco, Fabrizio, Mario, Robert e Giulia!")
           ])
         ])
       ])
@@ -26468,13 +26463,13 @@ var staticRenderFns = [
         _c("img", {
           staticClass: "hamburger-gif",
           attrs: {
-            src: __webpack_require__(/*! ../../../public/images/hamburger.gif */ "./public/images/hamburger.gif"),
+            src: __webpack_require__(/*! ../../../public/image/hamburger.gif */ "./public/image/hamburger.gif"),
             alt: ""
           }
         })
       ]),
       _vm._v(" "),
-      _c("h2", [_vm._v("Grazie per aver scelto DeliveBoo")])
+      _c("h2", [_vm._v("Grazie per aver scelto DeliveBoo!!!")])
     ])
   }
 ]
@@ -42649,6 +42644,17 @@ module.exports = "/images/cute_food.gif?cbd237c4c6c4b9aec09d0c8739fbd219";
 
 /***/ }),
 
+/***/ "./public/image/hamburger.gif":
+/*!************************************!*\
+  !*** ./public/image/hamburger.gif ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/hamburger.gif?13b8b9fe7a67201c3e620c3236f8134e";
+
+/***/ }),
+
 /***/ "./public/image/rider_deliveboo.png":
 /*!******************************************!*\
   !*** ./public/image/rider_deliveboo.png ***!
@@ -42668,17 +42674,6 @@ module.exports = "/images/rider_deliveboo.png?1b0405626e3107536e37fcaf00586501";
 /***/ (function(module, exports) {
 
 module.exports = "/images/sfondo.jpg?f2124aa4a512c8dc652b79f2c42520b3";
-
-/***/ }),
-
-/***/ "./public/images/hamburger.gif":
-/*!*************************************!*\
-  !*** ./public/images/hamburger.gif ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/hamburger.gif?13b8b9fe7a67201c3e620c3236f8134e";
 
 /***/ }),
 
@@ -43638,8 +43633,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\_Programmazione\Boolean\Classe#30\FinalProject\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

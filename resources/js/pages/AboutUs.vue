@@ -10,9 +10,7 @@
                     src="../../../public/image/sfondo.jpg"
                     alt="About"
                 />
-                <h2>
-                    Lorem 
-                </h2>
+                
             </div>
             <div class="w-100 d-sm-block d-md-none "></div>
             <div class="description col-md-3 col-sm-6 col-6">
@@ -21,9 +19,7 @@
                     src="../../../public/image/sfondo.jpg"
                     alt="About"
                 />
-                <h2>
-                    Lorem, ipsum dolor sit 
-                </h2>
+                
             </div>
             <div class="w-100 d-sm-block d-md-none "></div>
             <div class="description col-md-3 col-sm-6 col-6">
@@ -32,9 +28,7 @@
                     src="../../../public/image/sfondo.jpg"
                     alt="About"
                 />
-                <h2>
-                    Lorem, ipsum dolor sit 
-                </h2>
+                
             </div>
         </div>
         <div class="row justify-content-around">
@@ -44,9 +38,7 @@
                     src="../../../public/image/sfondo.jpg"
                     alt="About"
                 />
-                <h2>
-                    Lorem, ipsum dolor sit 
-                </h2>
+                
             </div>
             <div class="w-100 d-sm-block d-md-none "></div>
             <div class="description col-md-3 col-sm-6 col-6">
@@ -55,10 +47,14 @@
                     src="../../../public/image/sfondo.jpg"
                     alt="About"
                 />
-                <h2>
-                    Lorem, ipsum dolor sit 
-                </h2>
+                
             </div>
+            <h2 class="text-center mt-3">
+                Siamo un gruppo di ragazzi che è voluto andare oltre le proprie conoscenze ed intraprendere un corso come Boolean per approfondire la nostra passione nell'informatica .
+                 <h2 class="text-center mt-3">Con semplicità abbiamo creato questo sito, frutto di dedizione, organizzazione e caparbietà.</h2>
+                Con la speranza che sia il primo di tanti, ci presentiamo così.
+                 <h2 class="text-center mt-3">Marco, Fabrizio, Mario, Robert e Giulia!</h2>
+            </h2>
         </div>
     </div>
 </template>
