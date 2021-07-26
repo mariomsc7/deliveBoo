@@ -3,9 +3,13 @@
         <Hero />
         <div class="container">
             
-            <h1 class="text-center">Cosa vorresti mangiare oggi?</h1>
+            <h1 class="text-center">
+                Cosa vorresti mangiare oggi? 
+                <i v-if="!toggle" @click="toggleTypes()" class="fas fa-chevron-circle-down d-inline d-md-none"></i>
+                <i v-if="toggle" @click="toggleTypes()" class="fas fa-chevron-circle-up d-inline d-md-none"></i>
+            </h1>
             <!-- Types Checkbox -->
-            <div class="type-list d-flex justify-content-center">
+            <div v-if="toggle" class="type-list d-flex justify-content-center">
                 <div class="chek-wrap" v-for="(type, index) in types" :key="`types-${index}`">
                     <input @change="filter" type="checkbox" :value="type" :id="type" v-model="checked">
                     <label class="box-card" :for="type">
@@ -77,6 +81,7 @@ export default {
     },
     data() {
         return {
+            toggle: true,
             restaurants: [],
             types: [],
             checked:[],
@@ -171,17 +176,18 @@ export default {
                 this.checked = JSON.parse(window.localStorage.getItem('check'));
             }
         },
-        // currentPage(){
-        //     if(window.localStorage.getItem('page')){
-        //         return JSON.parse(window.localStorage.getItem('page'));
-        //     }
-        // }
+        toggleTypes(){
+            this.toggle = !this.toggle;
+        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
 @import '../../sass/app';
+    i{
+        cursor: pointer;
+    }
     hr{
         width: 40%;
         border: 1px solid #273036;
