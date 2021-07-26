@@ -325,6 +325,7 @@ export default {
     color: green;
 }
 .thanks-container {
+    z-index: 10;
     position: fixed;
     top: 0;
     bottom: 0;

@@ -20,7 +20,7 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $restaurant = Restaurant::find($user->restaurant->id);
-        $orders = Order::where('restaurant_id', $restaurant->id)->get();
+        $orders = Order::where('restaurant_id', $restaurant->id)->orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.orders.index', compact('restaurant', 'orders'));
     }
 

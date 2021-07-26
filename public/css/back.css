@@ -109,3 +109,21 @@ border-radius: 10px;
 ::-webkit-scrollbar-thumb:hover {
 background: #149756d5; 
 }
+
+/* Pagination */
+.pagination {
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.page-item.active .page-link {
+    background-color: #273036;
+    border-color: #273036;
+    outline: none;
+}
+.page-link {
+    color: #273036;
+}
+.page-link:focus{
+    box-shadow: none;
+}

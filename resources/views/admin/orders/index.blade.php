@@ -15,7 +15,8 @@
             <h2>STORICO ORDINI</h2>
             <a class="btn show-info text-uppercase mr-3" href="{{route('admin.restaurants.show', $restaurant->id)}}">Ritorna al ristorante</a>
             <a class="btn modify text-uppercase" href="{{route('admin.charts.show', $restaurant->id)}}">Mostra Grafico Ordini</a>
-            <table class="table mt-5 tt">
+            {{$orders->links()}}
+            <table class="table mt-3 tt">
                 <thead>
                     <tr>
                         <th>Data e Ora</th>
@@ -27,7 +28,7 @@
                 <tbody>
                     @foreach ($orders as $order)
                         <tr>
-                            <td>{{$order->created_at}}</td>
+                            <td>{{date_format($order->created_at, 'd/m/Y H:i:s')}}</td>
                             <td>{{$order->customer_name}} {{$order->customer_lastname}}</td>
                             <td>€{{number_format($order->tot_paid, 2)}}</td>
                             <td>

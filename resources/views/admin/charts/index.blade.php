@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <h1 class="text-center">Ordini ricevuti negli ultimi dodici mesi</h1>
                 <canvas id="userChart" class="rounded shadow"></canvas>
             </div>
         </div>
@@ -31,7 +32,7 @@
             data: {
                 labels: month,
                 datasets: [{
-                    label: 'Ordini',
+                    label: 'Ordini al Mese',
                     data:  order,
                     fill: true,
                     borderColor: 'rgb(19, 217, 119)',

@@ -100,6 +100,7 @@ export default {
     },
     data() {
         return {
+            slug: this.$route.params.slug,
             restaurant: {},
             dishes: [],
             dishDetail: {},
@@ -110,17 +111,22 @@ export default {
             pagination: {},
         };
     },
+    beforeRouteUpdate(to, from, next) {
+        this.slug = to.params.slug;
+        this.getRestaurant(this.slug);
+        next();
+    },
     created() {
-        this.getRestaurant();
+        this.getRestaurant(this.slug);
         this.popCart();
     },
     methods: {
         /**
          * Call API for Dishes
          */
-        getRestaurant() {
+        getRestaurant(slug) {
             axios
-                .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.slug}`)
+                .get(`http://127.0.0.1:8000/api/restaurants/${slug}`)
                 .then(res => {
                     this.restaurant = res.data;
                     this.getDishes();
@@ -521,4 +527,12 @@ export default {
             color: $brand-col;
         }
     }
+
+    a{
+    color: $brand-col;
+    
+    &:hover{
+        text-decoration: none;
+    }
+}
 </style>
