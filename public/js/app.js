@@ -2055,6 +2055,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Footer"
 });
@@ -2163,6 +2164,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -23783,11 +23788,10 @@ exports.push([module.i, "@charset \"UTF-8\";\n/*!\n * Bootstrap v4.6.0 (https://
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap);", ""]);
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap);", ""]);
+
 
 // module
-exports.push([module.i, ".container > .about > h1 {\n  font-family: \"Otomanopee One\", sans-serif;\n}\n.about {\n  margin-top: 25px;\n}\n.description img {\n  margin-top: 40px;\n  border-radius: 20px;\n}\n.description h2 {\n  margin-top: 20px;\n  font-family: \"Dancing Script\", cursive;\n}", ""]);
+exports.push([module.i, ".about {\n  margin-top: 25px;\n}\nh1 {\n  font-weight: bold;\n  font-size: 3rem;\n}\n.description img {\n  margin-top: 40px;\n  border-radius: 20px;\n}\n.dedica {\n  padding-top: 70px;\n  text-align: center;\n}\n.dedica h2 {\n  margin-top: 20px;\n}\n.dedica h3 {\n  margin-top: 40px;\n}", ""]);
 
 // exports
 
@@ -25364,7 +25368,9 @@ var render = function() {
           _vm._v(" "),
           _vm._m(10)
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _vm._m(11)
     ])
   ])
 }
@@ -25516,6 +25522,15 @@ var staticRenderFns = [
           ])
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "text-center" }, [
+      _vm._v("DeliveBoo "),
+      _c("i", { staticClass: "fas fa-ghost" })
     ])
   }
 ]
@@ -25927,23 +25942,33 @@ var staticRenderFns = [
               alt: "About"
             }
           })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "dedica" }, [
+        _c("h2", [
+          _vm._v(
+            "\n                Siamo un gruppo di ragazzi che è voluto andare oltre le proprie conoscenze ed intraprendere un corso come Boolean per approfondire la nostra passione nell'informatica .\n            "
+          )
         ]),
         _vm._v(" "),
-        _c("h2", { staticClass: "text-center mt-3" }, [
+        _c("h2", [
           _vm._v(
-            "\n            Siamo un gruppo di ragazzi che è voluto andare oltre le proprie conoscenze ed intraprendere un corso come Boolean per approfondire la nostra passione nell'informatica .\n             "
-          ),
-          _c("h2", { staticClass: "text-center mt-3" }, [
-            _vm._v(
-              "Con semplicità abbiamo creato questo sito, frutto di dedizione, organizzazione e caparbietà."
-            )
-          ]),
+            "Con semplicità abbiamo creato questo sito, frutto di dedizione, organizzazione e caparbietà."
+          )
+        ]),
+        _vm._v(" "),
+        _c("h2", [
           _vm._v(
-            "\n            Con la speranza che sia il primo di tanti, ci presentiamo così.\n             "
-          ),
-          _c("h2", { staticClass: "text-center mt-3" }, [
-            _vm._v("Marco, Fabrizio, Mario, Robert e Giulia!")
-          ])
+            "Con la speranza che sia il primo di tanti, ci presentiamo così."
+          )
+        ]),
+        _vm._v(" "),
+        _c("h2", [_vm._v("Marco, Fabrizio, Mario, Robert e Giulia!")]),
+        _vm._v(" "),
+        _c("h3", [
+          _vm._v("By DeliveBoo Team "),
+          _c("i", { staticClass: "fas fa-ghost" })
         ])
       ])
     ])
@@ -43633,8 +43658,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/fabriziomarongiu/Desktop/deliveBoo/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Mario\Desktop\deliveBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Mario\Desktop\deliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

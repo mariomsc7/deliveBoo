@@ -49,13 +49,17 @@
                 />
                 
             </div>
-            <h2 class="text-center mt-3">
-                Siamo un gruppo di ragazzi che è voluto andare oltre le proprie conoscenze ed intraprendere un corso come Boolean per approfondire la nostra passione nell'informatica .
-                 <h2 class="text-center mt-3">Con semplicità abbiamo creato questo sito, frutto di dedizione, organizzazione e caparbietà.</h2>
-                Con la speranza che sia il primo di tanti, ci presentiamo così.
-                 <h2 class="text-center mt-3">Marco, Fabrizio, Mario, Robert e Giulia!</h2>
-            </h2>
+
         </div>
+            <div class="dedica">
+                <h2 >
+                    Siamo un gruppo di ragazzi che è voluto andare oltre le proprie conoscenze ed intraprendere un corso come Boolean per approfondire la nostra passione nell'informatica .
+                </h2>
+                <h2>Con semplicità abbiamo creato questo sito, frutto di dedizione, organizzazione e caparbietà.</h2>
+                <h2>Con la speranza che sia il primo di tanti, ci presentiamo così.</h2> 
+                <h2>Marco, Fabrizio, Mario, Robert e Giulia!</h2>
+                <h3>By DeliveBoo Team <i class="fas fa-ghost"></i></h3>
+            </div>
     </div>
 </template>
 
@@ -64,17 +68,14 @@ export default {};
 </script>
 
 <style lang="scss">
-// IMPORT FONT
-@import url("https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
-
-.container > .about > h1 {
-    font-family: "Otomanopee One", sans-serif;
-}
 
 .about {
     margin-top: 25px;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 3rem;
 }
 
 .description {
@@ -84,9 +85,16 @@ export default {};
         margin-top: 40px;
         border-radius: 20px;
     }
-    h2 {
-        margin-top: 20px;
-        font-family: "Dancing Script", cursive;
-    }
 }
+    .dedica {
+        padding-top: 70px;
+        text-align: center;
+        h2 {
+            margin-top: 20px;
+        }
+        h3 {
+            margin-top: 40px;
+        }
+
+    }
 </style>

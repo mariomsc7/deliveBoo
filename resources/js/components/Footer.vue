@@ -71,6 +71,7 @@
                     </div>
                 </div>
             </div>
+        <h4 class="text-center">DeliveBoo <i class="fas fa-ghost"></i></h4>
         </div>
     </footer>
 </template>
