@@ -1,53 +1,55 @@
 <template>
     <div class="container">
         <div class="about">
-            <h1 class="text-center">Chi ha creato DeliveBoo???</h1>
+            <h1 class="text-center">Chi ha creato DeliveBoo <i class="fas fa-ghost"></i> ???</h1>
+            <h1 class="text-center">Team #1</h1>
         </div>
         <div class="row justify-content-around">
             <div class="description col-md-3 col-sm-6 col-6">
                 <img
                     class="link-img img-fluid rounded-circle"
-                    src="../../../public/image/sfondo.jpg"
+                    src="../../../public/image/marco.png"
                     alt="About"
                 />
-                
+                <h3 class="text-center mt-3">Marco</h3>
             </div>
             <div class="w-100 d-sm-block d-md-none "></div>
             <div class="description col-md-3 col-sm-6 col-6">
                 <img
-                    class="link-img img-fluid"
-                    src="../../../public/image/sfondo.jpg"
+                    class="link-img img-fluid rounded-circle"
+                    src="../../../public/image/mario3.png"
                     alt="About"
                 />
-                
+                <h3 class="text-center mt-3">Mario</h3>
             </div>
+            
             <div class="w-100 d-sm-block d-md-none "></div>
             <div class="description col-md-3 col-sm-6 col-6">
                 <img
-                    class="link-img img-fluid"
-                    src="../../../public/image/sfondo.jpg"
+                    class="link-img img-fluid rounded-circle"
+                    src="../../../public/image/fabrizio.png"
                     alt="About"
                 />
-                
+                <h3 class="text-center mt-3">Fabrizio</h3>
             </div>
         </div>
         <div class="row justify-content-around">
             <div class="description col-md-3 col-sm-6 col-6">
                 <img
-                    class="link-img img-fluid"
-                    src="../../../public/image/sfondo.jpg"
+                    class="link-img img-fluid rounded-circle"
+                    src="../../../public/image/giulia.png"
                     alt="About"
                 />
-                
+                <h3 class="text-center mt-3">Giulia</h3>
             </div>
             <div class="w-100 d-sm-block d-md-none "></div>
             <div class="description col-md-3 col-sm-6 col-6">
                 <img
-                    class="link-img img-fluid"
-                    src="../../../public/image/sfondo.jpg"
+                    class="link-img img-fluid rounded-circle"
+                    src="../../../public/image/robert2.png"
                     alt="About"
                 />
-                
+                <h3 class="text-center mt-3">Robert</h3>
             </div>
 
         </div>

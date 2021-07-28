@@ -10,7 +10,7 @@
         <h4>{{dishDetails.description}}</h4>
       </div>
       <h3>€{{dishDetails.price.toFixed(2)}}</h3>
-      <div class="text-center img-box"><img class="img-fluid h-100 w-100" v-if="dishDetails.image" :src="dishDetails.image" :alt="dishDetails.name" width="300"/></div>
+      <div class="text-center img-box"><img class="" v-if="dishDetails.image" :src="dishDetails.image" :alt="dishDetails.name" width="300"/></div>
     </div>
   </div>
 </template>
@@ -35,13 +35,12 @@ export default {
 
   .details-box{
     width: 500px;
-    height: 65%;
     padding: 10px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background-color: rgba(255, 255, 255, .90);
+    background-color: #fff;
     border-radius: 10px;
 
     .dish-info{
@@ -53,11 +52,11 @@ export default {
     }
   }
 }
-.img-box{
-  height: 45%;
-}
+// .img-box{
+//   height: 45%;
+// }
 img{
-  object-fit: cover;
+  width: 100%;
 }
 @media screen and (max-width: 550px){
   .details{

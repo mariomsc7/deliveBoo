@@ -7,7 +7,7 @@
                 <div class="alert alert-success">
                     Piatto
                     <strong>{{ session('deleted') }} </strong>
-                    cancellato con succeeso
+                    cancellato con successo
                 </div>
             @endif
             <h1 class="mb-5 text-center"><a href="{{ route('admin.restaurants.show', $restaurant->id)}}">{{$restaurant->name}}</a></h1>

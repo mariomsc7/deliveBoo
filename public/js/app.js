@@ -2229,6 +2229,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -23715,7 +23717,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".details[data-v-97bbb0f6] {\n  z-index: 10;\n  position: fixed;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.4);\n}\n.details .details-box[data-v-97bbb0f6] {\n  width: 500px;\n  height: 65%;\n  padding: 10px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  background-color: rgba(255, 255, 255, 0.9);\n  border-radius: 10px;\n}\n.details .details-box .dish-info[data-v-97bbb0f6] {\n  height: 170px;\n  overflow: auto;\n}\n.details .details-box .close[data-v-97bbb0f6] {\n  cursor: pointer;\n}\n.img-box[data-v-97bbb0f6] {\n  height: 45%;\n}\nimg[data-v-97bbb0f6] {\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n@media screen and (max-width: 550px) {\n.details .details-box[data-v-97bbb0f6] {\n    width: 300px;\n    font-size: 0.8em;\n}\n}", ""]);
+exports.push([module.i, ".details[data-v-97bbb0f6] {\n  z-index: 10;\n  position: fixed;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.4);\n}\n.details .details-box[data-v-97bbb0f6] {\n  width: 500px;\n  padding: 10px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  background-color: #fff;\n  border-radius: 10px;\n}\n.details .details-box .dish-info[data-v-97bbb0f6] {\n  height: 170px;\n  overflow: auto;\n}\n.details .details-box .close[data-v-97bbb0f6] {\n  cursor: pointer;\n}\nimg[data-v-97bbb0f6] {\n  width: 100%;\n}\n@media screen and (max-width: 550px) {\n.details .details-box[data-v-97bbb0f6] {\n    width: 300px;\n    font-size: 0.8em;\n}\n}", ""]);
 
 // exports
 
@@ -25273,7 +25275,6 @@ var render = function() {
       _c("div", { staticClass: "text-center img-box" }, [
         _vm.dishDetails.image
           ? _c("img", {
-              staticClass: "img-fluid h-100 w-100",
               attrs: {
                 src: _vm.dishDetails.image,
                 alt: _vm.dishDetails.name,
@@ -25881,7 +25882,53 @@ var staticRenderFns = [
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "about" }, [
         _c("h1", { staticClass: "text-center" }, [
-          _vm._v("Chi ha creato DeliveBoo???")
+          _vm._v("Chi ha creato DeliveBoo "),
+          _c("i", { staticClass: "fas fa-ghost" }),
+          _vm._v(" ???")
+        ]),
+        _vm._v(" "),
+        _c("h1", { staticClass: "text-center" }, [_vm._v("Team #1")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row justify-content-around" }, [
+        _c("div", { staticClass: "description col-md-3 col-sm-6 col-6" }, [
+          _c("img", {
+            staticClass: "link-img img-fluid rounded-circle",
+            attrs: {
+              src: __webpack_require__(/*! ../../../public/image/marco.png */ "./public/image/marco.png"),
+              alt: "About"
+            }
+          }),
+          _vm._v(" "),
+          _c("h3", { staticClass: "text-center mt-3" }, [_vm._v("Marco")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "w-100 d-sm-block d-md-none " }),
+        _vm._v(" "),
+        _c("div", { staticClass: "description col-md-3 col-sm-6 col-6" }, [
+          _c("img", {
+            staticClass: "link-img img-fluid rounded-circle",
+            attrs: {
+              src: __webpack_require__(/*! ../../../public/image/mario3.png */ "./public/image/mario3.png"),
+              alt: "About"
+            }
+          }),
+          _vm._v(" "),
+          _c("h3", { staticClass: "text-center mt-3" }, [_vm._v("Mario")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "w-100 d-sm-block d-md-none " }),
+        _vm._v(" "),
+        _c("div", { staticClass: "description col-md-3 col-sm-6 col-6" }, [
+          _c("img", {
+            staticClass: "link-img img-fluid rounded-circle",
+            attrs: {
+              src: __webpack_require__(/*! ../../../public/image/fabrizio.png */ "./public/image/fabrizio.png"),
+              alt: "About"
+            }
+          }),
+          _vm._v(" "),
+          _c("h3", { staticClass: "text-center mt-3" }, [_vm._v("Fabrizio")])
         ])
       ]),
       _vm._v(" "),
@@ -25890,58 +25937,26 @@ var staticRenderFns = [
           _c("img", {
             staticClass: "link-img img-fluid rounded-circle",
             attrs: {
-              src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
+              src: __webpack_require__(/*! ../../../public/image/giulia.png */ "./public/image/giulia.png"),
               alt: "About"
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("h3", { staticClass: "text-center mt-3" }, [_vm._v("Giulia")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "w-100 d-sm-block d-md-none " }),
         _vm._v(" "),
         _c("div", { staticClass: "description col-md-3 col-sm-6 col-6" }, [
           _c("img", {
-            staticClass: "link-img img-fluid",
+            staticClass: "link-img img-fluid rounded-circle",
             attrs: {
-              src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
+              src: __webpack_require__(/*! ../../../public/image/robert2.png */ "./public/image/robert2.png"),
               alt: "About"
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-100 d-sm-block d-md-none " }),
-        _vm._v(" "),
-        _c("div", { staticClass: "description col-md-3 col-sm-6 col-6" }, [
-          _c("img", {
-            staticClass: "link-img img-fluid",
-            attrs: {
-              src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
-              alt: "About"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row justify-content-around" }, [
-        _c("div", { staticClass: "description col-md-3 col-sm-6 col-6" }, [
-          _c("img", {
-            staticClass: "link-img img-fluid",
-            attrs: {
-              src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
-              alt: "About"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-100 d-sm-block d-md-none " }),
-        _vm._v(" "),
-        _c("div", { staticClass: "description col-md-3 col-sm-6 col-6" }, [
-          _c("img", {
-            staticClass: "link-img img-fluid",
-            attrs: {
-              src: __webpack_require__(/*! ../../../public/image/sfondo.jpg */ "./public/image/sfondo.jpg"),
-              alt: "About"
-            }
-          })
+          }),
+          _vm._v(" "),
+          _c("h3", { staticClass: "text-center mt-3" }, [_vm._v("Robert")])
         ])
       ]),
       _vm._v(" "),
@@ -42669,6 +42684,28 @@ module.exports = "/images/cute_food.gif?cbd237c4c6c4b9aec09d0c8739fbd219";
 
 /***/ }),
 
+/***/ "./public/image/fabrizio.png":
+/*!***********************************!*\
+  !*** ./public/image/fabrizio.png ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/fabrizio.png?a8622c441fefc9c145651ee41c1dc9eb";
+
+/***/ }),
+
+/***/ "./public/image/giulia.png":
+/*!*********************************!*\
+  !*** ./public/image/giulia.png ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/giulia.png?1b1e0e692fb6da614bd8b15af4ccfd56";
+
+/***/ }),
+
 /***/ "./public/image/hamburger.gif":
 /*!************************************!*\
   !*** ./public/image/hamburger.gif ***!
@@ -42677,6 +42714,28 @@ module.exports = "/images/cute_food.gif?cbd237c4c6c4b9aec09d0c8739fbd219";
 /***/ (function(module, exports) {
 
 module.exports = "/images/hamburger.gif?13b8b9fe7a67201c3e620c3236f8134e";
+
+/***/ }),
+
+/***/ "./public/image/marco.png":
+/*!********************************!*\
+  !*** ./public/image/marco.png ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/marco.png?3c2c1c29bb2b97726ee778e6d9337372";
+
+/***/ }),
+
+/***/ "./public/image/mario3.png":
+/*!*********************************!*\
+  !*** ./public/image/mario3.png ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/mario3.png?10568506d8281fa381e08b1ff2f7c50c";
 
 /***/ }),
 
@@ -42691,14 +42750,14 @@ module.exports = "/images/rider_deliveboo.png?1b0405626e3107536e37fcaf00586501";
 
 /***/ }),
 
-/***/ "./public/image/sfondo.jpg":
-/*!*********************************!*\
-  !*** ./public/image/sfondo.jpg ***!
-  \*********************************/
+/***/ "./public/image/robert2.png":
+/*!**********************************!*\
+  !*** ./public/image/robert2.png ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/sfondo.jpg?f2124aa4a512c8dc652b79f2c42520b3";
+module.exports = "/images/robert2.png?94f9e84a3337602dbca09c70a7799741";
 
 /***/ }),
 
